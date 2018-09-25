@@ -1,0 +1,94 @@
+/* 
+ * This script contains a list of functions and data structures from USB
+ *  DataPump that that should be placed in a fast memory section.
+ *  This script can be included in custom linker scripts and configured
+ *  by locally defining __USB_FAST_TEXT_START, __USB_FAST_RODATA_START 
+ *  and/or __USB_FAST_DATA_START. If these variables are not defined, the
+ *  default values will be used.
+ */
+SECTIONS
+{
+    /* try to put these sections at the end of CMX */
+    __USB_FAST_TEXT_START = DEFINED(__USB_FAST_TEXT_START) ? __USB_FAST_TEXT_START : CMX_MEMORY_END;
+    . = __USB_FAST_TEXT_START;
+    .usb.fast_text_mem :
+    {
+        /* common functions */
+        *(.text.UsbPumpXdcdI_PrimaryLineIsr)
+        *(.text.UsbPumpXdcdI_HandleDcdInterrupt)
+        *(.text.UsbPumpXdcdI_DisableEventBufferInterrupt)
+        *(.text.UsbPumpPlatform_SynchronizeToDataPump)
+        *(.text.UsbPumpXdcdI_SecondaryLineIsr)
+        *(.text.UsbPumpXdcdI_SecondaryIsrHandler)
+        *(.text.UsbPumpXdcdI_EnableEventBufferInterrupt)
+        *(.text.UsbPumpXdcdI_DeviceEventHandler)
+
+        *(.text.UsbPumpXdcdI_Endpoint*)
+        *(.text.UsbPumpXdcdI_Dma*)
+        *(.text.UsbPumpXdcdI_RestoreUsb2PhySuspend)
+        *(.text.UsbPumpXdcdI_WakeUsb2PhySuspend)
+
+        *(.text.MdkUhilAuxI_HbufferEnterScope)
+        *(.text.MdkUhilAuxI_HbufferMapDmaAsync)
+        *(.text.MdkUhilAuxI_HbufferUnMapDma)
+        *(.text.MdkUhilAuxI_HbufferExitScope)
+        *(.text.UsbPumpUhilAux_SessionValidate)
+        *(.text.UsbPumpPool_Alloc)
+        *(.text.UsbPumpPool_AllocAligned)
+        *(.text.UsbPumpMemoryBlock_Free)
+        *(.text.UsbPumpLinearPool_Alloc)
+        *(.text.UsbPumpLinearPool_Free)
+
+        *(.text.UHIL_cpybuf)
+
+        *(.text.UsbPumpDataStream_Queue)
+        *(.text.UsbPumpDataStream_QueueV2)
+        *(.text.UsbPumpDataStreamI_ReconnectPipe)
+        *(.text.UsbPumpPipe_QueueList)
+        *(.text.UsbPipeQueue)
+        *(.text.UsbPipeQueueBuffer)
+        *(.text.UsbPipeQueueBufferWithTimeout)
+        *(.text.UsbCompleteQE)
+        *(.text.UsbCompleteQEList)
+        *(.text.UsbPumpBufferQeI_FixLegacy)
+        *(.text.UsbPumpBufferQeI_CheckRequestSize)
+        *(.text.UsbPumpBufferQeI_HbufferEnterScope)
+        *(.text.UsbPumpBufferQeI_HbufferExitScope)
+        
+        /* rtems functions */
+        *(.text.UsbpumpRtemsI_Isr_30)
+        *(.text.UsbPumpRtems_UsbPumpInit_ServiceTask)
+        *(.text.UsbPumpRtemsI_GetEvent)
+        *(.text.UHIL_dispatchevent)
+        *(.text.UHIL_InterlockedIncrement)
+        *(.text.UHIL_InterlockedDecrement)
+        *(.text.UsbPumpRtemsI_Malloc)
+        *(.text.UsbPumpRtemsI_Free)
+    }
+
+    __USB_FAST_RODATA_START = DEFINED(__USB_FAST_RODATA_START) ? __USB_FAST_RODATA_START : .;
+    . = __USB_FAST_RODATA_START; 
+    
+    .usb.fast_rodata_mem :
+    {
+        *(.rodata.gk_UsbPumpXdcd_switch)
+        *(.rodata.gk_UsbPumpXdcdI_DmaInterruptInSwitch)
+        *(.rodata.gk_UsbPumpXdcdI_DmaInterruptOutSwitch)
+        *(.rodata.gk_UsbPumpXdcdI_IntMaskToEpIndex)
+        *(.rodata.gk_UsbPumpXdcdI_DmaBulkInSwitch)
+        *(.rodata.gk_UsbPumpXdcdI_DmaBulkOutSwitch)
+        *(.rodata.gk_UsbPumpXdcdI_DmaControlInSwitch)
+        *(.rodata.gk_UsbPumpXdcdI_DmaControlOutSwitch)
+        *(.rodata.gk_UsbPumpMdkTimer_Switch)
+        *(.rodata.sk_UsbPumpMdkUhilAux_InCall)
+        *(.rodata.sk_Ubufqe_AccessType)
+    }
+    __USB_FAST_DATA_START = DEFINED(__USB_FAST_DATA_START) ? __USB_FAST_DATA_START : .;
+    . = __USB_FAST_DATA_START; 
+    
+    .usb.fast_data_mem :
+    {
+        *(.data.gs_Margay_Context)
+        *(.data.g_Margay_UsbInterruptResource)
+    }    
+}

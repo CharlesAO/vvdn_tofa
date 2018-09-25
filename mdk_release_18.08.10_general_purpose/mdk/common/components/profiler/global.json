@@ -1,0 +1,30 @@
+{
+  "arguments" :[
+    {
+      "id":"PROFILER_SESSION_DESCRIPTION",
+      "name":"Description",
+      "description":"Free text, describe here the profile session purpose",
+      "mandatory":"false",
+      "type":"string",
+      "default":"",
+      "typeConfig":"regex='^.+$'; size=60"
+    },
+    {
+      "id":"PROFILER_SESSION_PATH",
+      "name":"Session path",
+      "description":"Path to a directory in which output will be placed.",
+      "mandatory":"true",
+      "type":"directory",
+      "default":"profile_session"
+    },
+    {
+      "id":"PROFILER_SESSION_NAME",
+      "name":"Session name",
+      "description":"Session name will be added to 'Session path'. Helpful when you want to save more sessions and compare them. \n%now% will be replaced with YYYY.MM.DD-HH.MM.SS",
+      "mandatory":"false",
+      "type":"string",
+      "default":"profile_%now%",
+      "typeConfig":"regex='^[\\\\w-\\\\.%]$'; size=20"
+    }
+  ]
+}

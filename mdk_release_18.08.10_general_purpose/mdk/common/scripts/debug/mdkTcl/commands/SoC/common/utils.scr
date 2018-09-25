@@ -1,0 +1,64 @@
+proc putsAllRegisters {module filter} {
+    array set result {}
+    set addresses [mdbg::findRegAddr $module]
+
+    puts [format "%-35s %08s" "Name of register" "  Address      Value"]
+    foreach item $addresses {
+        lassign $item addr reg
+        if {[regexp $filter $reg]} { continue }
+        if {[catch {set val [mdbg::jtag get32 $addr]} err]} {
+            set result($reg) "$addr $err"
+            puts [format "%-35s %08s" $reg "$addr   $err"]
+        } else {
+            puts [format "%-35s %08s" $reg "$addr   $val"]
+        }
+    }
+}
+
+proc getAllRegisters {module filter} {
+    set result [dict create]
+    set addresses [mdbg::findRegAddr $module]
+
+    foreach item $addresses {
+        lassign $item addr reg
+        if {[regexp $filter $reg]} { continue }
+        if {[catch {set val [mdbg::jtag get32 $addr]} err]} {
+            #nothing, ignore error for now
+        } else {
+            dict append result $reg $val
+        }
+    }
+    return $result
+}
+
+proc haltproc {name arguments body} {
+    # define the function itself
+    uplevel 1 [list proc $name $arguments [list doFromHaltedState $body ] ]
+}
+
+proc doFromHaltedState {code} {
+    if {[mdbg::state -isrunning LOS]} {
+         mdbg::displaystate off
+         try {
+            mdbg::halt -target LOS -temporary {
+                 uplevel 1 $code
+            }
+         } finally {
+            mdbg::displaystate on
+         }
+    } else {
+         uplevel 1 $code
+    }
+}
+
+proc shavesCount {} {
+    set numShaves [mdbg::myriad2::getNumberOfShaves [mdbg::MV_SOC_REV]]
+    return $numShaves
+}
+
+proc shavesList {} {
+    set shList [list 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31]
+    return [lrange $shList 0 [expr [shavesCount]-1]]
+}
+
+# vim: ft=tcl

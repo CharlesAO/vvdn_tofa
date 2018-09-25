@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Movidius Development Kit Software  </title>
+	<style>
+	    table.fixed { table-layout:fixed; }
+	    table.fixed td { overflow: hidden; }
+	    td.cell { padding:7px; background-color:#E8E8E8; font-family:verdana; font-size:10pt; }
+	    td.middle { text-align:center; }  
+	    td.header { border: thin solid; font-weight:bold; font-family:verdana; font-size:10pt; padding: 8px; margin-bottom:32px; background-color: #e0e0e0;}
+	    td { color:#17365d; }
+      td.wrappable, table.data_table td.wrappable { white-space: normal; }      
+	</style>
+</head>
+
+<body>
+<div style="margin:32px;">
+
+<table width="100%">
+<tr>
+<td width="10%" style="vertical-align:center;text-align:left">
+<font face="arial" color="black"><a href="http://www.movidius.org"><img src="img/Intel_Movidius.png" alt="Intel Movidius logo"/></a></font>
+<td width="90%" style="vertical-align:bottom;text-align:left">
+   <span style='font-weight:bold; font-size: 28px; color:#17365d;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MDK Frequently Asked Questions</span>
+</td>
+</tr>
+</table>
+<br><br><br>
+<table width="100%">
+<tr>
+<td width="40px"></td>
+<td>
+<font face="arial" color="black" size="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Frequently Asked Questions online page can be accessed using this <a href='https://www.movidius.org/support/faqs' target="_blank">link</a>.</font><br><br><br>
+</td>
+</tr>
+</table>
+<table width="100%">
+<tr height="50">
+<td width="5%" style="background-color:#FF3600;vertical-align:center;text-align:center"><font size="5" face="tahoma" color="white"><strong>&nbsp;&nbsp;</strong></font></td>
+<td width="95%" style="background-color:#2467AC" colspan="2"><font size="4" face="tahoma" color="white"><strong><a name="mdk">&nbsp;&nbsp;General FAQs</a></strong></font></td>
+	 <!--tr>
+      <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="10" style="vertical-align:top;text-align:center" class='header'><span style='color:#4f81bd;'>Date</span></td>
+      <td width="35" style="vertical-align:top;text-align:left" class='header'><span style='color:#4f81bd;'>Question</span></td>
+      <td width="50%" style="vertical-align:top;text-align:justify;" class='header'><span style='color:#4f81bd;'>Answer</span></td>
+     </tr-->
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><br></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/nan-comparison">I seem to be having some strange NaN comparison behavior. How to mitigate?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/eclipse-on-gtk-3.2">moviEclipse broke suddenly. Many windows display currently &quot;displayed page contains...&quot; What to do?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/cmx-dma-protections">Can I guard myself against CMX DMA failures? How?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/my-usb-application-stopped-working-after-code-changes-or-ldscript-changes">The USB part of may USB application stopped working after code changes and/or ldscript changes. What can I do to bring it back?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/running-sipp-on-a-leon-running-from-ddr">I've moved my Leon code in DDR but I have some SIPP calls in there and SIPP stopped working. Why?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/how-do-i-know-if-an-application-is-an-rtems-one-or-not">It's not clear for me if an example uses RTEMS or not. How do I quickly spot that?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/ma2150-ma2450-ddr-power-differences">I am seeing DDR power rail differences between MA2150 and MA2450. Why?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/debugging-release-projects">I'm trying to enable debug but my SHAVE code huge to possibly execute if I use MV_BUILD_CONFIG=debug. Anything else possible?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/cpp-in-rtems-generates-error">I am trying to build in some *.cpp files in RTEMS but when I do this RTEMS just does not boot anymore throwing fatal error. Why?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/dma-engine-in-shvdlib-code">I'm using the DMA driver in SHAVE dynamically loaded libraries (shvdlibs). It doesn't work. Why?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/moviasm-unaligned-target-warning">Why do I see a series of &quot;unalgined target instruction might generate a stall&quot;?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/measuring-sipp-pipelines-performance">I'm measuring a SIPP pipeline but it seems to take an awfully lot more than the documentation says. Why?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/clocks-not-turned-on">I have a sample testcase for a certain HW bloc/circuit. It does not start integrated in my preexisting complex application. Why?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/voltage-on-gpio-pins-when-chip-not-powered-un">Can I apply voltage on the GPIO pins while Myriad is powered off?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/usb-3.0-pins-when-not-using-usb-3.0">I don't need USB 3.0. What must I do to the USB 3.0 pins?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/efuse-bits-information">What is the process of burning the eFUSE bits?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/l1-cache-caching-cmx">Does Shave L1 cache cache both CMX and DDR on Myriad2?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/l2-cache-errors-on-power-on-power-off">I'm using L2 cache and suddenly I see cache access errors after a shave power off/power On. Why?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/dw-at-const-value-error">I'm seeing moviDebug display a &quot;DW_AT_const_value&quot; error. Is this important?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/sipp-errors-details">I have an error on a SIPP pipeline I've created. The program just crashes/stops. How can I get more details?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/sipp-graph-visualization">I have a more complex pipeline, hard to debug. Is there a way to automatically generate the pipeline graph for checking it's OK?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/sipp-static-scheduler">How can I speed up SIPP simulations? Why do I see a ppDumpSchedule.hh header? Does SIPP support static scheduling?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/sipp-internals-description">Can I get some input into the way SIPP framework is implemented internally, not just the usage descriptions from the SIPP Guide?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/ibis-model-for-different-signals">Can Movidius provide the IBIS model for any of it's signals for simulations purposes (MIPI, USB, etc.)?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/rtems-big-memory-allocation">I'm running RTEMS from DDR with lot's of memory space but I get strange memory errors that point to stack overflow. How come?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/usb-ref-clock-usb-internal-clock">Why is there an external USB ref clock on Myriad2 but the code I see uses an internal reference? How to use the external one?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/sipp-pipeline-not-working-between-14.12-and-15.02">My SIPP pipeline use to work on 14.12 mdk release and it doesn't work on 15.02. What can I do?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/sipp-pipeline-broke-between-14.12-and-15.02-upgrade">I have a SIPP pipeline similar or derived from Cam214DebayerHDMI. It stopped working when upgrading to MDK 15.02. What can I do?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/camgeneric-migration-guide">I've downloaded a new mdk and my old application using CamGeneric does not build/work anymore. What can I do?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/mipirx-internal-termination-resistors">Do the MIPI Rx inputs include internal resistors on the differential data inputs, or are external resistors required?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/running-leon-code-from-ddr">I'm trying to run a Leon code from DDR but all I see is a fail very early with the Leon going into a trap. What can I do?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/advanced-debugging-techniques">For a number of reasons, I cannot use breakpoints. How can I still do debugging?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/creating-libraries-from-altium-designs">How do I create schematic and PCB libraries from released Altium Designs?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/more-mvcv-clarification">I need some more information about MvCV kernels. Can you help?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/movisim-ilpav-meaning">What does ILPav mean in the moviSim log?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/l2-cache-for-leon-pointers">I want to use L2 cache for Leon. What are the things to be carefull about?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/connecting-mv0182-myriad2-development-kits-to-dragonboard">How do I connect my MV0182 Myriad2 development kit to the Dragon board?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/leon-processor-ip-specs">Where can I get additional information about the Leon processor?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/what-is-invalid-memory-segment-esc-ctrl-not-implemented-yet">What is &quot;Invalid memory segment&quot;/&quot;ESC_CTRL - not implemented yet&quot; ?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/incorrect-power-supply-assembly">moviDebug keeps saying: JTAG initialization failed. Please check board power and connection.. What to do?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/power-measurements-on-mv0153-boards">How can I measure power usage on MV0153 boards?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/movidebugserver-continues-to-crash">I'm on Linux and trying to launch moviDebugServer but it continues to crash. What can I do?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/permission-denied-on-lst-file">Why do I get &quot;mv: cannot move `shave/init.lst' to `./output/lst/shave/init.lst': Permission denied&quot; when building?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/getting-documentation">Where can I get API documentation for movidius provided content?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/sparc-elf-gcc.exe-createprocess-no-such-file-or-directory">Using cygwin there is an error saying &quot;sparc-elf-gcc.exe: CreateProcess: No such file or directory&quot;. What to do?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/cygwin-version-to-use">Which cygwin version should I use?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/target-pattern-contains-no-error">What is wrong if I have some strange error saying [somepath]***target pattern contains no `%'. Stop. ?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/strange-errors">All of the targets seem to be failing when I try make. What to do?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/movidebug-wont-run">Why can't I connect to moviDebug in Windows using my preferred Cygwin terminal?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"><a href="https://www.movidius.org/support/faqs/random-generator-on-shave">Can we generate random numbers on SHAVE?</a></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+	 <tr>
+	  <td width="5%" style="vertical-align:top;text-align:right"></td>
+	  <td width="95%" style="vertical-align:top;text-align:left"></td>
+     </tr>
+</table>
+</div>
+</body>
+</html>

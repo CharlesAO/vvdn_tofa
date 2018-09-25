@@ -1,0 +1,14 @@
+puts breset
+mdbg::breset
+
+mdbg::loadfile -verify XX_FLASHER_ELF_XX
+
+mdbg::mset 0x80000000 XX_TARGET_MVCMD_SIZE_XX
+
+mdbg::loadfile -addr 0x80000004 -binary XX_TARGET_MVCMD_XX
+
+mdbg::runw
+
+mdbg::savefile XX_TARGET_MVCMD_XX.readback 0x80000004 XX_TARGET_MVCMD_SIZE_XX
+
+exit

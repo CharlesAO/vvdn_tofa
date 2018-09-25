@@ -1,0 +1,62 @@
+/****************************************************************************/
+/* General purpose sections to be used by any project which needs to switch */
+/* to a low power mode periodically                                         */
+/* The following sections will get located in L2Cache before entering in    */
+/* low-power mode                                                           */
+/****************************************************************************/
+
+SECTIONS
+{
+  /* required for locking the section in L2 */ 
+  .lockable.getCurrentPointerLocation : {
+  _LOCKING_AREA_START = .;
+  } > LOCK
+
+  .lockable.traps ALIGN(0x1000) : {
+    KEEP(*(.lockable.traps))
+  } > LOCK
+
+  .lockable.lpStack ALIGN(64) (NOLOAD) : {
+    . = . + 0x200;
+    LP_STACK_POINTER = .;
+  } > LOCK
+
+  /* drivers and local text symbols */
+  .lockable.text ALIGN(64) : {
+
+    /* component and drivers code needed for wake-up */
+    *(.lockable.text*)
+
+    /* libraries text symbols */
+    *:lib_a-memcpy.o(.text)                 /* memcpy */
+    *:_udivdi3.o(.text)                     /* _udivdi3 */
+    *:_divdi3.o(.text)                      /* _divdi3 */
+
+    /* static functions needed from others */
+    *(.text.DrvRegBitMaskOperation)         /* DrvRegUtils */
+    *(.text.DrvRegSetBitField)              /* DrvRegUtils */
+    *(.text.DrvTimerGetSystemTicks64)       /* DrvTimer */
+    *(.text.swcLeonSetPIL)
+
+  } > LOCK
+
+  /* drivers data symbols */
+  .lockable.data ALIGN (64) : {
+
+    /* component lockable data symbols*/
+    *(.lockable.data*)
+    *(.lockable.bss*)
+
+    *(.data.timCfg)                         /* DrvTimer.o */
+  } > LOCK
+
+  /* drivers rodata symbols */
+  .lockable.rodata ALIGN (64): {
+    *(.lockable.rodata*)
+
+    /* required for locking the section in L2 */
+    . = ALIGN(64);
+    _LOCKING_AREA_END = .;
+  } > LOCK
+
+}

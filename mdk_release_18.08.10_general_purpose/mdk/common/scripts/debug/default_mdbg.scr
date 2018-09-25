@@ -1,0 +1,6 @@
+breset
+start $default_target                                                      
+target $default_target                                                      
+echo load $elf ..                                                          
+load $elf                                                                  
+

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" version="2.1">
+<key attr.name="includes" attr.type="string" for="graph" id="includes"/>
+<key attr.name="binary" attr.type="string" for="graph" id="binary"/>
+<key attr.name="shaveFirst" attr.type="int" for="graph" id="shaveFirst"/>
+<key attr.name="shaveLast" attr.type="int" for="graph" id="shaveLast"/>
+<key attr.name="mkPath" attr.type="string" for="graph" id="mkPath"/>
+<key attr.name="myriadTarget" attr.type="int" for="graph" id="myriadTarget"/>
+<key attr.name="id" attr.type="string" for="node" id="id"/>
+<key attr.name="name" attr.type="string" for="node" id="name"/>
+<key attr.name="description" attr.type="string" for="node" id="description"/>
+<key attr.name="flags" attr.type="string" for="node" id="flags"/>
+<key attr.name="dataType" attr.type="string" for="node" id="dataType"/>
+<key attr.name="outW" attr.type="string" for="node" id="outW"/>
+<key attr.name="outH" attr.type="string" for="node" id="outH"/>
+<key attr.name="numPl" attr.type="string" for="node" id="numPl"/>
+<key attr.name="symbol" attr.type="string" for="node" id="symbol"/>
+<key attr.name="x" attr.type="int" for="node" id="x"/>
+<key attr.name="y" attr.type="int" for="node" id="y"/>
+<key attr.name="w" attr.type="int" for="node" id="w"/>
+<key attr.name="h" attr.type="int" for="node" id="h"/>
+<key attr.name="internal0" attr.type="string" for="node" id="internal0"/>
+<key attr.name="internal1" attr.type="string" for="node" id="internal1"/>
+<key attr.name="cfg" attr.type="string" for="node" id="cfg"/>
+<key attr.name="dogCoeffs11" attr.type="string" for="node" id="dogCoeffs11"/>
+<key attr.name="dogCoeffs15" attr.type="string" for="node" id="dogCoeffs15"/>
+<key attr.name="dogStrength" attr.type="string" for="node" id="dogStrength"/>
+<key attr.name="ltmCurves" attr.type="string" for="node" id="ltmCurves"/>
+<key attr.name="index" attr.type="int" for="edge" id="index"/>
+<key attr.name="inputIndex" attr.type="int" for="edge" id="inputIndex"/>
+<key attr.name="outputIndex" attr.type="int" for="edge" id="outputIndex"/>
+<key attr.name="kernel" attr.type="string" for="edge" id="kernel"/>
+<graph edgedefault="directed" id="Pipeline">
+<data key="includes">testHwDogLtmSetup.h</data>
+<data key="binary">mbinImgSipp</data>
+<data key="shaveFirst">0</data>
+<data key="shaveLast">0</data>
+<data key="mkPath">../build/sipp/</data>
+<data key="myriadTarget">MA2x5x</data>
+<node id="0">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">dmaIn0</data>
+<data key="id">dmaIn</data>
+<data key="description">DMA in filter</data>
+<data key="flags">0x00</data>
+<data key="outW">1584</data>
+<data key="outH">1290</data>
+<data key="symbol">SIPP_DMA_ID</data>
+<data key="x">408</data>
+<data key="y">112</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="internal0">auto</data>
+<data key="internal1">../../../../../../../resources/OCT_1584x1290_I_dogltm_8bpp.raw</data>
+</node>
+<node id="1">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">dmaOut0</data>
+<data key="id">dmaOut</data>
+<data key="description">DMA out filter</data>
+<data key="flags">0x00</data>
+<data key="outW">1584</data>
+<data key="outH">1290</data>
+<data key="symbol">SIPP_DMA_ID</data>
+<data key="x">411</data>
+<data key="y">417</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="internal0">auto</data>
+<data key="internal1">dogLtmOutput_8bit_1584x1290.raw</data>
+</node>
+<node id="2">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">dogLtmMa2x5x0</data>
+<data key="id">dogLtmMa2x5x</data>
+<data key="description">Spatial Local Tone Mapping plus Noise reduction based on a Difference of Gaussians</data>
+<data key="flags">0x0</data>
+<data key="outW">1584</data>
+<data key="outH">1290</data>
+<data key="symbol">SIPP_DOGL_ID</data>
+<data key="x">412</data>
+<data key="y">262</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="cfg">DOGL_CFG_SET(MODE,DOG_THR,DOG_OUTPUT_CLAMP,DS_MODE,LTM_THR,0,DOG_HEIGHT)</data>
+<data key="dogCoeffs11">KCSet0</data>
+<data key="dogCoeffs15">KCSet1</data>
+<data key="dogStrength">0xFF</data>
+<data key="ltmCurves">(u16 *)ltm_curves</data>
+</node>
+<edge id="0" source="0" target="2">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">15x15</data>
+</edge>
+<edge id="1" source="2" target="1">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">1x1</data>
+</edge>
+</graph>
+</graphml>

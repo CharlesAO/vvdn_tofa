@@ -1,0 +1,8 @@
+/*  This is a Leon Default Linker script
+ *  Should be used as an included linker script in top level scripts
+ */
+/*  linkcmds
+ */
+
+INCLUDE myriad2_leon_os_default_elf.ldscript
+INCLUDE myriad2_leon_rt_default_elf.ldscript

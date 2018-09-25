@@ -1,0 +1,198 @@
+MOVIDIUS SOFTWARE LICENCE AGREEMENT
+
+
+
+IMPORTANT - read before downloading, copying, installing or using
+
+
+Do not use or load this software and any associated materials 
+(collectively, the "Software") until you have 
+carefully read the 
+following terms and conditions. By loading or using the Software, 
+you agree to the terms 
+of this Agreement. If you do not wish so to 
+agree, do not install or use the Software.
+
+
+
+SOFTWARE LICENCE
+
+
+The Software is protected by copyright laws and international copyright 
+treaties, as well as other intellectual 
+property laws and treaties. 
+The Software is licensed, not sold. The licensor is Movidius Limited, 
+
+company number 408970 incorporated in Republic of Ireland, registered 
+office 19 Mountjoy Square, Dublin 1, Ireland.
+
+
+
+GRANT OF LICENCE
+
+
+You may install and use one copy of the Software onto a single computer 
+for your personal use. 
+The primary user of the computer on which the 
+Software is installed may make a second copy for 
+his or her exclusive use 
+on a portable computer.
+
+ You may also store or install a copy of the Software 
+on a storage device, such as a network server, 
+in order to run the Software 
+on your other computers over an internal network; however, you must acquire 
+
+and dedicate a license for each separate computer on which the Software is 
+run from the storage device. 
+A license for the Software may not be shared 
+or used concurrently on different computers.
+
+Upon accepting this Licence you 
+undertake:
+
+·	not to reverse engineer, decompile, or disassemble the Software, 
+except and only to the extent that 
+such activity is expressly permitted by 
+applicable law notwithstanding this limitation.
+
+·	not to translate, modify, 
+lease, rent, loan, redistribute, sub-lease, sub-license or create 
+derivative 
+works from the Software.
+
+·	to supervise and control use of the Software in accordance with the 
+terms of this Licence.
+
+·	to ensure that your employees, agents and other parties who will use 
+the Software are notified 
+of this Licence and the terms hereof prior to such 
+employee, agent or party using the same.
+
+·	to reproduce and include the copyright notice of the Licensor as it 
+appears in or on the Software on all copies.
+
+·	not to provide or otherwise make available the Software to any person 
+other than your employees or as specified herein without prior written consent 
+from the Licensor.
+
+·	not to use the Software for immoral, illegal or for any other purpose 
+which may be determined 
+threatening, abusive or harmful including but not 
+limited to the creation or transmission of any 
+virus, worm, Trojan horse or any 
+other destructive or contaminating program.
+
+·	within 14 days after the date of termination or discontinuance of this 
+Licence for whatever reason, to destroy the Software and all upgrades or copies.
+	
+
+
+The Software may not be transferred to another party.
+
+
+
+EVALUATION SOFTWARE
+
+
+This Software may be a free evaluation version of software that is normally subject 
+to a licence fee. 
+In this case it is provided for evaluation purposes only, and in 
+addition to the above you undertake:
+
+·	to use it for evaluation purposes only.
+
+·	not to use it in any commercial application whatsoever.
+
+
+
+OWNERSHIP OF SOFTWARE AND COPYRIGHTS
+
+
+Title to all copies of the Software remains with Movidius. The Software is 
+copyrighted and protected by the laws of the Republic of Ireland 
+and other countries, 
+and international treaty provisions. You may not remove any copyright notices from 
+the Software. 
+At any time and without notice, Movidius may make changes to the 
+Software or to items referenced therein, but is not 
+obligated to support or update 
+the Software. Except as otherwise expressly provided, Movidius grants no express or 
+implied 
+right under Movidius patents, copyrights, trademarks or other intellectual 
+property rights.
+
+
+
+
+NO WARRANTIES
+
+
+(a) Subject to clause (e) below and except as otherwise provided in this clause 
+THE SOFTWARE IS PROVIDED "AS IS" WITHOUT ANY WARRANTY OF ANY KIND EITHER EXPRESS OR 
+IMPLIED INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR 
+PURPOSE, MERCHANTABILITY, TITLE AND NON-INFRINGEMENT.
+
+(b) MOVIDIUS DOES NOT WARRANT THAT THE SOFTWARE WILL BE ERROR-FREE OR THAT SUCH ERRORS 
+WILL BE CORRECTED AND YOU ARE SOLELY 
+RESPONSIBLE FOR ALL COSTS AND EXPENSES ASSOCIATED 
+WITH RECTIFICATION, REPAIR OR DAMAGE CAUSED BY SUCH ERRORS. 
+Exclusion of warranties may 
+not be valid in certain jurisdictions, however, the only applicable laws under which 
+this licence 
+may be construed are specified below.  
+
+
+Movidius may create new versions of the Software ("upgrades") which may correct such 
+errors and although Movidius has no obligation 
+to notify existing licensees of such 
+upgrades, the same will be made available at the same internet site as the licensee 
+
+downloaded the Software accompanying this licence or from another internet site operated 
+by Movidius, at such cost as shall be indicated.
+
+
+(c) MOVIDIUS SHALL NOT BE LIABLE TO YOU OR TO ANY OTHER PARTY FOR ANY LOSS OR DAMAGE 
+WHATSOEVER OR HOWSOEVER CAUSED ARISING 
+DIRECTLY OR INDIRECTLY IN CONNECTION WITH THIS 
+LICENCE, THE SOFTWARE, ITS USE OR OTHERWISE, EXCEPT TO THE EXTENT THAT 
+	SUCH LIABILITY 
+MAY NOT BE LAWFULLY EXCLUDED UNDER THE APPLICABLE LAW.
+
+
+(d) NOTWITHSTANDING THE GENERALITY OF (c) ABOVE, MOVIDIUS EXPRESSLY EXCLUDES LIABILITY 
+FOR INDIRECT, SPECIAL, INCIDENTAL OR 
+CONSEQUENTIAL LOSS OR DAMAGE WHICH MAY ARISE IN 
+RESPECT OF THE SOFTWARE HOWSOEVER CAUSED EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+
+(e) IN THE EVENT THAT MOVIDIUS INCURS ANY LIABILITY WHATSOEVER, SUCH LIABILITY IS 
+LIMITED TO THE LICENCE FEE PAID BY YOU FOR 
+THE SOFTWARE (EXCEPT FOR DEATH OR PERSONAL 
+INJURY ARISING FROM MOVIDIUS’S NEGLIGENCE).
+
+
+
+TERMINATION OF THIS AGREEMENT
+
+
+Movidius may terminate this Agreement at any time if you violate its terms. Upon 
+termination, you will immediately destroy the 
+Software or return all copies of the 
+Software to Movidius. You may terminate this Agreement at any time by destroying the 
+Software, 
+documentation and all copies. No Licence fee is refundable unless by prior 
+agreement from Movidius.
+
+
+
+APPLICABLE LAW
+
+
+This Licence shall be governed by the laws of Republic of Ireland and the parties submit 
+to the exclusive jurisdiction of the Irish Courts. 
+You may not export the Software in 
+violation of applicable export laws and regulations. Movidius is not obligated under any 
+other agreements, 
+unless they are in writing and signed by an authorized representative of Movidius.
+

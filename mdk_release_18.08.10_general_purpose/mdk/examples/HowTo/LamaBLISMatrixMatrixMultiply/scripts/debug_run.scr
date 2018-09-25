@@ -1,0 +1,52 @@
+macro lddetails
+    t LOS
+
+    ; Load symbols
+    echo "Loading symbols ..."
+    loadsym output/LamaBLISMatrixMatrixMultiply.elf
+    
+    ;Set number of SHAVEs
+    s numberShaves 1
+endm
+
+macro ldri
+; Prepare for debugging
+    debug on
+    debug off
+    srf ored
+
+; Load the elf
+    breset
+    l output/LamaBLISMatrixMatrixMultiply.elf
+        start a
+    t LOS
+
+; Load details for LamaBLISMatrixMatrixMultiply
+    lddetails
+
+; Load matrixA
+    echo "Loading aTranspose.bin ..."
+    load matrixA aTranspose.bin
+    
+; Load matrixB
+    echo "Loading bTranspose.bin ..."
+    load matrixB bTranspose.bin
+    
+; Load matrixAB
+    echo "Loading abTranspose.bin ..."
+    load matrixAB abTranspose.bin
+
+
+; Run the Leon
+    t LOS
+    runw
+
+;Save output
+    echo "Saving matrixC ..."
+    save matrixC (2048*2048) c.bin
+    echo "Application done!"
+    exit
+
+endm
+
+ldri

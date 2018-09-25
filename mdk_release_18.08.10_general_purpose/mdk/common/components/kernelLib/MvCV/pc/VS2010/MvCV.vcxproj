@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DebugLib|Win32">
+      <Configuration>DebugLib</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseLib|Win32">
+      <Configuration>ReleaseLib</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\kernels\absoluteDiff\shave\src\cpp\absoluteDiff.cpp" />
+    <ClCompile Include="..\..\kernels\aggregateCostSGBM32_clamp\shave\src\cpp\aggregateCostSGBM32_clamp.cpp" />
+    <ClCompile Include="..\..\kernels\aggregateCostSGBM64\shave\src\cpp\aggregateCostSGBM64.cpp" />
+    <ClCompile Include="..\..\kernels\aggregateAllPaths64\shave\src\cpp\aggregateAllPaths64.cpp" />
+    <ClCompile Include="..\..\kernels\accumulateSquare\shave\src\cpp\accumulateSquare.cpp" />
+    <ClCompile Include="..\..\kernels\accumulateWeighted\shave\src\cpp\accumulateWeighted.cpp" />
+    <ClCompile Include="..\..\kernels\aggregateCostSGBM64_clamp\shave\src\cpp\aggregateCostSGBM64_clamp.cpp" />
+    <ClCompile Include="..\..\kernels\aggregateThreePaths32\shave\src\cpp\aggregateThreePaths32.cpp" />
+    <ClCompile Include="..\..\kernels\aggregateThreePaths64\shave\src\cpp\aggregateThreePaths64.cpp" />
+    <ClCompile Include="..\..\kernels\arithmeticAdd\shave\src\cpp\arithmeticAdd.cpp" />
+    <ClCompile Include="..\..\kernels\arithmeticAddMask\shave\src\cpp\arithmeticAddMask.cpp" />
+    <ClCompile Include="..\..\kernels\arithmeticSub\shave\src\cpp\arithmeticSub.cpp" />
+    <ClCompile Include="..\..\kernels\arithmeticSubFp16ToFp16\shave\src\cpp\arithmeticSubFp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\arithmeticSubMask\shave\src\cpp\arithmeticSubMask.cpp" />
+    <ClCompile Include="..\..\kernels\bitwiseAnd\shave\src\cpp\bitwiseAnd.cpp" />
+    <ClCompile Include="..\..\kernels\bitwiseAndMask\shave\src\cpp\bitwiseAndMask.cpp" />
+    <ClCompile Include="..\..\kernels\bitwiseNot\shave\src\cpp\bitwiseNot.cpp" />
+    <ClCompile Include="..\..\kernels\bitwiseOr\shave\src\cpp\bitwiseOr.cpp" />
+    <ClCompile Include="..\..\kernels\bitwiseOrMask\shave\src\cpp\bitwiseOrMask.cpp" />
+    <ClCompile Include="..\..\kernels\bitwiseXor\shave\src\cpp\bitwiseXor.cpp" />
+    <ClCompile Include="..\..\kernels\bitwiseXorMask\shave\src\cpp\bitwiseXorMask.cpp" />
+    <ClCompile Include="..\..\kernels\boxFilter\shave\src\cpp\boxFilter.cpp" />
+    <ClCompile Include="..\..\kernels\boxFilter11x11\shave\src\cpp\boxFilter11x11.cpp" />
+    <ClCompile Include="..\..\kernels\boxFilter13x13\shave\src\cpp\boxFilter13x13.cpp" />
+    <ClCompile Include="..\..\kernels\boxFilter15x15\shave\src\cpp\boxFilter15x15.cpp" />
+    <ClCompile Include="..\..\kernels\boxFilter3x3\shave\src\cpp\boxFilter3x3.cpp" />
+    <ClCompile Include="..\..\kernels\boxFilter5x5\shave\src\cpp\boxFilter5x5.cpp" />
+    <ClCompile Include="..\..\kernels\boxFilter7x7\shave\src\cpp\boxFilter7x7.cpp" />
+    <ClCompile Include="..\..\kernels\boxFilter9x9\shave\src\cpp\boxFilter9x9.cpp" />
+    <ClCompile Include="..\..\kernels\canny\shave\src\cpp\canny.cpp" />
+    <ClCompile Include="..\..\kernels\censusMatching16\shave\src\cpp\censusMatching16.cpp" />
+    <ClCompile Include="..\..\kernels\censusMatching32\shave\src\cpp\censusMatching32.cpp" />
+    <ClCompile Include="..\..\kernels\censusMatching64\shave\src\cpp\censusMatching64.cpp" />
+    <ClCompile Include="..\..\kernels\censusMatching65\shave\src\cpp\censusMatching65.cpp" />
+    <ClCompile Include="..\..\kernels\censusMatchingPyrOnePos\shave\src\cpp\censusMatchingPyrOnePos.cpp" />
+    <ClCompile Include="..\..\kernels\CensusMatchingPyr\shave\src\cpp\censusMatchingPyr.cpp" />
+    <ClCompile Include="..\..\kernels\censusMin16\shave\src\cpp\censusMin16.cpp" />
+    <ClCompile Include="..\..\kernels\censusMin32\shave\src\cpp\censusMin32.cpp" />
+    <ClCompile Include="..\..\kernels\censusMin3\shave\src\cpp\censusMin3.cpp" />
+    <ClCompile Include="..\..\kernels\censusMin64\shave\src\cpp\censusMin64.cpp" />
+    <ClCompile Include="..\..\kernels\censusMin65\shave\src\cpp\censusMin65.cpp" />
+    <ClCompile Include="..\..\kernels\censusMin7\shave\src\cpp\censusMin7.cpp" />
+    <ClCompile Include="..\..\kernels\censusMinConfidence32\shave\src\cpp\censusMinConfidence32.cpp" />
+    <ClCompile Include="..\..\kernels\censusMinConfidence64\shave\src\cpp\censusMinConfidence64.cpp" />
+    <ClCompile Include="..\..\kernels\censusTransform5x5\shave\src\cpp\censusTransform5x5.cpp" />
+    <ClCompile Include="..\..\kernels\computeAD32\shave\src\cpp\computeAD32.cpp" />
+    <ClCompile Include="..\..\kernels\computeAD64\shave\src\cpp\computeAD64.cpp" />
+    <ClCompile Include="..\..\kernels\computeADPyrOnePos\shave\src\cpp\computeADPyrOnePos.cpp" />
+    <ClCompile Include="..\..\kernels\computeCombinedCost32\shave\src\cpp\computeCombinedCost32.cpp" />
+    <ClCompile Include="..\..\kernels\computeCombinedCost3\shave\src\cpp\computeCombinedCost3.cpp" />
+    <ClCompile Include="..\..\kernels\computeCombinedCost64\shave\src\cpp\computeCombinedCost64.cpp" />
+    <ClCompile Include="..\..\kernels\convertFrom12BppTo8Bpp\shave\src\cpp\convertFrom12BppTo8Bpp.cpp" />
+    <ClCompile Include="..\..\kernels\convertYUV400ToYUV422\shave\src\cpp\convertYUV400ToYUV422.cpp" />
+    <ClCompile Include="..\..\kernels\convolution11x11\shave\src\cpp\convolution11x11.cpp" />
+    <ClCompile Include="..\..\kernels\convolution15x1\shave\src\cpp\convolution15x1.cpp" />
+    <ClCompile Include="..\..\kernels\convolution1x15\shave\src\cpp\convolution1x15.cpp" />
+    <ClCompile Include="..\..\kernels\convolution1x5\shave\src\cpp\convolution1x5.cpp" />
+    <ClCompile Include="..\..\kernels\convolution1x5Fp16ToFp16\shave\src\cpp\convolution1x5Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\convolution1x7\shave\src\cpp\convolution1x7.cpp" />
+    <ClCompile Include="..\..\kernels\convolution1x7Fp16ToFp16\shave\src\cpp\convolution1x7Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\convolution1x9\shave\src\cpp\convolution1x9.cpp" />
+    <ClCompile Include="..\..\kernels\convolution3x3\shave\src\cpp\convolution3x3.cpp" />
+    <ClCompile Include="..\..\kernels\convolution3x3Fp16ToFp16\shave\src\cpp\convolution3x3Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\convolution5x1\shave\src\cpp\convolution5x1.cpp" />
+    <ClCompile Include="..\..\kernels\convolution5x1Fp16ToFp16\shave\src\cpp\convolution5x1Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\convolution5x5\shave\src\cpp\convolution5x5.cpp" />
+    <ClCompile Include="..\..\kernels\convolution5x5Fp16ToFp16\shave\src\cpp\convolution5x5Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\convolution7x1\shave\src\cpp\convolution7x1.cpp" />
+    <ClCompile Include="..\..\kernels\convolution7x1Fp16ToFp16\shave\src\cpp\convolution7x1Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\convolution7x7\shave\src\cpp\convolution7x7.cpp" />
+    <ClCompile Include="..\..\kernels\convolution7x7Fp16ToFp16\shave\src\cpp\convolution7x7Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\convolution7x7Fp16ToU8\shave\src\cpp\convolution7x7Fp16ToU8.cpp" />
+    <ClCompile Include="..\..\kernels\convolution9x1\shave\src\cpp\convolution9x1.cpp" />
+    <ClCompile Include="..\..\kernels\convolution9x9\shave\src\cpp\convolution9x9.cpp" />
+    <ClCompile Include="..\..\kernels\convolution9x9Fp16ToFp16\shave\src\cpp\convolution9x9Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\convSeparable11x11\shave\src\cpp\convSeparable11x11.cpp" />
+    <ClCompile Include="..\..\kernels\convSeparable11x11Fp16ToFp16\shave\src\cpp\convSeparable11x11Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\convSeparable3x3\shave\src\cpp\convSeparable3x3.cpp" />
+    <ClCompile Include="..\..\kernels\convSeparable3x3Fp16ToFp16\shave\src\cpp\convSeparable3x3Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\convSeparable5x5\shave\src\cpp\convSeparable5x5.cpp" />
+    <ClCompile Include="..\..\kernels\convSeparable5x5Fp16ToFp16\shave\src\cpp\convSeparable5x5Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\convSeparable7x7\shave\src\cpp\convSeparable7x7.cpp" />
+    <ClCompile Include="..\..\kernels\convSeparable7x7Fp16ToFp16\shave\src\cpp\convSeparable7x7Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\convSeparable9x9\shave\src\cpp\convSeparable9x9.cpp" />
+    <ClCompile Include="..\..\kernels\convSeparable9x9Fp16ToFp16\shave\src\cpp\convSeparable9x9Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\cornerMinEigenVal\shave\src\cpp\cornerMinEigenVal.cpp" />
+    <ClCompile Include="..\..\kernels\cornerMinEigenVal_patched\shave\src\cpp\cornerMinEigenVal_patched.cpp" />
+    <ClCompile Include="..\..\kernels\cvtColorKernelRGBToYUV\shave\src\cpp\cvtColorKernelRGBToYUV.cpp" />
+    <ClCompile Include="..\..\kernels\cvtColorKernelRGBToYUV422\shave\src\cpp\cvtColorKernelRGBToYUV422.cpp" />
+    <ClCompile Include="..\..\kernels\cvtColorKernelYUV422ToRGB\shave\src\cpp\cvtColorKernelYUV422ToRGB.cpp" />
+    <ClCompile Include="..\..\kernels\cvtColorKernelYUVToRGB\shave\src\cpp\cvtColorKernelYUVToRGB.cpp" />
+    <ClCompile Include="..\..\kernels\cvtColorNV21ToRGB\shave\src\cpp\cvtColorNV21ToRGB.cpp" />
+    <ClCompile Include="..\..\kernels\cvtColorRGBfp16ToLumaU8\shave\src\cpp\cvtColorRGBfp16ToLumaU8.cpp" />
+    <ClCompile Include="..\..\kernels\cvtColorRGBfp16ToUV420U8\shave\src\cpp\cvtColorRGBfp16ToUV420U8.cpp" />
+    <ClCompile Include="..\..\kernels\cvtColorRGBToChromaNV12\shave\src\cpp\cvtColorRGBToChromaNV12.cpp" />
+    <ClCompile Include="..\..\kernels\cvtColorRGBToLuma\shave\src\cpp\cvtColorRGBToLuma.cpp" />
+    <ClCompile Include="..\..\kernels\cvtColorRGBToLumaNV12\shave\src\cpp\cvtColorRGBToLumaNV12.cpp" />
+    <ClCompile Include="..\..\kernels\cvtColorRGBToNV21\shave\src\cpp\cvtColorRGBToNV21.cpp" />
+    <ClCompile Include="..\..\kernels\cvtColorRGBToUV\shave\src\cpp\cvtColorRGBToUV.cpp" />
+    <ClCompile Include="..\..\kernels\cvtColorRGBToUV420\shave\src\cpp\cvtColorRGBToUV420.cpp" />
+    <ClCompile Include="..\..\kernels\dilate\shave\src\cpp\dilate.cpp" />
+    <ClCompile Include="..\..\kernels\dilate3x3\shave\src\cpp\dilate3x3.cpp" />
+    <ClCompile Include="..\..\kernels\dilate5x5\shave\src\cpp\dilate5x5.cpp" />
+    <ClCompile Include="..\..\kernels\dilate7x7\shave\src\cpp\dilate7x7.cpp" />
+    <ClCompile Include="..\..\kernels\equalizeHist\shave\src\cpp\equalizeHist.cpp" />
+    <ClCompile Include="..\..\kernels\erode3x3\shave\src\cpp\erode3x3.cpp" />
+    <ClCompile Include="..\..\kernels\erode5x5\shave\src\cpp\erode5x5.cpp" />
+    <ClCompile Include="..\..\kernels\erode7x7\shave\src\cpp\erode7x7.cpp" />
+    <ClCompile Include="..\..\kernels\extractDescriptor64_brisk\shave\src\cpp\extractDescriptor64_brisk.cpp" />
+    <ClCompile Include="..\..\kernels\extractDescriptor64_freakA\shave\src\cpp\extractDescriptor64_freakA.cpp" />
+    <ClCompile Include="..\..\kernels\fast9M2\shave\src\cpp\fast9M2.cpp" />
+    <ClCompile Include="..\..\kernels\fastAtan2Positive\shave\src\cpp\fastAtan2Positive.cpp" />
+    <ClCompile Include="..\..\kernels\flipKernel\shave\src\cpp\flipKernel.cpp" />
+    <ClCompile Include="..\..\kernels\gauss\shave\src\cpp\gauss.cpp" />
+    <ClCompile Include="..\..\kernels\gaussHx2\shave\src\cpp\gaussHx2.cpp" />
+    <ClCompile Include="..\..\kernels\gaussHx2_fp16\shave\src\cpp\gaussHx2_fp16.cpp" />
+    <ClCompile Include="..\..\kernels\gaussVx2\shave\src\cpp\gaussVx2.cpp" />
+    <ClCompile Include="..\..\kernels\gaussVx2_fp16\shave\src\cpp\gaussVx2_fp16.cpp" />
+    <ClCompile Include="..\..\kernels\hammingDistance\shave\src\cpp\hammingDistance.cpp" />
+    <ClCompile Include="..\..\kernels\harrisResponse\shave\src\cpp\harrisResponse.cpp" />
+    <ClCompile Include="..\..\kernels\histogram\shave\src\cpp\histogram.cpp" />
+    <ClCompile Include="..\..\kernels\integralImageSquareSumFloatM2\shave\src\cpp\integralImageSquareSumFloatM2.cpp" />
+    <ClCompile Include="..\..\kernels\integralImageSquareSumM2\shave\src\cpp\integralImageSquareSumM2.cpp" />
+    <ClCompile Include="..\..\kernels\integralImageSumFloatM2\shave\src\cpp\integralImageSumFloatM2.cpp" />
+    <ClCompile Include="..\..\kernels\integralImageSumM2\shave\src\cpp\integralImageSumM2.cpp" />
+    <ClCompile Include="..\..\kernels\integralImageSumU16U32\shave\src\cpp\integralImageSumU16U32.cpp" />
+    <ClCompile Include="..\..\kernels\interpolatePixelBilinear\shave\src\cpp\interpolatePixelBilinear.cpp" />
+    <ClCompile Include="..\..\kernels\localMaxMin3x3_fp16\shave\src\cpp\localMaxMin3x3_fp16.cpp" />
+    <ClCompile Include="..\..\kernels\lookupTable10To16\shave\src\cpp\lookupTable10To16.cpp" />
+    <ClCompile Include="..\..\kernels\lookupTable10To8\shave\src\cpp\lookupTable10To8.cpp" />
+    <ClCompile Include="..\..\kernels\lookupTable12To16\shave\src\cpp\lookupTable12To16.cpp" />
+    <ClCompile Include="..\..\kernels\lookupTable12To8\shave\src\cpp\lookupTable12To8.cpp" />
+    <ClCompile Include="..\..\kernels\lookupTable8To8\shave\src\cpp\lookupTable8To8.cpp" />
+    <ClCompile Include="..\..\kernels\matrixInv3x3_fp32\shave\src\cpp\matrixInv3x3_fp32.cpp" />
+    <ClCompile Include="..\..\kernels\medianFilter5x5\shave\src\cpp\medianFilter5x5.cpp" />
+    <ClCompile Include="..\..\kernels\minKernel32\shave\src\cpp\minKernel32.cpp" />
+    <ClCompile Include="..\..\kernels\minKernel64\shave\src\cpp\minKernel64.cpp" />
+    <ClCompile Include="..\..\kernels\minMaxKernel\shave\src\cpp\minMaxKernel.cpp" />
+    <ClCompile Include="..\..\kernels\minMaxPos\shave\src\cpp\minMaxPos.cpp" />
+    <ClCompile Include="..\..\kernels\nonMax3x3_fp32\shave\src\cpp\nonMax3x3_fp32.cpp" />
+    <ClCompile Include="..\..\kernels\nonMax3x3_u8\shave\src\cpp\nonMax3x3_u8.cpp" />
+    <ClCompile Include="..\..\kernels\pixelPos\shave\src\cpp\pixelPos.cpp" />
+    <ClCompile Include="..\..\kernels\pyrdown\shave\src\cpp\pyrdown.cpp" />
+    <ClCompile Include="..\..\kernels\sLaplacian3x3\shave\src\cpp\sLaplacian3x3.cpp" />
+    <ClCompile Include="..\..\kernels\sLaplacian3x3Fp16ToFp16\shave\src\cpp\sLaplacian3x3Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\sLaplacian5x5\shave\src\cpp\sLaplacian5x5.cpp" />
+    <ClCompile Include="..\..\kernels\sLaplacian5x5Fp16ToFp16\shave\src\cpp\sLaplacian5x5Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\sLaplacian7x7\shave\src\cpp\sLaplacian7x7.cpp" />
+    <ClCompile Include="..\..\kernels\sLaplacian7x7Fp16ToFp16\shave\src\cpp\sLaplacian7x7Fp16ToFp16.cpp" />
+    <ClCompile Include="..\..\kernels\sobel\shave\src\cpp\sobel.cpp" />
+    <ClCompile Include="..\..\kernels\ssdPointLine7x7U8U32\shave\src\cpp\ssdPointLine7x7U8U32.cpp" />
+    <ClCompile Include="..\..\kernels\sumOfAbsDiff11x11\shave\src\cpp\sumOfAbsDiff11x11.cpp" />
+    <ClCompile Include="..\..\kernels\sumOfAbsDiff5x5\shave\src\cpp\sumOfAbsDiff5x5.cpp" />
+    <ClCompile Include="..\..\kernels\sumOfSquaredDiff5x5\shave\src\cpp\sumOfSquaredDiff5x5.cpp" />
+    <ClCompile Include="..\..\kernels\sumOfSquaredDiff7x7U8ToU32\shave\src\cpp\sumOfSquaredDiff7x7U8ToU32.cpp" />
+    <ClCompile Include="..\..\kernels\thresholdBinaryRange\shave\src\cpp\thresholdBinaryRange.cpp" />
+    <ClCompile Include="..\..\kernels\thresholdBinaryU8\shave\src\cpp\thresholdBinaryU8.cpp" />
+    <ClCompile Include="..\..\kernels\thresholdDisparity\shave\src\cpp\thresholdDisparity.cpp" />
+    <ClCompile Include="..\..\kernels\thresholdKernel\shave\src\cpp\thresholdKernel.cpp" />
+    <ClCompile Include="..\..\kernels\whiteBalanceBayerGBRG\shave\src\cpp\whiteBalanceBayerGBRG.cpp" />
+    <ClCompile Include="..\..\kernels\whiteBalanceRGB\shave\src\cpp\whiteBalanceRGB.cpp" />
+    <ClCompile Include="..\..\shave\mat.cpp" />
+    <ClCompile Include="..\..\shave\mvcv_types.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\swCommon\pcModel\half\half.h" />
+    <ClInclude Include="..\..\..\..\..\swCommon\pcModel\half\moviFloat32.h" />
+    <ClInclude Include="..\..\kernels\absoluteDiff\shave\include\absoluteDiff.h" />
+    <ClInclude Include="..\..\kernels\aggregateAllPaths64\shave\include\aggregateAllPaths64.h" />
+    <ClInclude Include="..\..\kernels\aggregateCostSGBM64\shave\include\aggregateCostSGBM64.h" />
+    <ClInclude Include="..\..\kernels\accumulateSquare\shave\include\accumulateSquare.h" />
+    <ClInclude Include="..\..\kernels\accumulateWeighted\shave\include\accumulateWeighted.h" />
+    <ClInclude Include="..\..\kernels\arithmeticAdd\shave\include\arithmeticAdd.h" />
+    <ClInclude Include="..\..\kernels\arithmeticAddMask\shave\include\arithmeticAddMask.h" />
+    <ClInclude Include="..\..\kernels\arithmeticSub\shave\include\arithmeticSub.h" />
+    <ClInclude Include="..\..\kernels\arithmeticSubFp16ToFp16\shave\include\arithmeticSubFp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\arithmeticSubMask\shave\include\arithmeticSubMask.h" />
+    <ClInclude Include="..\..\kernels\bilateral5x5\shave\include\bilateral5x5.h" />
+    <ClInclude Include="..\..\kernels\bitwiseAnd\shave\include\bitwiseAnd.h" />
+    <ClInclude Include="..\..\kernels\bitwiseAndMask\shave\include\bitwiseAndMask.h" />
+    <ClInclude Include="..\..\kernels\bitwiseNot\shave\include\bitwiseNot.h" />
+    <ClInclude Include="..\..\kernels\bitwiseOr\shave\include\bitwiseOr.h" />
+    <ClInclude Include="..\..\kernels\bitwiseOrMask\shave\include\bitwiseOrMask.h" />
+    <ClInclude Include="..\..\kernels\bitwiseXor\shave\include\bitwiseXor.h" />
+    <ClInclude Include="..\..\kernels\bitwiseXorMask\shave\include\bitwiseXorMask.h" />
+    <ClInclude Include="..\..\kernels\boxFilter\shave\include\boxFilter.h" />
+    <ClInclude Include="..\..\kernels\boxFilter11x11\shave\include\boxFilter11x11.h" />
+    <ClInclude Include="..\..\kernels\boxFilter13x13\shave\include\boxFilter13x13.h" />
+    <ClInclude Include="..\..\kernels\boxFilter15x15\shave\include\boxFilter15x15.h" />
+    <ClInclude Include="..\..\kernels\boxFilter3x3\shave\include\boxFilter3x3.h" />
+    <ClInclude Include="..\..\kernels\boxFilter5x5\shave\include\boxFilter5x5.h" />
+    <ClInclude Include="..\..\kernels\boxFilter7x7\shave\include\boxFilter7x7.h" />
+    <ClInclude Include="..\..\kernels\boxFilter9x9\shave\include\boxFilter9x9.h" />
+    <ClInclude Include="..\..\kernels\canny\shave\include\canny.h" />
+    <ClInclude Include="..\..\kernels\censusMatching16\shave\include\censusMatching16.h" />
+    <ClInclude Include="..\..\kernels\censusMatching32\shave\include\censusMatching32.h" />
+    <ClInclude Include="..\..\kernels\censusMatching64\shave\include\censusMatching64.h" />
+    <ClInclude Include="..\..\kernels\censusMatching65\shave\include\censusMatching65.h" />
+    <ClInclude Include="..\..\kernels\CensusMatchingPyr\shave\include\censusMatchingPyr.h" />
+    <ClInclude Include="..\..\kernels\censusMin16\shave\include\censusMin16.h" />
+    <ClInclude Include="..\..\kernels\censusMin64\shave\include\censusMin64.h" />
+    <ClInclude Include="..\..\kernels\censusMin65\shave\include\censusMin65.h" />
+    <ClInclude Include="..\..\kernels\censusMin7\shave\include\censusMin7.h" />
+    <ClInclude Include="..\..\kernels\censusTransform5x5\shave\include\censusTransform5x5.h" />
+    <ClInclude Include="..\..\kernels\convolution11x11\shave\include\convolution11x11.h" />
+    <ClInclude Include="..\..\kernels\convolution15x1\shave\include\convolution15x1.h" />
+    <ClInclude Include="..\..\kernels\convolution1x15\shave\include\convolution1x15.h" />
+    <ClInclude Include="..\..\kernels\convolution1x5\shave\include\convolution1x5.h" />
+    <ClInclude Include="..\..\kernels\convolution1x5Fp16ToFp16\shave\include\convolution1x5Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\convolution1x7\shave\include\convolution1x7.h" />
+    <ClInclude Include="..\..\kernels\convolution1x7Fp16ToFp16\shave\include\convolution1x7Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\convolution1x9\shave\include\convolution1x9.h" />
+    <ClInclude Include="..\..\kernels\convolution3x3\shave\include\convolution3x3.h" />
+    <ClInclude Include="..\..\kernels\convolution3x3Fp16ToFp16\shave\include\convolution1x3Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\convolution5x1\shave\include\convolution5x1.h" />
+    <ClInclude Include="..\..\kernels\convolution5x1Fp16ToFp16\shave\include\convolution5x1Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\convolution5x5\shave\include\convolution5x5.h" />
+    <ClInclude Include="..\..\kernels\convolution5x5Fp16ToFp16\shave\include\convolution5x5Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\convolution7x1\shave\include\convolution7x1.h" />
+    <ClInclude Include="..\..\kernels\convolution7x1Fp16ToFp16\shave\include\convolution7x1Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\convolution7x7\shave\include\convolution7x7.h" />
+    <ClInclude Include="..\..\kernels\convolution7x7Fp16ToFp16\shave\include\convolution7x7Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\convolution7x7Fp16ToU8\shave\include\convolution7x7Fp16ToU8.h" />
+    <ClInclude Include="..\..\kernels\convolution9x1\shave\include\convolution9x1.h" />
+    <ClInclude Include="..\..\kernels\convolution9x9\shave\include\convolution9x9.h" />
+    <ClInclude Include="..\..\kernels\convolution9x9Fp16ToFp16\shave\include\convolution9x9Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\convSeparable11x11\shave\include\convSeparable11x11.h" />
+    <ClInclude Include="..\..\kernels\convSeparable11x11Fp16ToFp16\shave\include\convSeparable11x11Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\convSeparable3x3\shave\include\convSeparable3x3.h" />
+    <ClInclude Include="..\..\kernels\convSeparable3x3Fp16ToFp16\shave\include\convSeparable3x3Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\convSeparable5x5\shave\include\convSeparable5x5.h" />
+    <ClInclude Include="..\..\kernels\convSeparable5x5Fp16ToFp16\shave\include\convSeparable5x5Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\convSeparable7x7\shave\include\convSeparable7x7.h" />
+    <ClInclude Include="..\..\kernels\convSeparable7x7Fp16ToFp16\shave\include\convSeparable7x7Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\convSeparable9x9\shave\include\convSeparable9x9.h" />
+    <ClInclude Include="..\..\kernels\convSeparable9x9Fp16ToFp16\shave\include\convSeparable9x9Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\cornerMinEigenVal\shave\include\cornerMinEigenVal.h" />
+    <ClInclude Include="..\..\kernels\cornerMinEigenVal_patched\shave\include\cornerMinEigenVal_patched.h" />
+    <ClInclude Include="..\..\kernels\cvtColorKernelRGBToYUV\shave\include\cvtColorKernelRGBToYUV.h" />
+    <ClInclude Include="..\..\kernels\cvtColorKernelRGBToYUV422\shave\include\cvtColorKernelRGBToYUV422.h" />
+    <ClInclude Include="..\..\kernels\cvtColorKernelYUV422ToRGB\shave\include\cvtColorKernelYUV422ToRGB.h" />
+    <ClInclude Include="..\..\kernels\cvtColorKernelYUVToRGB\shave\include\cvtColorKernelYUVToRGB.h" />
+    <ClInclude Include="..\..\kernels\cvtColorNV21ToRGB\shave\include\cvtColorNV21ToRGB.h" />
+    <ClInclude Include="..\..\kernels\cvtColorRGBfp16ToLumaU8\shave\include\cvtColorRGBfp16ToLumaU8.h" />
+    <ClInclude Include="..\..\kernels\cvtColorRGBfp16ToUV420U8\shave\include\cvtColorRGBfp16ToUV420U8.h" />
+    <ClInclude Include="..\..\kernels\cvtColorRGBToChromaNV12\shave\include\cvtColorRGBToChromaNV12.h" />
+    <ClInclude Include="..\..\kernels\cvtColorRGBToLuma\shave\include\cvtColorRGBToLuma.h" />
+    <ClInclude Include="..\..\kernels\cvtColorRGBToLumaNV12\shave\include\cvtColorRGBToLumaNV12.h" />
+    <ClInclude Include="..\..\kernels\cvtColorRGBToNV21\shave\include\cvtColorRGBToNV21.h" />
+    <ClInclude Include="..\..\kernels\cvtColorRGBToUV\shave\include\cvtColorRGBToUV.h" />
+    <ClInclude Include="..\..\kernels\cvtColorRGBToUV420\shave\include\cvtColorRGBToUV420.h" />
+    <ClInclude Include="..\..\kernels\dilate\shave\include\dilate.h" />
+    <ClInclude Include="..\..\kernels\dilate3x3\shave\include\dilate3x3.h" />
+    <ClInclude Include="..\..\kernels\dilate5x5\shave\include\dilate5x5.h" />
+    <ClInclude Include="..\..\kernels\dilate7x7\shave\include\dilate7x7.h" />
+    <ClInclude Include="..\..\kernels\equalizeHist\shave\include\equalizeHist.h" />
+    <ClInclude Include="..\..\kernels\erode3x3\shave\include\erode3x3.h" />
+    <ClInclude Include="..\..\kernels\erode5x5\shave\include\erode5x5.h" />
+    <ClInclude Include="..\..\kernels\erode7x7\shave\include\erode7x7.h" />
+    <ClInclude Include="..\..\kernels\extractDescriptor64_brisk\shave\include\extractDescriptor64_brisk.h" />
+    <ClInclude Include="..\..\kernels\extractDescriptor64_freakA\shave\include\extractDescriptor64_freakA.h" />
+    <ClInclude Include="..\..\kernels\fast9M2\shave\include\fast9M2.h" />
+    <ClInclude Include="..\..\kernels\fastAtan2Positive\shave\include\fastAtan2Positive.h" />
+    <ClInclude Include="..\..\kernels\gauss\shave\include\gauss.h" />
+    <ClInclude Include="..\..\kernels\gaussHx2\shave\include\gaussHx2.h" />
+    <ClInclude Include="..\..\kernels\gaussHx2_fp16\shave\include\gaussHx2_fp16.h" />
+    <ClInclude Include="..\..\kernels\gaussVx2\shave\include\gaussVx2.h" />
+    <ClInclude Include="..\..\kernels\gaussVx2_fp16\shave\include\gaussVx2_fp16.h" />
+    <ClInclude Include="..\..\kernels\hammingDistance\shave\include\hammingDistance.h" />
+    <ClInclude Include="..\..\kernels\harrisResponse\shave\include\harrisResponse.h" />
+    <ClInclude Include="..\..\kernels\histogram\shave\include\histogram.h" />
+    <ClInclude Include="..\..\kernels\integralImageSquareSumFloatM2\shave\include\integralImageSquareSumFloatM2.h" />
+    <ClInclude Include="..\..\kernels\integralImageSquareSumM2\shave\include\integralImageSquareSumM2.h" />
+    <ClInclude Include="..\..\kernels\integralImageSumFloatM2\shave\include\integralImageSumFloatM2.h" />
+    <ClInclude Include="..\..\kernels\integralImageSumM2\shave\include\integralImageSumM2.h" />
+    <ClInclude Include="..\..\kernels\integralImageSumU16U32\shave\include\integralImageSumU16U32.h" />
+    <ClInclude Include="..\..\kernels\interpolatePixelBilinear\shave\include\interpolatePixelBilinear.h" />
+    <ClInclude Include="..\..\kernels\localMaxMin3x3_fp16\shave\include\localMaxMin3x3_fp16.h" />
+    <ClInclude Include="..\..\kernels\lookupTable10To16\shave\include\lookupTable10To16.h" />
+    <ClInclude Include="..\..\kernels\lookupTable10To8\shave\include\lookupTable10To8.h" />
+    <ClInclude Include="..\..\kernels\lookupTable12To16\shave\include\lookupTable12To16.h" />
+    <ClInclude Include="..\..\kernels\lookupTable12To8\shave\include\lookupTable12To8.h" />
+    <ClInclude Include="..\..\kernels\lookupTable8To8\shave\include\lookupTable8To8.h" />
+    <ClInclude Include="..\..\kernels\matrixInv3x3_fp32\shave\include\matrixInv3x3_fp32.h" />
+    <ClInclude Include="..\..\kernels\minMaxKernel\shave\include\minMaxKernel.h" />
+    <ClInclude Include="..\..\kernels\minMaxPos\shave\include\minMaxPos.h" />
+    <ClInclude Include="..\..\kernels\nonMax3x3_fp32\shave\include\nonMax3x3_fp32.h" />
+    <ClInclude Include="..\..\kernels\nonMax3x3_u8\shave\include\nonMax3x3_u8.h" />
+    <ClInclude Include="..\..\kernels\pixelPos\shave\include\pixelPos.h" />
+    <ClInclude Include="..\..\kernels\pyrdown\shave\include\pyrdown.h" />
+    <ClInclude Include="..\..\kernels\sLaplacian3x3\shave\include\sLaplacian3x3.h" />
+    <ClInclude Include="..\..\kernels\sLaplacian3x3Fp16ToFp16\shave\include\sLaplacian3x3Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\sLaplacian5x5\shave\include\sLaplacian5x5.h" />
+    <ClInclude Include="..\..\kernels\sLaplacian5x5Fp16ToFp16\shave\include\sLaplacian5x5Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\sLaplacian7x7\shave\include\sLaplacian7x7.h" />
+    <ClInclude Include="..\..\kernels\sLaplacian7x7Fp16ToFp16\shave\include\sLaplacian7x7Fp16ToFp16.h" />
+    <ClInclude Include="..\..\kernels\sobel\shave\include\sobel.h" />
+    <ClInclude Include="..\..\kernels\ssdPointLine7x7U8U32\shave\include\ssdPointLine7x7U8U32.h" />
+    <ClInclude Include="..\..\kernels\sumOfAbsDiff11x11\shave\include\sumOfAbsDiff11x11.h" />
+    <ClInclude Include="..\..\kernels\sumOfAbsDiff5x5\shave\include\sumOfAbsDiff5x5.h" />
+    <ClInclude Include="..\..\kernels\sumOfSquaredDiff11x11\shave\include\sumOfSquaredDiff11x11.h" />
+    <ClInclude Include="..\..\kernels\sumOfSquaredDiff5x5\shave\include\sumOfSquaredDiff5x5.h" />
+    <ClInclude Include="..\..\kernels\sumOfSquaredDiff7x7U8ToU32\shave\include\sumOfSquaredDiff7x7U8ToU32.h" />
+    <ClInclude Include="..\..\kernels\thresholdBinaryRange\shave\include\thresholdBinaryRange.h" />
+    <ClInclude Include="..\..\kernels\thresholdBinaryU8\shave\include\thresholdBinaryU8.h" />
+    <ClInclude Include="..\..\kernels\thresholdKernel\shave\include\thresholdKernel.h" />
+    <ClInclude Include="..\..\kernels\whiteBalanceBayerGBRG\shave\include\whiteBalanceBayerGBRG.h" />
+    <ClInclude Include="..\..\kernels\whiteBalanceRGB\shave\include\ssdPointLine7x7U8U32.h" />
+    <ClInclude Include="..\..\include\mat.h" />
+    <ClInclude Include="..\..\include\mvcv.h" />
+    <ClInclude Include="..\..\include\mvcv_types.h" />
+    <ClInclude Include="..\..\include\point.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F055BDBA-0FC0-4329-8EBC-5E8A5ADB301B}</ProjectGuid>
+    <RootNamespace>MvCV</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLib|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLib|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IncludePath>..\..\..\..\..\swCommon\pcModel;..\..\..\..\..\shared\include;..\..\..\..\..\swCommon\pcModel\half;..\..\..\..\..\swCommon\pcModel\dmaModel;..\..\include;..\..\..\..\..\..\packages\movidius\pcModel\moviCompile\compilerVectorFunctions\include;..\..\..\..\..\..\packages\movidius\pcModel\moviCompile\compilerIntrinsics\include;..\..\kernels\absoluteDiff\shave\include;..\..\kernels\accumulateSquare\shave\include;..\..\kernels\accumulateWeighted\shave\include;..\..\kernels\aggregateAllPaths32\shave\include;..\..\kernels\aggregateAllPaths64\shave\include;..\..\kernels\aggregateThreePaths32\shave\include;..\..\kernels\aggregateThreePaths64\shave\include;..\..\kernels\aggregateCostSGBM32\shave\include;..\..\kernels\aggregateCostSGBM64\shave\include;..\..\kernels\aggregateCostSGBM32_clamp\shave\include;..\..\kernels\aggregateCostSGBM64_clamp\shave\include;..\..\kernels\arithmeticAdd\shave\include;..\..\kernels\arithmeticAddMask\shave\include;..\..\kernels\arithmeticSub\shave\include;..\..\kernels\arithmeticSubFp16ToFp16\shave\include;..\..\kernels\arithmeticSubMask\shave\include;..\..\kernels\bilateral5x5\shave\include;..\..\kernels\bitwiseAnd\shave\include;..\..\kernels\bitwiseAndMask\shave\include;..\..\kernels\bitwiseNot\shave\include;..\..\kernels\bitwiseOr\shave\include;..\..\kernels\bitwiseOrMask\shave\include;..\..\kernels\bitwiseXor\shave\include;..\..\kernels\bitwiseXorMask\shave\include;..\..\kernels\boxFilter\shave\include;..\..\kernels\boxFilter11x11\shave\include;..\..\kernels\boxFilter13x13\shave\include;..\..\kernels\boxFilter15x15\shave\include;..\..\kernels\boxFilter3x3\shave\include;..\..\kernels\boxFilter5x5\shave\include;..\..\kernels\boxFilter7x7\shave\include;..\..\kernels\boxFilter9x9\shave\include;..\..\kernels\canny\shave\include;..\..\kernels\censusMatching16\shave\include;..\..\kernels\censusMatching32\shave\include;..\..\kernels\censusMatching64\shave\include;..\..\kernels\censusMatching65\shave\include;..\..\kernels\CensusMatchingPyr\shave\include;..\..\kernels\CensusMatchingPyrOnePos\shave\include;..\..\kernels\censusMin16\shave\include;..\..\kernels\censusMin32\shave\include;..\..\kernels\censusMin64\shave\include;..\..\kernels\censusMin65\shave\include;..\..\kernels\censusMin7\shave\include;..\..\kernels\censusMin3\shave\include;..\..\kernels\censusMinConfidence32\shave\include;..\..\kernels\censusMinConfidence64\shave\include;..\..\kernels\censusTransform5x5\shave\include;..\..\kernels\computeCombinedCost32\shave\include;..\..\kernels\computeCombinedCost64\shave\include;..\..\kernels\computeCombinedCost3\shave\include;..\..\kernels\computeAD32\shave\include;..\..\kernels\computeAD64\shave\include;..\..\kernels\computeADPyrOnePos\shave\include;..\..\kernels\convolution11x11\shave\include;..\..\kernels\convolution15x1\shave\include;..\..\kernels\convolution1x15\shave\include;..\..\kernels\convolution1x5\shave\include;..\..\kernels\convolution1x5Fp16ToFp16\shave\include;..\..\kernels\convolution1x7\shave\include;..\..\kernels\convolution1x7Fp16ToFp16\shave\include;..\..\kernels\convolution1x9\shave\include;..\..\kernels\convolution3x3\shave\include;..\..\kernels\convolution3x3Fp16ToFp16\shave\include;..\..\kernels\convolution5x1\shave\include;..\..\kernels\convolution5x1Fp16ToFp16\shave\include;..\..\kernels\convolution5x5\shave\include;..\..\kernels\convolution5x5Fp16ToFp16\shave\include;..\..\kernels\convolution7x1\shave\include;..\..\kernels\convolution7x1Fp16ToFp16\shave\include;..\..\kernels\convolution7x7\shave\include;..\..\kernels\convolution7x7Fp16ToFp16\shave\include;..\..\kernels\convolution7x7Fp16ToU8\shave\include;..\..\kernels\convolution9x1\shave\include;..\..\kernels\convolution9x9\shave\include;..\..\kernels\convolution9x9Fp16ToFp16\shave\include;..\..\kernels\convSeparable11x11\shave\include;..\..\kernels\convSeparable11x11Fp16ToFp16\shave\include;..\..\kernels\convSeparable3x3\shave\include;..\..\kernels\convSeparable3x3Fp16ToFp16\shave\include;..\..\kernels\convSeparable5x5\shave\include;..\..\kernels\convSeparable5x5Fp16ToFp16\shave\include;..\..\kernels\convSeparable7x7\shave\include;..\..\kernels\convSeparable7x7Fp16ToFp16\shave\include;..\..\kernels\convSeparable9x9\shave\include;..\..\kernels\convSeparable9x9Fp16ToFp16\shave\include;..\..\kernels\cornerMinEigenVal\shave\include;..\..\kernels\cornerMinEigenVal_patched\shave\include;..\..\kernels\cvtColorKernelRGBToYUV\shave\include;..\..\kernels\cvtColorKernelRGBToYUV422\shave\include;..\..\kernels\cvtColorKernelYUV422ToRGB\shave\include;..\..\kernels\cvtColorKernelYUVToRGB\shave\include;..\..\kernels\cvtColorNV21ToRGB\shave\include;..\..\kernels\cvtColorRGBfp16ToLumaU8\shave\include;..\..\kernels\cvtColorRGBfp16ToUV420U8\shave\include;..\..\kernels\cvtColorRGBToChromaNV12\shave\include;..\..\kernels\cvtColorRGBToLuma\shave\include;..\..\kernels\cvtColorRGBToLumaNV12\shave\include;..\..\kernels\cvtColorRGBToNV21\shave\include;..\..\kernels\cvtColorRGBToUV\shave\include;..\..\kernels\cvtColorRGBToUV420\shave\include;..\..\kernels\dilate\shave\include;..\..\kernels\dilate3x3\shave\include;..\..\kernels\dilate5x5\shave\include;..\..\kernels\dilate7x7\shave\include;..\..\kernels\equalizeHist\shave\include;..\..\kernels\erode3x3\shave\include;..\..\kernels\erode5x5\shave\include;..\..\kernels\erode7x7\shave\include;..\..\kernels\extractDescriptor64_brisk\shave\include;..\..\kernels\extractDescriptor64_freakA\shave\include;..\..\kernels\fast9M2\shave\include;..\..\kernels\fastAtan2Positive\shave\include;..\..\kernels\flipKernel\shave\include;..\..\kernels\gauss\shave\include;..\..\kernels\gaussHx2\shave\include;..\..\kernels\gaussHx2_fp16\shave\include;..\..\kernels\gaussVx2\shave\include;..\..\kernels\gaussVx2_fp16\shave\include;..\..\kernels\hammingDistance\shave\include;..\..\kernels\harrisResponse\shave\include;..\..\kernels\histogram\shave\include;..\..\kernels\integralImageSquareSumFloatM2\shave\include;..\..\kernels\integralImageSquareSumM2\shave\include;..\..\kernels\integralImageSumFloatM2\shave\include;..\..\kernels\integralImageSumM2\shave\include;..\..\kernels\integralImageSumU16U32\shave\include;..\..\kernels\interpolatePixelBilinear\shave\include;..\..\kernels\localMaxMin3x3_fp16\shave\include;..\..\kernels\lookupTable10To16\shave\include;..\..\kernels\lookupTable10To8\shave\include;..\..\kernels\lookupTable12To16\shave\include;..\..\kernels\lookupTable12To8\shave\include;..\..\kernels\lookupTable8To8\shave\include;..\..\kernels\matrixInv3x3_fp32\shave\include;..\..\kernels\medianFilter5x5\shave\include;..\..\kernels\minKernel32\shave\include;..\..\kernels\minKernel64\shave\include;..\..\kernels\minMaxKernel\shave\include;..\..\kernels\minMaxPos\shave\include;..\..\kernels\nonMax3x3_fp32\shave\include;..\..\kernels\nonMax3x3_u8\shave\include;..\..\kernels\pixelPos\shave\include;..\..\kernels\pyrdown\shave\include;..\..\kernels\sLaplacian3x3\shave\include;..\..\kernels\sLaplacian3x3Fp16ToFp16\shave\include;..\..\kernels\sLaplacian5x5\shave\include;..\..\kernels\sLaplacian5x5Fp16ToFp16\shave\include;..\..\kernels\sLaplacian7x7\shave\include;..\..\kernels\sLaplacian7x7Fp16ToFp16\shave\include;..\..\kernels\sobel\shave\include;..\..\kernels\ssdPointLine7x7U8U32\shave\include;..\..\kernels\sumOfAbsDiff11x11\shave\include;..\..\kernels\sumOfAbsDiff5x5\shave\include;..\..\kernels\sumOfSquaredDiff11x11\shave\include;..\..\kernels\sumOfSquaredDiff5x5\shave\include;..\..\kernels\sumOfSquaredDiff7x7U8ToU32\shave\include;..\..\kernels\thresholdBinaryRange\shave\include;..\..\kernels\thresholdBinaryU8\shave\include;..\..\kernels\thresholdKernel\shave\include;..\..\kernels\thresholdDisparity\shave\include;..\..\kernels\whiteBalanceBayerGBRG\shave\include;..\..\kernels\whiteBalanceRGB\shave\include;..\..\kernels\convertYUV400ToYUV422\shave\include;..\..\kernels\convertFrom12BppTo8Bpp\shave\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IncludePath>..\..\include;..\..\shave;..\..\..\..\..\..\regression\unittest\halfPC;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLib|Win32'">
+    <IncludePath>..\..\..\..\..\shared\include;..\..\..\..\..\..\common\swCommon\pcModel\dmaModel;..\..\..\..\..\..\common\swCommon\pcModel\half;..\..\..\..\..\..\common\swCommon\pcModel;..\..\include;$(IncludePath)</IncludePath>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__PC__;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLib|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__PC__;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

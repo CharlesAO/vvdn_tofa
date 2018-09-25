@@ -1,0 +1,99 @@
+/*  This is a Default Linker script
+ *  Should be used as an included linker script in top level scripts
+ *
+ *  Addresses defined in common/drivers/myriad2/system/asm/memmap.S
+ */
+
+EXTERN(rtems_get_version_string);
+
+VERSION_INFO_DYNAMIC_SIZE = DEFINED (VERSION_INFO_DYNAMIC_SIZE) ? VERSION_INFO_DYNAMIC_SIZE : 1024;
+DTP_DATA_SIZE = DEFINED (DTP_DATA_SIZE) ? DTP_DATA_SIZE : (1024 * 300);
+
+MEMORY
+{
+  SHV0_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 0K
+  SHV0_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV1_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 0K
+  SHV1_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV2_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 0K
+  SHV2_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV3_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 0K
+  SHV3_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV4_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 0K
+  SHV4_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV5_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 0K
+  SHV5_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV6_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 0K
+  SHV6_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV7_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 0K
+  SHV7_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV8_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 0K
+  SHV8_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV9_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 0K
+  SHV9_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV10_CODE (wx) : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 0K
+  SHV10_DATA (w)  : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV11_CODE (wx) : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 0K
+  SHV11_DATA (w)  : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+  /* The CMX_DMA section must be between the following addreses
+   *  0x78000000 + 12 * 128K
+   *      and
+   *  0x78000000 + 13 * 128K  */
+  CMX_DMA_DESCRIPTORS  (wx) : ORIGIN = 0x78000000 + 12 * 128K , LENGTH = 128K
+
+  CMX_OTHER          (wx) : ORIGIN = 0x70000000 + 0*128K + 0K, LENGTH = 12*128K + 0k
+  /*CMX_OTHER          (wx) : ORIGIN = 0x70000000 + 0*128K + 0K, LENGTH = 8*128K + 96k*/
+
+  DDR_DATA          (wx) : ORIGIN = 0x80000000, LENGTH = 128M-15*1024K
+
+  LRT (wx) : ORIGIN = 0x70000000 + 13 * 128K + 0k, LENGTH = 3*128K
+  LOS (wx) : ORIGIN = 0x80000000 + 128M - 15*1024K, LENGTH = 15*1024K
+  /*LOS (wx) : ORIGIN = 0x70000000 + 8*128K + 96k, LENGTH = 3*128K*/
+}
+
+SECTIONS
+{
+  .ddr.xxdebug :
+  {
+    __start_mmsdbgvarlist = .;
+    KEEP(*(mmsdbgvarlist))
+    __stop_mmsdbgvarlist = .;
+  } > LOS
+
+  version_info :
+  {
+    . = ALIGN (16);
+    linker_version_info_begin = .;
+
+    KEEP(*(version_info_prolog))
+    KEEP(*(version_info))
+    KEEP(*(version_info_epilog))
+    . = ALIGN (4);
+    . += VERSION_INFO_DYNAMIC_SIZE;
+    linker_version_info_end = .;
+  } > LOS
+
+  dtp_data :
+  {
+    . = ALIGN (16);
+    linker_dtp_data_begin = .;
+    *(dtp_data*)
+    . = linker_dtp_data_begin + DTP_DATA_SIZE;
+    linker_dtp_data_end = .;
+  } > LOS
+}
+
+INCLUDE myriad2_leon_default_elf.ldscript
+INCLUDE myriad2_shave_slices.ldscript
+INCLUDE myriad2_default_general_purpose_sections.ldscript

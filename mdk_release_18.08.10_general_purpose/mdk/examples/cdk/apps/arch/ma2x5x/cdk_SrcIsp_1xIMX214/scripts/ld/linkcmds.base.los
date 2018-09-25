@@ -1,0 +1,269 @@
+/*  linkcmds
+ */
+
+OUTPUT_ARCH(sparc)
+__DYNAMIC  =  0;
+ENTRY(start)
+
+/*
+ * The memory map looks like this:
+ * +--------------------+ <- low memory
+ * | .text              |
+ * |        etext       |
+ * |        ctor list   | the ctor and dtor lists are for
+ * |        dtor list   | C++ support
+ * |        _endtext    |
+ * +--------------------+
+ * | .data              | initialized data goes here
+ * |        _sdata      |
+ * |        _edata      |
+ * +--------------------+
+ * | .bss               |
+ * |        __bss_start | start of bss, cleared by crt0
+ * |        _end        | start of heap, used by sbrk()
+ * +--------------------+
+ * |    heap space      |
+ * |        _ENDHEAP    |
+ * |    stack space     |
+ * |        __stack     | top of stack
+ * +--------------------+ <- high memory
+ */
+
+_RAM_END_LOS = _RAM_START_LOS + _RAM_SIZE_LOS;
+
+_PROM_END_LOS = _PROM_START_LOS + _PROM_SIZE_LOS;
+
+/*
+ *  Alternate names without leading _.
+ */
+
+PROM_START_LOS = _PROM_START_LOS;
+PROM_SIZE_LOS = _PROM_SIZE_LOS;
+PROM_END_LOS = _PROM_END_LOS;
+
+RAM_START_LOS = _RAM_START_LOS;
+RAM_SIZE_LOS = _RAM_SIZE_LOS;
+RAM_END_LOS = _RAM_END_LOS;
+
+/*
+ * SPARC monitor assumes this is present to provide proper RTEMS awareness.
+ */
+EXTERN(rtems_get_version_string);
+
+SECTIONS
+{
+  /*
+   * locate the special sections in correct place
+   * These sections are required to ensure Myriad is initialized correctly and must be loaded first
+   */
+  .l2.mode    0x20FD0000 : { KEEP(*(.l2.mode)) }           /* L2 cache mode                */
+  .cmx.ctrl   0x20FC0028 : { KEEP(*(.cmx.ctrl)) }          /* CMX default layout           */
+}
+
+/*
+ * stick everything in ram (of course)
+ */
+SECTIONS
+{
+  . = RAM_START_LOS;
+  .text :
+  {
+    CREATE_OBJECT_SYMBOLS
+    text_start = .;
+    _text_start = .;
+	/********************************************/
+	/* In order to include the trap table first */
+    . = ALIGN(0x1000);
+      *(.sys.text.traps)
+    . = ALIGN(4);
+      *(.sys.text.start)
+      *(.sys.text*)
+	/********************************************/
+	. = ALIGN (4);
+    *(.text*)
+    . = ALIGN (16);
+
+    KEEP(*(.eh_frame*))
+    . = ALIGN (16);
+
+    *(.gnu.linkonce.t*)
+    }
+   .ddr.xxdebug :
+   {
+    __start_mmsdbgvarlist = .;
+    KEEP(*(mmsdbgvarlist))
+    __stop_mmsdbgvarlist = .;
+  }
+  .ctors :
+  {
+    /*
+     * C++ constructors
+     */
+    /* gcc uses crtbegin.o to find the start of
+       the constructors, so we make sure it is
+       first.  Because this is a wildcard, it
+       doesn't matter if the user does not
+       actually link against crtbegin.o; the
+       linker won't look for a file to match a
+       wildcard.  The wildcard also means that it
+       doesn't matter which directory crtbegin.o
+       is in.  */
+    CTORS_BEGIN = .;
+    KEEP (*crtbegin.o(.ctors))
+    KEEP (*crtbegin?.o(.ctors))
+    /* We don't want to include the .ctor section from
+       the crtend.o file until after the sorted ctors.
+       The .ctor section from the crtend file contains the
+       end of ctors marker and it must be last */
+    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .ctors))
+    KEEP (*(SORT(.ctors*)))
+    CTORS_END = .;
+  }
+
+  .dtors :
+  {
+    KEEP (*crtbegin.o(.dtors))
+    KEEP (*crtbegin?.o(.dtors))
+    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .dtors))
+    KEEP (*(SORT(.dtors*)))
+  }
+
+  .rodata :
+  {
+	. = ALIGN(4);
+    _rodata_start = . ;
+	/* Adding startup readonly data */
+	*(.sys.rodata*)
+    *(.rodata*)
+    *(.gnu.linkonce.r*)
+    _erodata = ALIGN( 0x10 ) ;
+    etext = ALIGN(0x10);
+    _etext = .;
+  }
+  .init :
+  {
+    KEEP(*(.init*))
+  }
+  .fini :
+  {
+    KEEP(*(.fini*))
+    *(.lit)
+    *(.shdata)
+    . = ALIGN (16);
+  }
+  .tdata : {
+    _TLS_Data_begin = .;
+    *(.tdata .tdata.* .gnu.linkonce.td.*)
+    _TLS_Data_end = .;
+  }
+  .tbss : {
+    _TLS_BSS_begin = .;
+    *(.tbss .tbss.* .gnu.linkonce.tb.*) *(.tcommon)
+    _TLS_BSS_end = .;
+  }
+  _TLS_Data_size = _TLS_Data_end - _TLS_Data_begin;
+  _TLS_BSS_size = _TLS_BSS_end - _TLS_BSS_begin;
+  _TLS_Size = _TLS_BSS_end - _TLS_Data_begin;
+  _TLS_Alignment = ALIGNOF (.tdata);
+  .rtemsroset : {
+    /* for pre rtems-libbsd FreeBSD code */
+    __start_set_sysctl_set = .;
+    KEEP(*(set_sysctl_*));
+    __stop_set_sysctl_set = .;
+    KEEP(*(set_domain_*));
+    KEEP(*(set_pseudo_*));
+
+    KEEP (*(SORT(.rtemsroset.*)))
+
+    . = ALIGN (16);
+    _endtext = .;
+  }
+  .rela.dyn       :
+    {
+      *(.rela.init)
+      *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
+      *(.rela.fini)
+      *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
+      *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
+      *(.rela.tdata .rela.tdata.* .rela.gnu.linkonce.td.*)
+      *(.rela.tbss .rela.tbss.* .rela.gnu.linkonce.tb.*)
+      *(.rela.ctors)
+      *(.rela.dtors)
+      *(.rela.got)
+      *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+    }
+  .rtemsrwset : {
+    KEEP (*(SORT(.rtemsrwset.*)))
+  }
+  .data :
+  {
+    data_start = .;
+    _data_start = .;
+    _sdata = . ;
+    *(.data*)
+    *(.gnu.linkonce.d*)
+    . = ALIGN(0x10);
+    *(.gcc_except_table*)
+    . = ALIGN(0x10);
+    edata = .;
+    _edata = .;
+  }
+
+  /*The LeonOS default heap section*/
+  .heapSection : { *(.heapSection.data) }
+
+  .dynamic	  : { *(.dynamic) 	}
+  .jcr		  : { *(.jcr) 		}
+  .got		  : { *(.got) 		}
+  .plt   	  : { *(.plt) 		}
+  .hash		  : { *(.hash)		}
+  .dynrel	  : { *(.dynrel)	}
+  .dynsym	  : { *(.dynsym)	}
+  .dynstr	  : { *(.dynstr)	}
+  .hash		  : { *(.hash)		}
+  .shbss :
+  {
+    *(.shbss)
+  }
+
+  .bss :
+  {
+    __bss_start = ALIGN(0x8);
+    _bss_start = .;
+    bss_start = .;
+    *(.bss .bss* .gnu.linkonce.b*)
+    *(COMMON)
+    . = ALIGN (16);
+    end = .;
+    _end = ALIGN(0x8);
+    __end = ALIGN(0x8);
+  }
+
+  .noinit (NOLOAD) : {
+    . = ALIGN(8);
+    __noinit_start = . ;
+    *(.noinit*) *(COMMON)
+    . = ALIGN(8);
+    __noinit_end = . ;
+  }
+
+  /*Move section pointer to the end of the allocated memory*/
+  . = __sys_bss_start;
+  _LEON_STACK_POINTER = .;
+  .sys.bss ALIGN(4) (NOLOAD) : {
+    . = ALIGN(8);
+    __sys_bss_start = . ;
+    *(.sys.bss*)
+    . = ALIGN(8);
+    __sys_bss_end = . ;
+  }
+
+  .stab . (NOLOAD) :
+  {
+    [ .stab ]
+  }
+  .stabstr . (NOLOAD) :
+  {
+    [ .stabstr ]
+  }
+ }

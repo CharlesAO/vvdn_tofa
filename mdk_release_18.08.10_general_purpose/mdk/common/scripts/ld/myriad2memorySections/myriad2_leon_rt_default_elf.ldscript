@@ -1,0 +1,316 @@
+/*  This is a Leon Default Linker script
+ *  Should be used as an included linker script in top level scripts
+ */
+/*  linkcmds
+ */
+
+OUTPUT_ARCH(sparc)
+lrt___DYNAMIC  =  0;
+
+/*
+ * The memory map looks like this:
+ * +------------------------+ <- low memory
+ * | .lrt.text              |
+ * |        lrt_etext       |
+ * |        ctor list       | the ctor and dtor lists are for
+ * |        dtor list       | C++ support
+ * |        lrt__endtext    |
+ * +------------------------+
+ * | .lrt.data              | initialized data goes here
+ * |        lrt__sdata      |
+ * |        lrt__edata      |
+ * +------------------------+
+ * | .lrt.bss               |
+ * |        lrt___bss_start | start of bss, cleared by crt0
+ * |        lrt__end        | start of heap, used by sbrk()
+ * +------------------------+
+ * |    heap space          |
+ * |        lrt__ENDHEAP    |
+ * |    stack space         |
+ * |        lrt___stack     | top of stack
+ * +------------------------+ <- high memory
+ */
+
+/*
+ * SPARC monitor assumes this is present to provide proper RTEMS awareness.
+ */
+EXTERN(lrt_rtems_get_version_string);
+
+/*
+ * stick everything in ram (of course)
+ */
+SECTIONS
+{
+  /* This needs to be here, to allow insertion of custom code before .lrt.text */
+  .lrt.getCurrentPointerLocation :
+  {
+    LRT_CURRENT_POINTER = .;
+  } > LRT
+  . = LRT_CURRENT_POINTER;
+
+  .lrt.text ALIGN(0x1000) :
+  {
+    CREATE_OBJECT_SYMBOLS
+    lrt_text_start = .;
+    lrt__text_start = .;
+    /******************************************/
+    /* Must include the trap table first      */
+    /* The traps starting address must have   */
+    /* the first 12 bits set to 0,            */
+    /* this is HW imposed limitation          */
+      *(.lrt.sys.text.traps)
+      . = ALIGN(0x1000);  /* Need to be clarified  http://dub30/bugzilla/show_bug.cgi?id=24361 */
+      *(.lrt.sys.text.start)
+      *(.lrt.sys.text*)
+    /********************************************/
+    *(.lrt.text*)
+    LRT_TEXT_END = .;
+  } > LRT
+
+  /* Update location counter */
+  . = LRT_TEXT_END;
+  .lrt.text.eh_frame ALIGN(16) :
+  {
+    KEEP(*(.lrt.eh_frame*))
+    LRT_TEXT_EH_FRAME_END = .;
+  } > LRT
+
+  . = LRT_TEXT_EH_FRAME_END;
+  .lrt.text.gnu.linkonce.t ALIGN(16) :
+  {
+    *(.lrt.gnu.linkonce.t*)
+  } > LRT
+
+  .lrt.ctors :
+  {
+    /*
+     * C++ constructors
+     */
+    /* gcc uses crtbegin.o to find the start of
+     * the constructors, so we make sure it is
+     * first.  Because this is a wildcard, it
+     * doesn't matter if the user does not
+     * actually link against crtbegin.o; the
+     * linker won't look for a file to match a
+     * wildcard.  The wildcard also means that it
+     * doesn't matter which directory crtbegin.o
+     * is in.  */
+    lrt_CTORS_BEGIN = .;
+    KEEP (*crtbegin.o(.lrt.ctors))
+    KEEP (*crtbegin?.o(.lrt.ctors))
+    /* We don't want to include the .ctor section from
+     * the crtend.o file until after the sorted ctors.
+     * The .ctor section from the crtend file contains the
+     * end of ctors marker and it must be last */
+    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .lrt.ctors))
+    KEEP (*(SORT(.lrt.ctors*)))
+    lrt_CTORS_END = .;
+  } > LRT
+
+  .lrt.dtors :
+  {
+    KEEP (*crtbegin.o(.lrt.dtors))
+    KEEP (*crtbegin?.o(.lrt.dtors))
+    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .lrt.dtors))
+    KEEP (*(SORT(.lrt.dtors*)))
+  } > LRT
+
+  .lrt.rodata :
+  {
+    lrt__rodata_start = . ;
+    /* Adding startup readonly data */
+    *(.lrt.sys.rodata*)
+    *(.lrt.rodata*)
+    *(.lrt.gnu.linkonce.r*)
+    lrt__erodata = ALIGN(0x10);
+    lrt_etext = lrt__erodata;
+    lrt__etext = lrt__erodata;
+  } > LRT
+
+  /* Update location counter */
+  . = lrt__erodata;
+
+  .lrt.init . :
+  {
+    KEEP(*(.lrt.init*))
+  } > LRT
+
+  .lrt.fini :
+  {
+    KEEP(*(.lrt.fini*))
+    *(.lrt.lit)
+    *(.lrt.shdata)
+    LRT_FINI_END = . ;
+  } > LRT
+
+  . = LRT_FINI_END;
+  .lrt.tdata ALIGN(16) :
+  {
+    lrt__TLS_Data_begin = .;
+    *(.lrt.tdata .lrt.tdata.* .lrt.gnu.linkonce.td.*)
+    lrt__TLS_Data_end = .;
+  } > LRT
+
+  . = lrt__TLS_Data_end;
+  .lrt.tbss . :
+  {
+    lrt__TLS_BSS_begin = .;
+    *(.lrt.tbss .lrt.tbss.* .lrt.gnu.linkonce.tb.*)
+    *(.lrt.tcommon)
+    lrt__TLS_BSS_end = .;
+  } > LRT
+
+  lrt__TLS_Data_size = lrt__TLS_Data_end - lrt__TLS_Data_begin;
+  lrt__TLS_BSS_size = lrt__TLS_BSS_end - lrt__TLS_BSS_begin;
+  lrt__TLS_Size = lrt__TLS_BSS_end - lrt__TLS_Data_begin;
+  lrt__TLS_Alignment = ALIGNOF (.lrt.tdata);
+
+  ASSERT( (_TLS_Size >= 0) && (_TLS_Size < 0x0FFFFFFF) , "RTEMS TLS table size is negative!")
+
+  .lrt.rtemsroset :
+  {
+    /* for pre rtems-libbsd FreeBSD code */
+    lrt___start_set_sysctl_set = .;
+    KEEP(*(lrt_set_sysctl_*));
+    lrt___stop_set_sysctl_set = .;
+    KEEP(*(lrt_set_domain_*));
+    KEEP(*(lrt_set_pseudo_*));
+    KEEP (*(SORT(.lrt.rtemsroset.*)))
+    lrt__endtext = .;
+  } > LRT
+
+  /* Update location pointer */
+  . = lrt__endtext;
+  .lrt.rela.dyn ALIGN(16) :
+  {
+    *(.lrt.rela.init)
+    *(.lrt.rela.text .lrt.rela.text.* .lrt.rela.gnu.linkonce.t.*)
+    *(.lrt.rela.fini)
+    *(.lrt.rela.rodata .lrt.rela.rodata.* .lrt.rela.gnu.linkonce.r.*)
+    *(.lrt.rela.data .lrt.rela.data.* .lrt.rela.gnu.linkonce.d.*)
+    *(.lrt.rela.tdata .lrt.rela.tdata.* .lrt.rela.gnu.linkonce.td.*)
+    *(.lrt.rela.tbss .lrt.rela.tbss.* .lrt.rela.gnu.linkonce.tb.*)
+    *(.lrt.rela.ctors)
+    *(.lrt.rela.dtors)
+    *(.lrt.rela.got)
+    *(.lrt.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+  } > LRT
+
+  .lrt.rtemsrwset :
+  {
+    KEEP (*(SORT(.lrt.rtemsrwset.*)))
+  } > LRT
+
+  .lrt.data :
+  {
+    lrt_data_start = .;
+    lrt__data_start = .;
+    lrt__sdata = . ;
+    *(.lrt.data*)
+    *(.lrt.gnu.linkonce.d*)
+    LRT_DATA_END = .;
+  } > LRT
+
+  /* Update location pointer */
+  . = LRT_DATA_END;
+  .lrt.data.except_table ALIGN(0x10):
+  {
+    *(.lrt.gcc_except_table*)
+    lrt_edata = ALIGN(0x10);
+    lrt__edata = lrt_edata;
+  } > LRT
+
+  /* Update location pointer */
+  . = lrt_edata;
+
+  /*The LeonRT default heap section*/
+  .lrt.heapSection . : { *(.lrt.heapSection.data) } > LRT
+
+  .lrt.dynamic    : { *(.lrt.dynamic)   } > LRT
+  .lrt.jcr        : { *(.lrt.jcr)       } > LRT
+  .lrt.got        : { *(.lrt.got)       } > LRT
+  .lrt.plt        : { *(.lrt.plt)       } > LRT
+  .lrt.hash       : { *(.lrt.hash)      } > LRT
+  .lrt.dynrel     : { *(.lrt.dynrel)    } > LRT
+  .lrt.dynsym     : { *(.lrt.dynsym)    } > LRT
+  .lrt.dynstr     : { *(.lrt.dynstr)    } > LRT
+  .lrt.hash       : { *(.lrt.hash)      } > LRT
+
+  .lrt.shbss :
+  {
+    *(.lrt.shbss)
+    LRT_END_SHBSS = .;
+  } > LRT
+
+  /* Update location pointer */
+  . = LRT_END_SHBSS;
+  .lrt.bss ALIGN(8) (NOLOAD):
+  {
+    lrt___bss_start = .;
+    lrt__bss_start = .;
+    lrt_bss_start = .;
+    *(.lrt.bss*)
+    *(.lrt.gnu.linkonce.b*)
+    *(.lrtCOMMON)
+    lrt_bss_end = ALIGN(8);
+    lrt__bss_end = lrt_bss_end;
+    lrt___bss_end = lrt_bss_end;
+  } > LRT
+
+  /* Update location pointer */
+  . = lrt___bss_end;
+  .lrt.noinit ALIGN(8) (NOLOAD) :
+  {
+    lrt___noinit_start = . ;
+    *(.lrt.noinit*) *(.lrtCOMMON)
+    lrt___noinit_end = ALIGN(8);
+    lrt_end = ALIGN (8);
+    /* Note: RTEMS will use for the 'workspace', the memory area:
+        starting at the "lrt_end" symbol above,
+        up to "lrt___sys_bss_start" symbol below - 8K.
+        If this linkerscript is modified to add more statically allocated
+        sections after this one, then the above assignment should be moved
+        lower.
+    */
+  } > LRT
+
+  . = lrt___noinit_end;
+
+  .lrt.stack . (NOLOAD):
+  {
+    _STACKEND_LRT = ORIGIN(LRT) + ( LENGTH(LRT) >= 0x200 ? (LENGTH(LRT) - 0x200) : LENGTH(LRT));
+    _STACKSIZE_LRT = _STACKEND_LRT - .;
+    FILL(0);
+    . = (_STACKSIZE_LRT > 0) ? _STACKEND_LRT : .;
+  } > LRT
+  lrt__LEON_STACK_POINTER = .;
+
+  .lrt.sys.bss ALIGN(8) (NOLOAD) :
+  {
+    lrt___sys_bss_start = . ;
+    *(.lrt.sys.bss*)
+    lrt___sys_bss_end = ALIGN(8);
+  } > LRT
+
+  /* Update location pointer */
+  . = lrt___sys_bss_end;
+  .lrt.stab . (NOLOAD) :
+  {
+    [ .lrt.stab ]
+  } > LRT
+  .lrt.stabstr . (NOLOAD) :
+  {
+    [ .lrt.stabstr ]
+  } > LRT
+
+  lrt__MIN_STACK_SIZE = DEFINED( lrt__MIN_STACK_SIZE ) ? lrt__MIN_STACK_SIZE : 3584;
+  lrt__STACK_SIZE = ABSOLUTE(lrt___sys_bss_start - lrt___bss_end);
+  lrt__TEXT_SIZE = ABSOLUTE(lrt__rodata_start - lrt__text_start);
+
+  ASSERT( (lrt__TEXT_SIZE == 0) || ( (lrt__STACK_SIZE > lrt__MIN_STACK_SIZE) && (lrt__STACK_SIZE < 0x80000000) ), "LeonRT Code + data too big. Stack space left is smaller than the required minimum (3.5 KB)!")
+
+  /DISCARD/ :
+  {
+    *(.comment .gnu.attributes .iplt .rela.iplt)
+  }
+}

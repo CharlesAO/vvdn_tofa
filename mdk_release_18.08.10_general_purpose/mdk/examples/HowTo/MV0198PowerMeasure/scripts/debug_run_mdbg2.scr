@@ -1,0 +1,28 @@
+puts breset
+mdbg::breset
+puts "startupcore $default_target"
+mdbg::startupcore $default_target
+puts "target $default_target"
+mdbg::target $default_target
+puts "loadfile $::elf"
+mdbg::loadfile $::elf
+
+set los_exists [mdbg::sym addr -nocomplain mvConsoleTxQueue]
+if { $los_exists ne "" } {
+    mdbg::pipe create LOS
+    mdbg::pipe configure LOS -stdout
+    mdbg::pipe configure LOS -readsym mvConsoleTxQueue
+}
+
+set lrt_exists [mdbg::sym addr -nocomplain lrt_mvConsoleTxQueue]
+if { "$lrt_exists" ne "" } {
+    mdbg::pipe create LRT
+    mdbg::pipe configure LRT -stdout
+    mdbg::pipe configure LRT -readsym lrt_mvConsoleTxQueue
+}
+
+puts $run_opt
+mdbg::$run_opt
+puts "Saving trace buffers .."
+mdbg::uart flush
+

@@ -1,0 +1,143 @@
+USB-resource-file 3.00 =
+	{
+	Device 	{
+		Class			0x0	#Look at interface for class info
+		SubClass		0x0	#
+		Protocol 		0x0	#none specified.
+		Vendor          0x040E %tag% VENDOR_ID
+		Product-ID		0xF003 %tag% PRODUCT
+		Device-Version		1.00
+		serial-number		SERIALNUMBER
+		} %no external name% ;
+
+	#### here's the first configuration.  ideally, we
+	#### ought to support autonum.
+	Configuration 1
+		{
+		%tag% CONFIG1_ID	# name of this configuration
+		Self-Powered		# the flags
+		Power 4 mA
+		# config private descriptors would go here
+
+		# Interface 0 is used for the DFU interface
+		# NOTE:	This URC file describes a DFU device with two memory regions
+		#	which run in DFU-Mode only
+		#	.
+		interface 0
+			{
+			alternate-setting 0
+				class 0xFE              # Application Specific Class
+				subclass 0x01           # DFU
+				protocol 0x02		# DFU mode protocol
+				name DFUIFC_FLASH       # string
+
+				private-descriptors
+					{
+					# header
+					raw	{
+						0x21	# DFU functional decriptor
+						0x07	# bmAttributes
+							#   bitWillDetach = No
+							#   bitManifestationTolerant = Yes
+							#   bitCanUpload = Yes
+							#   bitCanDnload = Yes
+						word(5000)	# wDetachTimeout = 5s
+						word(0x1000)	# wTransferSize
+						word(0x0110)	# bcdDFUVersion
+						};
+					}
+				#endpoints
+				#	bulk in
+				#	bulk out
+				;
+
+			# alternate setting 1 used to access additional memory
+			# segments. See DFU spec 1.1 section 4.2.3
+			alternate-setting 1
+				class 0xFE              # Application Specific Class
+				subclass 0x01           # DFU
+				protocol 0x02		# DFU mode protocol
+				name DFUIFC_EEPROM      # string
+
+				private-descriptors
+					{
+					# header
+					raw	{
+						0x21	# DFU functional decriptor
+						0x07	# bmAttributes
+							#   bitWillDetach = No
+							#   bitManifestationTolerant = Yes
+							#   bitCanUpload = Yes
+							#   bitCanDnload = Yes
+						word(5000)	# wDetachTimeout = 5s
+						word(0x1000)	# wTransferSize
+						word(0x0110)	# bcdDFUVersion
+						};
+					}
+				endpoints
+					bulk in
+					bulk out
+				;
+			}
+
+		} %no name% ;
+
+	strings
+		{
+		properties external SERIALNUMBER, DFUIFC_FLASH, DFUIFC_EEPROM;
+
+		default, language "English (USA)"
+			{
+			VENDOR_ID     = "Intel Corporation";
+			PRODUCT       = "DFU 1.0 Demo";
+			SERIALNUMBER  = "DUMMY";
+			DFUIFC_FLASH  = "DFU Interface for flash memory";
+			DFUIFC_EEPROM = "DFU Interface for eeprom memory";
+			CONFIG1_ID    = "MCCI DFU Prototype Configuration";
+			}
+		} %strings% ;
+	} %no name% ;
+
+#
+# We also illustrate the use of an "application" section to control the
+# names of the generated structures and tables.
+#
+application
+	{
+	structure
+		{
+		type name "UDEVICE_NDFUDEMO";
+		};
+	initialization
+		{
+		% name to compile for the init function: %
+		function name "usbrc_UdeviceNDfuDemo_init";
+
+		% assumed name of file %
+		file name "ndfudevice.c";
+		};
+	header-file
+		{
+		file name "ndfudevice.h";
+		with string ids;
+		};
+	descriptor table
+		{
+		internal names static;
+		functions
+			{
+			with string filter table;
+			get-descriptor
+				"UsbPumpFilter_MultiConfigModalDescriptors";
+			};
+		};
+	strings # info for writing the string header file.
+		{
+		% assumed name of output file %
+		% file name "ndfudemo_strings.h"; %
+
+		% prefix for emitted string ids %
+		prefix "NDFUDEMO_STRING";
+		};
+	};
+

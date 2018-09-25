@@ -1,0 +1,102 @@
+##############################################################################
+#
+# Name:	chipinfo.urc
+#
+# Function:
+#	Chip information for the XDCI chip port
+#
+# Version:
+#	V3.13b	Mon Oct 20 2014 14:00:09 chwon	Edit level 2
+#
+# Copyright Notice:
+#	This file copyright (C) 2012, 2014 by
+#
+#		MCCI Corporation
+#       	3520 Krums Corners Road
+#		Ithaca, NY  14850
+#
+#	An unpublished work.  All rights reserved.
+#
+#	This file is proprietary information, and may not be disclosed or
+#	copied without the prior permission of MCCI Corporation
+#
+#	Wonkun Kim, MCCI Corporation	January 2012
+#
+# Revision history:
+#   3.01f  Wed Jan 18 2012 13:49:22  wkkim
+#	Module created.
+#
+#   3.01f  Thu Apr 12 2012 13:37:18  ssyang
+#	Changed U1-Exit-Latency value to 0x0a because 0x10 is invalid value.
+#
+#   3.13b  Mon Oct 20 2014 14:00:09  chwon
+#	18585: Add besl-and-hird-support=1 in the LPM capability.
+#
+##############################################################################
+
+% DataPump Information for USBRC %
+Data-Pump
+	{
+	Chip-Name			"xdcd"
+	Include-File-Name		"xdcdkern.h"
+	Chip-Header-Name		"USBPUMP_XDCD_HDR"
+	Chip-Data-Structure-Name	"USBPUMP_DEVICE_XDCD"
+	Init-Function-Name		"USBPUMP_DEVICE_XDCDInit"
+	Endpoint-Data-Structure-Name	"USBPUMP_ENDPOINT_XDCD"
+	Device-Switch-Name		"gk_UsbPumpXdcd_switch"
+
+	Number-of-Endpoints		32
+
+	Speeds full high super
+
+	% The only requirement for the mapping is that, %
+	% for each endpoint address, there is only one  %
+	% corresponding endpoint index                  %
+	Endpoint-Mapping
+		{
+		( 0,       0)
+		( 0x80,    1)
+		( 1,       2)
+		( 0x81,    3)
+		( 2,       4)
+		( 0x82,    5)
+		( 3,       6)
+		( 0x83,    7)
+		( 4,       8)
+		( 0x84,    9)
+		( 5,       10)
+		( 0x85,    11)
+		( 6,       12)
+		( 0x86,    13)
+		( 7,       14)
+		( 0x87,    15)
+		( 8,       16)
+		( 0x88,    17)
+		( 9,       18)
+		( 0x89,    19)
+		( 10,      20)
+		( 0x8A,    21)
+		( 11,      22)
+		( 0x8B,    23)
+		( 12,      24)
+		( 0x8C,    25)
+		( 13,      26)
+		( 0x8D,    27)
+		( 14,      28)
+		( 0x8E,    29)
+		( 15,      30)
+		( 0x8F,    31)
+		}
+
+##############################################################################
+#
+#	superspeed device capability
+#
+##############################################################################
+		link-power-management besl-and-hird-support=1
+		all-device-functionality-support full
+		U1-Exit-Latency 0x0a
+		U2-Exit-Latency 0x20
+	};
+
+% end of file %

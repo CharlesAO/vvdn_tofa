@@ -1,0 +1,75 @@
+OUTPUT_FORMAT("elf32-sparc", "elf32-sparc", "elf32-littlesparc")
+OUTPUT_ARCH(sparc)
+
+/* Location of the CMX memory block */
+CMX_START = 0x70000000;
+CMX_END   = CMX_START + 2M;
+
+/* Important constraints */
+CMX_MIN_STACK_SIZE = 4K;
+
+/* The addresses of each CMX slice */
+CMX_SLICE__0_ADDRESS = CMX_START;
+CMX_SLICE__1_ADDRESS = CMX_SLICE__0_ADDRESS + 128K;
+CMX_SLICE__2_ADDRESS = CMX_SLICE__1_ADDRESS + 128K;
+CMX_SLICE__3_ADDRESS = CMX_SLICE__2_ADDRESS + 128K;
+CMX_SLICE__4_ADDRESS = CMX_SLICE__3_ADDRESS + 128K;
+CMX_SLICE__5_ADDRESS = CMX_SLICE__4_ADDRESS + 128K;
+CMX_SLICE__6_ADDRESS = CMX_SLICE__5_ADDRESS + 128K;
+CMX_SLICE__7_ADDRESS = CMX_SLICE__6_ADDRESS + 128K;
+CMX_SLICE__8_ADDRESS = CMX_SLICE__7_ADDRESS + 128K;
+CMX_SLICE__9_ADDRESS = CMX_SLICE__8_ADDRESS + 128K;
+CMX_SLICE_10_ADDRESS = CMX_SLICE__9_ADDRESS + 128K;
+CMX_SLICE_11_ADDRESS = CMX_SLICE_10_ADDRESS + 128K;
+
+
+/* Layout each of the slices */
+SECTIONS {
+	/* Put all code for the test in CMX Slice #0 */
+		. = CMX_SLICE__0_ADDRESS;
+		PROVIDE ( __shave0_cmx_text_start = . );
+		S.shv0.cmx.text : {
+			*(.shv0.S.cmx.text)
+			*(.shv0.S.text)
+		}
+		PROVIDE ( __shave0_cmx_text_end = . );
+		__TEST_CMX_CODE_END = . ;
+		ASSERT ( __TEST_CMX_CODE_END <= CMX_SLICE__1_ADDRESS, "CMX Slice #0 - code size exceeds 128KBytes" )
+
+	/* Put all data for the test in CMX Slices #3 and #4 */
+		. = CMX_SLICE__3_ADDRESS;
+		PROVIDE ( __shave0_cmx_data_start = . );
+		S.shv3.cmx.data : {
+			*(.shv0.S.cmx.rodata)
+			*(.shv0.S.cmx.data)
+			*(.shv0.S.rodata)
+			*(.shv0.S.data)
+			}
+		PROVIDE ( __shave0_cmx_data_end = . );
+		__TEST_CMX_DATA_END = . ;
+		ASSERT ( __TEST_CMX_DATA_END <= CMX_SLICE__5_ADDRESS, "CMX Slices #3 and #4 - data size exceeds 256KBytes" )
+}
+
+/* These following are defined for compatibility with the existing MDK LD scripts */
+__CMX_SLICE0_START  = CMX_SLICE__0_ADDRESS;
+__CMX_SLICE1_START  = CMX_SLICE__1_ADDRESS;
+__CMX_SLICE2_START  = CMX_SLICE__2_ADDRESS;
+__CMX_SLICE3_START  = CMX_SLICE__3_ADDRESS;
+__CMX_SLICE4_START  = CMX_SLICE__4_ADDRESS;
+__CMX_SLICE5_START  = CMX_SLICE__5_ADDRESS;
+__CMX_SLICE6_START  = CMX_SLICE__6_ADDRESS;
+__CMX_SLICE7_START  = CMX_SLICE__7_ADDRESS;
+__CMX_SLICE8_START  = CMX_SLICE__8_ADDRESS;
+__CMX_SLICE9_START  = CMX_SLICE__9_ADDRESS;
+__CMX_SLICE10_START = CMX_SLICE_10_ADDRESS;
+__CMX_SLICE11_START = CMX_SLICE_11_ADDRESS;
+__CMX_END           = CMX_END;
+
+/* The following are empty sections but we just need to make sure their symbols get pulled in */
+SECTIONS {
+	. = 0x1D000000;
+	S.shvdynamic.text : { *(.dyn.text*) }
+
+	. = 0x1C000000;
+	S.shvdynamic.data : { *(.dyn.data*) }
+}

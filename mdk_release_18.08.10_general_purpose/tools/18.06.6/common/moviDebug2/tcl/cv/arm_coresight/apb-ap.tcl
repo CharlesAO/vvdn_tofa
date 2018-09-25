@@ -1,0 +1,3 @@
+mdbg::REG_DEFS {
+    ARM_DBG_ROM_BASE_ADDR    0x80400000
+}

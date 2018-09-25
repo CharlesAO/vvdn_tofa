@@ -1,0 +1,89 @@
+##############################################################################
+#
+# Module:  chipinfo_hs.urc
+#
+# Function:
+#	Chip information for the XDCI chip port for high speed
+#
+# Version:
+#	V3.21f	Thu Jun 28 2018 10:48:24 chwon	Edit level 1
+#
+# Copyright notice:
+#	This file copyright (C) 2018 by
+#
+#		MCCI Corporation
+#		3520 Krums Corners Road
+#		Ithaca, NY  14850
+#
+#	An unpublished work.  All rights reserved.
+#
+#	This file is proprietary information, and may not be disclosed or
+#	copied without the prior permission of MCCI Corporation
+#
+# Author:
+#	ChaeHee Won, MCCI Corporation	June 2018
+#
+# Revision History:
+#   3.21f  Thu Jun 28 2018 10:48:24  chwon
+#	20841: Module created.
+#
+##############################################################################
+
+% DataPump Information for USBRC %
+Data-Pump
+	{
+	Chip-Name			"xdcd"
+	Include-File-Name		"xdcdkern.h"
+	Chip-Header-Name		"USBPUMP_XDCD_HDR"
+	Chip-Data-Structure-Name	"USBPUMP_DEVICE_XDCD"
+	Init-Function-Name		"USBPUMP_DEVICE_XDCDInit"
+	Endpoint-Data-Structure-Name	"USBPUMP_ENDPOINT_XDCD"
+	Device-Switch-Name		"gk_UsbPumpXdcd_switch"
+
+	Number-of-Endpoints		32
+
+	Speeds full high
+
+	% The only requirement for the mapping is that, %
+	% for each endpoint address, there is only one  %
+	% corresponding endpoint index                  %
+	Endpoint-Mapping
+		{
+		( 0,       0)
+		( 0x80,    1)
+		( 1,       2)
+		( 0x81,    3)
+		( 2,       4)
+		( 0x82,    5)
+		( 3,       6)
+		( 0x83,    7)
+		( 4,       8)
+		( 0x84,    9)
+		( 5,       10)
+		( 0x85,    11)
+		( 6,       12)
+		( 0x86,    13)
+		( 7,       14)
+		( 0x87,    15)
+		( 8,       16)
+		( 0x88,    17)
+		( 9,       18)
+		( 0x89,    19)
+		( 10,      20)
+		( 0x8A,    21)
+		( 11,      22)
+		( 0x8B,    23)
+		( 12,      24)
+		( 0x8C,    25)
+		( 13,      26)
+		( 0x8D,    27)
+		( 14,      28)
+		( 0x8E,    29)
+		( 15,      30)
+		( 0x8F,    31)
+		}
+
+	link-power-management besl-and-hird-support=1
+	};
+
+% end of file %

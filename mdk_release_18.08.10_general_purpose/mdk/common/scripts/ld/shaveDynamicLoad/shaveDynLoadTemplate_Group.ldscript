@@ -1,0 +1,54 @@
+SECTIONS {
+  /*Make sure on the data side of CMNlibs NOLOAD is used but addresses for data sections are virtual*/
+  S.shvCOM.cmx.data.ShaveZZZZZZZZZ 0x1E000000 (NOLOAD) : {
+        *(.shvZ.ZZZZZZZZZ.S.data*)
+        *(.shvZ.ZZZZZZZZZ.S.__DATA__sect*)
+        *(.shvZ.ZZZZZZZZZ.S.__STACK__sect*)
+        *(.shvZ.ZZZZZZZZZ.S.__static_data*)
+        *(.shvZ.ZZZZZZZZZ.S.__HEAP__sect*)
+        *(.shvZ.ZZZZZZZZZ.S.__T__*)
+        . = ALIGN(16);
+        __ZZZZZZZZZ_groupbss_sectionStart = .;
+        *(.shvZ.ZZZZZZZZZ.S.bss*)
+        . = ALIGN(16);
+        __ZZZZZZZZZ_groupbss_sectionEnd = .;
+  }
+  S.lrt.shvCOM.cmx.data.ShaveZZZZZZZZZ 0x1E000000 (NOLOAD) : {
+        *(.lrt.shvZ.ZZZZZZZZZ.S.data*)
+        *(.lrt.shvZ.ZZZZZZZZZ.S.__DATA__sect*)
+        *(.lrt.shvZ.ZZZZZZZZZ.S.__STACK__sect*)
+        *(.lrt.shvZ.ZZZZZZZZZ.S.__static_data*)
+        *(.lrt.shvZ.ZZZZZZZZZ.S.__HEAP__sect*)
+        *(.lrt.shvZ.ZZZZZZZZZ.S.__T__*)
+        . = ALIGN(16);
+        lrt___ZZZZZZZZZ_groupbss_sectionStart = .;
+        *(.lrt.shvZ.ZZZZZZZZZ.S.bss*)
+        . = ALIGN(16);
+        lrt___ZZZZZZZZZ_groupbss_sectionEnd = .;
+
+  }
+}
+
+SECTIONS {
+  S.shvCOM.ddr_cached.sections.iat.ZZZZZZZZZ : {
+      . = ALIGN(16);
+      ZZZZZZZZZ__iat_array_start = .;
+      KEEP(*(.shvZ.ZZZZZZZZZ.S..iat))
+      KEEP(*(.lrt.shvZ.ZZZZZZZZZ.S..iat))
+      ZZZZZZZZZ__iat_array_end = .;
+  } > DDR_DATA
+
+  S.shvCOM.ddr_cached.sections.iatnames.ZZZZZZZZZ : {
+      . = ALIGN(16);
+      ZZZZZZZZZ__iatnames_array_start = .;
+      KEEP(*(.shvZ.ZZZZZZZZZ.S..iatnames))
+      KEEP(*(.lrt.shvZ.ZZZZZZZZZ.S..iatnames))
+      ZZZZZZZZZ__iatnames_array_end = .;
+  } > DDR_DATA
+  
+  S.shvCOM.ddr_cached.sections.iatstrings.ZZZZZZZZZ : {
+      . = ALIGN(16);
+      *(.shvZ.ZZZZZZZZZ.S..iatstrings)
+      *(.lrt.shvZ.ZZZZZZZZZ.S..iatstrings)
+  } > DDR_DATA
+}

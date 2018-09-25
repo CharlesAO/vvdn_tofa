@@ -1,0 +1,265 @@
+/* usbpump_usbdi_costtree.h	Fri Feb 01 2008 09:24:08 djt */
+
+/*
+
+Module:  usbpump_usbdi_costtree.h
+
+Function:
+	Cost tree and branch-cost tree defintions
+
+Version:
+	V1.97k	Fri Feb 01 2008 09:24:08 djt	Edit level 3
+
+Copyright notice:
+	This file copyright (C) 2006 by
+
+		MCCI Corporation
+		3520 Krums Corners Road
+		Ithaca, NY  14850
+
+	An unpublished work.  All rights reserved.
+
+	This file is proprietary information, and may not be disclosed or
+	copied without the prior permission of MCCI Corporation.
+
+Author:
+	Terry Moore, MCCI Corporation	January 2006
+
+Revision history:
+   1.93e  Tue Jan 31 2006 09:20:12  tmm
+	Module created.
+
+   1.97f  Thu Oct 26 2006 16:12:21  chwon
+	Clean up commentary.
+
+   1.97k  Fri Feb 01 2008 09:24:08  djt
+	6900: Added COSTTREE_N_LEVEL.
+
+*/
+
+#ifndef _USBPUMP_USBDI_COSTTREE_H_		/* prevent multiple includes */
+#define _USBPUMP_USBDI_COSTTREE_H_
+
+/****************************************************************************\
+|
+|	Definitions for macros used in processing the tree
+|
+\****************************************************************************/
+
+
+/*
+
+Name:	COSTTREE_K_CHILD()
+
+Function:
+	Given a linear index in a cost tree, find the linear index of the
+	left-most child.
+
+Definition:
+	unsigned COSTTREE_K_CHILD(
+		unsigned K
+		);
+
+Description:
+	|K| is a linear index into cost tree.  The linear index of the
+	leftmost child of |K| is computed and returned.
+
+Returns:
+	Index of leftmost child of K.
+
+*/
+
+#define __TMS_COSTTREE_K_CHILD(K)		((((K) + 1u) << 1u) - 1u)
+
+/*
+
+Name:	COSTTREE_K_TO_OFFSET()
+
+Function:
+	Convert a linear index in a tree with known level to an offset
+
+Definition:
+	unsigned COSTTREE_K_TO_OFFSET(
+		unsigned Level,
+		unsigned K
+		);
+
+Description:
+	The specified linear offset is converted to a zero-based offset in
+	the cost tree relative to the first node at the specified level.
+
+Returns:
+	A value that's guaranteed to be in [0..Level-1].  If K is not
+	actually in the level specified at level |Level|, then the result
+	is unsepcified, apart from being in [0..Level-1].
+
+*/
+
+#define	__TMS_COSTTREE_K_TO_OFFSET(L,K)	  (((K) + 1u) & ((1u << (L)) - 1u))
+
+/*
+
+Name:	COSTTREE_K_PARENT()
+
+Function:
+	Find a node's parent given its linear index.
+
+Definition:
+	unsigned COSTTREE_K_PARENT(
+		unsigned K
+		);
+
+Description:
+	Given K is a linear index of a non-root node in a cost tree,
+	thie function computes the index of its parent.  K must be
+	a valid linear index.
+
+Returns:
+	Linear index of parent.  If K is the index of the root, result is
+	not defined
+
+*/
+
+#define	__TMS_COSTTREE_K_PARENT(K)		((((K) + 1u) >> 1u) - 1u)
+
+/*
+
+Name:	COSTTREE_K_PEER()
+
+Function:
+	Given a node's linear index, find the linear index of its
+	peer.
+
+Definition:
+	unsigned COSTTREE_K_PEER(
+		unsigned K
+		);
+
+Description:
+	Every non-root node of the a cost tree has a peer node.  This
+	function calcluates the index of a peer node, given the index of a
+	node with a peer.
+
+Returns:
+	The index of the peer node.  The result of this on the root node is
+	not specified.
+
+*/
+
+#define	__TMS_COSTTREE_K_PEER(K)		((((K) + 1u) ^ 1u) - 1u)
+
+/*
+
+Name:	COSTTREE_K()
+
+Function:
+	Compute the linear offset given a level and a bucket.
+
+Definition:
+	unsigned COSTTREE_K(
+		unsigned uLevel,
+		unsigned uOffset
+		);
+
+Description:
+	The level + offset in the tree are converted to a linear offset,
+	assuming the linear representation of the tree is in pre-order
+	sequential form.  Note that an offset is the offset in the level
+	of the tree (considering all branches).  So if the tree is
+
+	[level 0]		       0
+	[level 1]		   1       2
+	[level 2]		 3   4   5   6
+	[level 3]		7 8 9 a b c d e
+
+	The offsets are counted horizontally across the whole level.
+	For example, node 'b' is level 3, offset 4.
+
+Returns:
+	The linear index.
+
+*/
+
+#define __TMS_COSTTREE_K(Lvl,Offset) ((1u << (Lvl)) + (Offset) - 1u)
+
+/*
+
+Name:	COSTTREE_N()
+
+Function:
+	Return the number of nodes in a cost tree of specified depth.
+
+Definition:
+	unsigned COSTTREE_N(
+		unsigned nLevels
+		);
+
+Description:
+	If a tree contains nLevels levels, then COSTTREE_N() returns the
+	number of nodes in the linear representation of the tree.
+
+Returns:
+	a positive integer.
+
+Notes:
+	The output is 2^nLevels - 1; nLevels is not checked to make sure
+	it's within a reasonable range.
+
+	This is a macro.
+
+*/
+
+#define	__TMS_COSTTREE_N(nLvls)	((1u << (nLvls)) - 1u)
+
+/*
+
+Name:	COSTTREE_N_LEVEL()
+
+Function:
+	Returns the number of nodes in a cost tree level.
+
+Definition:
+	unsigned COSTTREE_N_LEVEL(
+		unsigned uLevel
+		);
+
+Description:
+	COSTTREE_N_LEVEL() returns the number of nodes in the specified level.
+
+Returns:
+	a positive integer.
+
+Notes:
+	This is a macro.
+
+*/
+
+#define	__TMS_COSTTREE_N_LEVEL(Lvl)	(1u << (Lvl))
+
+/****************************************************************************\
+|
+|	Uncloaked names
+|
+\****************************************************************************/
+
+/**** uncloaked names generated by uncloak-defs.sh ****/
+#if !__TMS_CLOAKED_NAMES_ONLY
+# define COSTTREE_K_CHILD(K)	\
+   __TMS_COSTTREE_K_CHILD(K)
+# define COSTTREE_K_TO_OFFSET(L,K)	\
+   __TMS_COSTTREE_K_TO_OFFSET(L,K)
+# define COSTTREE_K_PARENT(K)	\
+   __TMS_COSTTREE_K_PARENT(K)
+# define COSTTREE_K_PEER(K)	\
+   __TMS_COSTTREE_K_PEER(K)
+# define COSTTREE_K(Lvl,Offset)	\
+   __TMS_COSTTREE_K(Lvl,Offset)
+# define COSTTREE_N(nLvls)	\
+   __TMS_COSTTREE_N(nLvls)
+# define COSTTREE_N_LEVEL(Lvl)	\
+   __TMS_COSTTREE_N_LEVEL(Lvl)
+#endif /* !__TMS_CLOAKED_NAMES_ONLY */
+
+
+/**** end of usbpump_usbdi_costtree.h ****/
+#endif /* _USBPUMP_USBDI_COSTTREE_H_ */

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <MDKRoot>..\..\..\..\..\..\..</MDKRoot>
+    <Components>$(MDKRoot)\common\components</Components>
+    <MvCV>MvCV</MvCV>
+    <MvCVIncDir>$(Components)\$(MvCV)\include</MvCVIncDir>
+    <MvCVLib>$(MvCV).lib</MvCVLib>
+    <MvCVLibDir>$(MDKRoot)\testApps\components\$(MvCV)Test\pc\VS2010\DebugLib</MvCVLibDir>
+    <OwnLeonIncDir>..\..\leon</OwnLeonIncDir>
+    <OwnShaveIncDir>..\..\shave</OwnShaveIncDir>
+    <OwnIncDir>..\..\include</OwnIncDir>
+    <OpenCLIncDir>$(MDKRoot)\testApps\resources\win32\OpenCL1.1\include</OpenCLIncDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <_PropertySheetDisplayName>MvCVTestCommon</_PropertySheetDisplayName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(OpenCLIncDir);$(MvCVIncDir);$(OwnLeonIncDir);$(OwnShaveIncDir);$(OwnIncDir);..\..\..\common\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__PC__;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>$(MvCVLib);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(MvCVLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="MDKRoot">
+      <Value>$(MDKRoot)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="Components">
+      <Value>$(Components)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="MvCV">
+      <Value>$(MvCV)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="MvCVIncDir">
+      <Value>$(MvCVIncDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="MvCVLib">
+      <Value>$(MvCVLib)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="MvCVLibDir">
+      <Value>$(MvCVLibDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="OwnLeonIncDir">
+      <Value>$(OwnLeonIncDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="OwnShaveIncDir">
+      <Value>$(OwnShaveIncDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="OwnIncDir">
+      <Value>$(OwnIncDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="OpenCLIncDir">
+      <Value>$(OpenCLIncDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

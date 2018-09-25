@@ -1,0 +1,30 @@
+{
+	"arguments" :[
+   		{
+			"id":"CONFIG_PROFILER_SESSION_DESCRIPTION",
+			"name":"Description",
+			"description":"Free text, describe here the profile session purpose",
+			"type":"text",
+			"default":""
+		},
+		{
+			"id":"CONFIG_PROFILER_DURATION",
+			"name":"Number of seconds to run",
+			"description": "After specified timeout the application will be killed and profile data will be collected. A value of -1 means infinite",
+			"type":"int",
+			"default":"60"
+		},
+		{
+			"id":"CONFIG_PROFILE_CHUNK_SIZE",
+			"name":"Chunk size (hex)",
+			"type":"hex",
+			"default":"0x100"
+		},
+		{
+			"id":"CONFIG_PROFILE_MAX_CHUNKS",
+			"name":"Number of chunks (hex)",
+			"type":"hex",
+			"default":"0x1000"
+		}
+    ]
+}

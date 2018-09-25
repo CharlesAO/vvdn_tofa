@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Movidius&reg; Development Kit Software</title>
+      <style>
+         table.fixed { table-layout:fixed; }
+         table.fixed td { overflow: hidden; }
+         td.cell { padding:7px; background-color:#E8E8E8; font-family:verdana; font-size:10pt; }
+         td.middle { text-align:center; }  
+         td.header { border: thin solid; font-weight:bold; font-family:verdana; font-size:10pt; padding: 8px; margin-bottom:32px; background-color: #e0e0e0;}
+         td { color:#17365d; }
+         td.wrappable, table.data_table td.wrappable { white-space: normal; }      
+      </style>
+   </head>
+   <body>
+      <div style="margin:32px;">
+         <table width="100%">
+            <tr>
+               <td width="10%" style="vertical-align:center;text-align:left">
+                  <font face="arial" color="black"><a href="http://www.movidius.org"><img src="mdk/doc/img/Intel_Movidius.png" alt="Intel Movidius logo"/></a></font>
+               <td width="90%" style="vertical-align:bottom;text-align:left">
+                  <span style='font-weight:bold; font-size: 28px; color:#17365d;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Myriad<sup>&reg;</sup> 2 Software Development Kit Documentation </span>
+               </td>
+            </tr>
+         </table>
+         <br><br><br>
+         <table width="100%">
+            <tr>
+               <td width="40px"></td>
+               <td>
+                  <span style="color: black; font-family: arial;">For the latest version of the documents please visit <a href="http://www.movidius.org">movidius.org</a>.</span><br /><br />
+               </td>
+            </tr>
+            </tbody>
+         </table>
+         <br />
+         <table width="100%">
+            <tbody>
+               <tr height="50">
+                  <td style="background-color: #ff3600; text-align: center; width: 5%;"><span style="color: white; font-family: tahoma; font-size: x-large;"><strong>&nbsp;I.&nbsp;</strong></span></td>
+                  <td style="background-color: #2467ac; width: 140%;" colspan="4"><span style="color: white; font-family: tahoma; font-size: large;"><strong><a name="mdk"></a>&nbsp;&nbsp;MDK Documents </strong></span></td>
+               </tr>
+               <tr height="50">
+                  <td style="background-color: #ffffff; text-align: right; width: 5%;"><span style="color: #2467ac; font-family: tahoma; font-size: large;"><strong>&nbsp;&#10148;&nbsp;</strong></span></td>
+                  <td style="width: 140%;" colspan="4"><span style="color: #ff3600; font-family: arial; font-size: large;"><strong>&nbsp;&nbsp;MDK Manuals</strong></span></td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td style="vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="header" style="vertical-align: top; text-align: left; width: 45%;" colspan="2">&nbsp;<span style="color: #4f81bd;">Section</span></td>
+                  <td class="header" style="vertical-align: top; text-align: justify; width: 47%;"><span style="color: #4f81bd;">Description</span></td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">1.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="https://www.movidius.org/downloads/software-release-notes" target="_blank" rel="noopener">MDK Release Notes</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">
+                     This document describes the following for the Myriad&trade; 2 Development Kit Software Release:
+                     <ul>
+                        <li>Supported software capabilities and features.</li>
+                        <li>Any known issues in the release.</li>
+                     </ul>
+                  </td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">2.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2x5x_GettingStarted.pdf">MDK MA2x5x Getting Started</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document serves as an introduction to the Myriad&trade; Development Kit (MDK), and contains all the information necessary to get it up and running.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">3.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2x5x_ProgrammersGuide.pdf">MDK MA2x5x Programmer&rsquo;s Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This guide describes the functionality and use of the Myriad&trade; multiprocessor device from a programmer&rsquo;s perspective.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">4.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2xxx_FLIC_ProgrammersGuide_and_API.pdf">MDK MA2xxx FLIC Programmer&rsquo;s Guide and API</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document is intended to be the programmer&rsquo;s guide to the FLIC framework.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">5.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2x5x_SHAVE_Assembly_ProgrammingGuide.pdf">MDK MA2x5x SHAVE Assembly Programming Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document provides a programming guide on working with assembly language.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">6.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2x5x_Kernel_testing.pdf">MDK MA2x5x Kernel testing</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document contains all the information needed to run and implement unitary tests for MDK kernels</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">7.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2x5x_SIPP_UserManual.pdf">MDK MA2x5x SIPP User Manual</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes the Movidius SIPP (Streaming Image Processing Pipeline) MA2x5x framework. It is created as a replacement for the existing MA2100 SIPP User Guide which introduced the SIPP MA2100 framework.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">8.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2x5x_CDK_UserGuide.pdf">MDK MA2x5x CDK User&rsquo;s Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes the functionality and any known issues for the Camera Development Kit for the Myriad 2 processor (MA2x5x).</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">9.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2x5x_CDK_SensorIntegration_Guide.pdf">MDK MA2x5x CDK Sensor Integration Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">The purpose of this document is to give a general view of the Camera SDK component used in Myriad 2 Camera Development Kit (CDK).</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">10.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2x5x_CDK_Plug-in_Framework_UserGuide.pdf">MDK MA2x5x CDK Plug-in Framework User Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">The purpose of this document is to show Myriad 2 users how to develop camera and sensor driven applications using the Myriad 2 Camera Development Kit (CDK) plug-in framework.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">11.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2x5x_MV0182_UserManual.pdf">MDK MA2x5x MV0182 User&rsquo;s Manual</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document covers the specifications of the MV0182 board and provides a high level description of the major components and interfaces that make up the MV0182 board.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">12.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2x5x_MV0198_UserManual.pdf">MDK MA2x5x MV0198 User&rsquo;s Manual</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document is the System Reference Manual for the MV0198 power measurement daughter-card. It provides a description of how the board functions and discusses the performance and capability of the system.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">13.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2x5x_MV0212_UserManual.pdf">MDK MA2x5x MV0212 User&rsquo;s Manual</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document is the System Reference Manual for the MV0212 evaluation board. It provides detailed information on the overall design and usage of the MV0212 board.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">14.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2x5x_CMXDMA_UserGuide.pdf">MDK MA2x5x CMX DMA User&rsquo;s Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document briefly describes the features of the new CMX DMA driver for MA2x5x and is intended to serve as a basic user guide.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">15.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2x5x_Stereo_Software_Module.pdf">MDK MA2x5x Stereo Software Module Specification</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes the API and functionality of the Movidius Stereo component.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">16.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2xxx_XLink_UserGuide.pdf">MDK MA2xxx XLink User&rsquo;s Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document explains the structure and functionality of the XLink component inside the Myriad Development Kit and the APIs used.</td>
+               </tr>
+              <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">17.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2xxx_vTrack_Software_Module.pdf">MDK MA2xxx vTrack Software Module Specification</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document is intended for Myriad developers and provides the software specification and implementation details for the vTrack software module offered as an addition to the standard Myriad Development Kit (MDK).</td>
+               </tr>
+              <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">18.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/MDK-MA2xxx_RobotVisionEvalKit_UserManual.pdf">MDK MA2xxx Robot Vision Evaluation Kit User&rsquo;s Manual</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes the Robot Vision Evaluation Kit: Myriad application, visionHal and example PC applications.</td>
+               </tr>
+              <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">19.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/3rd-party_MDK_OpenSource_Components.pdf">Third-party Open Source Components in the Intel® Movidius™ MDK Software Suite</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document provides a list of all the Third-party Open Source Components used in the Intel® Movidius™ MDK Software Suite.</td>
+               </tr>
+               <tr height="50">
+                  <td style="background-color: #ffffff; text-align: right; width: 5%;"><span style="color: #2467ac; font-family: tahoma; font-size: large;"><strong>&nbsp;&#10148;&nbsp;</strong></span></td>
+                  <td style="width: 140%;" colspan="4"><span style="color: #ff3600; font-family: arial; font-size: large;"><strong>&nbsp;&nbsp;MDK Programming Reference</strong></span></td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td style="vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="header" style="vertical-align: top; text-align: left; width: 45%;" colspan="2">&nbsp;<span style="color: #4f81bd;">Section</span></td>
+                  <td class="header" style="vertical-align: top; text-align: justify; width: 47%;"><span style="color: #4f81bd;">Description</span></td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">1.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/DoxygenPDFs/MDKdox-Components.pdf">MDKdox-Components</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">Components are software modules that are conditionally compiled. This document documents the API for each of these moduless.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">2.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/DoxygenPDFs/MDKdox-LeonUtils.pdf">MDKdox-LeonUtils</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes the Leon Utilities provided with Myriad&trade; 2.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">3.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/DoxygenPDFs/MDKdox-MvCv.pdf">MDKdox-MvCv</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This is a placeholder paragraph to be filled with the real description of the correspondent document.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">4.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/DoxygenPDFs/MDKdox-ShaveUtils.pdf">MDKdox-ShaveUtils</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes the kernel level interface to the Movidius Computer Vision Library.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">5.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/DoxygenPDFs/MDKdox-Sipp.pdf">MDKdox-Sipp</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document contains information about Movidius' SIPP Filters.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">6.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/DoxygenPDFs/MDKdox-SocDrivers.pdf">MDKdox-SocDrivers</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes the lower level "Soc" Drivers that are provided for use with Myriad&trade; 2. The Myriad&trade; 2 Platform Data Sheet may also be used as a cross reference.</td>
+               </tr>
+               <tr height="50">
+                  <td style="background-color: #ffffff; text-align: right; width: 5%;"><span style="color: #2467ac; font-family: tahoma; font-size: large;"><strong>&nbsp;&#10148;&nbsp;</strong></span></td>
+                  <td style="width: 140%;" colspan="4"><span style="color: #ff3600; font-family: arial; font-size: large;"><strong>&nbsp;&nbsp;USB</strong></span></td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td style="vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="header" style="vertical-align: top; text-align: left; width: 35%;" colspan="2">&nbsp;<span style="color: #4f81bd;">Section</span></td>
+                  <td class="header" style="vertical-align: top; text-align: justify; width: 57%;"><span style="color: #4f81bd;">Description</span></td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/USB/MDK-USB-Integration-Guide.pdf">MDK USB Integration Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document gives an overview of the USB support in Myriad&trade; 2 Movidius Development Kit (MDK) andreferences the further documentation.</td>
+               </tr>
+			   <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/USB/971001018c_(MCCI-USB-DataPump-Technical-Overview).pdf">MCCI USB DataPump Technical Overview</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document provides a technical overview of the MCCI USB DataPump.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2"><strong>&#10148;&nbsp;&nbsp;&nbsp;HOST</strong></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">&nbsp;</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;1.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/host/972001013b_(DataPump-Host-Training-Intro).pdf"> USB DataPump Training Introduction</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document provides training and introduction on the MCCI USB DataPump.</td>
+               </tr>
+			   <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;2.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/host/950000066p_(MCCI-USB-DataPump-User-Guide).pdf"> USB DataPump User Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document introduces the MCCI USB DataPump, a portable USB firmware development kit for adding USB device support to embedded products based on 16- and 32-bit processors.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;3.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/host/950519a_(DataPump-Dynamic-Sizing).pdf"> USB DataPump Dynamic Sizing</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document provides a framework that will allow coders to instrument modules to record and display RAM usage for a given module or configuration of the DataPump.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;4.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/host/950000324f_(MCCI-USB-DataPump-HCD-API).pdf">DataPump HCD API</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document specifies the APIs for Host Controller Drivers (HCDs) that are part of the MCCI DataPump embedded host (EH) and USB On The Go (OTG) product.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;5.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/host/950000325e_(MCCI-USB-DataPump-Embedded-USBDI).pdf">DataPump Embedded USBDI</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes the USB Driver Interface (USBDI) API provided by the MCCI USB DataPump Embedded Host / On-The-Go USB host stack.</td>
+               </tr>
+			   <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;6.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/host/950000327e_(MCCI-USB-DataPump-Embedded-Host-and-OTG-Users-Guide).pdf">DataPump Embedded Host and OTG User Guides</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This manual provides an overview of the Embedded Host/OTG and, more specifically, provides guidance on where additional information and configuration details can be found in lower level documents.</td>
+               </tr>
+			   <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;7.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/host/950000692b_(MCCI-DataPump-Embedded-Host-Generic-Class-Driver-Users-Guide).pdf">DataPump Embedded Host Generic Class Driver Users Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes the Generic Class Driver (GCD) API provided by the MCCI USB DataPump Embedded USB host stack.</td>
+               </tr>
+			   <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;8.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/host/950000761c_(MCCI-USB-DataPump-Embedded-Host-Class-Driver-Development-Guide).pdf">DataPump Embedded Host Class Driver Development Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document provides technical training on the internal details of the implementation of MCCI USB DataPump Embedded Host Class Drivers.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;9.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/host/950000819d_(MCCI-USB-DataPump-Footprint-Information).pdf"> USB DataPump Footprint Information</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document presents the code and memory footprint statistics for the MCCI USB DataPump<sup>&reg;</sup> OTG Stack.</td>
+               </tr>
+			   <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;10.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/host/950001350a_(MCCI-Embedded-Mass-Storage-Class-Driver-V2-Users-Guide).pdf">MCCI Embedded Mass Storage Class Driver v2 Users Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This documentation describes the Mass Storage Class Driver (MSD) V2 API provided by the MCCI USB DataPump Embedded Host / On-The-Go host stack.</td>
+               </tr>
+			   <!--tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;11.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/host/950001473a_(MCCI-Embedded-UVC-Class-Driver-Users-Guide).pdf">MCCI Embedded UVC Class Driver Users Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes the UVC (USB Video Class) Class Driver optional component of the MCCI TrueTask USB host stack.</td>
+               </tr-->
+			   <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;11.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/host/950000548c_(MCCI-Transaction-Translator-Users-Guide).pdf">MCCI Transaction Translator Users Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">The scope of this document is to describe how to initialize the Transaction Translator (TT) and what the memory requirements are for various configurations.</td>
+               </tr>
+			   <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;12.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/host/950000681d_(MCCI-OTG-Users-Guide).pdf">MCCI OTG Users Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes the APIs and user guide to support the HNP and SRP in the MCCI USB Embedded Host / On-The-Go USB host stack.</td>
+               </tr>
+			   <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;13.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/host/950000684b_(MCCI-Composite-Device-Users-Guide).pdf">MCCI Composite Device Users Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">The purpose of this document is to describe the functionality of the Composite Device Driver, how to initialize it and what the memory requirements are for various Composite Device configurations.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2"><strong>&#10148;&nbsp;&nbsp;&nbsp;DEVICE</strong></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">&nbsp;</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;1.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/device/950000137c_(MCCI-USB-DataPump-Porting-Guide).pdf"> USB DataPump Porting Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document provides technical training on the internal details of the architecture and implementation of the MCCI USB DataPump.</td>
+               </tr>
+			   <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;2.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/device/950000260c_(MCCI-USB-DataPump-Platform-Porting-Guide).pdf"> USB DataPump Platform Porting Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes the roadmap for creating a concrete platform code base by starting with the sample MCCI platform code.</td>
+               </tr>
+			   <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;3.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/device/950000061r_(USBRC-User-Guide).pdf">USBRC User Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes and specifies version v3.36 of the USB Resource Compiler (USBRC) developed by MCCI.</td>
+               </tr>
+			   <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;4.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/device/950386a_(MCCI-USBSERI-API).pdf">MCCI USBSERI API</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes and specifies the USBSERI API to the MCCI DataPump WMC protocol library.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;5.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/device/950000250i_(MCCI-USB-DataPump-Mass-Storage-Protocol-Users-Guide).pdf"> USB DataPump Mass Storage Protocol Users Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document presents programming information for integrating support into user's firmware, to create a USB device that presents a mass-storage class interface to the host PC.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;6.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/device/950000298c_(DataPump-New-DFU-Protocol-Users-Guide).pdf">DataPump New DFU Protocol Users Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document presents programming information for developing USB devices that are capable of upgrading the firmware using the MCCI NDFU Protocol Library. This Guide does not discuss host software, beyond mentioning that MCCI also has drivers and a library for Windows that will work in conjunction with this packet.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;7.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/device/950000387d_(MCCI-USB-DataPump-HID-Protocol-Users-Guide).pdf"> USB DataPump HID Protocol Users Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes and specifies the HID class protocol implementation for the MCCI USB DataPump V3.0. This document assumes familiarity with the USB-IF Human Interface Device class documents, and with the theory of HID class device design and implementation.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;8.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/device/950000736c_(MCCI-USB-DataPump-Video-Protocol-Users-Guide).pdf"> USB DataPump Video Protocol Users Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes architecture of the MCCI Video Class Protocol for the MCCI USB DataPump and specifies APIs to access it.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;9.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/device/950001297a_(MCCI-USB-DataPump-VSC-V2-Protocol-Users-Guide).pdf"> USB DataPump VSC V2 Protocol Users Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document describes architecture of the MCCI VSC (Vendor Specific Class) V2 Protocol for the MCCI USB DataPump&reg; and specifies APIs to access it.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="cell" style="background-color: #ffffff; vertical-align: top; width: 3%; text-align: right;">&nbsp;10.</td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;"><a href="mdk/doc/USB/device/950000255d_(MCCI-USB-DataPump-WMC-Protocol-Users-Guide).pdf"> USB DataPump WMC Protocol User Guide</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This document presents programming information for integrating a portable, generic implementation of the USB Device Working Communication Device Class (CDC) - Advanced Control Model (ACM) protocol into the MCCI USB DataPump® portable firmware framework.</td>
+               </tr>
+               <tr height="50">
+                  <td style="background-color: #ffffff; text-align: right; width: 5%;"><span style="color: #2467ac; font-family: tahoma; font-size: large;"><strong>&nbsp;&#10148;&nbsp;</strong></span></td>
+                  <td style="width: 140%;" colspan="4"><span style="color: #ff3600; font-family: arial; font-size: large;"><strong>&nbsp;&nbsp;Application notes</strong></span></td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td style="vertical-align: top; text-align: right; width: 3%;">&nbsp;</td>
+                  <td class="header" style="vertical-align: top; text-align: left; width: 45%;" colspan="2">&nbsp;<span style="color: #4f81bd;">Section</span></td>
+                  <td class="header" style="vertical-align: top; text-align: justify; width: 47%;"><span style="color: #4f81bd;">Description</span></td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">1.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/ApplicationNotes/AN001_MA2x5x_MvCVLibraryPerformance.pdf">MvCv Library Performance</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This application note gives a brief outline of kernel performance on Myriad&trade; 2.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">2.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/ApplicationNotes/AN002_MDK_DisparityMapExampleArchitecture.pdf">MDK Disparity Map Example</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This application note provides a description for the Disparity Map example.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">3.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/ApplicationNotes/AN003_EFuse_Programming.pdf">EFuse Programming</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This application note provides information on EFuse Programming.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">4.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/ApplicationNotes/AN004_MA2x5x_BLISTestApp.pdf">BLIS Test App</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This application note provides information on the GEMM and TRSM BLIS kernels implementation for the Myriad&trade; architecture.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">5.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/ApplicationNotes/AN005_USB_Firmware_Update.pdf">USB Firmware Update</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This application note provides information on updating the firmware via USB.</td>
+               </tr>
+               <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">6.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/ApplicationNotes/AN006_Camera_Pipeline_with_FLIC_for MA2x5x.pdf">FLIC Camera Application Note</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This application note describes how to build a basic streaming camera application using the FLIC framework.</td>
+               </tr>
+             <tr>
+                  <td style="vertical-align: top; text-align: right; width: 5%;">&nbsp;</td>
+                  <td class="cell" style="vertical-align: top; text-align: right; width: 3%;"><span style="color: black; font-family: arial;">7.</span></td>
+                  <td class="cell" style="vertical-align: top; text-align: left; width: 42%;" colspan="2">&nbsp;<a href="mdk/doc/ApplicationNotes/AN007_MA2x5x_StereoCalibration.pdf">Myriad 2 Stereo Modules Calibration Application Note</a></td>
+                  <td class="cell" style="vertical-align: top; text-align: justify; width: 50%;">This application note provides information on stereo calibration for Myriad 2.</td>
+               </tr>
+            </tbody>
+         </table>
+         <br><br>
+         <table width="100%">
+            <tr height="50">
+               <td width="2%" style="background-color:#FF3600;vertical-align:center;text-align:center"><font size="5" face="tahoma" color="white"><strong>&nbsp;II.&nbsp;</strong></font></td>
+               <td width="98%" style="background-color:#2467AC" colspan="3"><font size="4" face="tahoma" color="white"><strong><a name="tools">&nbsp;&nbsp;Tools Documents</a></strong></font></td>
+            </tr>
+            <tr height="50">
+               <td width="5%" style="background-color:#FFFFFF;vertical-align:center;text-align:right"><font size="4" face="tahoma" color="#2467AC"><strong>&nbsp;&#10148;&nbsp;</strong></font></td>
+               <td colspan="3" width="95%"><font size="4" face="arial" color="#FF3600"><strong>&nbsp;&nbsp;moviTools Documents</strong></font></td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="vertical-align:top;text-align:right"></td>
+               <td width="42%" style="vertical-align:top;text-align:left" class='header'><span style='color:#4f81bd;'>Section</span></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='header'><span style='color:#4f81bd;'>Description</span></td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="vertical-align:top;text-align:right" class='cell'><font color="black" face="arial">1.</font></td>
+               <td width="45%" style="vertical-align:top;text-align:left" class='cell'><a href='tools/18.06.6/doc/ReleaseNotes.pdf'>moviTools Release Notes</a></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='cell'>General tools re-factoring due to requirements for Myriad 2 support.</td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="vertical-align:top;text-align:right" class='cell'><font color="black" face="arial">2.</font></td>
+               <td width="45%" style="vertical-align:top;text-align:left" class='cell'><a href='tools/18.06.6/doc/moviToolsIntroduction.pdf'>moviTools Introduction</a></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='cell'>Movidius Tools are a set of tools used to build, run and debug applications for Movidius Myriad processors.</td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="vertical-align:top;text-align:right" class='cell'><font color="black" face="arial">3.</font></td>
+               <td width="45%" style="vertical-align:top;text-align:left" class='cell'><a href='tools/18.06.6/doc/moviAsm.pdf'>moviAsm</a></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='cell'>The Movidius Assembler ( moviAsm ) is the Software Component which is responsible for producing output binary files in the specified format, according to the latest ISA specifications.</td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="vertical-align:top;text-align:right" class='cell'><font color="black" face="arial">4.</font></td>
+               <td width="45%" style="vertical-align:top;text-align:left" class='cell'><a href='tools/18.06.6/doc/moviCompile.pdf'>moviCompile</a></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='cell'>moviCompile is Movidius&#39; C/C++ compiler, a tool which compiles C and C++ code. moviCompile is based on CLang and the LLVM infrastructure. moviCompile is the default compiler used to compile code for Movidius&#39; SHAVE core.</td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="vertical-align:top;text-align:right" class='cell'><font color="black" face="arial">5.</font></td>
+               <td width="45%" style="vertical-align:top;text-align:left" class='cell'><a href='tools/18.06.6/doc/moviConvert.pdf'>moviConvert</a></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='cell'>The moviConvert tool converts the mof file into: hex files used for vcs simulation; mvcmd file used as boot image; mvupd file used as update boot image; .elf file used as output cross-checking.</td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="vertical-align:top;text-align:right" class='cell'><font color="black" face="arial">6.</font></td>
+               <td width="45%" style="vertical-align:top;text-align:left" class='cell'><a href='tools/18.06.6/doc/moviDebug2.pdf'>moviDebug 2</a></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='cell'>Version 2 of the Movidius Debugger (moviDebug), an application that is used to test and debug Movidius code on different platforms.</td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="vertical-align:top;text-align:right" class='cell'><font color="black" face="arial">7.</font></td>
+               <td width="45%" style="vertical-align:top;text-align:left" class='cell'><a href='tools/18.06.6/doc/moviDebug2 features.pdf'>moviDebug 2 features</a></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='cell'>This document presents the features of the Movidius Debugger 2 (moviDebug2).</td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="vertical-align:top;text-align:right" class='cell'><font color="black" face="arial">8.</font></td>
+               <td width="45%" style="vertical-align:top;text-align:left" class='cell'><a href='tools/18.06.6/doc/moviDebugServer.pdf'>moviDebugServer</a></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='cell'>Movidius Debug Server ( moviDebugServer ) is an application that is used to provide the link between the moviDebug (Movidius Debugger) and the hardware targets ( ASIC or FPGA ).</td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="vertical-align:top;text-align:right" class='cell'><font color="black" face="arial">9.</font></td>
+               <td width="45%" style="vertical-align:top;text-align:left" class='cell'><a href='tools/18.06.6/doc/moviDump.pdf'>moviDump</a></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='cell'>The Movidius Object Dumper ( moviDump ) is capable of dumping an object file in a readable format.</td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="vertical-align:top;text-align:right" class='cell'><font color="black" face="arial">10.</font></td>
+               <td width="45%" style="vertical-align:top;text-align:left" class='cell'><a href='tools/18.06.6/doc/moviEclipse features.pdf'>moviEclipse features</a></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='cell'>This document presents the features of moviEclipse.</td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="vertical-align:top;text-align:right" class='cell'><font color="black" face="arial">11.</font></td>
+               <td width="45%" style="vertical-align:top;text-align:left" class='cell'><a href='tools/18.06.6/doc/moviSim.pdf'>moviSim</a></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='cell'>MoviSim is a configurable simulator designed for heterogeneous multiprocessor systems.</td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="vertical-align:top;text-align:right" class='cell'><font color="black" face="arial">12.</font></td>
+               <td width="45%" style="vertical-align:top;text-align:left" class='cell'><a href='tools/18.06.6/doc/moviProf.pdf'>moviProf</a></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='cell'>Movidius Profiler (moviProf) is an application that is used to decode profiled functions instrumented with the functionProfiler MDK component. It is integrated in Eclipse and can be used from the command line as well.</td>
+            </tr>
+         </table>
+         <br><br>
+         <table width="100%">
+            <tr height="50">
+               <td width="2%" style="background-color:#FF3600;vertical-align:center;text-align:center"><font size="5" face="tahoma" color="white"><strong>&nbsp;III.&nbsp;</strong></font></td>
+               <td width="98%" style="background-color:#2467AC" colspan="5"><font size="4" face="tahoma" color="white"><strong>&nbsp;&nbsp;Examples</strong></font></td>
+            </tr>
+            <tr height="50">
+               <td width="5%" style="background-color:#FFFFFF;vertical-align:center;text-align:right"><font size="4" face="tahoma" color="#2467AC"><strong>&nbsp;&#10148;&nbsp;</strong></font></td>
+               <td colspan="4" width="95%"><font size="4" face="arial" color="#FF3600"><strong>&nbsp;&nbsp;Demo files</strong></font></td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="background-color: #ffffff; vertical-align:top;text-align:right" class='cell'><font color="black" face="arial"></td>
+               <td width="45%" style="vertical-align:top;text-align:left" class='cell'><a href='mdk/examples/examples.html' target="_blank">Examples</a></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='cell'>Provides MDK example files</td>
+            </tr>
+         </table>
+         <br><br>
+         <table width="100%">
+            <tr height="50">
+               <td width="2%" style="background-color:#FF3600;vertical-align:center;text-align:center"><font size="5" face="tahoma" color="white"><strong>&nbsp;IV.&nbsp;</strong></font></td>
+               <td width="98%" style="background-color:#2467AC" colspan="5"><font size="4" face="tahoma" color="white"><strong>&nbsp;&nbsp;FAQ</strong></font></td>
+            </tr>
+            <tr height="50">
+               <td width="5%" style="background-color:#FFFFFF;vertical-align:center;text-align:right"><font size="4" face="tahoma" color="#2467AC"><strong>&nbsp;&#10148;&nbsp;</strong></font></td>
+               <td colspan="4" width="95%"><font size="4" face="arial" color="#FF3600"><strong>&nbsp;&nbsp;FAQ</strong></font></td>
+            </tr>
+            <tr>
+               <td width="5%" style="vertical-align:top;text-align:right"></td>
+               <td width="3%" style="background-color: #ffffff; vertical-align:top;text-align:right" class='cell'><font color="black" face="arial"></td>
+               <td width="45%" style="vertical-align:top;text-align:left" class='cell'><a href='./mdk/doc/FAQ.html' target="_blank">FAQ</a></td>
+               <td width="50%" style="vertical-align:top;text-align:justify;" class='cell'>Frequently Asked Questions</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>
+

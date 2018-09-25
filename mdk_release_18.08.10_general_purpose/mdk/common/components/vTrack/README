@@ -1,0 +1,20 @@
+The structure of the vTrack directory is as follows: 
+
+├── binary                  # When we deploy vTrack, lib and public headers written here
+├── CMakeLists.txt          # to build PC lib for vTrack
+├── Makefile                # to build myriad version of vTrack
+├── README                  # this
+├── source                  # vTrack source
+│   ├── api                 # vTrack public API
+│   ├── common              # common cross compilable files (used by more than 1 module in vTrack)
+│   ├── featurePipe         # Feature Maintenance module
+│   ├── leon                # common leon files (used by more than 1 module in vTrack)
+│   ├── opticalFlow         # Optical Flow module
+│   ├── pc                  # common pc files (used by more than 1 module in vTrack)
+│   ├── pixelPipe           # Pixel Pipe module
+│   ├── utilities           # Utilities (mostly drawing)
+│   └── vpipe               # VPipe module
+├── vTrack.cmake            # cmake file to be included by CMakelists when using vTrack (PC)
+└── vTrackConfig.mk         # makefile to be included by Makefile when using vTrack (Myriad)
+
+To build vTrack, do a "make clean" followed by "make deploy MV_SOC_REV=<REV>"

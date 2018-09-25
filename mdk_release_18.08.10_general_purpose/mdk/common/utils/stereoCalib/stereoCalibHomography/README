@@ -1,0 +1,31 @@
+
+PC offline calibration tool for stereo cameras.
+The tool takes as input a pair of left and right images containing the chessboard pattern and calculates a homography matrix stored in a binary file (i.e. .bin).
+
+1. Prerequisites:
+    OpenCV 3.x.x
+    Left and Right images with chessboard pattern .png format
+
+2. Build
+    >> cd stereoCalibHomography\Linux
+	>> mkdir build
+	>> cd build
+	>> cmake ..
+	>> make
+
+3. Run 
+    >> stereoCalibHomography.exe -l LeftImage -r RightImage -ho HomographyFile -td Offset 
+
+Required Inputs:
+    -l or --left: to specify the path for the left image
+    -r or --right: to specify the path for the right image
+    -ho or --homography: to specify the path for the homography between left and right image
+    -td or --true_disparity: offset to compensate 'infinity' objects
+Options:
+    -h or --help: this help
+	
+ Example:
+    stereoCalibHomography -l cam0.png -r cam1.png -ho homography.bin -td value
+
+Output:
+    The Homography will be saved in a .bin format in the same location with the PC application.

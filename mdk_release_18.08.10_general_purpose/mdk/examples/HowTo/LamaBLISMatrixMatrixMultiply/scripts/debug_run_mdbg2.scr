@@ -1,0 +1,49 @@
+proc lddetails {} {
+    mdbg::target LOS
+
+    #Set number of SHAVEs
+    mdbg::mset numberShaves 1
+
+    # Load matrixA
+    set aAddr [mdbg::sym addr matrixA]
+    puts "Loading matrix aTranspose.bin ..."
+    mdbg::loadfile -addr $aAddr -binary  aTranspose.bin
+    set aSize [file size aTranspose.bin]
+
+    # Load matrixB
+    set bAddr [mdbg::sym addr matrixB]
+    puts "Loading matrix bTranspose.bin ..."
+    mdbg::loadfile  -addr $bAddr -binary  bTranspose.bin
+    set bSize [file size bTranspose.bin]
+
+    # Load matrixAB
+    set abAddr [mdbg::sym addr matrixAB]
+    puts "Loading matrix abTranspose.bin ..."
+    mdbg::loadfile -addr $abAddr -binary  abTranspose.bin
+    set abSize [file size abTranspose.bin]
+}
+
+proc ldri {} {
+
+    # Load the elf
+    mdbg::breset
+    mdbg::ddrinit
+    mdbg::loadfile $::elf
+
+    mdbg::target LOS
+
+    # Load details for LamaBLISMatrixMatrixMultiply
+    lddetails
+
+    # Run the Leon
+    mdbg::target LOS
+    mdbg::runw
+
+    #Save output
+    set cAddr [mdbg::sym addr matrixC]
+    puts "Saving output ..."
+    mdbg::savefile c.bin matrixC 4194304
+
+}
+
+ldri

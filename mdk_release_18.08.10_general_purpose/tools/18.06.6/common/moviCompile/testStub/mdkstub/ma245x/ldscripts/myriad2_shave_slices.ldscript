@@ -1,0 +1,403 @@
+/*Linker script file which sets all shave slices code*/
+
+SECTIONS {
+
+  S.shv0.cmx.text : {
+        PROVIDE ( __shave0_cmx_text_start = . );
+        *(.shv0.S.text*)
+        *(.shv0.S.__TEXT__sect)
+        *(.shv0.S.__MAIN__sect)
+        *(.shv0.S.init*)
+        *(.lrt.shv0.S.text*)
+        *(.lrt.shv0.S.__TEXT__sect)
+        *(.lrt.shv0.S.__MAIN__sect)
+        *(.lrt.shv0.S.init*)
+        PROVIDE ( __shave0_cmx_text_end = . );
+  } > SHV0_CODE
+
+  S.shv0.cmx.data : {
+        PROVIDE ( __shave0_cmx_data_start = . );
+        *(.shv0.S.data*)
+        *(.shv0.S.rodata*)
+        *(.shv0.S.__DATA__sect*)
+        *(.shv0.S.__STACK__sect*)
+        *(.shv0.S.__static_data*)
+        *(.shv0.S.__HEAP__sect*)
+        *(.shv0.S.__T__*)
+        *(.lrt.shv0.S.data*)
+        *(.lrt.shv0.S.rodata*)
+        *(.lrt.shv0.S.__DATA__sect*)
+        *(.lrt.shv0.S.__STACK__sect*)
+        *(.lrt.shv0.S.__static_data*)
+        *(.lrt.shv0.S.__HEAP__sect*)
+        *(.lrt.shv0.S.__T__*)
+        PROVIDE ( __shave0_cmx_data_end = . );
+  } > SHV0_DATA
+
+  S.shv1.cmx.text : {
+        PROVIDE ( __shave1_cmx_text_start = . );
+        *(.shv1.S.text*)
+        *(.shv1.S.__TEXT__sect)
+        *(.shv1.S.__MAIN__sect)
+        *(.shv1.S.init*)
+        *(.lrt.shv1.S.text*)
+        *(.lrt.shv1.S.__TEXT__sect)
+        *(.lrt.shv1.S.__MAIN__sect)
+        *(.lrt.shv1.S.init*)
+        PROVIDE ( __shave1_cmx_text_end = . );
+  } > SHV1_CODE
+
+  S.shv1.cmx.data : {
+        PROVIDE ( __shave1_cmx_data_start = . );
+        *(.shv1.S.data*)
+        *(.shv1.S.rodata*)
+        *(.shv1.S.__DATA__sect*)
+        *(.shv1.S.__STACK__sect*)
+        *(.shv1.S.__static_data*)
+        *(.shv1.S.__HEAP__sect*)
+        *(.shv1.S.__T__*)
+        *(.lrt.shv1.S.data*)
+        *(.lrt.shv1.S.rodata*)
+        *(.lrt.shv1.S.__DATA__sect*)
+        *(.lrt.shv1.S.__STACK__sect*)
+        *(.lrt.shv1.S.__static_data*)
+        *(.lrt.shv1.S.__HEAP__sect*)
+        *(.lrt.shv1.S.__T__*)
+        PROVIDE ( __shave1_cmx_data_end = . );
+  } > SHV1_DATA
+
+  S.shv2.cmx.text : {
+        PROVIDE ( __shave2_cmx_text_start = . );
+        *(.shv2.S.text*)
+        *(.shv2.S.__TEXT__sect)
+        *(.shv2.S.__MAIN__sect)
+        *(.shv2.S.init*)
+        *(.lrt.shv2.S.text*)
+        *(.lrt.shv2.S.__TEXT__sect)
+        *(.lrt.shv2.S.__MAIN__sect)
+        *(.lrt.shv2.S.init*)
+        PROVIDE ( __shave2_cmx_text_end = . );
+  } > SHV2_CODE
+
+  S.shv2.cmx.data : {
+        PROVIDE ( __shave2_cmx_data_start = . );
+        *(.shv2.S.data*)
+        *(.shv2.S.rodata*)
+        *(.shv2.S.__DATA__sect*)
+        *(.shv2.S.__STACK__sect*)
+        *(.shv2.S.__static_data*)
+        *(.shv2.S.__HEAP__sect*)
+        *(.shv2.S.__T__*)
+        *(.lrt.shv2.S.data*)
+        *(.lrt.shv2.S.rodata*)
+        *(.lrt.shv2.S.__DATA__sect*)
+        *(.lrt.shv2.S.__STACK__sect*)
+        *(.lrt.shv2.S.__static_data*)
+        *(.lrt.shv2.S.__HEAP__sect*)
+        *(.lrt.shv2.S.__T__*)
+        PROVIDE ( __shave2_cmx_data_end = . );
+  } > SHV2_DATA
+
+  S.shv3.cmx.text : {
+        PROVIDE ( __shave3_cmx_text_start = . );
+        *(.shv3.S.text*)
+        *(.shv3.S.__TEXT__sect)
+        *(.shv3.S.__MAIN__sect)
+        *(.shv3.S.init*)
+        *(.lrt.shv3.S.text*)
+        *(.lrt.shv3.S.__TEXT__sect)
+        *(.lrt.shv3.S.__MAIN__sect)
+        *(.lrt.shv3.S.init*)
+        PROVIDE ( __shave3_cmx_text_end = . );
+  } > SHV3_CODE
+
+  S.shv3.cmx.data : {
+        PROVIDE ( __shave3_cmx_data_start = . );
+        *(.shv3.S.data*)
+        *(.shv3.S.rodata*)
+        *(.shv3.S.__DATA__sect*)
+        *(.shv3.S.__STACK__sect*)
+        *(.shv3.S.__static_data*)
+        *(.shv3.S.__HEAP__sect*)
+        *(.shv3.S.__T__*)
+        *(.lrt.shv3.S.data*)
+        *(.lrt.shv3.S.rodata*)
+        *(.lrt.shv3.S.__DATA__sect*)
+        *(.lrt.shv3.S.__STACK__sect*)
+        *(.lrt.shv3.S.__static_data*)
+        *(.lrt.shv3.S.__HEAP__sect*)
+        *(.lrt.shv3.S.__T__*)
+        PROVIDE ( __shave3_cmx_data_end = . );
+  } > SHV3_DATA
+
+  S.shv4.cmx.text : {
+        PROVIDE ( __shave4_cmx_text_start = . );
+        *(.shv4.S.text*)
+        *(.shv4.S.__TEXT__sect)
+        *(.shv4.S.__MAIN__sect)
+        *(.shv4.S.init*)
+        *(.lrt.shv4.S.text*)
+        *(.lrt.shv4.S.__TEXT__sect)
+        *(.lrt.shv4.S.__MAIN__sect)
+        *(.lrt.shv4.S.init*)
+        PROVIDE ( __shave4_cmx_text_end = . );
+  } > SHV4_CODE
+
+  S.shv4.cmx.data : {
+        PROVIDE ( __shave4_cmx_data_start = . );
+        *(.shv4.S.data*)
+        *(.shv4.S.rodata*)
+        *(.shv4.S.__DATA__sect*)
+        *(.shv4.S.__STACK__sect*)
+        *(.shv4.S.__static_data*)
+        *(.shv4.S.__HEAP__sect*)
+        *(.shv4.S.__T__*)
+        *(.lrt.shv4.S.data*)
+        *(.lrt.shv4.S.rodata*)
+        *(.lrt.shv4.S.__DATA__sect*)
+        *(.lrt.shv4.S.__STACK__sect*)
+        *(.lrt.shv4.S.__static_data*)
+        *(.lrt.shv4.S.__HEAP__sect*)
+        *(.lrt.shv4.S.__T__*)
+        PROVIDE ( __shave4_cmx_data_end = . );
+  } > SHV4_DATA
+
+  S.shv5.cmx.text : {
+        PROVIDE ( __shave5_cmx_text_start = . );
+        *(.shv5.S.text*)
+        *(.shv5.S.__TEXT__sect)
+        *(.shv5.S.__MAIN__sect)
+        *(.shv5.S.init*)
+        *(.lrt.shv5.S.text*)
+        *(.lrt.shv5.S.__TEXT__sect)
+        *(.lrt.shv5.S.__MAIN__sect)
+        *(.lrt.shv5.S.init*)
+        PROVIDE ( __shave5_cmx_text_end = . );
+  } > SHV5_CODE
+
+  S.shv5.cmx.data : {
+        PROVIDE ( __shave5_cmx_data_start = . );
+        *(.shv5.S.data*)
+        *(.shv5.S.rodata*)
+        *(.shv5.S.__DATA__sect*)
+        *(.shv5.S.__STACK__sect*)
+        *(.shv5.S.__static_data*)
+        *(.shv5.S.__HEAP__sect*)
+        *(.shv5.S.__T__*)
+        *(.lrt.shv5.S.data*)
+        *(.lrt.shv5.S.rodata*)
+        *(.lrt.shv5.S.__DATA__sect*)
+        *(.lrt.shv5.S.__STACK__sect*)
+        *(.lrt.shv5.S.__static_data*)
+        *(.lrt.shv5.S.__HEAP__sect*)
+        *(.lrt.shv5.S.__T__*)
+        PROVIDE ( __shave5_cmx_data_end = . );
+  } > SHV5_DATA
+
+  S.shv6.cmx.text : {
+        PROVIDE ( __shave6_cmx_text_start = . );
+        *(.shv6.S.text*)
+        *(.shv6.S.__TEXT__sect)
+        *(.shv6.S.__MAIN__sect)
+        *(.shv6.S.init*)
+        *(.lrt.shv6.S.text*)
+        *(.lrt.shv6.S.__TEXT__sect)
+        *(.lrt.shv6.S.__MAIN__sect)
+        *(.lrt.shv6.S.init*)
+        PROVIDE ( __shave6_cmx_text_end = . );
+  } > SHV6_CODE
+
+  S.shv6.cmx.data : {
+        PROVIDE ( __shave6_cmx_data_start = . );
+        *(.shv6.S.data*)
+        *(.shv6.S.rodata*)
+        *(.shv6.S.__DATA__sect*)
+        *(.shv6.S.__STACK__sect*)
+        *(.shv6.S.__static_data*)
+        *(.shv6.S.__HEAP__sect*)
+        *(.shv6.S.__T__*)
+        *(.lrt.shv6.S.data*)
+        *(.lrt.shv6.S.rodata*)
+        *(.lrt.shv6.S.__DATA__sect*)
+        *(.lrt.shv6.S.__STACK__sect*)
+        *(.lrt.shv6.S.__static_data*)
+        *(.lrt.shv6.S.__HEAP__sect*)
+        *(.lrt.shv6.S.__T__*)
+        PROVIDE ( __shave6_cmx_data_end = . );
+  } > SHV6_DATA
+
+  S.shv7.cmx.text : {
+        PROVIDE ( __shave7_cmx_text_start = . );
+        *(.shv7.S.text*)
+        *(.shv7.S.__TEXT__sect)
+        *(.shv7.S.__MAIN__sect)
+        *(.shv7.S.init*)
+        *(.lrt.shv7.S.text*)
+        *(.lrt.shv7.S.__TEXT__sect)
+        *(.lrt.shv7.S.__MAIN__sect)
+        *(.lrt.shv7.S.init*)
+        PROVIDE ( __shave7_cmx_text_end = . );
+  } > SHV7_CODE
+
+  S.shv7.cmx.data : {
+        PROVIDE ( __shave7_cmx_data_start = . );
+        *(.shv7.S.data*)
+        *(.shv7.S.rodata*)
+        *(.shv7.S.__DATA__sect*)
+        *(.shv7.S.__STACK__sect*)
+        *(.shv7.S.__static_data*)
+        *(.shv7.S.__HEAP__sect*)
+        *(.shv7.S.__T__*)
+        *(.lrt.shv7.S.data*)
+        *(.lrt.shv7.S.rodata*)
+        *(.lrt.shv7.S.__DATA__sect*)
+        *(.lrt.shv7.S.__STACK__sect*)
+        *(.lrt.shv7.S.__static_data*)
+        *(.lrt.shv7.S.__HEAP__sect*)
+        *(.lrt.shv7.S.__T__*)
+        PROVIDE ( __shave7_cmx_data_end = . );
+  } > SHV7_DATA
+
+  S.shv8.cmx.text : {
+        PROVIDE ( __shave8_cmx_text_start = . );
+        *(.shv8.S.text*)
+        *(.shv8.S.__TEXT__sect)
+        *(.shv8.S.__MAIN__sect)
+        *(.shv8.S.init*)
+        *(.lrt.shv8.S.text*)
+        *(.lrt.shv8.S.__TEXT__sect)
+        *(.lrt.shv8.S.__MAIN__sect)
+        *(.lrt.shv8.S.init*)
+        PROVIDE ( __shave8_cmx_text_end = . );
+  } > SHV8_CODE
+
+  S.shv8.cmx.data : {
+        PROVIDE ( __shave8_cmx_data_start = . );
+        *(.shv8.S.data*)
+        *(.shv8.S.rodata*)
+        *(.shv8.S.__DATA__sect*)
+        *(.shv8.S.__STACK__sect*)
+        *(.shv8.S.__static_data*)
+        *(.shv8.S.__HEAP__sect*)
+        *(.shv8.S.__T__*)
+        *(.lrt.shv8.S.data*)
+        *(.lrt.shv8.S.rodata*)
+        *(.lrt.shv8.S.__DATA__sect*)
+        *(.lrt.shv8.S.__STACK__sect*)
+        *(.lrt.shv8.S.__static_data*)
+        *(.lrt.shv8.S.__HEAP__sect*)
+        *(.lrt.shv8.S.__T__*)
+        PROVIDE ( __shave8_cmx_data_end = . );
+  } > SHV8_DATA
+
+  S.shv9.cmx.text : {
+        PROVIDE ( __shave9_cmx_text_start = . );
+        *(.shv9.S.text*)
+        *(.shv9.S.__TEXT__sect)
+        *(.shv9.S.__MAIN__sect)
+        *(.shv9.S.init*)
+        *(.lrt.shv9.S.text*)
+        *(.lrt.shv9.S.__TEXT__sect)
+        *(.lrt.shv9.S.__MAIN__sect)
+        *(.lrt.shv9.S.init*)
+        PROVIDE ( __shave9_cmx_text_end = . );
+  } > SHV9_CODE
+
+  S.shv9.cmx.data : {
+        PROVIDE ( __shave9_cmx_data_start = . );
+        *(.shv9.S.data*)
+        *(.shv9.S.rodata*)
+        *(.shv9.S.__DATA__sect*)
+        *(.shv9.S.__STACK__sect*)
+        *(.shv9.S.__static_data*)
+        *(.shv9.S.__HEAP__sect*)
+        *(.shv9.S.__T__*)
+        *(.lrt.shv9.S.data*)
+        *(.lrt.shv9.S.rodata*)
+        *(.lrt.shv9.S.__DATA__sect*)
+        *(.lrt.shv9.S.__STACK__sect*)
+        *(.lrt.shv9.S.__static_data*)
+        *(.lrt.shv9.S.__HEAP__sect*)
+        *(.lrt.shv9.S.__T__*)
+        PROVIDE ( __shave9_cmx_data_end = . );
+  } > SHV9_DATA
+
+  S.shv10.cmx.text : {
+        PROVIDE ( __shave10_cmx_text_start = . );
+        *(.shv10.S.text*)
+        *(.shv10.S.__TEXT__sect)
+        *(.shv10.S.__MAIN__sect)
+        *(.shv10.S.init*)
+        *(.lrt.shv10.S.text*)
+        *(.lrt.shv10.S.__TEXT__sect)
+        *(.lrt.shv10.S.__MAIN__sect)
+        *(.lrt.shv10.S.init*)
+        PROVIDE ( __shave10_cmx_text_end = . );
+  } > SHV10_CODE
+
+  S.shv10.cmx.data : {
+        PROVIDE ( __shave10_cmx_data_start = . );
+        *(.shv10.S.data*)
+        *(.shv10.S.rodata*)
+        *(.shv10.S.__DATA__sect*)
+        *(.shv10.S.__STACK__sect*)
+        *(.shv10.S.__static_data*)
+        *(.shv10.S.__HEAP__sect*)
+        *(.shv10.S.__T__*)
+        *(.lrt.shv10.S.data*)
+        *(.lrt.shv10.S.rodata*)
+        *(.lrt.shv10.S.__DATA__sect*)
+        *(.lrt.shv10.S.__STACK__sect*)
+        *(.lrt.shv10.S.__static_data*)
+        *(.lrt.shv10.S.__HEAP__sect*)
+        *(.lrt.shv10.S.__T__*)
+        PROVIDE ( __shave10_cmx_data_end = . );
+  } > SHV10_DATA
+
+  S.shv11.cmx.text : {
+        PROVIDE ( __shave11_cmx_text_start = . );
+        *(.shv11.S.text*)
+        *(.shv11.S.__TEXT__sect)
+        *(.shv11.S.__MAIN__sect)
+        *(.shv11.S.init*)
+        *(.lrt.shv11.S.text*)
+        *(.lrt.shv11.S.__TEXT__sect)
+        *(.lrt.shv11.S.__MAIN__sect)
+        *(.lrt.shv11.S.init*)
+        PROVIDE ( __shave11_cmx_text_end = . );
+  } > SHV11_CODE
+
+  S.shv11.cmx.data : {
+        PROVIDE ( __shave11_cmx_data_start = . );
+        *(.shv11.S.data*)
+        *(.shv11.S.rodata*)
+        *(.shv11.S.__DATA__sect*)
+        *(.shv11.S.__STACK__sect*)
+        *(.shv11.S.__static_data*)
+        *(.shv11.S.__HEAP__sect*)
+        *(.shv11.S.__T__*)
+        *(.lrt.shv11.S.data*)
+        *(.lrt.shv11.S.rodata*)
+        *(.lrt.shv11.S.__DATA__sect*)
+        *(.lrt.shv11.S.__STACK__sect*)
+        *(.lrt.shv11.S.__static_data*)
+        *(.lrt.shv11.S.__HEAP__sect*)
+        *(.lrt.shv11.S.__T__*)
+        PROVIDE ( __shave11_cmx_data_end = . );
+  } > SHV11_DATA
+}
+
+/*The following are empty sections but we just need to make sure their symbols get pulled in*/
+
+SECTIONS {
+
+  S.shvdynamic.text 0x1D000000 : {
+        *(.dyn.text*)
+  }
+
+  S.shvdynamic.data 0x1C000000 : {
+        *(.dyn.data*)
+  }
+
+}
+

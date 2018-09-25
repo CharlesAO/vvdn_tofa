@@ -1,0 +1,63 @@
+// ///
+// /// @file
+// /// @copyright All code copyright Movidius Ltd 2012, all rights reserved.
+// ///            For License Warranty see: common/license.txt
+// ///
+// /// @brief
+// ///
+
+.version 00.51.04
+
+.ifndef SVU_COMMON_MACROS
+.set SVU_COMMON_MACROS
+
+.include ShDrvMutexDefines.incl
+.include ShDrvCmxFifoDefines.incl
+
+//stack manipulation macros
+
+.macro PUSH_V_REG VREG
+    lsu0.sto64.h \VREG,StackPtr,-8 || lsu1.sto64.l \VREG,StackPtr,-16 || iau.incs StackPtr,-16
+.endm
+
+.macro POP_V_REG VREG 
+    lsu0.ldo64.l \VREG,StackPtr,0 || lsu1.ldo64.h \VREG, StackPtr, 8 || iau.incs StackPtr,16
+.endm
+
+.macro PUSH_2_32BIT_REG REG1, REG2
+    lsu0.sto32 \REG1,StackPtr,-4 || lsu1.sto32 \REG2,StackPtr,-8 || iau.incs StackPtr,-8
+.endm
+
+.macro POP_2_32BIT_REG REG1, REG2
+    lsu0.ldo32 \REG2,StackPtr,0 || lsu1.ldo32 \REG1,StackPtr,4 || iau.incs StackPtr,8
+.endm
+
+.macro PUSH_1_32BIT_REG REG
+    lsu0.sto32 \REG,StackPtr,-4 || iau.incs StackPtr,-4
+.endm
+
+.macro POP_1_32BIT_REG REG
+    lsu0.ldo32 \REG,StackPtr,0 || iau.incs StackPtr,4
+.endm
+
+//-------------------------------------------------------------------
+//---------------WAIT FOR INTERUPT REQUEST---------------------------
+// wait/loop until get a hight interupt from LOS
+.macro WAIT_FOR_LOS_HI_INT i_tempReg
+    // status HI_P_IRQ
+    lsu0.ldil i0, OS_HP_IRQ_MASK        || lsu1.ldih i0, OS_HP_IRQ_MASK
+    cmu.cmti.bitp \i_tempReg, P_GPI
+    peu.pc1c EQ || cmu.cmti.bitp \i_tempReg, P_GPI || bru.rpim 0
+    nop 6
+.endm
+
+// wait/loop until get a low interupt from LOS
+.macro WAIT_FOR_LOS_LOW_INT i_tempReg
+    // status HI_P_IRQ
+    lsu0.ldil i0, OS_LP_IRQ_MASK        || lsu1.ldih i0, OS_LP_IRQ_MASK
+    cmu.cmti.bitp \i_tempReg, P_GPI
+    peu.pc1c EQ || cmu.cmti.bitp \i_tempReg, P_GPI || bru.rpim 0
+    nop 6
+.endm
+
+.endif

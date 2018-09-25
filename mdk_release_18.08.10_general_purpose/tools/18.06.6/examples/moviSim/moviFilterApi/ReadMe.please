@@ -1,0 +1,36 @@
+========================================================================
+    STATIC LIBRARY : moviFilterApi Project Overview
+========================================================================
+
+See doc/moviSim.pdf chapter 8
+
+Other notes:
+
+Test solution on moviFilterApiTests folder contains relevant commnets and examples of usage.
+
+For unsuported features or bugs, report to moviSim team.
+
+=========================================================================
+SUPPORTED CV MODELS by using MODE 2, APB Interface
+
+    filterInterface.h:
+        virtual FilterStatus apbWriteRegister(size_t address, uintptr_t data, size_t size = 0) = 0;
+        virtual FilterStatus apbReadRegister(size_t address, uintptr_t data, size_t size = 0) = 0;
+
+    See location of libraries:
+        Linux: $MV_TOOLS_VERSION/linux64/models
+        Windows:$MV_TOOLS_VERSION\win32\models
+=========================================================================
+MyriadX:
+    Warp(warpDll.so/warpDll.dll)
+    Stereo(stereoDll.so/stereoDll.dll)
+    Cnn(cnnDll.so/cnnDll.dll)
+    MinMax(minMaxDll.so/minMaxDll.dll)
+    MotionEstimation(motionEstDll.so/motionEstDll.dll)
+    SIPP(Isp Filters, Edge, Harris)(ispDll.so/ispDll.dll)
+=========================================================================
+Keembay:
+    DPU(dpuDll.so/dpuDll.dll)
+    MotionEstimation(mestDll.so/mestDll.dll)
+    MatMul(matmulDll.so/matmulDll.dll)
+=========================================================================

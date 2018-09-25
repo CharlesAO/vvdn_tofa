@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" version="2.1">
+<key attr.name="includes" attr.type="string" for="graph" id="includes"/>
+<key attr.name="binary" attr.type="string" for="graph" id="binary"/>
+<key attr.name="shaveFirst" attr.type="int" for="graph" id="shaveFirst"/>
+<key attr.name="shaveLast" attr.type="int" for="graph" id="shaveLast"/>
+<key attr.name="mkPath" attr.type="string" for="graph" id="mkPath"/>
+<key attr.name="myriadTarget" attr.type="int" for="graph" id="myriadTarget"/>
+<key attr.name="id" attr.type="string" for="node" id="id"/>
+<key attr.name="name" attr.type="string" for="node" id="name"/>
+<key attr.name="description" attr.type="string" for="node" id="description"/>
+<key attr.name="flags" attr.type="string" for="node" id="flags"/>
+<key attr.name="dataType" attr.type="string" for="node" id="dataType"/>
+<key attr.name="outW" attr.type="string" for="node" id="outW"/>
+<key attr.name="outH" attr.type="string" for="node" id="outH"/>
+<key attr.name="numPl" attr.type="string" for="node" id="numPl"/>
+<key attr.name="symbol" attr.type="string" for="node" id="symbol"/>
+<key attr.name="x" attr.type="int" for="node" id="x"/>
+<key attr.name="y" attr.type="int" for="node" id="y"/>
+<key attr.name="w" attr.type="int" for="node" id="w"/>
+<key attr.name="h" attr.type="int" for="node" id="h"/>
+<key attr.name="internal0" attr.type="string" for="node" id="internal0"/>
+<key attr.name="internal1" attr.type="string" for="node" id="internal1"/>
+<key attr.name="cMat" attr.type="string" for="node" id="cMat"/>
+<key attr.name="dMat" attr.type="string" for="node" id="dMat"/>
+<key attr.name="index" attr.type="int" for="edge" id="index"/>
+<key attr.name="inputIndex" attr.type="int" for="edge" id="inputIndex"/>
+<key attr.name="outputIndex" attr.type="int" for="edge" id="outputIndex"/>
+<key attr.name="kernel" attr.type="string" for="edge" id="kernel"/>
+<graph edgedefault="directed" id="Pipeline">
+<data key="includes">myDefs.h</data>
+<data key="binary">mbinImgSipp</data>
+<data key="shaveFirst">0</data>
+<data key="shaveLast">7</data>
+<data key="mkPath">../build/sipp/</data>
+<data key="myriadTarget">MA2x5x</data>
+<node id="0">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">dmaIn0</data>
+<data key="id">dmaIn</data>
+<data key="description"/>
+<data key="flags">0x00</data>
+<data key="outW">512</data>
+<data key="outH">512</data>
+<data key="symbol">SIPP_DMA_ID</data>
+<data key="x">155</data>
+<data key="y">48</data>
+<data key="w">88</data>
+<data key="h">88</data>
+<data key="internal0">auto</data>
+<data key="internal1">../../../../../../../resources/lena_512x512_luma.raw</data>
+</node>
+<node id="1">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">absdiff0</data>
+<data key="id">absdiff</data>
+<data key="description">This filter computes the absolute difference of two images.</data>
+<data key="flags">0x0</data>
+<data key="outW">512</data>
+<data key="outH">512</data>
+<data key="symbol">svuAbsdiff</data>
+<data key="x">229</data>
+<data key="y">361</data>
+<data key="w">119</data>
+<data key="h">95</data>
+</node>
+<node id="2">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">dmaIn1</data>
+<data key="id">dmaIn</data>
+<data key="description">DMA in filter</data>
+<data key="flags">0x00</data>
+<data key="outW">512</data>
+<data key="outH">512</data>
+<data key="symbol">SIPP_DMA_ID</data>
+<data key="x">386</data>
+<data key="y">53</data>
+<data key="w">86</data>
+<data key="h">86</data>
+<data key="internal0">auto</data>
+<data key="internal1">../../../../../../../resources/lena_512x512_luma.raw</data>
+</node>
+<node id="3">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">conv3x30</data>
+<data key="id">conv3x3</data>
+<data key="description">This filter performs a convolution on the input image using the given 3x3 matrix.</data>
+<data key="flags">0x0</data>
+<data key="outW">512</data>
+<data key="outH">512</data>
+<data key="symbol">svuConv3x3</data>
+<data key="x">145</data>
+<data key="y">196</data>
+<data key="w">106</data>
+<data key="h">95</data>
+<data key="cMat">0x2C00,0x3000,0x2C00,0x3000,0x3400,0x3000,0x2C00,0x3000,0x2C00</data>
+</node>
+<node id="4">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">dilate5x50</data>
+<data key="id">dilate5x5</data>
+<data key="description">This filter performs a dilate on the source image using the specified structuring element.</data>
+<data key="flags">0x0</data>
+<data key="outW">512</data>
+<data key="outH">512</data>
+<data key="symbol">svuDilate5x5</data>
+<data key="x">379</data>
+<data key="y">202</data>
+<data key="w">97</data>
+<data key="h">86</data>
+<data key="dMat">(UInt8*)&amp;dMat[0],(UInt8*)&amp;dMat[2],(UInt8*)&amp;dMat[4],(UInt8*)&amp;dMat[6],(UInt8*)&amp;dMat[8]</data>
+</node>
+<node id="5">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">scale05BilinHV0</data>
+<data key="id">scale05BilinHV</data>
+<data key="description">This filter performs bilinear downscale with 0.5 factor â€“ Horizontal and Vertical directions.</data>
+<data key="flags">SIPP_RESIZE</data>
+<data key="outW">256</data>
+<data key="outH">256</data>
+<data key="symbol">svuScl05BilinHV</data>
+<data key="x">467</data>
+<data key="y">354</data>
+<data key="w">137</data>
+<data key="h">102</data>
+</node>
+<node id="6">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">dmaOut0</data>
+<data key="id">dmaOut</data>
+<data key="description">DMA out filter</data>
+<data key="flags">0x00</data>
+<data key="outW">256</data>
+<data key="outH">256</data>
+<data key="symbol">SIPP_DMA_ID</data>
+<data key="x">533</data>
+<data key="y">495</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="internal0">auto</data>
+<data key="internal1">output.raw</data>
+</node>
+<node id="7">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">dmaOut1</data>
+<data key="id">dmaOut</data>
+<data key="description">DMA out filter</data>
+<data key="flags">0x00</data>
+<data key="outW">512</data>
+<data key="outH">512</data>
+<data key="symbol">SIPP_DMA_ID</data>
+<data key="x">251</data>
+<data key="y">501</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="internal0">auto</data>
+<data key="internal1">output2.raw</data>
+</node>
+<edge id="0" source="0" target="3">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">3x3</data>
+</edge>
+<edge id="1" source="1" target="7">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">1x1</data>
+</edge>
+<edge id="2" source="2" target="4">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">5x5</data>
+</edge>
+<edge id="3" source="3" target="1">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">1x1</data>
+</edge>
+<edge id="4" source="4" target="1">
+<data key="index">1</data>
+<data key="inputIndex">1</data>
+<data key="outputIndex">0</data>
+<data key="kernel">1x1</data>
+</edge>
+<edge id="5" source="4" target="5">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">2x2</data>
+</edge>
+<edge id="6" source="5" target="6">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">1x1</data>
+</edge>
+</graph>
+</graphml>

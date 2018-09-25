@@ -1,0 +1,68 @@
+/*****************************************************************************/
+/* General purpose sections to be used by any project which needs to use CMX */
+/* for functions and data to provice quicker execution and data access       */
+/* The following sections will get located in CRITICAL which needs to be     */
+/* predefined earlier                                                        */
+/*****************************************************************************/
+
+SECTIONS
+{
+    ASSERT(ORIGIN(CRITICAL_LRT) >= 0x70000000 , "CRITICAL_LRT not defined")
+    ASSERT(ORIGIN(CRITICAL_LOS) >= 0x70000000 , "CRITICAL_LOS not defined")
+
+   . = ORIGIN(CRITICAL_LRT);
+
+  /* libraries text symbols */
+  .lrt.critical.text ALIGN(64) :
+  {
+    *:irq_asm.o(.lrt.text)
+    *:reg_win.rel(.lrt.text)
+    *:irq-shared.o(.lrt.text.bsp_isr_handler)
+  } > CRITICAL_LRT
+
+  /* data symbols */
+  .lrt.critical.data ALIGN(8) :
+  {
+  } > CRITICAL_LRT
+  
+    /* irq data symbols */
+  .lrt.critical.irq.data ALIGN(8) :
+  {
+    /* this section's type gets modified to "contents,alloc,load,data" by an objcopy in generic.mk */
+    /* which results in objects in this section being initialised at startup */
+    *:irq-generic.o(.lrt.bss.bsp_interrupt_handler_table)
+  }  > CRITICAL_LRT
+
+  /* bss symbols */
+  .lrt.critical.bss ALIGN(8) :
+  {
+  }  > CRITICAL_LRT
+
+   . = ORIGIN(CRITICAL_LOS);
+   
+  /* libraries text symbols */
+  .critical.text ALIGN(64) :
+  {
+    *:irq_asm.o(.text) 
+    *:reg_win.rel(.text)
+    *:irq-shared.o(.text.bsp_isr_handler)
+  } > CRITICAL_LOS
+  
+  /* data symbols */
+  .critical.data ALIGN(8) :
+  {
+  } > CRITICAL_LOS
+
+  /* irq data symbols */
+  .critical.irq.data ALIGN(8) :
+  {
+    /* this section's type gets modified to "contents,alloc,load,data" by an objcopy in generic.mk */
+    /* which results in objects in this section being initialised at startup */
+    *:irq-generic.o(.bss.bsp_interrupt_handler_table)
+  }  > CRITICAL_LOS
+
+  /* bss symbols */
+  .critical.bss ALIGN(8) :
+  {
+  }  > CRITICAL_LOS
+}

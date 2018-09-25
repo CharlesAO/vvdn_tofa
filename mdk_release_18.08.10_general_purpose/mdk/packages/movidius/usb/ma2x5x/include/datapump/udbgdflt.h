@@ -1,0 +1,209 @@
+/* udbgdflt.h	Tue Nov 13 2012 21:49:11 chwon */
+
+/*
+
+Module:  udbgdflt.h
+
+Function:
+	Default debug printing package.
+
+Version:
+	V3.11b	Tue Nov 13 2012 21:49:11 chwon	Edit level 4
+
+Copyright notice:
+	This file copyright (C) 2001, 2006, 2011-2012 by
+
+		MCCI Corporation
+		3520 Krums Corners Road
+		Ithaca, NY  14850
+
+	An unpublished work.  All rights reserved.
+	
+	This file is proprietary information, and may not be disclosed or
+	copied without the prior permission of MCCI Corporation
+ 
+Author:
+	Terry Moore, MCCI Corporation	January 2001
+
+Revision history:
+   1.61a  Mon Jan  1 2001 22:35:56  tmm
+	Module created.
+
+   1.93e  Fri Mar  3 2006 17:16:18  tmm
+	Up the queue size.  This needs to be replaced, see bug 1687.
+
+   3.01f  Thu Jul 28 2011 09:27:53  chwon
+	13849: make __TMS_PRINTQ_SIZE compile time parameter -- if plaltform
+	has limited memory, then need to override at compile time.
+
+   3.11b  Tue Nov 13 2012 21:49:12  chwon
+	15844: Remove typecasting of pSelf when calling
+	UPLATFORM_DEBUG_PRINT_CONTROL_RUNTIME_INIT_V1(). Generate uncloaked
+	name using uncloak-defs.sh.
+
+*/
+
+#ifndef _UDBGDFLT_H_		/* prevent multiple includes */
+#define _UDBGDFLT_H_
+
+#ifndef _UHILDBG_H_
+# include "uhildbg.h"
+#endif
+
+/* 
+|| The type for the Port/Platform specific print output routine. 
+*/ 
+__TMS_FNTYPE_DEF(
+	DBGOUTFN,
+	__TMS_VOID, (__TMS_UPLATFORM *)
+	);
+
+__TMS_TYPE_DEF_STRUCT(UHIL_DEBUG_DEFAULT_CONTEXT);
+
+struct __TMS_STRUCTNAME(UHIL_DEBUG_DEFAULT_CONTEXT)
+	{
+	__TMS_UPLATFORM_DEBUG_PRINT_CONTROL_HDR;
+	__TMS_BOOL		upfdbg_bDebugPrint;
+	__TMS_PDBGOUTFN		upfdbg_pPushCharFn;
+	__TMS_TEXT		*upfdbg_pPrintqHead;
+	__TMS_TEXT		*upfdbg_pPrintqTail;
+	__TMS_TEXT		*upfdbg_pPrintqBase;
+	__TMS_TEXT		*upfdbg_pPrintqTop;
+	};
+
+/*
+
+Name:  UHIL_DEBUG_DEFAULT_CONTEXT_RUNTIME_INIT_V1()
+
+Function:
+	Generate the code needed to dynamically initialize
+	a UHIL_DEBUG_DEFAULT_CONTEXT structure.
+
+Definition:
+	VOID 
+	UHIL_DEBUG_DEFAULT_CONTEXT_RUNTIME_INIT_V1(
+		UHIL_DEBUG_DEFAULT_CONTEXT *pSelf,
+		UPLATFORM_DEBUG_CONTEXT_CLOSE_FN *pCloseFn,
+		PDBGOUTFN pPushCharFn,
+		VOID *pContext			// arbitrary context
+		TEXT *pQueueBase,		// first entry in queue.
+		TEXT *pQueueTop			// pQueueBase + sizeof(queue)
+		);
+
+Description:
+	This macro generates the code to initialize a
+	UHIL_DEBUG_DEFAULT_CONTEXT structure according
+	to V1 semantics.  This macro should be used instead of initializing
+	the UHIL_DEBUG_DEFAULT_CONTEXT manually, because the macro will 
+	be revised to maintain upward compatibility whenever new fields 
+	are added to the UHIL_DEBUG_DEFAULT_CONTEXT.
+
+	The caller is responsible for allocating the debug context,
+	which must persist until the close method is called.
+
+Returns:
+	No explicit result.
+
+*/
+
+/* don't add parameters to this macro; instead create a V2 */
+#define	__TMS_UHIL_DEBUG_DEFAULT_CONTEXT_RUNTIME_INIT_V1(		\
+		pSelf,							\
+		pCloseFn,						\
+		pPushCharFn,						\
+		pContext,						\
+		pQueueBase,						\
+		pQueueTop						\
+		)							\
+	do	{							\
+		__TMS_UPLATFORM_DEBUG_PRINT_CONTROL_RUNTIME_INIT_V1(	\
+			(pSelf),					\
+			(pCloseFn),					\
+			UHIL_PrintBuf_Default,				\
+			UHIL_PrintBufTransparent_Default,		\
+			UHIL_FlushChar_Default,				\
+			UHIL_PrintPoll_Default,				\
+			UHIL_DebugPrintEnable_Default,			\
+			(pContext)					\
+			);						\
+		(pSelf)->upfdbg_bDebugPrint = 0;			\
+		(pSelf)->upfdbg_pPushCharFn = (pPushCharFn);		\
+		(pSelf)->upfdbg_pPrintqHead =				\
+		  (pSelf)->upfdbg_pPrintqTail =				\
+		  (pSelf)->upfdbg_pPrintqBase = (pQueueBase);		\
+		(pSelf)->upfdbg_pPrintqTop = (pQueueTop);		\
+		} while (0)
+
+
+/*
+|| Helper Functions for default debug package DBGOUTFN routines.
+*/
+__TMS_BEGIN_DECLS
+__TMS_BOOL	UHIL_PQCheckChar __TMS_P((__TMS_UPLATFORM *));
+__TMS_TEXT	UHIL_PQGetChar __TMS_P((__TMS_UPLATFORM *));
+__TMS_END_DECLS
+
+
+/*
+|| The following are used for Service routines
+*/
+#ifndef	__TMS_PRINTQ_SIZE	/* PARAM */
+# define __TMS_PRINTQ_SIZE	32768		/* the default */
+#endif
+
+/*
+|| Use the following to declare your own printq, overriding the
+|| library definition.
+*/
+#define	__TMS_TTUSB_UHIL_INSTANTIATE_PRINTQ(size) \
+	__TMS_TEXT gb_printq_base[(size)] __TMS_BSS; \
+	__TMS_TEXT * __TMS_CONST gp_printq_top = &gb_printq_base[(size)]
+
+
+__TMS_BEGIN_DECLS
+extern __TMS_TEXT		gb_printq_base[];
+extern __TMS_TEXT * __TMS_CONST	gp_printq_top;
+
+__TMS_UPLATFORM_DEBUG_PRINT_BUF_FN	UHIL_PrintBuf_Default;
+__TMS_UPLATFORM_DEBUG_PRINT_BUF_FN	UHIL_PrintBufTransparent_Default;
+__TMS_UPLATFORM_DEBUG_FLUSH_FN		UHIL_FlushChar_Default;
+__TMS_UPLATFORM_DEBUG_PRINT_POLL_FN	UHIL_PrintPoll_Default;
+__TMS_UPLATFORM_DEBUG_PRINT_ENABLE_FN	UHIL_DebugPrintEnable_Default;
+
+__TMS_VOID	UHIL_PrintInit __TMS_P((__TMS_UPLATFORM *, __TMS_PDBGOUTFN));
+
+__TMS_END_DECLS
+
+
+/****************************************************************************\
+|
+|	Uncloaked names
+|
+\****************************************************************************/
+
+/**** uncloaked names generated by uncloak-defs.sh ****/
+#if !__TMS_CLOAKED_NAMES_ONLY
+# define UHIL_DEBUG_DEFAULT_CONTEXT_RUNTIME_INIT_V1(		\
+		pSelf,							\
+		pCloseFn,						\
+		pPushCharFn,						\
+		pContext,						\
+		pQueueBase,						\
+		pQueueTop						\
+		)	\
+	__TMS_UHIL_DEBUG_DEFAULT_CONTEXT_RUNTIME_INIT_V1(		\
+		pSelf,							\
+		pCloseFn,						\
+		pPushCharFn,						\
+		pContext,						\
+		pQueueBase,						\
+		pQueueTop						\
+		)
+# define PRINTQ_SIZE	\
+   __TMS_PRINTQ_SIZE
+# define TTUSB_UHIL_INSTANTIATE_PRINTQ(size)	\
+   __TMS_TTUSB_UHIL_INSTANTIATE_PRINTQ(size)
+#endif /* !__TMS_CLOAKED_NAMES_ONLY */
+
+/**** end of udbgdflt.h ****/
+#endif /* _UDBGDFLT_H_ */

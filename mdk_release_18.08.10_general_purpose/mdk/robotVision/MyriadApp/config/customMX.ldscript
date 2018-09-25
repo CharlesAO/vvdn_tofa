@@ -1,0 +1,107 @@
+/*  This is a Default Linker script
+ *  Should be used as an included linker script in top level scripts
+ *
+ *  Addresses defined in common/drivers/myriad2/system/asm/memmap.S
+ */
+
+EXTERN(rtems_get_version_string);
+
+VERSION_INFO_DYNAMIC_SIZE = DEFINED (VERSION_INFO_DYNAMIC_SIZE) ? VERSION_INFO_DYNAMIC_SIZE : 1024;
+DTP_DATA_SIZE = DEFINED (DTP_DATA_SIZE) ? DTP_DATA_SIZE : (1024 * 300);
+
+
+MEMORY
+{
+  SHV0_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 78K
+  SHV0_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 78K, LENGTH = 128K - 78K
+
+  SHV1_CODE (wx)  : ORIGIN = 0x70000000 + 1 * 128K,       LENGTH = 72K
+  SHV1_DATA (w)   : ORIGIN = 0x70000000 + 1 * 128K + 72K, LENGTH = 128K - 72K
+
+  SHV2_CODE (wx)  : ORIGIN = 0x70000000 + 2 * 128K,       LENGTH = 64K
+  SHV2_DATA (w)   : ORIGIN = 0x70000000 + 2 * 128K + 64K, LENGTH = 64K
+
+  SHV3_CODE (wx)  : ORIGIN = 0x70000000 + 3 * 128K,       LENGTH = 15K
+  SHV3_DATA (w)   : ORIGIN = 0x70000000 + 3 * 128K + 15K, LENGTH = 128K - 15K
+
+  SHV4_CODE (wx)  : ORIGIN = 0x70000000 + 4 * 128K,       LENGTH = 27K
+  SHV4_DATA (w)   : ORIGIN = 0x70000000 + 4 * 128K + 27K, LENGTH = 128K - 27K
+
+  SHV5_CODE (wx)  : ORIGIN = 0x70000000 + 5 * 128K,       LENGTH = 32K
+  SHV5_DATA (w)   : ORIGIN = 0x70000000 + 5 * 128K + 32K, LENGTH = 128K - 32K
+  
+  SHV6_CODE (wx)  : ORIGIN = 0x70000000 + 6 * 128K,       LENGTH = 64K
+  SHV6_DATA (w)   : ORIGIN = 0x70000000 + 6 * 128K + 64K, LENGTH = 64K
+
+  SHV7_CODE (wx)  : ORIGIN = 0x70000000 + 7 * 128K,       LENGTH = 0K
+  SHV7_DATA (w)   : ORIGIN = 0x70000000 + 7 * 128K + 0K, LENGTH = 128K
+
+  SHV8_CODE (wx)  : ORIGIN = 0x70000000 + 8 * 128K,       LENGTH = 64K
+  SHV8_DATA (w)   : ORIGIN = 0x70000000 + 8 * 128K + 64K, LENGTH = 64K
+
+  SHV9_CODE (wx)  : ORIGIN = 0x70000000 + 9 * 128K,       LENGTH = 64K
+  SHV9_DATA (w)   : ORIGIN = 0x70000000 + 9 * 128K + 64K, LENGTH = 64K
+
+  SHV10_CODE (wx) : ORIGIN = 0x70000000 + 10 * 128K,       LENGTH = 64K
+  SHV10_DATA (w)  : ORIGIN = 0x70000000 + 10 * 128K + 64K, LENGTH = 64K
+
+  SHV11_CODE (wx) : ORIGIN = 0x70000000 + 11 * 128K,       LENGTH = 64K
+  SHV11_DATA (w)  : ORIGIN = 0x70000000 + 11 * 128K + 64K, LENGTH = 64K
+  
+  SHV12_CODE (wx) : ORIGIN = 0x70000000 + 12 * 128K,       LENGTH = 64K
+  SHV12_DATA (w)  : ORIGIN = 0x70000000 + 12 * 128K + 64K, LENGTH = 64K
+  
+  SHV13_CODE (wx) : ORIGIN = 0x70000000 + 13 * 128K,       LENGTH = 64K
+  SHV13_DATA (w)  : ORIGIN = 0x70000000 + 13 * 128K + 64K, LENGTH = 64K
+  
+  SHV14_CODE (wx) : ORIGIN = 0x70000000 + 14 * 128K,       LENGTH = 64K
+  SHV14_DATA (w)  : ORIGIN = 0x70000000 + 14 * 128K + 64K, LENGTH = 64K
+  
+  SHV15_CODE (wx) : ORIGIN = 0x70000000 + 15 * 128K,       LENGTH = 64K
+  SHV15_DATA (w)  : ORIGIN = 0x70000000 + 15 * 128K + 64K, LENGTH = 64K
+  
+  CMX_DMA_DESCRIPTORS (wx) : ORIGIN = 0x78000000 + 16 * 128K , LENGTH = 3K
+
+  CMX_OTHER (wx) : ORIGIN = 0x70000000 + 16*128K + 3K, LENGTH = 3*128K - 3K
+
+  DDR_DATA             (wx) : ORIGIN = 0x80000000,                     LENGTH = 292M
+  LOS                  (wx) : ORIGIN = 0x80000000 + 292M,              LENGTH = 64M
+  LRT                  (wx) : ORIGIN = 0x80000000 + 292M + 64M,        LENGTH = 154M
+  GUZZI_MEM            (wx) : ORIGIN = 0x80000000 + 292M + 64M + 154M, LENGTH = 2M
+}
+SECTIONS
+{
+  .ddr.xxdebug :
+  {
+    __start_mmsdbgvarlist = .;
+    KEEP(*(mmsdbgvarlist))
+    __stop_mmsdbgvarlist = .;
+  } > GUZZI_MEM
+
+  version_info :
+  {
+    . = ALIGN (16);
+    linker_version_info_begin = .;
+
+    KEEP(*(version_info_prolog))
+    KEEP(*(version_info))
+    KEEP(*(version_info_epilog))
+    . = ALIGN (4);
+    . += VERSION_INFO_DYNAMIC_SIZE;
+    linker_version_info_end = .;
+  } > GUZZI_MEM
+
+  dtp_data :
+  {
+    . = ALIGN (16);
+    linker_dtp_data_begin = .;
+    *(dtp_data*)
+    . = linker_dtp_data_begin + DTP_DATA_SIZE;
+    linker_dtp_data_end = .;
+  } > GUZZI_MEM
+}
+
+INCLUDE shvDynInfrastructureBase.ldscript
+INCLUDE myriad2_leon_default_elf.ldscript
+INCLUDE myriad2_shave_slices.ldscript
+INCLUDE myriad2_SDL_general_purpose_sections.ldscript

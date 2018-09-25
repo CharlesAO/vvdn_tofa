@@ -1,0 +1,9 @@
+INCLUDE myriad2_default_memory_map.ldscript
+
+SECTIONS {
+   .lrt.cmx.shared : {KEEP(*(.lrt.cmx.shared))} > CMX_OTHER
+}
+
+INCLUDE myriad2_leon_default_elf.ldscript
+INCLUDE myriad2_shave_slices.ldscript
+INCLUDE myriad2_default_general_purpose_sections.ldscript

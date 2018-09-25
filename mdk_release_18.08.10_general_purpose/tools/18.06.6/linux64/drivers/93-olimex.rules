@@ -1,0 +1,1 @@
+SUBSYSTEM=="usb*", SYSFS{idProduct}=="0004", SYSFS{idVendor}=="15ba",MODE="0666"

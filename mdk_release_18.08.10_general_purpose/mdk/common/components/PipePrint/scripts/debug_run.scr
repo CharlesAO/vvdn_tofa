@@ -1,0 +1,19 @@
+breset
+start $default_target
+target $default_target
+echo load $elf ..
+load $elf
+
+uart off
+pipe LOS read @mvConsoleTxQueueLos
+pipe LOS >>
+pipe LRT read @lrt_mvConsoleTxQueueLrt
+pipe LRT >>
+pipe SHV read @mvConsoleShaveTxQueue
+pipe SHV >>
+
+
+echo $run_opt
+$run_opt
+echo $exit_opt
+$exit_opt

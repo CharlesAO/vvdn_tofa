@@ -1,0 +1,56 @@
+MEMORY
+{    
+  /* dummy sections, put in just to make the linker shut up */
+  SHV0_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K,       LENGTH = 32K
+  SHV0_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 32K, LENGTH = 128K - 32K
+
+  SHV1_CODE (wx)  : ORIGIN = 0x80000000, LENGTH = 0
+  SHV1_DATA (w)   : ORIGIN = 0x80000000, LENGTH = 0
+
+  SHV2_CODE (wx)  : ORIGIN = 0x80000000, LENGTH = 0
+  SHV2_DATA (w)   : ORIGIN = 0x80000000, LENGTH = 0
+
+  SHV3_CODE (wx)  : ORIGIN = 0x80000000, LENGTH = 0
+  SHV3_DATA (w)   : ORIGIN = 0x80000000, LENGTH = 0
+
+  SHV4_CODE (wx)  : ORIGIN = 0x80000000, LENGTH = 0
+  SHV4_DATA (w)   : ORIGIN = 0x80000000, LENGTH = 0
+
+  SHV5_CODE (wx)  : ORIGIN = 0x80000000, LENGTH = 0
+  SHV5_DATA (w)   : ORIGIN = 0x80000000, LENGTH = 0
+
+  SHV6_CODE (wx)  : ORIGIN = 0x80000000, LENGTH = 0
+  SHV6_DATA (w)   : ORIGIN = 0x80000000, LENGTH = 0
+
+  SHV7_CODE (wx)  : ORIGIN = 0x80000000, LENGTH = 0
+  SHV7_DATA (w)   : ORIGIN = 0x80000000, LENGTH = 0
+
+  SHV8_CODE (wx)  : ORIGIN = 0x80000000, LENGTH = 0
+  SHV8_DATA (w)   : ORIGIN = 0x80000000, LENGTH = 0
+
+  SHV9_CODE (wx)  : ORIGIN = 0x80000000, LENGTH = 0
+  SHV9_DATA (w)   : ORIGIN = 0x80000000, LENGTH = 0
+
+  SHV10_CODE (wx) : ORIGIN = 0x80000000, LENGTH = 0
+  SHV10_DATA (w)  : ORIGIN = 0x80000000, LENGTH = 0
+
+  SHV11_CODE (wx) : ORIGIN = 0x80000000, LENGTH = 0
+  SHV11_DATA (w)  : ORIGIN = 0x80000000, LENGTH = 0
+
+  /* slices 0 assigned to SHAVE0 */
+  /* slice 1 is split between cmxdma and other stuff */
+  /* NOTE: it was necessary to keep this in slice 12 on the MA2100; 
+     w/ MA2x5x, this is no longer the case */
+  CMX_DMA_DESCRIPTORS  (wx) : ORIGIN = 0x78000000 + 1*128K,      LENGTH = 3K
+  CMX_OTHER (wx) :            ORIGIN = 0x70000000 + 1*128K + 3K, LENGTH = 64K - 3K
+
+  /* upper half of slice 1 and slices 2..15 assigned to the Leon */
+  LOS (wx) : ORIGIN = 0x70000000 + 13*128K, LENGTH = 350K
+  LRT (wx) : ORIGIN = 0x81000000 + 13*128K + 128K, LENGTH = 5K
+
+  DDR_DATA (wx) : ORIGIN = 0x80000000, LENGTH = 512M
+}
+
+INCLUDE myriad2_leon_default_elf.ldscript
+INCLUDE myriad2_shave_slices.ldscript
+INCLUDE myriad2_default_general_purpose_sections.ldscript

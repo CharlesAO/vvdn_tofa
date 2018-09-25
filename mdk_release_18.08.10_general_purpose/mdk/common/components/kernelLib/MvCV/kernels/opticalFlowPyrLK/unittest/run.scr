@@ -1,0 +1,7 @@
+breset
+start a
+t los
+l dummy/output/dummy.elf
+break breakpoint
+s leonEntryPoint 0x70181c98
+;run

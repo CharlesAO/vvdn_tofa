@@ -1,0 +1,522 @@
+/*General purpose sections for Shave Dynamic Loading (SDL) to be used by anyone who needs them*/
+
+INCLUDE myriad2_arch_defaults.ldscript
+
+SECTIONS
+{
+  /*
+  * locate the special sections in correct place
+  * These sections are required to ensure Myriad is initialized correctly and must be loaded first
+  */
+
+  ASSERT(ORIGIN(CMX_DMA_DESCRIPTORS) >= 0x78000000 , "ERROR CMX_DMA_DESCRIPTORS not in uncached CMX memory")
+  ASSERT(ORIGIN(CMX_DMA_DESCRIPTORS) < 0x78000000 + CMX_SIZE , "ERROR CMX_DMA_DESCRIPTORS needs to be allocated in CMX memory")
+
+  /* CMX DMA descriptors need to stay in slice 12*/
+  .cmx.cdmaDescriptors : AT(ORIGIN(CMX_DMA_DESCRIPTORS) - 0x08000000)
+  {
+    *(.cmx.cdmaDescriptors*)
+    *(*.cmx.cdmaDescriptors*)
+  } > CMX_DMA_DESCRIPTORS
+
+  /* defining DDR sections */
+  .ddr.text :
+  {
+      . = ALIGN(8);
+      *(.ddr.text*)
+      *(.lrt.ddr.text*)
+      *(.*.ddr.text*)
+  } > DDR_DATA
+  .ddr.rodata :
+  {
+      . = ALIGN(8);
+      *(.ddr.rodata*)
+      *(.lrt.ddr.rodata*)
+      *(.*.ddr.rodata*)
+  } > DDR_DATA
+  .ddr.data :
+  {
+      . = ALIGN(16);
+      KEEP(*(.ddr.data*))
+      KEEP(*(.lrt.ddr.data*))
+      KEEP(*(.*.ddr.data*))
+      . = ALIGN(16);
+      DDR_DATA_END = .;
+  } > DDR_DATA
+
+  .ddr.bss DDR_DATA_END (NOLOAD) :
+  {
+    __ddr_bss_start = .;
+     *(.ddr.bss*)
+     *(.lrt.ddr.bss*)
+     *(.*.ddr.bss*)
+    __ddr_bss_end = ALIGN(16);
+  } > DDR_DATA
+
+  . = __ddr_bss_end;
+  . = ALIGN(4);
+  START_SHVA_ADR = .;
+  S.shvALL.shvX.ddr_cached.sections.text : {
+        *(.shvX.*.S.text*)
+        *(.shvX.*.S.__TEXT__sect)
+        *(.shvX.*.S.__MAIN__sect)
+        *(.lrt.shvX.*.S.text*)
+        *(.lrt.shvX.*.S.__TEXT__sect)
+        *(.lrt.shvX.*.S.__MAIN__sect)
+  } > DDR_DATA
+  S.shvALL.shvX.ddr_cached.sections.data ALIGN(4) : {
+        *(.shvX.*.S.init*)
+        *(.shvX.*.S.rodata*)
+        *(.shvX.*.laststage*)
+        *(.shvX.*.S.function.tbls*)
+        *(.shvX.*.S.heapdata*)
+        *(.shvX.*.S.grpdata*)
+        *(.lrt.shvX.*.S.init*)
+        *(.lrt.shvX.*.S.rodata*)
+        *(.lrt.shvX.*.S.function.tbls*)
+        *(.lrt.shvX.*.S.heapdata*)
+        *(.lrt.shvX.*.S.grpdata*)
+  } > DDR_DATA
+
+  . = ALIGN(4);
+  START_SHVCOM_ADR = .;
+  S.shvALL.shvCOM.ddr_cached.sections.text : {
+      __SHAVE_CODE_DDR_LOCATION_COMMON = .;
+      *(.shvZ.*.S.text*)
+      *(.shvZ.*.S.__TEXT__sect)
+      *(.shvZ.*.S.__MAIN__sect)
+      *(.lrt.shvZ.*.S.text*)
+      *(.lrt.shvZ.*.S.__TEXT__sect)
+      *(.lrt.shvZ.*.S.__MAIN__sect)
+  } > DDR_DATA
+  S.shvALL.shvCOM.ddr_cached.sections.data ALIGN(4) : {
+      *(.shvZ.*.S.init*)
+      *(.shvZ.*.S.rodata*)
+      *(.shvZ.*.laststage*)
+      *(.shvZ.*.S.function.tbls*)
+      *(.lrt.shvZ.*.S.init*)
+      *(.lrt.shvZ.*.S.rodata*)
+      *(.lrt.shvZ.*.S.function.tbls*)
+      __ddr_virtual_shaves_end = ALIGN(8);
+  } > DDR_DATA
+
+  DDR_END = __ddr_virtual_shaves_end;
+  . = DDR_END;
+
+  /* Align the un-cached DDR section to a new cache boundary                  */
+  /* To avoid un-cached and cached data sitting on the same leon L2 cache line */
+  DDR_DIRECT_TEXT_START = ALIGN(64) + 0x40000000;
+  .ddr_direct.text DDR_DIRECT_TEXT_START : AT(DDR_DIRECT_TEXT_START - 0x40000000)
+  {
+    *(.ddr_direct.text*)
+    *(.lrt.ddr_direct.text*)
+    *(.*.ddr_direct.text*)
+    DDR_DIRECT_RODATA_START = .;
+  } > DDR_UNCACHED_DATA
+
+  DDR_DIRECT_RODATA_START_test = .;
+  ASSERT(DDR_DIRECT_RODATA_START == DDR_DIRECT_RODATA_START_test, "ERROR DDR_DIRECT_RODATA_START")
+
+  .ddr_direct.rodata DDR_DIRECT_RODATA_START : AT(DDR_DIRECT_RODATA_START - 0x40000000)
+  {
+    *(.ddr_direct.rodata*)
+    *(.lrt.ddr_direct.rodata*)
+    *(.*.ddr_direct.rodata*)
+    DDR_DIRECT_DATA_START = .;
+  } > DDR_UNCACHED_DATA
+
+  DDR_DIRECT_DATA_START_test = .;
+  ASSERT(DDR_DIRECT_DATA_START == DDR_DIRECT_DATA_START_test, "ERROR DDR_DIRECT_DATA_START")
+
+  .ddr_direct.data DDR_DIRECT_DATA_START : AT(DDR_DIRECT_DATA_START - 0x40000000)
+  {
+    KEEP(*(.ddr_direct.data*))
+    KEEP(*(.lrt.ddr_direct.data*))
+    KEEP(*(.*.ddr_direct.data*))
+    DDR_DIRECT_BSS_START = ALIGN(8);
+  } > DDR_UNCACHED_DATA
+
+  DDR_DIRECT_BSS_START_test = ALIGN(8);
+  ASSERT(DDR_DIRECT_BSS_START == DDR_DIRECT_BSS_START_test, "ERROR DDR_DIRECT_BSS_START")
+
+  .ddr_direct.bss DDR_DIRECT_BSS_START (NOLOAD) :  AT(DDR_DIRECT_BSS_START - 0x40000000)
+  {
+    __ddr_direct_bss_start = .;
+     *(.ddr_direct.bss*)
+     *(.lrt.ddr_direct.bss*)
+     *(.*.ddr_direct.bss*)
+    __ddr_direct_bss_end = ALIGN(8);
+  } > DDR_UNCACHED_DATA
+
+  . = __ddr_direct_bss_end;
+  /* Align end of uncached data to L2 cache boundary */
+  . = ALIGN(64);
+  DDR_UNCACHED_END = .;
+
+  .ddr_direct.shaveprint DDR_UNCACHED_END : AT(DDR_UNCACHED_END & 0x40000000)
+  { 
+    *(*.S.ddr_direct.shaveprint*)
+    DDR_SHAVEPRINT_BUFFER_END = .;
+  } > DDR_UNCACHED_DATA
+
+   .ddr_direct.mgr DDR_SHAVEPRINT_BUFFER_END : AT(DDR_SHAVEPRINT_BUFFER_END & 0x40000000)
+  { 
+    __ddrSpaceStart = ALIGN(8) - 0x40000000;
+    lrt___ddrSpaceStart = __ddrSpaceStart;
+    KEEP(*(.ddr_direct.mgr*))
+    KEEP(*(.lrt.ddr_direct.mgr*))
+    KEEP(*(.*.ddr_direct.mgr*))
+    __ddrSpaceEnd = ORIGIN(DDR_DATA) + LENGTH(DDR_DATA) - 1;
+    lrt___ddrSpaceEnd = __ddrSpaceEnd;
+    DDR_MGR_SECTION_END = ALIGN(1024);
+  } > DDR_UNCACHED_DATA
+
+  /* following needed for cmx test application ts_Shave_CmxDma_Mutex_Ddr_01 */
+  CMX_OTHER_START = ORIGIN(CMX_OTHER);
+
+  .cmx.text :   { *(*.cmx.text*)   } > CMX_OTHER
+  .cmx.rodata : { *(*.cmx.rodata*) } > CMX_OTHER
+  .cmx.data :
+  {
+    *(*.cmx.data*)
+    CMX_BSS_START = ALIGN(8);
+  } > CMX_OTHER
+
+  .cmx.bss CMX_BSS_START (NOLOAD) :
+  {
+    __cmx_bss_start = .;
+    *(*.cmx.bss*)
+    __cmx_bss_end = ALIGN(8);
+  } > CMX_OTHER
+
+  /* Update location pointer to match end of bss section, because align dose not move the location pointer */
+  . = __cmx_bss_end;
+  .lrt.cmx.text :   { *(.lrt.cmx.text*)   } > CMX_OTHER
+  .lrt.cmx.rodata : { *(.lrt.cmx.rodata*) } > CMX_OTHER
+  .lrt.cmx.data :
+  {
+    *(.lrt.cmx.data*)
+    LRT_CMX_BSS_START = ALIGN(8);
+  } > CMX_OTHER
+
+  LRT_CMX_BSS_START_test = ALIGN(8);
+  ASSERT(LRT_CMX_BSS_START == LRT_CMX_BSS_START_test, "ERROR LRT_CMX_BSS_START")
+
+  .lrt.cmx.bss LRT_CMX_BSS_START (NOLOAD) :
+  {
+    __lrt_cmx_bss_start = .;
+    *(.lrt.cmx.bss*)
+    __lrt_cmx_bss_end = ALIGN(8);
+  } > CMX_OTHER
+
+  CMX_MEMORY_END = __lrt_cmx_bss_end;
+  /*Check if the end of CMX was achieved and don't link if so*/
+  ASSERT( CMX_MEMORY_END < 0x70000000 + CMX_SIZE ,
+  "CMX size is exceeded! Please move code and/or data from CMX.")
+  /* Update location pointer */
+  . = CMX_MEMORY_END;
+  /*And have sections for uncached addressing also*/
+  CMX_DIRECT_TEXT_START = ALIGN(64) | 0x08000000;
+  .cmx_direct.text CMX_DIRECT_TEXT_START : AT(CMX_DIRECT_TEXT_START - 0x08000000)
+  {
+    *(.cmx_direct.text*)
+    CMX_DIRECT_RODATA_START = .;
+  } > CMX_UNCACHED_OTHER
+
+  CMX_DIRECT_RODATA_START_test = .;
+  ASSERT(CMX_DIRECT_RODATA_START == CMX_DIRECT_RODATA_START_test, "ERROR CMX_DIRECT_RODATA_START")
+
+  .cmx_direct.rodata CMX_DIRECT_RODATA_START : AT(CMX_DIRECT_RODATA_START - 0x08000000)
+  {
+    *(.cmx_direct.rodata*)
+    CMX_DIRECT_DATA_START = .;
+  } > CMX_UNCACHED_OTHER
+
+  CMX_DIRECT_DATA_START_test = .;
+  ASSERT(CMX_DIRECT_DATA_START == CMX_DIRECT_DATA_START_test, "ERROR CMX_DIRECT_DATA_START")
+
+  .cmx_direct.data CMX_DIRECT_DATA_START : AT(CMX_DIRECT_DATA_START - 0x08000000)
+  {
+    *(.cmx_direct.data*)
+    CMX_DIRECT_BSS_START = ALIGN(8);
+  } > CMX_UNCACHED_OTHER
+
+  CMX_DIRECT_BSS_START_test = ALIGN(8);
+  ASSERT(CMX_DIRECT_BSS_START == CMX_DIRECT_BSS_START_test, "ERROR CMX_DIRECT_BSS_START")
+
+  .cmx_direct.bss CMX_DIRECT_BSS_START (NOLOAD) : AT(CMX_DIRECT_BSS_START - 0x08000000)
+  {
+    __cmx_direct_bss_start = .;
+    *(.cmx_direct.bss*)
+    __cmx_direct_bss_end = ALIGN(8);
+  } > CMX_UNCACHED_OTHER
+
+  LRT_CMX_DIRECT_TEXT_START = __cmx_direct_bss_end;
+  /*And have sections for uncached addressing also*/
+  .lrt.cmx_direct.text LRT_CMX_DIRECT_TEXT_START : AT(LRT_CMX_DIRECT_TEXT_START - 0x08000000)
+  {
+    *(.lrt.cmx_direct.text*)
+    LRT_CMX_DIRECT_RODATA_START = .;
+  } > CMX_UNCACHED_OTHER
+
+  LRT_CMX_DIRECT_RODATA_START_test = .;
+  ASSERT(LRT_CMX_DIRECT_RODATA_START == LRT_CMX_DIRECT_RODATA_START_test, "ERROR LRT_CMX_DIRECT_RODATA_START")
+
+  .lrt.cmx_direct.rodata LRT_CMX_DIRECT_RODATA_START : AT(LRT_CMX_DIRECT_RODATA_START - 0x08000000)
+  {
+    *(.lrt.cmx_direct.rodata*)
+    LRT_CMX_DIRECT_DATA_START = .;
+  } > CMX_UNCACHED_OTHER
+
+  LRT_CMX_DIRECT_DATA_START_test = .;
+  ASSERT(LRT_CMX_DIRECT_DATA_START == LRT_CMX_DIRECT_DATA_START_test, "ERROR LRT_CMX_DIRECT_DATA_START")
+
+  .lrt.cmx_direct.data LRT_CMX_DIRECT_DATA_START : AT(LRT_CMX_DIRECT_DATA_START - 0x08000000)
+  {
+    *(.lrt.cmx_direct.data*)
+    LRT_CMX_DIRECT_BSS_START = ALIGN(8);
+  } > CMX_UNCACHED_OTHER
+
+  LRT_CMX_DIRECT_BSS_START_test = ALIGN(8);
+  ASSERT(LRT_CMX_DIRECT_BSS_START == LRT_CMX_DIRECT_BSS_START_test, "ERROR LRT_CMX_DIRECT_BSS_START")
+
+  .lrt.cmx_direct.bss LRT_CMX_DIRECT_BSS_START (NOLOAD) : AT(LRT_CMX_DIRECT_BSS_START - 0x08000000)
+  {
+    __lrt_cmx_direct_bss_start = .;
+    *(.lrt.cmx_direct.bss*)
+    __lrt_cmx_direct_bss_end = ALIGN(8);
+    SHVA_UNCACHED_ADR_START = ALIGN(8);
+  } > CMX_UNCACHED_OTHER
+
+  SHVA_UNCACHED_ADR_START_test = ALIGN(8);
+  ASSERT(SHVA_UNCACHED_ADR_START == SHVA_UNCACHED_ADR_START_test, "ERROR SHVA_UNCACHED_ADR_START")
+
+  S.shvALL.shvX.cmx_uncached.sections.data SHVA_UNCACHED_ADR_START : AT (SHVA_UNCACHED_ADR_START - 0x08000000)
+  {
+        . = ALIGN(4);
+        *(.shvX.*.S.moduledata*)
+        *(.lrt.shvX.*.S.moduledata*)
+        SHVG_UNCACHED_ADR_START = ALIGN(8);
+  } > CMX_UNCACHED_OTHER
+
+  SHVG_UNCACHED_ADR_START_test = ALIGN(8);
+  ASSERT(SHVG_UNCACHED_ADR_START == SHVG_UNCACHED_ADR_START_test, "ERROR SHVG_UNCACHED_ADR_START")
+
+  S.shvALL.shvZ.cmx_uncached.sections.data SHVG_UNCACHED_ADR_START : AT (SHVG_UNCACHED_ADR_START - 0x08000000)
+  {
+        . = ALIGN(4);
+        *(.shvZ.*.cmx_uncached.data*)
+        CMX_RESMGR_START = ALIGN(64);
+  } > CMX_UNCACHED_OTHER
+
+  CMX_RESMGR_START_test = ALIGN(64);
+  ASSERT(CMX_RESMGR_START == CMX_RESMGR_START_test, "ERROR CMX_RESMGR_START")
+
+  .cmx.resmgr CMX_RESMGR_START : AT(CMX_RESMGR_START - 0x08000000)
+  {
+    __cmx_resmgr_start = .;
+    *(.cmx.resmgr*) *(*.cmx.resmgr*)
+    __cmx_resmgr_end = ALIGN(64);
+  } > CMX_UNCACHED_OTHER
+
+  /* Align end of un-cached cmx memory at the end of L2 cache line */
+  CMX_UNCACHED_MEMORY_END = . ;
+  /*Check if the end of CMX was achieved and don't link if so*/
+  ASSERT( CMX_UNCACHED_MEMORY_END < 0x78000000 + CMX_SIZE,
+          "CMX size is exceeded! Please move code and/or data from CMX.")
+
+  /* This section allows the user to optionally overide the stack pointer from the default value using a custom.ldscript*/
+  __SVE0_STACK_POINTER  = DEFINED( __SVE0_USER_STACK_POINTER)  ? __SVE0_USER_STACK_POINTER  : ORIGIN(SHV0_DATA) + LENGTH(SHV0_DATA);
+  __SVE1_STACK_POINTER  = DEFINED( __SVE1_USER_STACK_POINTER)  ? __SVE1_USER_STACK_POINTER  : ORIGIN(SHV1_DATA) + LENGTH(SHV1_DATA);
+  __SVE2_STACK_POINTER  = DEFINED( __SVE2_USER_STACK_POINTER)  ? __SVE2_USER_STACK_POINTER  : ORIGIN(SHV2_DATA) + LENGTH(SHV2_DATA);
+  __SVE3_STACK_POINTER  = DEFINED( __SVE3_USER_STACK_POINTER)  ? __SVE3_USER_STACK_POINTER  : ORIGIN(SHV3_DATA) + LENGTH(SHV3_DATA);
+  __SVE4_STACK_POINTER  = DEFINED( __SVE4_USER_STACK_POINTER)  ? __SVE4_USER_STACK_POINTER  : ORIGIN(SHV4_DATA) + LENGTH(SHV4_DATA);
+  __SVE5_STACK_POINTER  = DEFINED( __SVE5_USER_STACK_POINTER)  ? __SVE5_USER_STACK_POINTER  : ORIGIN(SHV5_DATA) + LENGTH(SHV5_DATA);
+  __SVE6_STACK_POINTER  = DEFINED( __SVE6_USER_STACK_POINTER)  ? __SVE6_USER_STACK_POINTER  : ORIGIN(SHV6_DATA) + LENGTH(SHV6_DATA);
+  __SVE7_STACK_POINTER  = DEFINED( __SVE7_USER_STACK_POINTER)  ? __SVE7_USER_STACK_POINTER  : ORIGIN(SHV7_DATA) + LENGTH(SHV7_DATA);
+  __SVE8_STACK_POINTER  = DEFINED( __SVE8_USER_STACK_POINTER)  ? __SVE8_USER_STACK_POINTER  : ORIGIN(SHV8_DATA) + LENGTH(SHV8_DATA);
+  __SVE9_STACK_POINTER  = DEFINED( __SVE9_USER_STACK_POINTER)  ? __SVE9_USER_STACK_POINTER  : ORIGIN(SHV9_DATA) + LENGTH(SHV9_DATA);
+  __SVE10_STACK_POINTER = DEFINED( __SVE10_USER_STACK_POINTER) ? __SVE10_USER_STACK_POINTER : ORIGIN(SHV10_DATA) + LENGTH(SHV10_DATA);
+  __SVE11_STACK_POINTER = DEFINED( __SVE11_USER_STACK_POINTER) ? __SVE11_USER_STACK_POINTER : ORIGIN(SHV11_DATA) + LENGTH(SHV11_DATA);
+
+  /* Leon RT Version of Stack pointer */
+  lrt___SVE0_STACK_POINTER  = DEFINED( lrt___SVE0_USER_STACK_POINTER)  ? lrt___SVE0_USER_STACK_POINTER  : ORIGIN(SHV0_DATA) + LENGTH(SHV0_DATA);
+  lrt___SVE1_STACK_POINTER  = DEFINED( lrt___SVE1_USER_STACK_POINTER)  ? lrt___SVE1_USER_STACK_POINTER  : ORIGIN(SHV1_DATA) + LENGTH(SHV1_DATA);
+  lrt___SVE2_STACK_POINTER  = DEFINED( lrt___SVE2_USER_STACK_POINTER)  ? lrt___SVE2_USER_STACK_POINTER  : ORIGIN(SHV2_DATA) + LENGTH(SHV2_DATA);
+  lrt___SVE3_STACK_POINTER  = DEFINED( lrt___SVE3_USER_STACK_POINTER)  ? lrt___SVE3_USER_STACK_POINTER  : ORIGIN(SHV3_DATA) + LENGTH(SHV3_DATA);
+  lrt___SVE4_STACK_POINTER  = DEFINED( lrt___SVE4_USER_STACK_POINTER)  ? lrt___SVE4_USER_STACK_POINTER  : ORIGIN(SHV4_DATA) + LENGTH(SHV4_DATA);
+  lrt___SVE5_STACK_POINTER  = DEFINED( lrt___SVE5_USER_STACK_POINTER)  ? lrt___SVE5_USER_STACK_POINTER  : ORIGIN(SHV5_DATA) + LENGTH(SHV5_DATA);
+  lrt___SVE6_STACK_POINTER  = DEFINED( lrt___SVE6_USER_STACK_POINTER)  ? lrt___SVE6_USER_STACK_POINTER  : ORIGIN(SHV6_DATA) + LENGTH(SHV6_DATA);
+  lrt___SVE7_STACK_POINTER  = DEFINED( lrt___SVE7_USER_STACK_POINTER)  ? lrt___SVE7_USER_STACK_POINTER  : ORIGIN(SHV7_DATA) + LENGTH(SHV7_DATA);
+  lrt___SVE8_STACK_POINTER  = DEFINED( lrt___SVE8_USER_STACK_POINTER)  ? lrt___SVE8_USER_STACK_POINTER  : ORIGIN(SHV8_DATA) + LENGTH(SHV8_DATA);
+  lrt___SVE9_STACK_POINTER  = DEFINED( lrt___SVE9_USER_STACK_POINTER)  ? lrt___SVE9_USER_STACK_POINTER  : ORIGIN(SHV9_DATA) + LENGTH(SHV9_DATA);
+  lrt___SVE10_STACK_POINTER = DEFINED( lrt___SVE10_USER_STACK_POINTER) ? lrt___SVE10_USER_STACK_POINTER : ORIGIN(SHV10_DATA) + LENGTH(SHV10_DATA);
+  lrt___SVE11_STACK_POINTER = DEFINED( lrt___SVE11_USER_STACK_POINTER) ? lrt___SVE11_USER_STACK_POINTER : ORIGIN(SHV11_DATA) + LENGTH(SHV11_DATA);
+
+
+  /* Define linker symbols with desired location for windows C,D,E,F on each shave */
+  __WinRegShave0_winC  = DEFINED( __WinRegShave0_winC ) ? __WinRegShave0_winC : ORIGIN(SHV0_DATA);    /* Default absolute address  */
+  __WinRegShave0_winD  = DEFINED( __WinRegShave0_winD ) ? __WinRegShave0_winD : ORIGIN(SHV0_CODE);    /* Default absolute address  */
+  __WinRegShave0_winE = DEFINED( __WinRegShave0_winE ) ? __WinRegShave0_winE : ABSOLUTE(0x00000000);    /* not used                  */
+  __WinRegShave0_winF = DEFINED( __WinRegShave0_winF ) ? __WinRegShave0_winF : ABSOLUTE(0x80000000);    /* not used                  */
+
+  __WinRegShave1_winC  = DEFINED( __WinRegShave1_winC ) ? __WinRegShave1_winC : ORIGIN(SHV1_DATA);    /* Default absolute address  */
+  __WinRegShave1_winD  = DEFINED( __WinRegShave1_winD ) ? __WinRegShave1_winD : ORIGIN(SHV1_CODE);    /* Default absolute address  */
+  __WinRegShave1_winE = DEFINED( __WinRegShave1_winE ) ? __WinRegShave1_winE : ABSOLUTE(0x00000000);    /* not used                  */
+  __WinRegShave1_winF = DEFINED( __WinRegShave1_winF ) ? __WinRegShave1_winF : ABSOLUTE(0x80000000);    /* not used                  */
+
+  __WinRegShave2_winC  = DEFINED( __WinRegShave2_winC ) ? __WinRegShave2_winC : ORIGIN(SHV2_DATA);    /* Default absolute address  */
+  __WinRegShave2_winD  = DEFINED( __WinRegShave2_winD ) ? __WinRegShave2_winD : ORIGIN(SHV2_CODE);    /* Default absolute address  */
+  __WinRegShave2_winE = DEFINED( __WinRegShave2_winE ) ? __WinRegShave2_winE : ABSOLUTE(0x00000000);    /* not used                  */
+  __WinRegShave2_winF = DEFINED( __WinRegShave2_winF ) ? __WinRegShave2_winF : ABSOLUTE(0x80000000);    /* not used                  */
+
+  __WinRegShave3_winC  = DEFINED( __WinRegShave3_winC ) ? __WinRegShave3_winC : ORIGIN(SHV3_DATA);    /* Default absolute address  */
+  __WinRegShave3_winD  = DEFINED( __WinRegShave3_winD ) ? __WinRegShave3_winD : ORIGIN(SHV3_CODE);    /* Default absolute address  */
+  __WinRegShave3_winE = DEFINED( __WinRegShave3_winE ) ? __WinRegShave3_winE : ABSOLUTE(0x00000000);    /* not used                  */
+  __WinRegShave3_winF = DEFINED( __WinRegShave3_winF ) ? __WinRegShave3_winF : ABSOLUTE(0x80000000);    /* not used                  */
+
+  __WinRegShave4_winC  = DEFINED( __WinRegShave4_winC ) ? __WinRegShave4_winC : ORIGIN(SHV4_DATA);    /* Default absolute address  */
+  __WinRegShave4_winD  = DEFINED( __WinRegShave4_winD ) ? __WinRegShave4_winD : ORIGIN(SHV4_CODE);    /* Default absolute address  */
+  __WinRegShave4_winE = DEFINED( __WinRegShave4_winE ) ? __WinRegShave4_winE : ABSOLUTE(0x00000000);    /* not used                  */
+  __WinRegShave4_winF = DEFINED( __WinRegShave4_winF ) ? __WinRegShave4_winF : ABSOLUTE(0x80000000);    /* not used                  */
+
+  __WinRegShave5_winC  = DEFINED( __WinRegShave5_winC ) ? __WinRegShave5_winC : ORIGIN(SHV5_DATA);    /* Default absolute address  */
+  __WinRegShave5_winD  = DEFINED( __WinRegShave5_winD ) ? __WinRegShave5_winD : ORIGIN(SHV5_CODE);    /* Default absolute address  */
+  __WinRegShave5_winE = DEFINED( __WinRegShave5_winE ) ? __WinRegShave5_winE : ABSOLUTE(0x00000000);    /* not used                  */
+  __WinRegShave5_winF = DEFINED( __WinRegShave5_winF ) ? __WinRegShave5_winF : ABSOLUTE(0x80000000);    /* not used                  */
+
+  __WinRegShave6_winC  = DEFINED( __WinRegShave6_winC ) ? __WinRegShave6_winC : ORIGIN(SHV6_DATA);    /* Default absolute address  */
+  __WinRegShave6_winD  = DEFINED( __WinRegShave6_winD ) ? __WinRegShave6_winD : ORIGIN(SHV6_CODE);    /* Default absolute address  */
+  __WinRegShave6_winE = DEFINED( __WinRegShave6_winE ) ? __WinRegShave6_winE : ABSOLUTE(0x00000000);    /* not used                  */
+  __WinRegShave6_winF = DEFINED( __WinRegShave6_winF ) ? __WinRegShave6_winF : ABSOLUTE(0x80000000);    /* not used                  */
+
+  __WinRegShave7_winC  = DEFINED( __WinRegShave7_winC ) ? __WinRegShave7_winC : ORIGIN(SHV7_DATA);    /* Default absolute address  */
+  __WinRegShave7_winD  = DEFINED( __WinRegShave7_winD ) ? __WinRegShave7_winD : ORIGIN(SHV7_CODE);    /* Default absolute address  */
+  __WinRegShave7_winE = DEFINED( __WinRegShave7_winE ) ? __WinRegShave7_winE : ABSOLUTE(0x00000000);    /* not used                  */
+  __WinRegShave7_winF = DEFINED( __WinRegShave7_winF ) ? __WinRegShave7_winF : ABSOLUTE(0x80000000);    /* not used                  */
+
+  __WinRegShave8_winC  = DEFINED( __WinRegShave8_winC ) ? __WinRegShave8_winC : ORIGIN(SHV8_DATA);    /* Default absolute address  */
+  __WinRegShave8_winD  = DEFINED( __WinRegShave8_winD ) ? __WinRegShave8_winD : ORIGIN(SHV8_CODE);    /* Default absolute address  */
+  __WinRegShave8_winE = DEFINED( __WinRegShave8_winE ) ? __WinRegShave8_winE : ABSOLUTE(0x00000000);    /* not used                  */
+  __WinRegShave8_winF = DEFINED( __WinRegShave8_winF ) ? __WinRegShave8_winF : ABSOLUTE(0x80000000);    /* not used                  */
+
+  __WinRegShave9_winC  = DEFINED( __WinRegShave9_winC ) ? __WinRegShave9_winC : ORIGIN(SHV9_DATA);    /* Default absolute address  */
+  __WinRegShave9_winD  = DEFINED( __WinRegShave9_winD ) ? __WinRegShave9_winD : ORIGIN(SHV9_CODE);    /* Default absolute address  */
+  __WinRegShave9_winE = DEFINED( __WinRegShave9_winE ) ? __WinRegShave9_winE : ABSOLUTE(0x00000000);    /* not used                  */
+  __WinRegShave9_winF = DEFINED( __WinRegShave9_winF ) ? __WinRegShave9_winF : ABSOLUTE(0x80000000);    /* not used                  */
+
+  __WinRegShave10_winC = DEFINED( __WinRegShave10_winC ) ? __WinRegShave10_winC : ORIGIN(SHV10_DATA);    /* Default absolute address  */
+  __WinRegShave10_winD = DEFINED( __WinRegShave10_winD ) ? __WinRegShave10_winD : ORIGIN(SHV10_CODE);    /* Default absolute address  */
+  __WinRegShave10_winE = DEFINED( __WinRegShave10_winE ) ? __WinRegShave10_winE : ABSOLUTE(0x00000000); /* not used                  */
+  __WinRegShave10_winF = DEFINED( __WinRegShave10_winF ) ? __WinRegShave10_winF : ABSOLUTE(0x80000000); /* not used                  */
+
+  __WinRegShave11_winC = DEFINED( __WinRegShave11_winC ) ? __WinRegShave11_winC : ORIGIN(SHV11_DATA);    /* Default absolute address  */
+  __WinRegShave11_winD = DEFINED( __WinRegShave11_winD ) ? __WinRegShave11_winD : ORIGIN(SHV11_CODE);    /* Default absolute address  */
+  __WinRegShave11_winE = DEFINED( __WinRegShave11_winE ) ? __WinRegShave11_winE : ABSOLUTE(0x00000000); /* not used                  */
+  __WinRegShave11_winF = DEFINED( __WinRegShave11_winF ) ? __WinRegShave11_winF : ABSOLUTE(0x80000000); /* not used                  */
+
+
+  lrt___WinRegShave0_winC = __WinRegShave0_winC;
+  lrt___WinRegShave0_winD = __WinRegShave0_winD;
+  lrt___WinRegShave0_winE = __WinRegShave0_winE;
+  lrt___WinRegShave0_winF = __WinRegShave0_winF;
+
+  lrt___WinRegShave1_winC = __WinRegShave1_winC;
+  lrt___WinRegShave1_winD = __WinRegShave1_winD;
+  lrt___WinRegShave1_winE = __WinRegShave1_winE;
+  lrt___WinRegShave1_winF = __WinRegShave1_winF;
+
+  lrt___WinRegShave2_winC = __WinRegShave2_winC;
+  lrt___WinRegShave2_winD = __WinRegShave2_winD;
+  lrt___WinRegShave2_winE = __WinRegShave2_winE;
+  lrt___WinRegShave2_winF = __WinRegShave2_winF;
+
+  lrt___WinRegShave3_winC = __WinRegShave3_winC;
+  lrt___WinRegShave3_winD = __WinRegShave3_winD;
+  lrt___WinRegShave3_winE = __WinRegShave3_winE;
+  lrt___WinRegShave3_winF = __WinRegShave3_winF;
+
+  lrt___WinRegShave4_winC = __WinRegShave4_winC;
+  lrt___WinRegShave4_winD = __WinRegShave4_winD;
+  lrt___WinRegShave4_winE = __WinRegShave4_winE;
+  lrt___WinRegShave4_winF = __WinRegShave4_winF;
+
+  lrt___WinRegShave5_winC = __WinRegShave5_winC;
+  lrt___WinRegShave5_winD = __WinRegShave5_winD;
+  lrt___WinRegShave5_winE = __WinRegShave5_winE;
+  lrt___WinRegShave5_winF = __WinRegShave5_winF;
+
+  lrt___WinRegShave6_winC = __WinRegShave6_winC;
+  lrt___WinRegShave6_winD = __WinRegShave6_winD;
+  lrt___WinRegShave6_winE = __WinRegShave6_winE;
+  lrt___WinRegShave6_winF = __WinRegShave6_winF;
+  /* Define linker symbols with desired location for windows C,D,E,F on each shave */
+  lrt___WinRegShave7_winC = __WinRegShave7_winC;
+  lrt___WinRegShave7_winD = __WinRegShave7_winD;
+  lrt___WinRegShave7_winE = __WinRegShave7_winE;
+  lrt___WinRegShave7_winF = __WinRegShave7_winF;
+
+  lrt___WinRegShave8_winC = __WinRegShave8_winC;
+  lrt___WinRegShave8_winD = __WinRegShave8_winD;
+  lrt___WinRegShave8_winE = __WinRegShave8_winE;
+  lrt___WinRegShave8_winF = __WinRegShave8_winF;
+
+  lrt___WinRegShave9_winC = __WinRegShave9_winC;
+  lrt___WinRegShave9_winD = __WinRegShave9_winD;
+  lrt___WinRegShave9_winE = __WinRegShave9_winE;
+  lrt___WinRegShave9_winF = __WinRegShave9_winF;
+
+  lrt___WinRegShave10_winC = __WinRegShave10_winC;
+  lrt___WinRegShave10_winD = __WinRegShave10_winD;
+  lrt___WinRegShave10_winE = __WinRegShave10_winE;
+  lrt___WinRegShave10_winF = __WinRegShave10_winF;
+
+  lrt___WinRegShave11_winC = __WinRegShave11_winC;
+  lrt___WinRegShave11_winD = __WinRegShave11_winD;
+  lrt___WinRegShave11_winE = __WinRegShave11_winE;
+  lrt___WinRegShave11_winF = __WinRegShave11_winF;
+
+
+  /* DWARF debug sections.
+     Symbols in the DWARF debugging sections are relative to the beginning
+     of the section so we begin them at 0.  */
+  /* DWARF 1 */
+  .debug          0 : { *(.debug) }
+  .line           0 : { *(.line) }
+  /* GNU DWARF 1 extensions */
+  .debug_srcinfo  0 : { *(.debug_srcinfo) }
+  .debug_sfnames  0 : { *(.debug_sfnames) }
+  /* DWARF 1.1 and DWARF 2 */
+  .debug_aranges  0 : { *(.debug_aranges) }
+  .debug_ranges   0 : { *(.debug_ranges) }
+  .debug_pubnames 0 : { *(.debug_pubnames) }
+  /* DWARF 2 */
+  .debug_info     0 : { *(.debug_info .gnu.linkonce.wi.*) }
+  .debug_abbrev   0 : { *(.debug_abbrev) }
+  .debug_line     0 : { *(.debug_line) }
+  .debug_frame    0 : { *(.debug_frame) }
+  .debug_str      0 : { *(.debug_str) }
+  .debug_loc      0 : { *(.debug_loc) }
+  .debug_macinfo  0 : { *(.debug_macinfo) }
+  /* SGI/MIPS DWARF 2 extensions */
+  .debug_weaknames 0 : { *(.debug_weaknames) }
+  .debug_funcnames 0 : { *(.debug_funcnames) }
+  .debug_typenames 0 : { *(.debug_typenames) }
+  .debug_varnames  0 : { *(.debug_varnames) }
+  .debug_macro     0 : { *(.debug_macro*) }
+  .debug_pubtypes  0 : { *(.debug_pubtypes) }
+  /*Keep the moviAsm assembly debug information*/
+  /*Need to take it in as pattern because our moviAsm will prefix the section*/
+  .debug_asmline   0 : { *(*.debug_asmline*) }
+  /*Keep rel only as debug info*/
+  .rel   0 : { *(.rel*) }
+
+  /DISCARD/ : { *(.stab .stabstr .comment .gnu.attributes .iplt .rela.iplt)
+    *(S..iat*)
+  }
+  . = 0;
+  .stuff : { *(*) }
+   ASSERT ( . == 0, ".stuff section caught data! This means your application has sections placed nowhere which may be fatal!" )
+}
+
+INCLUDE myriad2_check_DDR_size.ldscript

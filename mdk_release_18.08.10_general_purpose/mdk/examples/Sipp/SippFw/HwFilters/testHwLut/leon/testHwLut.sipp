@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" version="2.1">
+<key attr.name="includes" attr.type="string" for="graph" id="includes"/>
+<key attr.name="binary" attr.type="string" for="graph" id="binary"/>
+<key attr.name="shaveFirst" attr.type="int" for="graph" id="shaveFirst"/>
+<key attr.name="shaveLast" attr.type="int" for="graph" id="shaveLast"/>
+<key attr.name="mkPath" attr.type="string" for="graph" id="mkPath"/>
+<key attr.name="myriadTarget" attr.type="int" for="graph" id="myriadTarget"/>
+<key attr.name="id" attr.type="string" for="node" id="id"/>
+<key attr.name="name" attr.type="string" for="node" id="name"/>
+<key attr.name="description" attr.type="string" for="node" id="description"/>
+<key attr.name="flags" attr.type="string" for="node" id="flags"/>
+<key attr.name="dataType" attr.type="string" for="node" id="dataType"/>
+<key attr.name="outW" attr.type="string" for="node" id="outW"/>
+<key attr.name="outH" attr.type="string" for="node" id="outH"/>
+<key attr.name="numPl" attr.type="string" for="node" id="numPl"/>
+<key attr.name="symbol" attr.type="string" for="node" id="symbol"/>
+<key attr.name="x" attr.type="int" for="node" id="x"/>
+<key attr.name="y" attr.type="int" for="node" id="y"/>
+<key attr.name="w" attr.type="int" for="node" id="w"/>
+<key attr.name="h" attr.type="int" for="node" id="h"/>
+<key attr.name="internal0" attr.type="string" for="node" id="internal0"/>
+<key attr.name="internal1" attr.type="string" for="node" id="internal1"/>
+<key attr.name="cfg" attr.type="string" for="node" id="cfg"/>
+<key attr.name="sizeA" attr.type="string" for="node" id="sizeA"/>
+<key attr.name="sizeB" attr.type="string" for="node" id="sizeB"/>
+<key attr.name="lut" attr.type="string" for="node" id="lut"/>
+<key attr.name="lutFormat" attr.type="string" for="node" id="lutFormat"/>
+<key attr.name="mat" attr.type="string" for="node" id="mat"/>
+<key attr.name="offset" attr.type="string" for="node" id="offset"/>
+<key attr.name="index" attr.type="int" for="edge" id="index"/>
+<key attr.name="inputIndex" attr.type="int" for="edge" id="inputIndex"/>
+<key attr.name="outputIndex" attr.type="int" for="edge" id="outputIndex"/>
+<key attr.name="kernel" attr.type="string" for="edge" id="kernel"/>
+<graph edgedefault="directed" id="Pipeline">
+<data key="includes">testHwLutSetup.h</data>
+<data key="binary">mbinImgSipp</data>
+<data key="shaveFirst">0</data>
+<data key="shaveLast">0</data>
+<data key="mkPath">../build/sipp/</data>
+<data key="myriadTarget">MA2x5x</data>
+<node id="0">
+<node id="outputbuffer0">
+<data key="dataType">UInt16</data>
+<data key="numPl">SIPP_HW_LUT_BUFFER_NUM_IN_PLANES</data>
+</node>
+<data key="name">dmaIn0</data>
+<data key="id">dmaIn</data>
+<data key="description">DMA in filter</data>
+<data key="flags">0x00</data>
+<data key="outW">SIPP_HW_LUT_BUFFER_WIDTH</data>
+<data key="outH">SIPP_HW_LUT_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_DMA_ID</data>
+<data key="x">272</data>
+<data key="y">47</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="internal0">auto</data>
+<data key="internal1">../../../../../../../resources/OCT_384x290_I_gamma_16bpp.raw</data>
+</node>
+<node id="1">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">SIPP_HW_LUT_BUFFER_NUM_IN_PLANES</data>
+</node>
+<data key="name">dmaOut0</data>
+<data key="id">dmaOut</data>
+<data key="description">DMA out filter</data>
+<data key="flags">0x00</data>
+<data key="outW">SIPP_HW_LUT_BUFFER_WIDTH</data>
+<data key="outH">SIPP_HW_LUT_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_DMA_ID</data>
+<data key="x">275</data>
+<data key="y">346</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="internal0">auto</data>
+<data key="internal1">lutTestOutput.raw</data>
+</node>
+<node id="2">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">SIPP_HW_LUT_BUFFER_NUM_IN_PLANES</data>
+</node>
+<data key="name">lutMa2x5x0</data>
+<data key="id">lutMa2x5x</data>
+<data key="description">The LUT is a highly flexible lookup table which can be used for tonal curve or gamma application, or other complex functions.</data>
+<data key="flags">0x0</data>
+<data key="outW">SIPP_HW_LUT_BUFFER_WIDTH</data>
+<data key="outH">SIPP_HW_LUT_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_LUT_ID</data>
+<data key="x">272</data>
+<data key="y">195</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="cfg">INTERP_MODE | CHANNEL_MODE&lt;&lt; 1  | INT_WIDTH&lt;&lt; 3  | (LUTS_NO - 1) &lt;&lt; 8  |(CHANNELS_NO - 1) &lt;&lt; 12 | LUT_LOAD &lt;&lt; 14 | APB_ACCESS&lt;&lt; 15 | CSC_ENABLE&lt;&lt; 16</data>
+<data key="sizeA">LUT_REGION0_SIZE_I | (LUT_REGION1_SIZE_I &lt;&lt;  4) | (LUT_REGION2_SIZE_I &lt;&lt;  8) | (LUT_REGION3_SIZE_I &lt;&lt; 12) | (LUT_REGION4_SIZE_I &lt;&lt; 16) | (LUT_REGION5_SIZE_I &lt;&lt; 20) | (LUT_REGION6_SIZE_I &lt;&lt; 24) | (LUT_REGION7_SIZE_I &lt;&lt; 28)</data>
+<data key="sizeB">LUT_REGION8_SIZE_I | (LUT_REGION9_SIZE_I  &lt;&lt;  4) | (LUT_REGION10_SIZE_I &lt;&lt;  8) | (LUT_REGION11_SIZE_I &lt;&lt; 12) | (LUT_REGION12_SIZE_I &lt;&lt; 16) | (LUT_REGION13_SIZE_I &lt;&lt; 20) | (LUT_REGION14_SIZE_I &lt;&lt; 24) | (LUT_REGION15_SIZE_I &lt;&lt; 28)</data>
+<data key="lut">(void *)appLUT</data>
+<data key="lutFormat">LUT_LD_FORMAT</data>
+<data key="mat">LUT_MAT_11,LUT_MAT_12,LUT_MAT_13,LUT_MAT_21,LUT_MAT_22,LUT_MAT_23,LUT_MAT_31,LUT_MAT_32,LUT_MAT_33</data>
+<data key="offset">LUT_OFF_1,LUT_OFF_2,LUT_OFF_3</data>
+</node>
+<edge id="0" source="0" target="2">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">1x1</data>
+</edge>
+<edge id="1" source="2" target="1">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">1x1</data>
+</edge>
+</graph>
+</graphml>

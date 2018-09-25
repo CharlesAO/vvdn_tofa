@@ -1,0 +1,8 @@
+
+haltproc dynamic {args} {
+    if { [llength $args] eq 0 } {set svuList [shavesList]}
+    #using mdbg::mget because __ShvXdataContextLoaded\[$i\] is a string and mget is the easy way to read it
+    foreach svu $args { puts [format "%02d %s" $i [mdbg::mget -asciiz __ShvXdataContextLoaded\[$i\]]] }
+}
+
+# vim: ft=tcl

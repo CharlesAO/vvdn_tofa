@@ -1,0 +1,110 @@
+Plugin Brief
+------------
+[cols="s,"]
+|=========================================================
+| Plugin Name      |  PlgPool
+| Plugin ID        |  PLG-PlgPool
+| Version          |  1.0
+| Description      |  Provide frames to producer plugins
+|=========================================================
+
+FLIC Inputs
+~~~~~~~~~~~~
+NONE
+
+FLIC Outputs
+~~~~~~~~~~~~~
+[options="header"]
+|=========================================================================
+| Name | Type              | Description
+| out  | SSender<PoPtr<T>> | T = Descriptor type associated to each frame
+|=========================================================================
+
+Plugin type
+~~~~~~~~~~~
+- [ ] input only (sink: R)
+- [x] output only (source: S)
+- [ ] single input-single output (one to one: S->R)
+- [ ] single input-multiple output (fan out: S->R, R)
+- [ ] multiple input-single output (aggregator: S,S->R)
+- [ ] multiple input-multiple output (parallel streams: S,S->R,R)
+
+Configuration options
+~~~~~~~~~~~~~~~~~~~~~
+'void Create(IAllocator *a, uint32_t nFrm, uint32_t fSize, bool sh = false)'
+
+[cols="10%,90%",options="header"]
+|=========================================================================
+| Param | Description
+| a     | memory allocator used to Allocate/Free the actual frame storage (see FLIC doc for more details)
+| nFrm  | number of frames to be allocated in current pool
+| fSize | frame size in bytes (maximal storage allocated per frame)
+| sh    | shared flag (to be set to 'true' when frames from this pool need to be passed to the other Leon)
+|=========================================================================
+
+Initialization Steps
+~~~~~~~~~~~~~~~~~~~~
+
+1. Invoke "Create" method on a PlgPool instance.
+2. Add PlgPool instance to a pipeline via Pipeline::Add method.
+3. Link PlgPool's "out" to producer-plugin-input it needs to service.
+
+Inside plugin Creation:
+  - the allocator object is invoked to allocate memory
+
+Processing Logic
+~~~~~~~~~~~~~~~~
+
+PlgPool maintains internally a list of "free" frames (i.e. unreferenced by any other plugins).
+When its master plugin requests a frame, PlgPool will do a 'pop' from the available frame-list and return it.
+If the free-frame list is EMPTY, requester plugin will be suspended till data is available.
+
+IMPORTANT:
+
+* all frame descriptors need to be derived from PoBuf (i.e. Pool Object Buffer)
+* PlgPool returns to requester a shared-pointer like struct (i.e. PoPtr<T>)
+
+Teardown Requirements
+~~~~~~~~~~~~~~~~~~~~~
+
+On PlgPool::Delete(), all data allocated through allocator object set at Create time, will be freed up.
+
+Performance Requirements
+~~~~~~~~~~~~~~~~~~~~~~~~
+N/A
+
+IRQ/RTEMS Requirements
+~~~~~~~~~~~~~~~~~~~~~~
+
+This is a Leon-only plugin
+
+* for local  pools (sh = false) : 0 thread + 2 POSIX_sem
+* for shared pools (sh = true ) : 1 thread + 3 POSIX_sem
+
+Resource Requirements
+~~~~~~~~~~~~~~~~~~~~~
+
+N/A (i.e. Leon-only plugin)
+
+Memory / Space / Buffer Requirements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+User can decide to use stock RgnAllocator, HeapAllocator or custom memory allocator solution.
+For RgnAllocator case: user can define static buffers of arbitrary size and can map them anywhere in memory (via ldscript/gcc attributes).
+The rough size allocated by current PlgPool is Size = nFrm x fSize [bytes]
+
+###DDR###
+N/A
+
+###CMX###
+N/A
+
+Example Usage
+~~~~~~~~~~~~~
+
+* /mdk/common/components/flic/tests/flic_00_alloc_pool
+* /mdk/common/components/flic/tests/flic_00_hello_02
+
+Not implemented
+~~~~~~~~~~~~~~~
+N/A

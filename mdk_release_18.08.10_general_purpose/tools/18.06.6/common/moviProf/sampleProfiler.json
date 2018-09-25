@@ -1,0 +1,60 @@
+{
+	"id":"sample",
+	"name":"Myriad sample profiler",
+	"description":"Myriad sample profiler description",
+	"arguments" :[
+		{
+			"id":"PROFILE_INFO",
+			"default":"sample",
+			"type":"constant"
+		},
+		{
+			"id":"SAMPLE_PERIOD_MICRO",
+			"name":"Sample duration",
+			"description":"Sample duration",
+			"mandatory":"false",
+			"type":"int",
+			"default":"10"
+		},
+		{
+			"id":"SAMPLE_DURATION_MS",
+			"name":"Total runtime",
+			"description":"Total runtime",
+			"mandatory":"false",
+			"type":"int",
+			"default":"14000"
+		},
+		{
+			"id":"SP_TIMER_INTERRUPT_LEVEL",
+			"name":"Timer interrupt",
+			"description":"Timer interrupt",
+			"mandatory":"false",
+			"type":"int",
+			"default":"13"
+		},
+		{
+			"id":"SAMPLE_PROFILER_DATA_SECTION",
+			"name":"Sample profiler data section name",
+			"description":"Sample profiler data section name",
+			"mandatory":"false",
+			"type":"string",
+			"default":"__attribute__((section(\".ddr_direct.bss\")))"
+		},
+		{
+			"id":"SAMPLE_PROFILER_DATA_SECTION_LRT",
+			"name":"Leon RT data section name",
+			"description":"Leon RT data section name",
+			"mandatory":"false",
+			"type":"string",
+			"default":"__attribute__((section(\".ddr_direct.bss\")))"
+		},
+    {
+			"id":"SAMPLE_PROF_COMPUTE_WINDOW",
+			"name":"Compute Shave Window Addrress",
+			"description":"Extra code is generated to compute window address",
+			"mandatory":"false",
+			"type":"bool",
+			"default":"false"
+    }
+	]
+}

@@ -1,0 +1,25 @@
+/*  This is a Default Linker script
+ *  Should be used as an included linker script in top level scripts
+ *
+ *  Addresses defined in common/drivers/myriad2/system/asm/memmap.S
+ */
+
+MEMORY
+{
+
+  /* The CMX_DMA section must be between the following addreses
+   *  0x78000000 + 12 * 128K
+   *      and
+   *  0x78000000 + 13 * 128K  */
+
+  CMX_DMA_DESCRIPTORS  (wx) : ORIGIN = 0x78000000 + 12 * 128K , LENGTH = 3K
+  CMX_OTHER            (wx) : ORIGIN = 0x70000000 + 12 * 128K + 3K, LENGTH = 16K - 3K
+ 
+     
+  LOS  (wx) : ORIGIN = 0x80000000, LENGTH = 512K
+  LOCK (wx) : ORIGIN = ORIGIN(LOS)  + LENGTH(LOS),  LENGTH = 512K
+  LRT  (wx) : ORIGIN = ORIGIN(LOCK) + LENGTH(LOCK), LENGTH = 256K
+}
+
+INCLUDE myriad2_leon_os_low_power.ldscript
+INCLUDE myriad2_leon_default_elf.ldscript

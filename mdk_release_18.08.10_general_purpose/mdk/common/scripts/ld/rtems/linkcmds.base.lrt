@@ -1,0 +1,209 @@
+/*  linkcmds
+ */
+
+OUTPUT_ARCH(sparc)
+lrt___DYNAMIC  =  0;
+
+/*
+ * The memory map looks like this:
+ * +------------------------+ <- low memory
+ * | .lrt.text              |
+ * |        lrt_etext       |
+ * |        ctor list       | the ctor and dtor lists are for
+ * |        dtor list       | C++ support
+ * |        lrt__endtext    |
+ * +------------------------+
+ * | .lrt.data              | initialized data goes here
+ * |        lrt__sdata      |
+ * |        lrt__edata      |
+ * +------------------------+
+ * | .lrt.bss               |
+ * |        lrt___bss_start | start of bss, cleared by crt0
+ * |        lrt__end        | start of heap, used by sbrk()
+ * +------------------------+   
+ * |    heap space          |
+ * |        lrt__ENDHEAP    |
+ * |    stack space         | 
+ * |        lrt___stack     | top of stack
+ * +------------------------+ <- high memory
+ */
+
+_RAM_END_LRT = _RAM_START_LRT + _RAM_SIZE_LRT;
+
+_PROM_END_LRT = _PROM_START_LRT + _PROM_SIZE_LRT;
+
+/*
+ *  Alternate names without leading _.
+ */
+
+PROM_START_LRT = _PROM_START_LRT;
+PROM_SIZE_LRT = _PROM_SIZE_LRT;
+PROM_END_LRT = _PROM_END_LRT;
+
+RAM_START_LRT = _RAM_START_LRT;
+RAM_SIZE_LRT = _RAM_SIZE_LRT;
+RAM_END_LRT = _RAM_END_LRT;
+
+/*
+ * SPARC monitor assumes this is present to provide proper RTEMS awareness.
+ */
+EXTERN(lrt_rtems_get_version_string);
+
+/*
+ * stick everything in ram (of course)
+ */
+SECTIONS
+{
+  . = RAM_START_LRT;
+  .lrt.text :
+  {
+    CREATE_OBJECT_SYMBOLS
+    lrt_text_start = .;
+    lrt__text_start = .;	
+	/********************************************/
+	/* In order to include the trap table first */	
+	KEEP(*(.lrt.sys.text*))
+	/********************************************/
+	. = ALIGN (4);
+    *(.lrt.text*)
+    . = ALIGN (16);
+
+    KEEP(*(.lrt.eh_frame*))
+    . = ALIGN (16);
+
+    *(.lrt.gnu.linkonce.t*)
+
+    /*
+     * C++ constructors
+     */
+    /* gcc uses crtbegin.o to find the start of
+       the constructors, so we make sure it is
+       first.  Because this is a wildcard, it
+       doesn't matter if the user does not
+       actually link against crtbegin.o; the
+       linker won't look for a file to match a
+       wildcard.  The wildcard also means that it
+       doesn't matter which directory crtbegin.o
+       is in.  */
+    KEEP (*crtbegin.o(.lrt.ctors))
+    KEEP (*crtbegin?.o(.lrt.ctors))
+    /* We don't want to include the .ctor section from
+       the crtend.o file until after the sorted ctors.
+       The .ctor section from the crtend file contains the
+       end of ctors marker and it must be last */
+    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .lrt.ctors))
+    KEEP (*(SORT(.lrt.ctors*)))
+    KEEP (*crtbegin.o(.lrt.dtors))
+    KEEP (*crtbegin?.o(.lrt.dtors))
+    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .lrt.dtors))
+    KEEP (*(SORT(.lrt.dtors*)))
+
+	. = ALIGN(4);
+    lrt__rodata_start = . ;
+	/* Adding startup readonly data */
+	*(.lrt.sys.rodata*)
+    *(.lrt.rodata*)
+    *(.lrt.gnu.linkonce.r*)
+    lrt__erodata = ALIGN( 0x10 ) ;
+
+    lrt_etext = ALIGN(0x10);
+    lrt__etext = .;
+    KEEP(*(.lrt.init*))
+    KEEP(*(.lrt.fini*))
+    *(.lrt.lit)
+    *(.lrt.shdata)
+    . = ALIGN (16);
+  }  
+  .lrt.tdata : {
+    lrt__TLS_Data_begin = .;
+    *(.lrt.tdata .lrt.tdata.* .lrt.gnu.linkonce.td.*)
+    lrt__TLS_Data_end = .;
+  }  
+  .lrt.tbss : {
+    lrt__TLS_BSS_begin = .;
+    *(.lrt.tbss .lrt.tbss.* .lrt.gnu.linkonce.tb.*) *(.lrt.tcommon)
+    lrt__TLS_BSS_end = .;
+  }  
+  lrt__TLS_Data_size = lrt__TLS_Data_end - lrt__TLS_Data_begin;
+  lrt__TLS_BSS_size = lrt__TLS_BSS_end - lrt__TLS_BSS_begin;
+  lrt__TLS_Size = lrt__TLS_BSS_end - lrt__TLS_Data_begin;
+  lrt__TLS_Alignment = ALIGNOF (.lrt.tdata);
+  .lrt.rtemsroset : {
+    /* for pre rtems-libbsd FreeBSD code */
+    lrt___start_set_sysctl_set = .;
+    KEEP(*(lrt_set_sysctl_*));
+    lrt___stop_set_sysctl_set = .;
+    KEEP(*(lrt_set_domain_*));
+    KEEP(*(lrt_set_pseudo_*));
+
+    KEEP (*(SORT(.lrt.rtemsroset.*)))
+
+    . = ALIGN (16);
+    lrt__endtext = .;
+  }  
+  .lrt.rela.dyn       :
+    {
+      *(.lrt.rela.init)
+      *(.lrt.rela.text .lrt.rela.text.* .lrt.rela.gnu.linkonce.t.*)
+      *(.lrt.rela.fini)
+      *(.lrt.rela.rodata .lrt.rela.rodata.* .lrt.rela.gnu.linkonce.r.*)
+      *(.lrt.rela.data .lrt.rela.data.* .lrt.rela.gnu.linkonce.d.*)
+      *(.lrt.rela.tdata .lrt.rela.tdata.* .lrt.rela.gnu.linkonce.td.*)
+      *(.lrt.rela.tbss .lrt.rela.tbss.* .lrt.rela.gnu.linkonce.tb.*)
+      *(.lrt.rela.ctors)
+      *(.lrt.rela.dtors)
+      *(.lrt.rela.got)
+      *(.lrt.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+    }  
+  .lrt.rtemsrwset : {
+    KEEP (*(SORT(.lrt.rtemsrwset.*)))
+  }  
+  .lrt.data :
+  {
+    lrt_data_start = .;
+    lrt__data_start = .;
+    lrt__sdata = . ;
+    *(.lrt.data*)
+    *(.lrt.gnu.linkonce.d*)
+    . = ALIGN(0x10);
+    *(.lrt.gcc_except_table*)
+    . = ALIGN(0x10);
+    lrt_edata = .;
+    lrt__edata = .;
+  }  
+  .lrt.dynamic	  : { *(.lrt.dynamic) 	}  
+  .lrt.jcr		  : { *(.lrt.jcr) 		}  
+  .lrt.got		  : { *(.lrt.got) 		}  
+  .lrt.plt   	  : { *(.lrt.plt) 		}  
+  .lrt.hash		  : { *(.lrt.hash)		}  
+  .lrt.dynrel	  : { *(.lrt.dynrel)	}  
+  .lrt.dynsym	  : { *(.lrt.dynsym)	}  
+  .lrt.dynstr	  : { *(.lrt.dynstr)	}  
+  .lrt.hash		  : { *(.lrt.hash)		}  
+  .lrt.shbss :
+  {
+    *(.lrt.shbss)
+  }  
+  
+  .lrt.bss :
+  {
+    lrt___bss_start = ALIGN(0x8);
+    lrt__bss_start = .;
+    lrt_bss_start = .;
+    *(.lrt.bss .lrt.bss* .lrt.gnu.linkonce.b*)
+    *(COMMON)
+    . = ALIGN (16);
+    lrt_end = .;
+    lrt__end = ALIGN(0x8);
+    lrt___end = ALIGN(0x8);
+  }  
+  .lrt.stab . (NOLOAD) :
+  {
+    [ .lrt.stab ]
+  }
+  .lrt.stabstr . (NOLOAD) :
+  {
+    [ .lrt.stabstr ]
+  }
+ }
+ 

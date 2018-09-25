@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<moviproject>
+	<resource name="KernelTest" type="project">
+		<property name="com.movidius.movidevelop.shaveLinkOrder" value=""></property>
+	</resource>
+	<resource name="include/MakeFileGenerator.h" type="file">
+		<property name="com.movidius.movidevelop.isAssigned" value="no"></property>
+		<property name="com.movidius.movidevelop.breakpoints" value=""></property>
+		<property name="com.movidius.movidevelop.batchCondition" value=""></property>
+		<property name="com.movidius.movidevelop.cores" value="0"></property>
+	</resource>
+	<resource name="src/testMakeFileGenerator.cpp" type="file">
+		<property name="com.movidius.movidevelop.isAssigned" value="no"></property>
+		<property name="com.movidius.movidevelop.breakpoints" value=""></property>
+		<property name="com.movidius.movidevelop.batchCondition" value=""></property>
+		<property name="com.movidius.movidevelop.cores" value="0"></property>
+	</resource>
+	<resource name="src/MakeFileGenerator.cpp" type="file">
+		<property name="com.movidius.movidevelop.isAssigned" value="no"></property>
+		<property name="com.movidius.movidevelop.breakpoints" value=""></property>
+		<property name="com.movidius.movidevelop.batchCondition" value=""></property>
+		<property name="com.movidius.movidevelop.cores" value="0"></property>
+	</resource>
+</moviproject>

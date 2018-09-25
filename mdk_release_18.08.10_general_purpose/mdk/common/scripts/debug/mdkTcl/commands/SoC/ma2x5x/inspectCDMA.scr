@@ -1,0 +1,10 @@
+# basic registers access
+haltproc mgetCDMA {} { putsAllRegisters CDMA*   ".*(?:\\D_BASE_ADR|_MAX_OFF)"}
+
+
+
+
+
+
+
+# vim: ft=tcl

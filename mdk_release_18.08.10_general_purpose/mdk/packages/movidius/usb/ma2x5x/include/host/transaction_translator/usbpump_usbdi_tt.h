@@ -1,0 +1,218 @@
+/* usbpump_usbdi_tt.h	Wed Feb 13 2008 19:19:45 djt */
+
+/*
+
+Module:  usbpump_usbdi_tt.h
+
+Function:
+	Definition of USBPUMP_USBDI_TT Object
+
+Version:
+	V1.97k	Wed Feb 13 2008 19:19:45 djt	Edit level 3
+
+Copyright notice:
+	This file copyright (C) 2007 by
+
+		MCCI Corporation
+		3520 Krums Corners Road
+		Ithaca, NY  14850
+
+	An unpublished work.  All rights reserved.
+
+	This file is proprietary information, and may not be disclosed or
+	copied without the prior permission of MCCI Corporation
+
+Author:
+	Debbie Totsline, MCCI Corporation	August 2007
+
+Revision history:
+   1.97j  Mon Aug 20 2007 14:52:05 djt
+	3265: Module created.
+
+   1.97j  Mon Dec 10 2007 11:33:45  djt
+	3265: Fixed cosmetic and documentation errors uncovered during code 
+	review.
+
+   1.97k  Wed Feb 13 2008 19:19:45  djt
+	6900: Move CLASS_NAME to ...ttclass.h.	
+
+*/
+
+#ifndef _USBPUMP_USBDI_TT_H_		/* prevent multiple includes */
+#define _USBPUMP_USBDI_TT_H_
+
+#ifndef _USBPUMP_USBDI_TYPES_H_
+# include "usbpump_usbdi_types.h"
+#endif
+
+#ifndef _USBPUMPOBJECT_H_
+# include "usbpumpobject.h"
+#endif
+
+
+/****************************************************************************\
+|
+|	The USBDI_TT object is used for submitting requests to the TT.
+|
+\****************************************************************************/
+
+/*
+
+Type:	USBPUMP_USBDI_TT
+
+Function:
+	Represents a Transaction Translator (TT) inside a HS Hub.
+
+Description:
+	Each hub within USBDI manages an optional collection of TT
+	objects that export a USBPUMP_USBDI_TT view of themselves.
+	This view is used by function drivers to send requests to a
+	particular TT. 
+
+Contents:
+	USBPUMP_OBJECT_HEADER	ObjectHeader;
+		The standard DataPump object header.
+
+	USBPUMP_USBD TT.pUsbd;
+		Pointer to the object that represents the USBD
+		system to the code that implements the system.
+
+	USBPUMP_USBDI_TT_METHOD_TABLE *TT.pMethods;
+		The method table contains:
+
+Notes:
+	The USBPUMP_USBDI_TT object is a subset of the full object,
+	which is maintained internally by USBDI. 
+
+	Examples of (future) methods might be: GET_TT_STATE, RESET_TT, STOP_TT 
+	defined in Usb2.0 11.24.2.
+
+*/
+/*
+|| in usbpump_usbdi_types.h:
+|| __TMS_TYPE_DEF_UNION(USBPUMP_USBDI_TT); 
+*/
+
+__TMS_TYPE_DEF_STRUCT(USBPUMP_USBDI_TT_CONTENTS);
+struct __TMS_STRUCTNAME(USBPUMP_USBDI_TT_CONTENTS)
+	{
+	__TMS_USBPUMP_OBJECT_CONTENTS__STRUCT;
+	__TMS_USBPUMP_USBDI_USBD		*pUsbd;
+/*
+||	__TMS_CONST __TMS_USBPUMP_USBDI_PUBLIC_TT_METHOD_TABLE	*pMethods;
+*/
+	};
+
+/*
+|| Finally, the actual USBD TT object
+*/
+union __TMS_UNIONNAME(USBPUMP_USBDI_TT)
+	{
+	__TMS_USBPUMP_OBJECT_CONTENTS__UNION;
+	__TMS_USBPUMP_USBDI_TT_CONTENTS	TT;
+	};
+
+#define	__TMS_USBPUMP_USBDI_TT_CONTENTS__STRUCT		\
+	__TMS_USBPUMP_USBDI_TT_CONTENTS	TT
+
+#define	__TMS_USBPUMP_USBDI_TT_CONTENTS__UNION		\
+	__TMS_USBPUMP_OBJECT_CONTENTS__UNION;		\
+	__TMS_USBPUMP_USBDI_TT_CONTENTS	TT;		\
+	__TMS_USBPUMP_USBDI_TT		TTCast
+
+/*
+|| Object related things
+*/
+
+/* the USB TT object tag */
+#define	__TMS_USBPUMP_USBDI_TT_TAG	__TMS_UHIL_MEMTAG('U', 'U', 'T', 'T')
+
+/* the name generator */
+#define	__TMS_USBPUMP_USBDI_TT_NAME(x)	\
+				x __TMS_USBPUMP_USBDI_NAME("tt")
+
+/****************************************************************************\
+|
+|	The USBD TT Configuration object
+|
+\****************************************************************************/
+
+/*
+|| in usbpump_usbdi_types.h:
+|| __TMS_TYPE_DEF_STRUCT(USBPUMP_USBDI_USBDTT_CONFIG);
+*/
+
+struct __TMS_STRUCTNAME(USBPUMP_USBDI_USBDTT_CONFIG)
+	{
+	__TMS_UINT32			MagicBegin;
+	__TMS_BYTES			Size;
+
+	/*
+	|| fTTPerPort:True - the application wants to allow hubs to operate in 
+	|| this mode.
+	|| fTTPerPort:False - the application does not want hubs to operate in 
+	|| this mode.
+	*/
+	__TMS_UINT8			fTTPerPort;
+
+	/* 
+	|| bNumberTT:0 - USBD should automatically calculate the number of TTs 
+	|| 	needed based on bNumberPorts, bPortsPerHub and fTTPerPort.
+	|| bNumberTT:>0 - the application wants to override the USBD automatic 
+	||	calculation and use this number of TTs instead. Typically used 
+	|| 	to save memory.
+	*/
+	__TMS_UINT8			bNumberTTs;
+	__TMS_UINT32			MagicEnd;
+	};
+
+#define	__TMS_USBPUMP_USBDI_USBDTT_CONFIG_MAGIC_BEGIN			\
+	__TMS_UHIL_MEMTAG('<', 'T', 'c', 'f')
+
+#define	__TMS_USBPUMP_USBDI_USBDTT_CONFIG_MAGIC_END			\
+	__TMS_UHIL_MEMTAG('>', 'T', 'c', 'f')
+
+#define	__TMS_USBPUMP_USBDI_USBDTT_CONFIG_INIT_V1(			\
+	a_fTTPerPort,							\
+	a_bNumberTTs							\
+	)								\
+	{								\
+	__TMS_USBPUMP_USBDI_USBDTT_CONFIG_MAGIC_BEGIN,			\
+	sizeof(__TMS_USBPUMP_USBDI_USBDTT_CONFIG),			\
+	(a_fTTPerPort),							\
+	(a_bNumberTTs),							\
+	__TMS_USBPUMP_USBDI_USBDTT_CONFIG_MAGIC_END			\
+	}
+
+/****************************************************************************\
+|
+|	Uncloaked names
+|
+\****************************************************************************/
+/**** uncloaked names generated by uncloak-defs.sh ****/
+#if !__TMS_CLOAKED_NAMES_ONLY
+# define USBPUMP_USBDI_TT_CONTENTS__STRUCT	\
+   __TMS_USBPUMP_USBDI_TT_CONTENTS__STRUCT
+# define USBPUMP_USBDI_TT_CONTENTS__UNION	\
+   __TMS_USBPUMP_USBDI_TT_CONTENTS__UNION
+# define USBPUMP_USBDI_TT_TAG	\
+   __TMS_USBPUMP_USBDI_TT_TAG
+# define USBPUMP_USBDI_TT_NAME(x)	\
+   __TMS_USBPUMP_USBDI_TT_NAME(x)
+# define USBPUMP_USBDI_USBDTT_CONFIG_MAGIC_BEGIN	\
+   __TMS_USBPUMP_USBDI_USBDTT_CONFIG_MAGIC_BEGIN
+# define USBPUMP_USBDI_USBDTT_CONFIG_MAGIC_END	\
+   __TMS_USBPUMP_USBDI_USBDTT_CONFIG_MAGIC_END
+# define USBPUMP_USBDI_USBDTT_CONFIG_INIT_V1(			\
+	a_fTTPerPort,							\
+	a_bNumberTTs							\
+	)	\
+	__TMS_USBPUMP_USBDI_USBDTT_CONFIG_INIT_V1(			\
+	a_fTTPerPort,							\
+	a_bNumberTTs							\
+	)
+#endif /* !__TMS_CLOAKED_NAMES_ONLY */
+
+
+/**** end of usbpump_usbdi_tt.h ****/
+#endif /* _USBPUMP_USBDI_TT_H_ */

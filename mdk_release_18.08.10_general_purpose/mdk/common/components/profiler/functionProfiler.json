@@ -1,0 +1,151 @@
+{
+	"id":"function",
+	"name":"Myriad function profiler",
+	"description":"Myriad function profiler description",
+	"arguments" :[
+		{
+			"id":"PROFILE_INFO",
+			"default":"function",
+			"type":"constant"
+		},
+		{
+			"id":"FP_CORE_PROFILE",
+			"name":"Profile cores",
+			"description":"Cores that can be profiled",
+			"mandatory":"true",
+			"type":"set",
+			"typeConfig": "los:LeonOS|lrt:LeonRT|shave:Shave",
+			"default":"los,lrt,shave"
+		},
+		{
+			"id":"PROFILER_DURATION_MS",
+			"name":"Milliseconds to run",
+			"description":"Milliseconds to run the program. After that the program will be stopped and profiling data will be gathered",
+			"mandatory":"true",
+			"type":"int",
+			"default":"60000"
+		},
+		{
+			"id":"FP_LOS_BUFFER_SIZE",
+			"name":"Leon OS buffer size",
+			"description":"Leon OS buffer size",
+			"mandatory":"true",
+			"type":"int",
+			"default":"4194304"
+		},
+		{
+			"id":"FP_LRT_BUFFER_SIZE",
+			"name":"Leon RT buffer size",
+			"description":"Leon RT buffer size",
+			"mandatory":"true",
+			"type":"int",
+			"default":"4194304"
+		},
+		{
+			"id":"FP_SHV_BUFFER_SIZE",
+			"name":"Shave buffer size",
+			"description":"Shave buffer size. Each configured shave will have its own buffer of this size",
+			"mandatory":"true",
+			"type":"int",
+			"default":"1048576"
+		},
+		{
+			"id":"FP_LOS_DATA_SECTION",
+			"name":"Leon OS data section name",
+			"description":"Leon OS data section name",
+			"mandatory":"true",
+			"type":"string",
+			"default":".ddr_direct.bss"
+		},
+		{
+			"id":"FP_LRT_DATA_SECTION",
+			"name":"Leon RT data section name",
+			"description":"Leon RT data section name",
+			"mandatory":"true",
+			"type":"string",
+			"default":".ddr_direct.bss"
+		},
+		{
+			"id":"FP_SHV_DATA_SECTION",
+			"name":"Shave data section name",
+			"description":"Shave data section name. Warning: if you select a bss section, make sure you initialize the buffers",
+			"mandatory":"true",
+			"type":"string",
+			"default":".ddr_direct.bss"
+		},
+		{
+			"id":"FP_LOS_TIMER",
+			"name":"Leon OS TIMER",
+			"description":"Leon OS timer used for measurement",
+			"mandatory":"false",
+			"type":"string",
+			"default":"TIM0_BASE_ADR"
+		},
+		{
+			"id":"FP_LRT_TIMER",
+			"name":"Leon RT TIMER",
+			"description":"Leon RT timer used for measurement",
+			"mandatory":"false",
+			"type":"string",
+			"default":"TIM0_BASE_ADR"
+		},
+		{
+			"id":"FP_SHV_TIMER",
+			"name":"Shave TIMER",
+			"description":"Shave timer used to measurement",
+			"mandatory":"false",
+			"type":"string",
+			"default":"TIM0_BASE_ADR"
+		},
+		{
+			"id":"FP_COLLECT_STALLS",
+			"name":"Collect stalls",
+			"description":"Collect accurate instruction count and stalls per function. This may intruduce overall delays and requires more memory",
+			"mandatory":"false",
+			"type":"bool",
+			"default":"false"
+		},
+		{
+			"id":"FP_32BIT_TIMESTAMP_OPT_MODE",
+			"name":"Optimize profiler memory",
+			"description":" Option to use 32 bit delta instead of the full 64 bit timestamp",
+			"mandatory":"false",
+			"type":"bool",
+			"default":"false"
+		},
+		{
+			"id":"FP_SHV_INSTRUMENT_ONLY",
+			"name":"Shave instrument files",
+			"description":"If set, only the selected Shave files will be profiled, other cores are not affected.",
+			"mandatory":"false",
+			"type":"filerule",
+			"typeConfig":";cpp,c,asm;.*/([^/]*)/([^/]*)(\\.[^\\.]*);%/$1/$2.asmgen"
+		},
+		{
+			"id":"FP_LOS_INSTRUMENT_ONLY",
+			"name":"Leon OS instrument files",
+			"description":"If set, only the selected Leon-OS files will be profiled, other cores are not affected.",
+			"mandatory":"false",
+			"type":"filerule",
+			"typeConfig":";cpp,c,asm;.*/([^/]*)/([^/]*)(\\.[^\\.]*);%/$1/$2.o"
+
+		},
+		{
+			"id":"FP_LRT_INSTRUMENT_ONLY",
+			"name":"Leon RT instrument files",
+			"description":"If set, only the selected Leon-RT files will be profiled, other cores are not affected.",
+			"mandatory":"false",
+			"type":"filerule",
+			"typeConfig":";cpp,c,asm;.*/([^/]*)/([^/]*)(\\.[^\\.]*);%/$1/$2_lrt.o"
+
+		},
+		{
+			"id":"FP_SHV_CTORS_CALLED",
+			"name":"Static constructors called before main",
+			"description":"Check this if you are sure constructors are beeing called. Will make profiling faster",
+			"mandatory":"false",
+			"type":"bool",
+			"default":"false"
+		}
+  ]
+}

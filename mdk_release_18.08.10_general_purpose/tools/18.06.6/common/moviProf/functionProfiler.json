@@ -1,0 +1,96 @@
+{
+	"id":"function",
+	"name":"Myriad function profiler",
+	"description":"Myriad function profiler description",
+	"arguments" :[
+		{
+			"id":"CONFIG_USE_FUNCTION_PROFILER",
+			"default":"y",
+			"type":"constant"
+		},
+		{
+			"id":"CONFIG_PROFILE_CORE_LOS",
+			"name":"LeonOS",
+			"description":"Core that can be profiled",
+			"type":"bool",
+			"typeConfig":"y;n",
+			"default":"y"
+		},
+		{
+			"id":"CONFIG_PROFILE_CORE_LRT",
+			"name":"LeonRT",
+			"description":"Core that can be profiled",
+			"type":"bool",
+			"typeConfig":"y;n",
+			"default":"y"
+		},
+		{
+			"id":"CONFIG_PROFILE_CORE_SHAVE",
+			"name":"Shave",
+			"description":"Core that can be profiled",
+			"type":"bool",
+			"typeConfig":"y;n",
+			"default":"y"
+		},
+		{	"id":"CONFIG_FPROFILER_DATA_SECTION",
+			"name":"Data section",
+			"description":"Data section name",
+			"mandatory":"true",
+			"type":"string",
+			"default":".ddr_direct.bss"
+		},
+		{
+			"id":"CONFIG_FPROFILER_COLLECT_STALLS",
+			"name":"Collect stalls",
+			"description":"Collect accurate instruction count and stalls per function. This may intruduce overall delays and requires more memory",
+			"mandatory":"false",
+			"type":"bool",
+			"typeConfig":"y;n",
+			"default":"n"
+		},
+		{
+			"id":"CONFIG_FPROFILER_32BIT_TIMESTAMP_OPT_MODE",
+			"name":"Optimize profiler memory",
+			"description":"Option to use 32 bit delta instead of the full 64 bit timestamp",
+			"mandatory":"false",
+			"type":"bool",
+			"typeConfig":"y;n",
+			"default":"n"
+		},
+		{
+			"id":"CONFIG_SHV_INSTRUMENT_ONLY",
+			"name":"Shave instrument files",
+			"description":"If set, only the selected Shave files will be profiled, other cores are not affected.",
+			"mandatory":"false",
+			"type":"filerule",
+			"typeConfig":";cpp,c,asm;.*/([^/]*)/([^/]*)(\\.[^\\.]*);%/$1/$2.asmgen"
+		},
+		{
+			"id":"CONFIG_LOS_INSTRUMENT_ONLY",
+			"name":"Leon OS instrument files",
+			"description":"If set, only the selected Leon-OS files will be profiled, other cores are not affected.",
+			"mandatory":"false",
+			"type":"filerule",
+			"typeConfig":";cpp,c,asm;.*/([^/]*)/([^/]*)(\\.[^\\.]*);%/$1/$2.o"
+
+		},
+		{
+			"id":"CONFIG_LRT_INSTRUMENT_ONLY",
+			"name":"Leon RT instrument files",
+			"description":"If set, only the selected Leon-RT files will be profiled, other cores are not affected.",
+			"mandatory":"false",
+			"type":"filerule",
+			"typeConfig":";cpp,c,asm;.*/([^/]*)/([^/]*)(\\.[^\\.]*);%/$1/$2_lrt.o"
+
+		},
+		{
+			"id":"CONFIG_SHV_CTORS_CALLED",
+			"name":"Static constructors called before main",
+			"description":"Check this if you are sure constructors are beeing called. Will make profiling faster",
+			"mandatory":"false",
+			"type":"bool",
+			"typeConfig":"y;n",
+			"default":"n"
+		}
+  ]
+}

@@ -1,0 +1,89 @@
+USB-resource-file 3.00 =
+    {
+    Device     {
+        Class 0x0    %no class%
+        SubClass 0x0    %no subclass%
+        Protocol 0x0    %none specified.%
+        Vendor 0x40E %tag% VENDOR_ID
+        Product-ID 0xF106 %tag% PRODUCT
+        Device-Version 1.00
+        serial-number S_SERIALNUMBER
+        } %no name% ;
+
+    ### only one configuration ###
+    Configuration 1
+        {
+        Remote-Wakeup Self-Powered    %the flags%
+        Power 0 mA
+        % private descriptors would go here %
+
+        interface 0
+            {
+            class 3        %hid%
+            subclass 1    %boot class device%
+            protocol 2    %mouse boot proto%
+            name MOUSE    # string
+            private-descriptors
+                {
+                raw {
+                    0x21    %hid descriptor%
+                    word(0x111)    % hid version BCD 1.11 %
+                    0x00    % not localized %
+                    0x01    % only 1 HID descriptor %
+                    0x22    % it's a report descriptor %
+                    word(0x32)    % the length is 0x32 %
+                    };
+                }
+
+            endpoints
+                interrupt in packet-size (speed < full) ? 8 : 64
+                    polling-interval 16 %ms%
+                ;
+            }
+
+        } %end of config, no name% ;
+
+    strings
+        {
+        properties external read-only S_SERIALNUMBER;
+
+        default, language "English (USA)"
+            {
+            VENDOR_ID = "MCCI Corporation";
+            PRODUCT = "MCCI(r) Mouse example";
+            S_SERIALNUMBER = "DUMMY";
+            MOUSE = "Port Expander HID mouse";
+            }
+        } %strings% ;
+    } % end of device, no name% ;
+
+#### the stuff we need to generate the external string info ####
+application
+        {
+    structure
+        {
+        type name "UDEVICE_MOUSEDEMO";
+        };
+    initialization
+        {
+        function name "mousedemo_init";
+        file name "mousedemo_device.c";
+        };
+    header-file
+        {
+        file name "mousedemo_device.h";
+        };
+        descriptor table
+                {
+                internal names static;
+                functions
+                        {
+                        with string filter table;
+                        get-descriptor
+                        "UsbPumpFilter_MultiConfigModalDescriptors";
+                        % no set-descriptor "<name>"; %
+                        };
+                };
+        };
+
+% end of file %

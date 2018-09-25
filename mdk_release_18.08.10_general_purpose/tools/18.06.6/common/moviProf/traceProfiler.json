@@ -1,0 +1,15 @@
+{
+	"id":"trace",
+	"name":"Myriad trace profiler",
+	"description":"Myriad trace profiler description",
+	"settings" : {
+		"eventsConfiguration" : "traceEvents.json"
+	},
+	"arguments" :[
+		{
+			"id":"PROFILE_INFO",
+			"default":"trace",
+			"type":"constant"
+		}
+    ]
+}

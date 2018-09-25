@@ -1,0 +1,88 @@
+/*Linker script file which sets all dynamic code*/
+
+SECTIONS {
+
+  /*Setting up shave slices memory with absolute addresses*/
+  . = 0x1D000000;
+  /*Keep that special CMX section for critical code*/
+  .dyn.textCrit : {
+        *(.textCrit*)
+  }
+  /*We just throw away the text section because this section will be bundled in DDR anyway*/
+  .dyn.text (NOLOAD) : {
+
+  }
+  . = 0x1C000000;
+  .dyn.data : {
+        *(S.data*)
+        *(S.__DATA__sect*)
+        *(S.__STACK__sect*)
+        *(S.__static_data*)
+        *(S.__HEAP__sect*)
+        *(S.__T__*)
+  }
+  . = ALIGN(16);
+  /*Offer some noload data options too*/
+  .dyn.bss.data (NOLOAD) : {
+        *(S.bss*)
+        . = ALIGN(16);
+  }
+
+  /* DWARF debug sections.
+     Symbols in the DWARF debugging sections are relative to the beginning
+     of the section so we begin them at 0.  */
+  /* DWARF 1 */
+  .debug          0 : { *(.debug) }
+  .line           0 : { *(.line) }
+  /* GNU DWARF 1 extensions */
+  .debug_srcinfo  0 : { *(.debug_srcinfo) }
+  .debug_sfnames  0 : { *(.debug_sfnames) }
+  /* DWARF 1.1 and DWARF 2 */
+  .debug_aranges  0 : { *(.debug_aranges) }
+  .debug_ranges   0 : { *(.debug_ranges) }
+  .debug_pubnames 0 : { *(.debug_pubnames) }
+  /* DWARF 2 */
+  .debug_info     0 : { *(.debug_info .gnu.linkonce.wi.*) }
+  .debug_abbrev   0 : { *(.debug_abbrev) }
+  .debug_line     0 : { *(.debug_line) }
+  .debug_frame    0 : { *(.debug_frame) }
+  .debug_str      0 : { *(.debug_str) }
+  .debug_loc      0 : { *(.debug_loc) }
+  .debug_macinfo  0 : { *(.debug_macinfo) }
+  /* SGI/MIPS DWARF 2 extensions */
+  .debug_weaknames 0 : { *(.debug_weaknames) }
+  .debug_funcnames 0 : { *(.debug_funcnames) }
+  .debug_typenames 0 : { *(.debug_typenames) }
+  .debug_varnames  0 : { *(.debug_varnames) }
+  .debug_macro     0 : { *(.debug_macro*) }
+  .debug_pubtypes  0 : { *(.debug_pubtypes) }
+  /*Keep the moviAsm assembly debug information*/
+  /*Need to take it in as pattern because our moviAsm will prefix the section*/
+  .debug_asmline   0 : { *(*.debug_asmline*) }
+  /*Keep rel only as debug info*/
+  .rel   0 : { *(.rel*) }
+
+  /DISCARD/ : { *(.stab .stabstr .comment .gnu.attributes .iplt .rela.iplt .shstrtab .strtab)
+        *(S.text*)
+        *(S.__TEXT__sect)
+        *(S.__MAIN__sect)
+        *(S.init*)
+        *(S.rodata*)
+        *(*.laststage*)
+        *(.ddr_direct.data*)
+        *(.cmx_uncached.data*)
+        *(S.function.tbls*)
+        *(S.heapdata*)
+        *(S.grpdata*)
+        *(S.moduledata*)
+        *(.cmx.cdmaDescriptors*)
+        *(.cmx.data*)
+        *(.cmx.resmgr*)
+        *(S..iat*)
+        *(S..iatnames*)
+        *(S..iatstrings*)
+        }
+  . = 0;
+  .stuff : { *(*) }
+   ASSERT ( . == 0, ".stuff section for dynamic lib caught data! This means your application has sections placed nowhere which may be fatal!" )
+}

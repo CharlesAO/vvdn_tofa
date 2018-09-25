@@ -1,0 +1,42 @@
+/*
+ * Common myriad2 variables of memories
+ */
+
+__ROM      = 0x76000000;
+__ROM_SIZE = 2M;
+
+__CMX      = 0x70000000;
+__CMX_SIZE = 2M;
+
+__DDR      = 0x80000000;
+__DDR_SIZE = 128M;
+
+/*
+ * User configuration: Set to 1 to place data in CMX
+ */
+USE_CMX = 0;
+
+/*
+ * Common linker script, do not modify
+ */
+DEF_RAM_START = (USE_CMX == 1) ? __CMX      : __DDR;
+DEF_RAM_SIZE  = (USE_CMX == 1) ? __CMX_SIZE : __DDR_SIZE;
+
+_PROM_START = DEFINED (_PROM_START) ? _PROM_START : __ROM;
+_PROM_SIZE  = DEFINED (_PROM_SIZE)  ? _PROM_SIZE  : __ROM_SIZE;
+
+_RAM_START  = DEFINED (_RAM_START) ? _RAM_START : DEF_RAM_START;
+_RAM_SIZE   = DEFINED (_RAM_SIZE)  ? _RAM_SIZE  : DEF_RAM_SIZE;
+
+/* these are the maximum values */
+__bss_end       = _end;
+__sys_bss_start = _RAM_START + _RAM_SIZE - 0x100;
+__sys_bss_end   = _RAM_START + _RAM_SIZE;
+
+MEMORY
+{
+  rom     : ORIGIN = _PROM_START, LENGTH = _PROM_SIZE
+  ram     : ORIGIN = _RAM_START , LENGTH = _RAM_SIZE
+}
+
+INCLUDE linkcmds.base

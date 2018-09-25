@@ -1,0 +1,96 @@
+/*  This is a Default Linker script
+ *  Should be used as an included linker script in top level scripts
+ *
+ *  Addresses defined in common/drivers/myriad2/system/asm/memmap.S
+ */
+_RAM_START_LOS = 0x70190000;
+MEMORY
+{
+  SHV0_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K, LENGTH = 128k
+  SHV0_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 128k, LENGTH = 6*128K-128k
+  SHV0_DATA_TO_KEEP (w) : ORIGIN = 0x70000000 + 6 * 128K , LENGTH = 128K
+
+  SHV1_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K, LENGTH = 0K
+  SHV1_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV2_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K, LENGTH = 0K
+  SHV2_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV3_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K, LENGTH = 0K
+  SHV3_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV4_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K, LENGTH = 0K
+  SHV4_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV5_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K, LENGTH = 0K
+  SHV5_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV6_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K, LENGTH = 0K
+  SHV6_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV7_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K, LENGTH = 0K
+  SHV7_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV8_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K, LENGTH = 0K
+  SHV8_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV9_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K, LENGTH = 0K
+  SHV9_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV10_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K, LENGTH = 0K
+  SHV10_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  SHV11_CODE (wx)  : ORIGIN = 0x70000000 + 0 * 128K, LENGTH = 0K
+  SHV11_DATA (w)   : ORIGIN = 0x70000000 + 0 * 128K + 0K, LENGTH = 0K
+
+  /* The CMX_DMA section must be between the following addresses
+   *  0x78000000 + 12 * 128K
+   *      and
+   *  0x78000000 + 13 * 128K  */
+
+  CMX_DMA_DESCRIPTORS  (wx) : ORIGIN = 0x78000000 + 12 * 128K , LENGTH = 3K
+  CMX_OTHER            (wx) : ORIGIN = 0x70000000 + 12 * 128K + 3K, LENGTH = 128K - 7K
+  DDR_DATA             (wx) : ORIGIN = 0x80000000 + 0M, LENGTH = 128M
+
+  LEON_TEXT_TO_KEEP (wx) : ORIGIN = 0x70000000 + 17 * 128K - 4K, LENGTH = 4K
+  LOS (wx) : ORIGIN = 0x70000000 + 13 * 128K, LENGTH = 2 * 128K
+  LRT (wx) : ORIGIN = 0x70000000 + 15 * 128K, LENGTH = 128K
+
+}
+
+INCLUDE ./myriad2_leon_default_elf.ldscript
+PROVIDE( __CMX_PHYS = 0x70000000 );
+PROVIDE( __CMX_SLICE_C = 0x70180000 );
+PROVIDE( __CMX_SLICE_E = 0x701C0000 );
+
+
+INCLUDE ./myriad2_shave_slices.ldscript
+
+SECTIONS {
+
+ S.shv0.data.tokeep : {
+        KEEP(*(.shv0..kept.data*))
+  } > SHV0_DATA_TO_KEEP
+
+}
+SECTIONS {
+ .text.tokeep : {
+        KEEP(*(.text.toKeep*))
+  } > SHV0_DATA_TO_KEEP
+
+}
+
+PROVIDE ( __CMX_SLICE0_START = 0x70000000);
+PROVIDE ( __CMX_SLICE1_START = 0x70020000);
+PROVIDE ( __CMX_SLICE2_START = 0x70040000);
+PROVIDE ( __CMX_SLICE3_START = 0x70060000);
+PROVIDE ( __CMX_SLICE4_START = 0x70080000);
+PROVIDE ( __CMX_SLICE5_START = 0x700A0000);
+PROVIDE ( __CMX_SLICE6_START = 0x700C0000);
+PROVIDE ( __CMX_SLICE7_START = 0x700E0000);
+PROVIDE ( __CMX_SLICE8_START = 0x70100000);
+PROVIDE ( __CMX_SLICE9_START = 0x70120000);
+PROVIDE ( __CMX_SLICE10_START = 0x70140000);
+PROVIDE ( __CMX_SLICE11_START = 0x70160000);
+
+INCLUDE ./myriad2_default_general_purpose_sections.ldscript

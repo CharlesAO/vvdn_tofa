@@ -1,0 +1,55 @@
+------------------------------------------------------------
+robotVisionEvalKit 01.01.00, Copyright @ Movidius Ltd 2018
+------------------------------------------------------------
+Features:
+1.  vTrack and Stereo now can run at VGA or 720P
+2.  New python GUI for visualising vTrack and Stereo
+3.  New confidence slider in Stereo visualisation
+4.  Disparity to depth computation for Stereo now runs on the Myriad
+
+Known issues:
+1.  Cameras are not synchronised in ISP mode (ISP mode turned off by default)
+
+------------------------------------------------------------
+robotVisionEvalKit 01.00.00, Copyright @ Movidius Ltd 2017
+------------------------------------------------------------
+1. First release
+
+Notes:
+1.  The application shows a default tuning for vTrack. 
+    Please note that for best performance, the vTrack, AEC and gyroAssist must be tuned 
+    (depends on camera, target environment, target application). The number of the features, 
+    the stability and the distribution of them will highly depend on this tuning. 
+
+2.  The latency is a very important factor in tracking applications. This release does not 
+    contain the optimal latency,it can be optimized:
+        - the camera readout time can be optimized
+        - the conversion time (~1.7ms) can be eliminated. Certain cameras can be configured
+          to output u8 data. There is also a possibility to do the conversions with the Rx 
+          filters when receiving the frame on myriad
+        - first module of vTrack (pixelPipe) can already operate when the first line of the 
+          frame arrived. This means that we can completely overlap the pixelPipe processing 
+          with the readout time (~3ms)
+        - The pyramidal optical flow is running on 2 shaves only. As the algorithm operates 
+          on points, this can be split over any number of shaves. The speedup is linear, 
+          power numbers remain the same, the only penalty being blocking more shaves for the 
+          timeslice of OF
+        - The latency numbers above are not including the USB readout. The USB readout time 
+          can be minimized using an USB3. Also, usually the latency of the features matter, 
+          not the latency of the actual image data. Sending the features before the frame 
+          can reduce the transmission time 
+   
+3.  As the gyro bias is estimated by using the first few samples, the board must be still on 
+    the desk in the first second after booting (keeping it in hand will not give best performance). 
+
+
+Known issues (will be fixed by the next release):
+1.  AEC has minor problems: 
+        -   When changing from high contrast to low contrast mode, a jump on the image brightness 
+            can appear. This jump can cause problems for vTrack
+        -   In low light conditions the gain value becomes too high, adding noise to the image. 
+            In this case wrong features and tracks may appear on the screen. This can be worked around 
+            with a smaller Harris threshold, but we preferred tuning for the general case instead of 
+            tuning for corner-cases.
+2. The Pc applications might have small memory leak. Monitor your RAM usage if you need to run the 
+   app for a very long time

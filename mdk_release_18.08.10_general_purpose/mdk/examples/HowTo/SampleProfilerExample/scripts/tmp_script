@@ -1,0 +1,12 @@
+breset
+start $default_target                                                      
+target $default_target                                                      
+echo load $elf ..                                                          
+load $elf                                                                  
+echo $run_opt                                                              
+$run_opt
+echo $exit_opt
+;$exit_opt
+save spBuffer spSampleCount4 ip.bin
+save lrt_spBuffer lrt_spSampleCount4 lrt_ip.bin
+$exit_opt

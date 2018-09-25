@@ -1,0 +1,15 @@
+[General]
+Format=MTRD
+Version=0.1
+Timescale=us
+DefaultEventSignalType=Integer
+EventSignalDesc0=../../../../common/utils/EventSignals.mtrs
+
+[Buffer0]
+Path=../output/tracebuff_los.bin
+Name=LOS
+TimeScaleNumerator=16
+TimeScaleDenominator=1000
+TimeStampLengthBytes=4
+EventSignalLengthBytes=4
+EventDataLengthBytes=4

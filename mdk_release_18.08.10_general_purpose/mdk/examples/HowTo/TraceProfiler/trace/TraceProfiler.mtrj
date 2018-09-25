@@ -1,0 +1,13 @@
+{
+		"eventTypes" : [
+		{
+			"id" : "10000",
+			"filter" : "acceptEvent(trace, 10000);",
+			"name" : "MY_APP_RUN",
+			"class" : "MoviLogicEvent",
+			"config" : {
+				"bgcolor" : "0x00c4c61c"
+			}
+		}
+		]	
+}

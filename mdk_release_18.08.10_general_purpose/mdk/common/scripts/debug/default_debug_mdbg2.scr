@@ -1,0 +1,9 @@
+
+puts $run_opt
+mdbg::$run_opt
+mdbg::uart flush
+
+foreach i [mdbg::pipe list] {
+    mdbg::pipe flush $i
+}
+

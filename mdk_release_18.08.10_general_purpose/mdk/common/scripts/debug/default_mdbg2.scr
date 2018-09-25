@@ -1,0 +1,9 @@
+puts breset
+mdbg::breset
+puts "startupcore $default_target"
+mdbg::startupcore $default_target
+puts "target $default_target"
+mdbg::target $default_target
+puts "loadfile $elf"
+mdbg::loadfile $elf
+

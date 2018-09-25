@@ -1,0 +1,14 @@
+
+menu "Myriad project setting"
+
+  menu "Regression system-related settings"
+    config MDK_PROJ_STRING
+      string "MDK_PROJ_STRING e.g. Is this a top-level project?"
+      default "MDK_TRUE"
+      help
+        This is the equivalent of the legacy MDK_PROJ_STRING
+
+  endmenu
+
+endmenu
+

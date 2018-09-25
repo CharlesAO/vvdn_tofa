@@ -1,0 +1,67 @@
+// ///
+// /// @file
+// /// @copyright All code copyright Movidius Ltd 2016, all rights reserved.
+// ///            For License Warranty see: common/license.txt
+// ///
+// /// @brief
+// ///
+
+.version 00.51.04
+
+.ifndef COMMON_DRIVERS_MYRIAD2_SOCDRIVERS_SHAVE_ARCH_MA2X5X_INCLUDE_SHDRVCMXFIFODEFINES_INCL_
+.set    COMMON_DRIVERS_MYRIAD2_SOCDRIVERS_SHAVE_ARCH_MA2X5X_INCLUDE_SHDRVCMXFIFODEFINES_INCL_
+
+.set    FIFO_FULL_MASK      (0x02)
+.set    FIFO_EMPTY_MASK     (0x01)
+.set    PFIFO_FIFO0_ADR     0x78803000
+.set    PFIFO_FIFO1_ADR     0x78803008
+.set    PFIFO_FIFO2_ADR     0x78803010
+.set    PFIFO_FIFO3_ADR     0x78803018
+.set    PFIFO_FIFO4_ADR     0x78803020
+.set    PFIFO_FIFO5_ADR     0x78803028
+.set    PFIFO_FIFO6_ADR     0x78803030
+.set    PFIFO_FIFO7_ADR     0x78803038
+.set    PFIFO_FIFO8_ADR     0x78803040
+.set    PFIFO_FIFO9_ADR     0x78803048
+.set    PFIFO_FIFO10_ADR    0x78803050
+.set    PFIFO_FIFO11_ADR    0x78803058
+.set    PFIFO_CTRL_ADR      0x78803080
+.set    PFIFO_GEN_CTRL_ADR  0x78803088
+.set    PFIFO_PTR_STAT0_ADR 0x78803090
+.set    PFIF0_PTR_STAT1_ADR 0x78803098
+.set    PFIF0_PTR_STAT2_ADR 0x788030A0
+.set    PFIF0_PTR_STAT3_ADR 0x788030A8
+.set    PFIFO_DIRECT_ADR    0x78803800
+.set    PFIFO_ATM_FIFO0_ADR 0x788030C0
+.set    PFIFO_ATM_FIFO1_ADR 0x788030C8
+.set    PFIFO_ATM_FIFO2_ADR 0x788030D0
+.set    PFIFO_ATM_FIFO3_ADR 0x788030D8
+.set    PFIFO_ATM_FIFO4_ADR 0x788030E0
+.set    PFIFO_ATM_FIFO5_ADR 0x788030E8
+.set    PFIFO_ATM_FIFO6_ADR 0x788030F0
+.set    PFIFO_ATM_FIFO7_ADR 0x788030F8
+.set    PFIFO_ATM_FIFO8_ADR 0x78803100
+.set    PFIFO_ATM_FIFO9_ADR 0x78803108
+.set    PFIFO_ATM_FIF10_ADR 0x78803200
+.set    PFIFO_ATM_FIF11_ADR 0x78803208
+
+.macro FIFO_READ fifoReqRegister, i_tempReg, i_outReg
+    lsu1.ldil \i_tempReg, FIFO_EMPTY_MASK
+    CMU.CMTI.BITP \i_tempReg, P_GPI
+    PEU.PC1C NEQ || BRU.RPIM 0 || CMU.CMTI.BITP \i_tempReg, P_GPI
+    lsu1.ldil \i_tempReg, \fifoReqRegister || lsu0.ldih \i_tempReg, \fifoReqRegister
+    lsu0.ld.64 \i_outReg, \i_tempReg
+    nop 6
+.endm
+
+// i_inReg - will use 2 consecutive registers starting with i_inReg
+.macro FIFO_WRITE fifoReqRegister, i_tempReg, i_inReg
+    lsu1.ldil \i_tempReg, FIFO_FULL_MASK
+    CMU.CMTI.BITP \i_tempReg, P_GPI
+    PEU.PC1C NEQ || BRU.RPIM 0 || CMU.CMTI.BITP \i_tempReg, P_GPI
+    lsu1.ldil \i_tempReg, \fifoReqRegister || lsu0.ldih \i_tempReg, \fifoReqRegister
+    lsu0.st.64 \i_inReg,\i_tempReg
+    nop 6
+.endm
+
+.endif

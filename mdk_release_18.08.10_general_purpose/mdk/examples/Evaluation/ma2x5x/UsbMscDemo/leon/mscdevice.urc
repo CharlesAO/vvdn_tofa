@@ -1,0 +1,104 @@
+USB-resource-file 3.00 =
+    {
+    Device  {
+        Class       0x00
+        SubClass    0x00
+        Protocol    0x00    #none specified.
+        Vendor      0x03E7  %tag% S_VENDOR_ID   # Intel_VID
+        Product-ID  0xF10C  %tag% S_PRODUCT
+        Device-Version  1.0
+        serial-number   S_SERIALNUMBER
+        } %no external name% ;
+
+    #### here is the first (and only) configuration.
+    Configuration 1
+        {
+        # %tag% CONFIG1_ID -- no string, there's only one config.
+        % Bus-Powered % Self-Powered    %the flags%
+        Power 40 mA
+        % private descriptors would go here %
+
+        #
+        # In this demo, we have only one interface.
+        #
+        interface 0
+            {
+            class    0x08       #mass storage class
+#           subclass 0x02       #ATAPI/MMC  commands
+            subclass 0x06       #ATAPI/SCSI commands
+            protocol 0x50       #bulk-only transport
+            name     S_MSCDEV1  # string
+
+            endpoints
+                bulk in
+
+                # Endpoint Companion Descriptor
+                max-burst 15
+                max-streams 0
+                max-sequence 1
+
+                bulk out
+
+                # Endpoint Companion Descriptor
+                max-burst 15
+                max-streams 0
+                max-sequence 1
+
+                ;
+            }
+
+        } %end of configuration% ;
+
+
+    strings
+        {
+        properties external read-only S_SERIALNUMBER;
+
+        default, language "English (USA)"
+            {
+            S_VENDOR_ID = "Intel Corporation";
+            S_PRODUCT = "MSC 1.0 Demo";
+            S_MSCDEV1 = "Mass Storage Device" ;
+
+            # USB MSC rev 1.0 section 4.1.1 Serial Number:
+            # The serial number shall contain at least 12 valid digits,
+            # represented as a UNICODE string. The last 12 digits of the
+            # serial number shall be unique to each USB idVendor and idProduct pair.
+            S_SERIALNUMBER = "DUMMY";
+            }
+        } %strings% ;
+    } %no name% ;
+
+#### the stuff we need to generate the external string info ####
+application
+    {
+    structure
+        {
+        type name "UDEVICE_MSCDEMO";
+        };
+    initialization
+        {
+        function name "usbrc_UdeviceMscDemo_init";
+        file name "mscdevice.c";
+        };
+    header-file
+        {
+        file name "mscdevice.h";
+        with string ids;
+        };
+    descriptor table
+        {
+        internal names static;
+                functions
+            {
+            with string filter table;
+            get-descriptor
+                "UsbPumpFilter_MultiConfigModalDescriptors";
+            % no set-descriptor "<name>"; %
+            };
+        };
+    };
+
+% end of file %
+
+#### end of mscdevice.urc ####

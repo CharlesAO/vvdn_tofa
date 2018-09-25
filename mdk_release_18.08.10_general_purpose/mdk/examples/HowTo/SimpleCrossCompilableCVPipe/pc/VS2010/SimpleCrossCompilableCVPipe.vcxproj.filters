@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Others">
+      <UniqueIdentifier>{ce844ec8-ed96-4fe6-ab6c-946e5e226cb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shared">
+      <UniqueIdentifier>{c8a9d4b3-ea03-458f-bfa8-96bb43e14253}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DOG">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="kernels">
+      <UniqueIdentifier>{735e03de-d02a-45b2-88b4-be3a57f327a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kernels\absolutedDiff">
+      <UniqueIdentifier>{ca7c80eb-52a3-4101-a1cd-75a11f15289c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kernels\convolution3x3">
+      <UniqueIdentifier>{0ba299ba-1433-45ba-97b5-0ed006804bb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kernels\convolution7x7">
+      <UniqueIdentifier>{e0c8e048-df24-4b25-993d-7af34dffa4fd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Modules\Main\Main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\myriad\Shave\SimpleCrossCompilableCVPipe.cpp">
+      <Filter>DOG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\myriad\leon\main.c">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\myriad\leon\app_config.c">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\myriad\shave\kernels\absoluteDiff\absoluteDiff_intr.cpp">
+      <Filter>kernels\absolutedDiff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\myriad\shave\kernels\convolution3x3\convolution3x3_intr.cpp">
+      <Filter>kernels\convolution3x3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\myriad\shave\kernels\convolution7x7\convolution7x7_intr.cpp">
+      <Filter>kernels\convolution7x7</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\common\swCommon\pcModel\dmaModel\svuCommonShave.cpp">
+      <Filter>Others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\common\swCommon\pcModel\dmaModel\swcCdmaShaveM2.c">
+      <Filter>Main</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\myriad\shared\Buffers.h">
+      <Filter>shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\myriad\shared\Defines.h">
+      <Filter>shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\myriad\shave\SimpleCrossCompilableCVPipe.h">
+      <Filter>DOG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\myriad\shave\kernels\absoluteDiff\absoluteDiff_intr.h">
+      <Filter>kernels\absolutedDiff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\myriad\shave\kernels\convolution3x3\convolution3x3_intr.h">
+      <Filter>kernels\convolution3x3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\myriad\shave\kernels\convolution7x7\convolution7x7_intr.h">
+      <Filter>kernels\convolution7x7</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

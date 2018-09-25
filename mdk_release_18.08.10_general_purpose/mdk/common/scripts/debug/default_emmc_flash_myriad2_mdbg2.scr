@@ -1,0 +1,33 @@
+puts breset
+mdbg::breset
+mdbg::ddrinit
+
+#Load flasher
+mdbg::loadandverify XX_FLASHER_ELF_XX
+
+#Magic number
+mdbg::mset 0x88000000 0x435259BF
+
+#size
+mdbg::mset 0x88000004 XX_TARGET_MVCMD_SIZE_XX
+
+#eMMC offset. Set offset to 0, begining of the memory.
+mdbg::mset 0x88000008 0
+
+#Commands. Set commands to 0, it means load image in eMMC memory.
+mdbg::mset 0x8800000C 0
+
+#eMMC partition. Select boot partition 0
+mdbg::mset 0x88000010 0
+
+#eMMC bus width. Set width register to 2, it selects 8 bits width.
+mdbg::mset 0x88000014 2
+
+#Load application's binary
+mdbg::loadfile -addr 0x88000018 -binary XX_TARGET_MVCMD_XX
+
+mdbg::runw
+
+mdbg::savefile XX_TARGET_MVCMD_XX.readback 0x88400000 XX_TARGET_MVCMD_SIZE_XX
+
+exit

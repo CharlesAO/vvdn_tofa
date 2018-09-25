@@ -1,0 +1,11 @@
+CMX_SIZE = 16*128K;
+
+MEMORY
+{
+    /* following define is used only for checking if uncached ddr region
+     * is still inside a valid address space, changing this
+     * will not move code position.
+     * One can change DDR content start, by changing ORIGIN(DDR_DATA)
+     */
+    DDR_UNCACHED_DATA (wx) : ORIGIN = 0xC0000000, LENGTH = 512M
+}

@@ -1,0 +1,88 @@
+Plugin Brief
+------------
+[cols="s,"]
+|===================================================
+| Plugin Name     |  `<plugin name>`
+| Plugin ID       |  PLG-IMxx-<Insert name here>
+| Version         |  1.0
+| Description     | `<Brief description>`
+|===================================================
+
+FLIC Inputs
+-----------
+[options="header"]
+|===============================================
+| Name | Type   | Description
+| In1  |`<type>`| Describe the type, amount and frequency of data that this plugin receives from linked senders. E.g. Number of messages to be stored in the receiver
+| In2  |        |
+| InN  |        |
+|===============================================
+
+FLIC Outputs
+------------
+[options="header"]
+|===============================================
+| Name | Type   | Description
+| Out1 |`<type>`|
+| Out2 |        |
+| OutN |        |
+|===============================================
+
+Plugin type
+-----------
+- [X] input only (sink: R)
+- [ ] output only (source: S)
+- [ ] single input-single output (one to one: S->R)
+- [ ] single input-multiple output (fan out: S->R, R)
+- [ ] multiple input-single output (aggregator: S,S->R)
+- [ ] multiple input-multiple output (parallel streams: S,S->R,R)
+
+Configuration options
+---------------------
+Describe any modes, configuration settings
+
+Initialization Steps
+--------------------
+tbd
+
+Processing Logic
+----------------
+Overview of the control logic implemented by this plugin:
+A typical control loop includes:
+
+* Wait for IO conditions
+* Arrange for processing and wait
+* Process results and send out
+
+Describe the functionality implemented that matches each of the requirements.
+Describe LOS, LRT and Shave processing.
+
+Teardown Requirements
+---------------------
+tbd
+
+Performance Requirements
+------------------------
+tbd
+
+IRQ/RTEMS Requirements
+----------------------
+tbd
+
+Resource Requirements
+---------------------
+tbd
+
+Memory / Space / Buffer Requirements
+------------------------------------
+Detail the internal memory used by this plugin. Detail the number of input messages/buffers reserved at a time
+
+###DDR###
+Describe the amount of DDR data used
+
+###CMX###
+Describe the amount of CMX data used
+
+Example Usage
+-------------
+tbd: provide link /mdk/...

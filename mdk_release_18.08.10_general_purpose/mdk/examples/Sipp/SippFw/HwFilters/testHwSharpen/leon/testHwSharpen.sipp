@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" version="2.1">
+<key attr.name="includes" attr.type="string" for="graph" id="includes"/>
+<key attr.name="binary" attr.type="string" for="graph" id="binary"/>
+<key attr.name="shaveFirst" attr.type="int" for="graph" id="shaveFirst"/>
+<key attr.name="shaveLast" attr.type="int" for="graph" id="shaveLast"/>
+<key attr.name="mkPath" attr.type="string" for="graph" id="mkPath"/>
+<key attr.name="myriadTarget" attr.type="int" for="graph" id="myriadTarget"/>
+<key attr.name="id" attr.type="string" for="node" id="id"/>
+<key attr.name="name" attr.type="string" for="node" id="name"/>
+<key attr.name="description" attr.type="string" for="node" id="description"/>
+<key attr.name="flags" attr.type="string" for="node" id="flags"/>
+<key attr.name="dataType" attr.type="string" for="node" id="dataType"/>
+<key attr.name="outW" attr.type="string" for="node" id="outW"/>
+<key attr.name="outH" attr.type="string" for="node" id="outH"/>
+<key attr.name="numPl" attr.type="string" for="node" id="numPl"/>
+<key attr.name="symbol" attr.type="string" for="node" id="symbol"/>
+<key attr.name="x" attr.type="int" for="node" id="x"/>
+<key attr.name="y" attr.type="int" for="node" id="y"/>
+<key attr.name="w" attr.type="int" for="node" id="w"/>
+<key attr.name="h" attr.type="int" for="node" id="h"/>
+<key attr.name="internal0" attr.type="string" for="node" id="internal0"/>
+<key attr.name="internal1" attr.type="string" for="node" id="internal1"/>
+<key attr.name="cfg" attr.type="string" for="node" id="cfg"/>
+<key attr.name="strength" attr.type="string" for="node" id="strength"/>
+<key attr.name="clip" attr.type="string" for="node" id="clip"/>
+<key attr.name="limit" attr.type="string" for="node" id="limit"/>
+<key attr.name="rgnStop01" attr.type="string" for="node" id="rgnStop01"/>
+<key attr.name="rgnStop23" attr.type="string" for="node" id="rgnStop23"/>
+<key attr.name="coef01" attr.type="string" for="node" id="coef01"/>
+<key attr.name="coef23" attr.type="string" for="node" id="coef23"/>
+<key attr.name="index" attr.type="int" for="edge" id="index"/>
+<key attr.name="inputIndex" attr.type="int" for="edge" id="inputIndex"/>
+<key attr.name="outputIndex" attr.type="int" for="edge" id="outputIndex"/>
+<key attr.name="kernel" attr.type="string" for="edge" id="kernel"/>
+<graph edgedefault="directed" id="Pipeline">
+<data key="includes">testMacros.h</data>
+<data key="binary">mbinImgSipp</data>
+<data key="shaveFirst">0</data>
+<data key="shaveLast">0</data>
+<data key="mkPath">../build/sipp/</data>
+<data key="myriadTarget">MA2x5x</data>
+<node id="0">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">dmaIn0</data>
+<data key="id">dmaIn</data>
+<data key="description">DMA in filter</data>
+<data key="flags">0x00</data>
+<data key="outW">SIPP_HW_SHARPEN_BUFFER_WIDTH</data>
+<data key="outH">SIPP_HW_SHARPEN_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_DMA_ID</data>
+<data key="x">336</data>
+<data key="y">89</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="internal0">auto</data>
+<data key="internal1">../../../../../../../resources/lumaSharpenInput.y</data>
+</node>
+<node id="1">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">dmaOut0</data>
+<data key="id">dmaOut</data>
+<data key="description">DMA out filter</data>
+<data key="flags">0x00</data>
+<data key="outW">SIPP_HW_SHARPEN_BUFFER_WIDTH</data>
+<data key="outH">SIPP_HW_SHARPEN_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_DMA_ID</data>
+<data key="x">333</data>
+<data key="y">434</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="internal0">auto</data>
+<data key="internal1">output.raw</data>
+</node>
+<node id="2">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">sharpenMa2x5x</data>
+<data key="id">sharpenMa2x5x</data>
+<data key="description">The Sharpen filter enhances image sharpness. Programmable (separable, symmetric) blur filter kernel. Sharpening functionality can be disabled to use filter kernel on its own.</data>
+<data key="flags">0x0</data>
+<data key="outW">SIPP_HW_SHARPEN_BUFFER_WIDTH</data>
+<data key="outH">SIPP_HW_SHARPEN_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_SHARPEN_ID</data>
+<data key="x">335</data>
+<data key="y">256</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="cfg">SHARPEN_CFG( THR,  KERNEL_SIZE,OUTPUT_CLAMP ,SHARPENING,OUTPUT_DELTAS)</data>
+<data key="strength">SHARPEN_STRENGTH_CFG(STRENGTH_LIGHTEN, STRENGTH_DARKEN )</data>
+<data key="clip">CLIPPING_ALPHA</data>
+<data key="limit"> SHARPEN_LIMITS_CFG(UNDERSHOOT,OVERSHOOT)</data>
+<data key="rgnStop01">SHARPEN_RANGESTOP01_CFG(RANGE_STOP0, RANGE_STOP1)</data>
+<data key="rgnStop23"> SHARPEN_RANGESTOP01_CFG(RANGE_STOP2, RANGE_STOP3)</data>
+<data key="coef01">SHARPEN_COEFS01_CFG(0x2400,0x2e00)</data>
+<data key="coef23">SHARPEN_COEFS23_CFG(0x3380, 0x3500)</data>
+</node>
+<edge id="0" source="0" target="2">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">7x7</data>
+</edge>
+<edge id="1" source="2" target="1">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">1x1</data>
+</edge>
+</graph>
+</graphml>

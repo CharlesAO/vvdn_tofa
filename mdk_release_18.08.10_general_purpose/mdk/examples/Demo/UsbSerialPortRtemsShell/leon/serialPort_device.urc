@@ -1,0 +1,138 @@
+USB-resource-file 3.00 =
+    {
+    Device     {
+        Class        0x02    #Vendor
+        SubClass    0x00    #
+        Protocol    0x00    #none specified.
+        Vendor         0x03E7    %tag% S_VENDOR_ID    # Intel_VID
+        Product-ID     0xF60B     %tag% S_PRODUCT
+        Device-Version     1.0
+        serial-number    S_SERIALNUMBER
+        } %no external name% ;
+
+    #### here is the first (and only) configuration.
+    Configuration 1
+        {
+        # %tag% CONFIG1_ID -- no string, there is only one config.
+        % Bus-Powered % Self-Powered    %the flags%
+        Power 40 mA
+        % private descriptors would go here %
+
+        #########################
+        #   Serial port interface    #
+        #########################
+
+        interface 0
+            {
+            class    0x02    #comm class
+            subclass 0x02    #ACM
+            protocol 0x01    #no protocol
+            name     S_SP    # string
+
+            # here are the class descriptors.
+            private-descriptors
+                {
+                # header
+                raw    {
+                    0x24    # interface
+                    0       # functional descriptor
+                    word(0x110)    # CDC version 1.1
+                    };
+
+                raw    {
+                    0x24    # interface
+                    0x02    # ACM functional descriptor
+                    0x02    # support for SET_LINE_ENCODING, SET_CONTROL_LINE, GET_LINE_ENCODING and SERIAL_STATE notification
+                    };
+
+                # union descriptor.
+                raw    {
+                    0x24    # interface
+                    6       # ``union''
+                    % index of master interface % 0
+                    % index of sub interface 1 % 1
+                    };
+
+                # call control
+                raw    {
+                    0x24    # interface/class.
+                    1       # ``call control''
+                    0x00    # bit 0: can handle call
+                        #     control
+                        # bit 1: can do call control
+                        #     over data ifc
+                    % index of call control ifc: %
+                      1
+                    };
+                }
+            # here is the notification endpoint
+            endpoints
+                interrupt in packet-size 16
+                    polling-interval 16
+                ;
+            }
+
+
+        # data interface TA#1
+        interface 1
+            {
+            alternate-setting 0
+                class     0x0A    #data class
+                subclass 0x00    #
+                protocol 0x00    #
+                name    S_TA1_DATA_1
+                endpoints
+                    bulk in
+                    bulk out
+                    ;
+            }
+
+        } %end of configuration% ;
+
+
+    strings
+        {
+        properties external read-only S_SERIALNUMBER;
+
+        default, language "English (USA)"
+            {
+            S_VENDOR_ID = "Intel Corporation";
+            S_PRODUCT = "Serial Port Demo";
+            S_SERIALNUMBER = "DUMMY";
+            S_SP = "Serial port interface";
+            S_TA1_DATA_1 = "Serial port bulk data";
+            }
+        } %strings% ;
+    } %no name% ;
+
+#### the stuff we need to generate the external string info ####
+application
+    {
+    structure
+        {
+        type name "UDEVICE_ACMDEMO";
+        };
+    initialization
+        {
+        function name "usbrc_UdeviceWmcDemo_init";
+        file name "serialPort_device.c";
+        };
+    header-file
+        {
+        file name "serialPort_device.h";
+        with string ids;
+        };
+    descriptor table
+        {
+        internal names static;
+                functions
+            {
+            with string filter table;
+            get-descriptor
+                "UsbPumpFilter_MultiConfigModalDescriptors";
+            % no set-descriptor "<name>"; %
+            };
+        };
+    };
+
+% end of file %

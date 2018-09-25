@@ -1,0 +1,28 @@
+CMX_SIZE = 16*128K;
+
+
+MEMORY
+{
+  CMX_UNCACHED_OTHER (wx) : ORIGIN = 0x78000000 , LENGTH = 16 * 128K
+}
+
+MEMORY
+{
+    /* following define is used only for checking if uncached ddr region
+     * is still inside a valid address space, changing this
+     * will not move code position.
+     * One can change DDR content start, by changing ORIGIN(DDR_DATA)
+     */
+    DDR_UNCACHED_DATA (wx) : ORIGIN = 0xC0000000, LENGTH = 512M
+}
+
+SECTIONS
+{
+  /*
+  * locate the special sections in correct place
+  * These sections are required to ensure Myriad is initialized correctly and must be loaded first
+  */
+  .l2.mode    0x20FD0000 : { KEEP(*(.l2.mode)) }           /* L2 cache mode      */
+  .cmx.ctrl   0x20FC0028 : { KEEP(*(.cmx.ctrl)) }          /* CMX default layout */
+}
+

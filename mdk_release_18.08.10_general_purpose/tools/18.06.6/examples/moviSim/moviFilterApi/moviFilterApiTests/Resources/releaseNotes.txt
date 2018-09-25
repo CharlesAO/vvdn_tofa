@@ -1,0 +1,66 @@
+*******************
+***** RELEASE NOTES 
+***** Version 0.1
+*******************
+http://dub30.ir.intel.com/svn/TRUNK/keembay/data/keembay/c_models/cnnModel/
+SVN revision: 136329.
+
+
+Features set:
+	- DPU full path (CMX NN -> IDU -> MRM -> MPE -> PPE -> ODU -> CMX NN);
+	- IDU - Z Major configuration with a storage element of 1x1xZ size, size must be multiple of 16;
+	      - 4x4 MPE configuration;
+	      - ZXY order;
+	      - reads the input data from CMXNN;
+	- ODU - 4x4 MPE configuration;
+		  - ZXY order;
+		  - storage element if 1x1xZ size, size must be multiple of 16;
+		  - writes the output data in CMXNN;
+		  
+	- MPE - 1x1 convolution 8,4,2,1 bit signed input values;
+    - PPE - tanh, add, sub, mult, min, and, bypass;
+
+	
+Features to be added:
+	- DPU Control is work in progress;
+	- A method for setting PPE Instructions from outside of DPU;
+	- IDU - XxYxZ convolutions with stride and padding;
+	      - to support more storage-elements on Z dimension;
+	      - 16x1 MPE Alignment;
+	      - XYZ order;
+	      - IDU Channel Major configuration;
+	- MPE - to get command signals from IDU;
+
+
+Test case for: 8x8x1024 8 bit signed input activations, 1x1x1024x128 8 bit signed input weights, 1x1 convolution;
+	- random generated 8bit signed input data:
+		* generateACTSprsDataAndWriteCMX(dpuDescriptor, mWrPort, mRdPort);
+		* generateWTSprsDataAndWriteCMX(dpuDescriptor, mWrPort, mRdPort);
+	- wrote the input data in CMXNN - is made in the functions mentioned above;
+	- start DPU with a descriptor or setting the registers through APB:
+		* with a descriptor - main.cpp: - setUpDPUDescriptor(dpuDescriptor);
+							            - cnnModel->startDPUs(dpuDescriptor);
+		* through registers - main_moviSim.cpp: - setDPURegisters();
+											    - startDPU();			
+	- check the ODU output data from CMX:
+		* main.cpp: - readAndCheckOduResult(dpuDescriptor);
+		* PPE is set in bypass mode, the input data for ODU is the output from the MPE. The output from ODU is 8 bit data.
+	
+How to build and run the the test case:
+	
+	- go to /build directory and type:
+		- make clean
+		- make model
+		- make run
+		
+	- build and run the test emulating APB reads and writes for DPU registers:
+		- make clean
+		- make tcl
+		- make run
+		
+	- the model will print out debug informations. In order to disable this prints run the model with:
+		- model -verbosity MOVI_LOW
+		
+
+		
+

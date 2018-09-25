@@ -1,0 +1,951 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\shave\mat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\shave\mvcv_types.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\absoluteDiff\shave\src\cpp\absoluteDiff.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\aggregateCostSGBM64\shave\src\cpp\aggregateCostSGBM64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\aggregateAllPaths64\shave\src\cpp\aggregateAllPaths64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\accumulateSquare\shave\src\cpp\accumulateSquare.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\accumulateWeighted\shave\src\cpp\accumulateWeighted.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\arithmeticAdd\shave\src\cpp\arithmeticAdd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\arithmeticAddMask\shave\src\cpp\arithmeticAddMask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\arithmeticSub\shave\src\cpp\arithmeticSub.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\arithmeticSubFp16ToFp16\shave\src\cpp\arithmeticSubFp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\arithmeticSubMask\shave\src\cpp\arithmeticSubMask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\bitwiseAnd\shave\src\cpp\bitwiseAnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\bitwiseAndMask\shave\src\cpp\bitwiseAndMask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\bitwiseNot\shave\src\cpp\bitwiseNot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\bitwiseOr\shave\src\cpp\bitwiseOr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\bitwiseOrMask\shave\src\cpp\bitwiseOrMask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\bitwiseXor\shave\src\cpp\bitwiseXor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\bitwiseXorMask\shave\src\cpp\bitwiseXorMask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\boxFilter\shave\src\cpp\boxFilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\boxFilter11x11\shave\src\cpp\boxFilter11x11.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\boxFilter13x13\shave\src\cpp\boxFilter13x13.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\boxFilter15x15\shave\src\cpp\boxFilter15x15.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\boxFilter3x3\shave\src\cpp\boxFilter3x3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\boxFilter5x5\shave\src\cpp\boxFilter5x5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\boxFilter7x7\shave\src\cpp\boxFilter7x7.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\boxFilter9x9\shave\src\cpp\boxFilter9x9.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\canny\shave\src\cpp\canny.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\censusMatching16\shave\src\cpp\censusMatching16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\censusMatching32\shave\src\cpp\censusMatching32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\censusMatching64\shave\src\cpp\censusMatching64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\censusMatching65\shave\src\cpp\censusMatching65.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\CensusMatchingPyr\shave\src\cpp\censusMatchingPyr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\censusMin16\shave\src\cpp\censusMin16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\censusMin64\shave\src\cpp\censusMin64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\censusMin65\shave\src\cpp\censusMin65.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\censusMin7\shave\src\cpp\censusMin7.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\censusTransform5x5\shave\src\cpp\censusTransform5x5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convertFrom12BppTo8Bpp\shave\src\cpp\convertFrom12BppTo8Bpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convertYUV400ToYUV422\shave\src\cpp\convertYUV400ToYUV422.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution11x11\shave\src\cpp\convolution11x11.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution15x1\shave\src\cpp\convolution15x1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution1x15\shave\src\cpp\convolution1x15.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution1x5\shave\src\cpp\convolution1x5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution1x5Fp16ToFp16\shave\src\cpp\convolution1x5Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution1x7\shave\src\cpp\convolution1x7.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution1x7Fp16ToFp16\shave\src\cpp\convolution1x7Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution1x9\shave\src\cpp\convolution1x9.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution3x3\shave\src\cpp\convolution3x3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution3x3Fp16ToFp16\shave\src\cpp\convolution3x3Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution5x1\shave\src\cpp\convolution5x1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution5x1Fp16ToFp16\shave\src\cpp\convolution5x1Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution5x5\shave\src\cpp\convolution5x5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution5x5Fp16ToFp16\shave\src\cpp\convolution5x5Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution7x1\shave\src\cpp\convolution7x1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution7x1Fp16ToFp16\shave\src\cpp\convolution7x1Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution7x7\shave\src\cpp\convolution7x7.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution7x7Fp16ToFp16\shave\src\cpp\convolution7x7Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution7x7Fp16ToU8\shave\src\cpp\convolution7x7Fp16ToU8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution9x1\shave\src\cpp\convolution9x1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution9x9\shave\src\cpp\convolution9x9.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convolution9x9Fp16ToFp16\shave\src\cpp\convolution9x9Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convSeparable11x11\shave\src\cpp\convSeparable11x11.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convSeparable11x11Fp16ToFp16\shave\src\cpp\convSeparable11x11Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convSeparable3x3\shave\src\cpp\convSeparable3x3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convSeparable3x3Fp16ToFp16\shave\src\cpp\convSeparable3x3Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convSeparable5x5\shave\src\cpp\convSeparable5x5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convSeparable5x5Fp16ToFp16\shave\src\cpp\convSeparable5x5Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convSeparable7x7\shave\src\cpp\convSeparable7x7.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convSeparable7x7Fp16ToFp16\shave\src\cpp\convSeparable7x7Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convSeparable9x9\shave\src\cpp\convSeparable9x9.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\convSeparable9x9Fp16ToFp16\shave\src\cpp\convSeparable9x9Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cornerMinEigenVal\shave\src\cpp\cornerMinEigenVal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cornerMinEigenVal_patched\shave\src\cpp\cornerMinEigenVal_patched.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cvtColorKernelRGBToYUV\shave\src\cpp\cvtColorKernelRGBToYUV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cvtColorKernelRGBToYUV422\shave\src\cpp\cvtColorKernelRGBToYUV422.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cvtColorKernelYUV422ToRGB\shave\src\cpp\cvtColorKernelYUV422ToRGB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cvtColorKernelYUVToRGB\shave\src\cpp\cvtColorKernelYUVToRGB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cvtColorNV21ToRGB\shave\src\cpp\cvtColorNV21ToRGB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cvtColorRGBfp16ToLumaU8\shave\src\cpp\cvtColorRGBfp16ToLumaU8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cvtColorRGBfp16ToUV420U8\shave\src\cpp\cvtColorRGBfp16ToUV420U8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cvtColorRGBToChromaNV12\shave\src\cpp\cvtColorRGBToChromaNV12.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cvtColorRGBToLuma\shave\src\cpp\cvtColorRGBToLuma.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cvtColorRGBToLumaNV12\shave\src\cpp\cvtColorRGBToLumaNV12.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cvtColorRGBToNV21\shave\src\cpp\cvtColorRGBToNV21.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cvtColorRGBToUV\shave\src\cpp\cvtColorRGBToUV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\cvtColorRGBToUV420\shave\src\cpp\cvtColorRGBToUV420.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\dilate\shave\src\cpp\dilate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\dilate3x3\shave\src\cpp\dilate3x3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\dilate5x5\shave\src\cpp\dilate5x5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\dilate7x7\shave\src\cpp\dilate7x7.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\equalizeHist\shave\src\cpp\equalizeHist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\erode3x3\shave\src\cpp\erode3x3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\erode5x5\shave\src\cpp\erode5x5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\erode7x7\shave\src\cpp\erode7x7.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\extractDescriptor64_brisk\shave\src\cpp\extractDescriptor64_brisk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\extractDescriptor64_freakA\shave\src\cpp\extractDescriptor64_freakA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\fast9M2\shave\src\cpp\fast9M2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\fastAtan2Positive\shave\src\cpp\fastAtan2Positive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\gauss\shave\src\cpp\gauss.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\gaussHx2\shave\src\cpp\gaussHx2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\gaussHx2_fp16\shave\src\cpp\gaussHx2_fp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\gaussVx2\shave\src\cpp\gaussVx2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\gaussVx2_fp16\shave\src\cpp\gaussVx2_fp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\hammingDistance\shave\src\cpp\hammingDistance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\harrisResponse\shave\src\cpp\harrisResponse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\histogram\shave\src\cpp\histogram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\integralImageSquareSumFloatM2\shave\src\cpp\integralImageSquareSumFloatM2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\integralImageSquareSumM2\shave\src\cpp\integralImageSquareSumM2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\integralImageSumFloatM2\shave\src\cpp\integralImageSumFloatM2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\integralImageSumM2\shave\src\cpp\integralImageSumM2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\integralImageSumU16U32\shave\src\cpp\integralImageSumU16U32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\interpolatePixelBilinear\shave\src\cpp\interpolatePixelBilinear.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\localMaxMin3x3_fp16\shave\src\cpp\localMaxMin3x3_fp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\lookupTable10To16\shave\src\cpp\lookupTable10To16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\lookupTable10To8\shave\src\cpp\lookupTable10To8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\lookupTable12To16\shave\src\cpp\lookupTable12To16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\lookupTable12To8\shave\src\cpp\lookupTable12To8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\lookupTable8To8\shave\src\cpp\lookupTable8To8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\matrixInv3x3_fp32\shave\src\cpp\matrixInv3x3_fp32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\minKernel64\shave\src\cpp\minKernel64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\minMaxKernel\shave\src\cpp\minMaxKernel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\minMaxPos\shave\src\cpp\minMaxPos.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\nonMax3x3_fp32\shave\src\cpp\nonMax3x3_fp32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\nonMax3x3_u8\shave\src\cpp\nonMax3x3_u8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\pixelPos\shave\src\cpp\pixelPos.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\pyrdown\shave\src\cpp\pyrdown.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\sLaplacian3x3\shave\src\cpp\sLaplacian3x3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\sLaplacian3x3Fp16ToFp16\shave\src\cpp\sLaplacian3x3Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\sLaplacian5x5\shave\src\cpp\sLaplacian5x5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\sLaplacian5x5Fp16ToFp16\shave\src\cpp\sLaplacian5x5Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\sLaplacian7x7\shave\src\cpp\sLaplacian7x7.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\sLaplacian7x7Fp16ToFp16\shave\src\cpp\sLaplacian7x7Fp16ToFp16.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\sobel\shave\src\cpp\sobel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\ssdPointLine7x7U8U32\shave\src\cpp\ssdPointLine7x7U8U32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\sumOfAbsDiff11x11\shave\src\cpp\sumOfAbsDiff11x11.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\sumOfAbsDiff5x5\shave\src\cpp\sumOfAbsDiff5x5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\sumOfSquaredDiff5x5\shave\src\cpp\sumOfSquaredDiff5x5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\sumOfSquaredDiff7x7U8ToU32\shave\src\cpp\sumOfSquaredDiff7x7U8ToU32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\thresholdBinaryRange\shave\src\cpp\thresholdBinaryRange.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\thresholdBinaryU8\shave\src\cpp\thresholdBinaryU8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\thresholdKernel\shave\src\cpp\thresholdKernel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\whiteBalanceBayerGBRG\shave\src\cpp\whiteBalanceBayerGBRG.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\whiteBalanceRGB\shave\src\cpp\whiteBalanceRGB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\censusMatchingPyrOnePos\shave\src\cpp\censusMatchingPyrOnePos.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\censusMin3\shave\src\cpp\censusMin3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\computeADPyrOnePos\shave\src\cpp\computeADPyrOnePos.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\computeCombinedCost64\shave\src\cpp\computeCombinedCost64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\computeAD64\shave\src\cpp\computeAD64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\computeCombinedCost3\shave\src\cpp\computeCombinedCost3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\aggregateCostSGBM64_clamp\shave\src\cpp\aggregateCostSGBM64_clamp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\aggregateThreePaths64\shave\src\cpp\aggregateThreePaths64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\aggregateCostSGBM32_clamp\shave\src\cpp\aggregateCostSGBM32_clamp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\aggregateThreePaths32\shave\src\cpp\aggregateThreePaths32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\censusMin32\shave\src\cpp\censusMin32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\computeAD32\shave\src\cpp\computeAD32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\computeCombinedCost32\shave\src\cpp\computeCombinedCost32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\minKernel32\shave\src\cpp\minKernel32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\medianFilter5x5\shave\src\cpp\medianFilter5x5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\flipKernel\shave\src\cpp\flipKernel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\censusMinConfidence32\shave\src\cpp\censusMinConfidence32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\censusMinConfidence64\shave\src\cpp\censusMinConfidence64.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\kernels\thresholdDisparity\shave\src\cpp\thresholdDisparity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\mat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\mvcv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\mvcv_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\harrisResponse\shave\include\harrisResponse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\pyrdown\shave\include\pyrdown.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\ssdPointLine7x7U8U32\shave\include\ssdPointLine7x7U8U32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\fast9M2\shave\include\fast9M2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\minMaxPos\shave\include\minMaxPos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\censusMatchingPyr\shave\include\censusMatchingPyr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\censusMatching65\shave\include\censusMatching65.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\censusMatching16\shave\include\censusMatching16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\censusMin7\shave\include\censusMin7.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\censusMin65\shave\include\censusMin65.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\censusMin16\shave\include\censusMin16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution7x7\shave\include\convolution7x7.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution3x3\shave\include\convolution3x3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\absoluteDiff\shave\include\absoluteDiff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\swCommon\pcModel\half\half.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\swCommon\pcModel\half\moviFloat32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\accumulateSquare\shave\include\accumulateSquare.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\accumulateWeighted\shave\include\accumulateWeighted.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\arithmeticAdd\shave\include\arithmeticAdd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\arithmeticAddMask\shave\include\arithmeticAddMask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\arithmeticSub\shave\include\arithmeticSub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\arithmeticSubFp16ToFp16\shave\include\arithmeticSubFp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\arithmeticSubMask\shave\include\arithmeticSubMask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\bilateral5x5\shave\include\bilateral5x5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\bitwiseAnd\shave\include\bitwiseAnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\bitwiseAndMask\shave\include\bitwiseAndMask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\bitwiseNot\shave\include\bitwiseNot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\bitwiseOr\shave\include\bitwiseOr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\bitwiseOrMask\shave\include\bitwiseOrMask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\bitwiseXor\shave\include\bitwiseXor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\bitwiseXorMask\shave\include\bitwiseXorMask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\boxFilter\shave\include\boxFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\boxFilter11x11\shave\include\boxFilter11x11.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\boxFilter13x13\shave\include\boxFilter13x13.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\boxFilter15x15\shave\include\boxFilter15x15.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\boxFilter3x3\shave\include\boxFilter3x3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\boxFilter5x5\shave\include\boxFilter5x5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\boxFilter7x7\shave\include\boxFilter7x7.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\boxFilter9x9\shave\include\boxFilter9x9.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\canny\shave\include\canny.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\censusMatching32\shave\include\censusMatching32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\censusMatching64\shave\include\censusMatching64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\censusMin64\shave\include\censusMin64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution11x11\shave\include\convolution11x11.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution15x1\shave\include\convolution15x1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution1x15\shave\include\convolution1x15.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution1x5\shave\include\convolution1x5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution1x5Fp16ToFp16\shave\include\convolution1x5Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution1x7\shave\include\convolution1x7.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution1x7Fp16ToFp16\shave\include\convolution1x7Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution1x9\shave\include\convolution1x9.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution3x3Fp16ToFp16\shave\include\convolution1x3Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution5x1\shave\include\convolution5x1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution5x1Fp16ToFp16\shave\include\convolution5x1Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution5x5\shave\include\convolution5x5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution5x5Fp16ToFp16\shave\include\convolution5x5Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution7x1\shave\include\convolution7x1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution7x1Fp16ToFp16\shave\include\convolution7x1Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution7x7Fp16ToFp16\shave\include\convolution7x7Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution7x7Fp16ToU8\shave\include\convolution7x7Fp16ToU8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution9x1\shave\include\convolution9x1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution9x9\shave\include\convolution9x9.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convolution9x9Fp16ToFp16\shave\include\convolution9x9Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convSeparable11x11\shave\include\convSeparable11x11.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convSeparable11x11Fp16ToFp16\shave\include\convSeparable11x11Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convSeparable3x3\shave\include\convSeparable3x3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convSeparable3x3Fp16ToFp16\shave\include\convSeparable3x3Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convSeparable5x5\shave\include\convSeparable5x5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convSeparable5x5Fp16ToFp16\shave\include\convSeparable5x5Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convSeparable7x7\shave\include\convSeparable7x7.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convSeparable7x7Fp16ToFp16\shave\include\convSeparable7x7Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convSeparable9x9\shave\include\convSeparable9x9.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\convSeparable9x9Fp16ToFp16\shave\include\convSeparable9x9Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cornerMinEigenVal\shave\include\cornerMinEigenVal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cornerMinEigenVal_patched\shave\include\cornerMinEigenVal_patched.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cvtColorKernelRGBToYUV\shave\include\cvtColorKernelRGBToYUV.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cvtColorKernelRGBToYUV422\shave\include\cvtColorKernelRGBToYUV422.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cvtColorKernelYUV422ToRGB\shave\include\cvtColorKernelYUV422ToRGB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cvtColorKernelYUVToRGB\shave\include\cvtColorKernelYUVToRGB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cvtColorNV21ToRGB\shave\include\cvtColorNV21ToRGB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cvtColorRGBfp16ToLumaU8\shave\include\cvtColorRGBfp16ToLumaU8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cvtColorRGBfp16ToUV420U8\shave\include\cvtColorRGBfp16ToUV420U8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cvtColorRGBToChromaNV12\shave\include\cvtColorRGBToChromaNV12.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cvtColorRGBToLuma\shave\include\cvtColorRGBToLuma.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cvtColorRGBToLumaNV12\shave\include\cvtColorRGBToLumaNV12.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cvtColorRGBToNV21\shave\include\cvtColorRGBToNV21.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cvtColorRGBToUV\shave\include\cvtColorRGBToUV.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\cvtColorRGBToUV420\shave\include\cvtColorRGBToUV420.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\dilate\shave\include\dilate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\dilate3x3\shave\include\dilate3x3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\dilate5x5\shave\include\dilate5x5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\dilate7x7\shave\include\dilate7x7.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\equalizeHist\shave\include\equalizeHist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\erode3x3\shave\include\erode3x3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\erode5x5\shave\include\erode5x5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\erode7x7\shave\include\erode7x7.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\extractDescriptor64_brisk\shave\include\extractDescriptor64_brisk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\extractDescriptor64_freakA\shave\include\extractDescriptor64_freakA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\fastAtan2Positive\shave\include\fastAtan2Positive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\gauss\shave\include\gauss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\gaussHx2\shave\include\gaussHx2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\gaussHx2_fp16\shave\include\gaussHx2_fp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\gaussVx2\shave\include\gaussVx2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\gaussVx2_fp16\shave\include\gaussVx2_fp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\hammingDistance\shave\include\hammingDistance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\histogram\shave\include\histogram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\integralImageSquareSumFloatM2\shave\include\integralImageSquareSumFloatM2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\integralImageSquareSumM2\shave\include\integralImageSquareSumM2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\integralImageSumFloatM2\shave\include\integralImageSumFloatM2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\integralImageSumM2\shave\include\integralImageSumM2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\integralImageSumU16U32\shave\include\integralImageSumU16U32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\interpolatePixelBilinear\shave\include\interpolatePixelBilinear.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\localMaxMin3x3_fp16\shave\include\localMaxMin3x3_fp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\lookupTable10To16\shave\include\lookupTable10To16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\lookupTable10To8\shave\include\lookupTable10To8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\lookupTable12To16\shave\include\lookupTable12To16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\lookupTable12To8\shave\include\lookupTable12To8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\lookupTable8To8\shave\include\lookupTable8To8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\matrixInv3x3_fp32\shave\include\matrixInv3x3_fp32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\minMaxKernel\shave\include\minMaxKernel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\nonMax3x3_fp32\shave\include\nonMax3x3_fp32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\nonMax3x3_u8\shave\include\nonMax3x3_u8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\pixelPos\shave\include\pixelPos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\sLaplacian3x3\shave\include\sLaplacian3x3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\sLaplacian3x3Fp16ToFp16\shave\include\sLaplacian3x3Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\sLaplacian5x5\shave\include\sLaplacian5x5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\sLaplacian5x5Fp16ToFp16\shave\include\sLaplacian5x5Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\sLaplacian7x7\shave\include\sLaplacian7x7.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\sLaplacian7x7Fp16ToFp16\shave\include\sLaplacian7x7Fp16ToFp16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\sobel\shave\include\sobel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\sumOfAbsDiff11x11\shave\include\sumOfAbsDiff11x11.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\sumOfAbsDiff5x5\shave\include\sumOfAbsDiff5x5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\sumOfSquaredDiff11x11\shave\include\sumOfSquaredDiff11x11.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\sumOfSquaredDiff5x5\shave\include\sumOfSquaredDiff5x5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\sumOfSquaredDiff7x7U8ToU32\shave\include\sumOfSquaredDiff7x7U8ToU32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\thresholdBinaryRange\shave\include\thresholdBinaryRange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\thresholdBinaryU8\shave\include\thresholdBinaryU8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\thresholdKernel\shave\include\thresholdKernel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\whiteBalanceBayerGBRG\shave\include\whiteBalanceBayerGBRG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\whiteBalanceRGB\shave\include\ssdPointLine7x7U8U32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\censusTransform5x5\shave\include\censusTransform5x5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\aggregateAllPaths64\shave\include\aggregateAllPaths64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\kernels\aggregateCostSGBM64\shave\include\aggregateCostSGBM64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

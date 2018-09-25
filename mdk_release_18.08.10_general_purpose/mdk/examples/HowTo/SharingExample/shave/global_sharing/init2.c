@@ -1,0 +1,43 @@
+///
+/// @file
+/// @copyright All code copyright Movidius Ltd 2012, all rights reserved.
+///            For License Warranty see: common/license.txt
+///
+/// @brief     Shavring Example - Shave source code
+///
+
+#include <stdio.h>
+#include <math.h>
+#include <svuCommonShave.h>
+#include <moviVectorUtils.h>
+
+int4 add_simd(int4 input1,int4 input2);
+
+extern volatile int shared1[4], shared2[4];
+
+int myintrez[4];
+int4 myval1, myval2, myrez;
+
+int main( void )
+{
+    myval1[0] = shared1[0];
+    myval1[1] = shared1[1];
+    myval1[2] = shared1[2];
+    myval1[3] = shared1[3];
+
+    myval2[0] = shared2[0];
+    myval2[1] = shared2[1];
+    myval2[2] = shared2[2];
+    myval2[3] = shared2[3];
+
+    myrez = add_simd(myval1, myval2);
+
+    myintrez[0] = myrez[0];
+    myintrez[1] = myrez[1];
+    myintrez[2] = myrez[2];
+    myintrez[3] = myrez[3];
+
+    SHAVE_HALT;
+
+    return 0;
+}

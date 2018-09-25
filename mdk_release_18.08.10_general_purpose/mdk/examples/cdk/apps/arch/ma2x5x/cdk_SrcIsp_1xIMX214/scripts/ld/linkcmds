@@ -1,0 +1,37 @@
+/*
+* Main Linker script file for RTEMS
+*/
+
+/*
+* Settings for LOS
+*/
+_PROM_SIZE_LOS = DEFINED (_PROM_SIZE_LOS) ? _PROM_SIZE_LOS : 2M;
+_PROM_START_LOS = DEFINED (_PROM_START_LOS) ? _PROM_START_LOS : 0x00000000;
+
+/*_RAM_START_LOS = DEFINED (_RAM_START_LOS) ? _RAM_START_LOS : 0x70000000;*/
+_RAM_SIZE_LOS = DEFINED (_RAM_SIZE_LOS) ? _RAM_SIZE_LOS : 128M;
+_RAM_START_LOS = DEFINED (_RAM_START_LOS) ? _RAM_START_LOS : 0x80000000;
+
+/* these are the maximum values */
+__bss_end = _end;
+__sys_bss_start = _RAM_START_LOS + _RAM_SIZE_LOS - 0x100;
+__sys_bss_end = _RAM_START_LOS + _RAM_SIZE_LOS;
+
+/*
+* Settings for LRT
+*/
+_PROM_SIZE_LRT = DEFINED (_PROM_SIZE_LRT) ? _PROM_SIZE_LRT : 2M;
+_PROM_START_LRT = DEFINED (_PROM_START_LRT) ? _PROM_START_LRT : 0x00000000;
+
+_RAM_SIZE_LRT = DEFINED (_RAM_SIZE_LRT) ? _RAM_SIZE_LRT : 20M;
+_RAM_START_LRT = DEFINED (_RAM_START_LRT) ? _RAM_START_LRT : (0x80000000+_RAM_SIZE_LOS);
+
+/* these are the maximum values */
+lrt___bss_end = lrt__end;
+lrt___sys_bss_start = _RAM_START_LRT + _RAM_SIZE_LRT - 0x100;
+lrt___sys_bss_end = _RAM_START_LRT + _RAM_SIZE_LRT;
+
+INCLUDE ../../../common/scripts/ld/myriad2collection/myriad2_shave_slices.ldscript
+INCLUDE ./scripts/ld/linkcmds.base.los
+INCLUDE ./scripts/ld/linkcmds.base.lrt
+INCLUDE ./scripts/ld/linkcmds.base.general

@@ -1,0 +1,7 @@
+mdbg::breset
+mdbg::target $default_target                                                     
+mdbg::loadfile $elf                                                                  
+puts $run_opt
+mdbg::$run_opt
+puts $exit_opt
+$exit_opt

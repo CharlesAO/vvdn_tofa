@@ -1,0 +1,56 @@
+namespace path mdbg
+uart off
+puts breset
+breset
+
+#fancy wait which toggles the jtag led
+proc ledwait {ms} {
+    repeat [expr {$ms / 100}] {
+       jtag pins -led toggle
+       incr count
+       after 100
+    }
+    if {$count % 2} {
+       jtag pins -led toggle
+    }
+}
+
+
+# toggle jtag reset pins to let myriad enter the bootloader
+mvproto::lock {
+    jtag pins -srst low
+    ledwait 500
+    jtag pins -srst high -led toggle
+    ledwait 500
+}
+
+puts "loadsym $elf"
+loadsym $elf
+
+proc msetBits {location args} {
+    set value [mget -value $location]
+    foreach arg $args {
+        set value [expr {$value | (1 << $arg)}]
+    }
+    mset $location $value
+}
+
+#set bits to enable debug
+# 17 SLRTDE DSU Leon RT Debug Enable
+# 15 SLOSDE DSU Leon OS Debug Enable
+msetBits CPR_GEN_CTRL_ADR 15 17
+
+#set pipes for PipePrint
+set los_exists [sym -quiet mvConsoleTxQueue]
+if { $los_exists ne "" } {
+    pipe create LOS
+    pipe configure LOS -stdout
+    pipe configure LOS -readsym mvConsoleTxQueue
+}
+
+set lrt_exists [sym -quiet lrt_mvConsoleTxQueue]
+if { "$lrt_exists" ne "" } {
+    pipe create LRT
+    pipe configure LRT -stdout
+    pipe configure LRT -readsym lrt_mvConsoleTxQueue
+}

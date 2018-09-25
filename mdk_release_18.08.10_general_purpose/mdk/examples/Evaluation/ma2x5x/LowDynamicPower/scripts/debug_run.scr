@@ -1,0 +1,11 @@
+breset
+echo start
+start $default_target
+target $default_target
+echo load $elf
+load $elf
+echo $run_opt
+runw
+save memDbgLogBuffer 102400 ./output/tracebuff_los.bin
+echo $exit_opt
+$exit_opt

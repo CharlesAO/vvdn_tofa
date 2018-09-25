@@ -1,0 +1,6 @@
+# ARM-USB-TINY
+SUBSYSTEM=="usb*", ATTR{idProduct}=="0004", ATTR{idVendor}=="15ba", MODE="0666"
+# ARM-USB-TINY-H
+SUBSYSTEM=="usb*", ATTR{idProduct}=="002a", ATTR{idVendor}=="15ba", MODE="0666"
+
+

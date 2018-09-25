@@ -1,0 +1,38 @@
+macro lddetails
+        t LOS
+
+	; Load symbols
+	loadsym output/test.elf
+
+	; Load input.general
+	load parameters_file ../input/input.general
+
+	; Load input.operations
+	load operations_file ../input/input.operations
+
+	;Set number of SHAVEs
+	s numberShaves 2
+endm
+
+macro ldri
+; Prepare for debugging
+	debug on
+	debug off
+	srf ored
+
+; Load the elf
+	breset
+	l output/test.elf
+        start a
+	t LOS
+
+; Load details for BLISTestApp
+    lddetails
+
+; Run the Leon
+        t LOS
+	runw
+	exit
+endm
+
+ldri

@@ -1,0 +1,318 @@
+/*  This is a Leon Default Linker script
+ *  Should be used as an included linker script in top level scripts
+ */
+/*  linkcmds
+ */
+
+ENTRY(start)
+OUTPUT_ARCH(sparc)
+__DYNAMIC  =  0;
+
+/*
+ * The memory map looks like this:
+ * +--------------------+ <- low memory
+ * | .text              |
+ * |        etext       |
+ * |        ctor list   | the ctor and dtor lists are for
+ * |        dtor list   | C++ support
+ * |        _endtext    |
+ * +--------------------+
+ * | .data              | initialized data goes here
+ * |        _sdata      |
+ * |        _edata      |
+ * +--------------------+
+ * | .bss               |
+ * |        __bss_start | start of bss, cleared by crt0
+ * |        _end        | start of heap, used by sbrk()
+ * +--------------------+
+ * |    heap space      |
+ * |        _ENDHEAP    |
+ * |    stack space     |
+ * |        __stack     | top of stack
+ * +--------------------+ <- high memory
+ */
+
+/*
+ * SPARC monitor assumes this is present to provide proper RTEMS awareness.
+ */
+EXTERN(rtems_get_version_string);
+
+/*
+ * stick everything in ram (of course)
+ */
+SECTIONS
+{
+  /* This needs to be here, to allow insertion of custom code before .text */
+  .getCurrentPointerLocation :
+  {
+    LOS_CURRENT_POINTER = .;
+  } > LOS
+  . = LOS_CURRENT_POINTER;
+
+  .text ALIGN(0x1000) :
+  {
+    CREATE_OBJECT_SYMBOLS
+    text_start = .;
+    _text_start = .;
+    /******************************************/
+    /* Must include the trap table first      */
+    /* The traps starting address must have   */
+    /* the first 12 bits set to 0,            */
+    /* this is HW imposed limitation          */
+      *(.sys.text.traps)
+      *(.sys.text.start)
+      *(.sys.text*)
+    /******************************************/
+    *(.text*)
+    LOS_TEXT_END = .;
+  } > LOS
+
+  /* Update location counter */
+  . = LOS_TEXT_END;
+  .text.eh_frame ALIGN(16) :
+  {
+    KEEP(*(.eh_frame*))
+    LOS_TEXT_EH_FRAME_END = .;
+  } > LOS
+
+  . = LOS_TEXT_EH_FRAME_END;
+  .text.gnu.linkonce.t ALIGN(16) :
+  {
+    *(.gnu.linkonce.t*)
+  } > LOS
+
+  .ctors :
+  {
+    /*
+     * C++ constructors
+     */
+    /* gcc uses crtbegin.o to find the start of
+     * the constructors, so we make sure it is
+     * first.  Because this is a wildcard, it
+     * doesn't matter if the user does not
+     * actually link against crtbegin.o; the
+     * linker won't look for a file to match a
+     * wildcard.  The wildcard also means that it
+     * doesn't matter which directory crtbegin.o
+     * is in.  */
+    CTORS_BEGIN = .;
+    KEEP (*crtbegin.o(.ctors))
+    KEEP (*crtbegin?.o(.ctors))
+    /* We don't want to include the .ctor section from
+     * the crtend.o file until after the sorted ctors.
+     * The .ctor section from the crtend file contains the
+     * end of ctors marker and it must be last */
+    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .ctors))
+    KEEP (*(SORT(.ctors*)))
+    CTORS_END = .;
+  } > LOS
+
+  .dtors :
+  {
+    KEEP (*crtbegin.o(.dtors))
+    KEEP (*crtbegin?.o(.dtors))
+    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .dtors))
+    KEEP (*(SORT(.dtors*)))
+  } > LOS
+
+  .rodata :
+  {
+    _rodata_start = . ;
+    /* Adding startup readonly data */
+    *(.sys.rodata*)
+    *(.rodata*)
+    *(.gnu.linkonce.r*)
+    _erodata = ALIGN(0x10);
+    etext = _erodata;
+    _etext = _erodata;
+  } > LOS
+
+  /* Update location counter */
+  . = _erodata;
+
+  .init . :
+  {
+    KEEP(*(.init*))
+  } > LOS
+
+  .fini :
+  {
+    KEEP(*(.fini*))
+    *(.lit)
+    *(.shdata)
+    LOS_FINI_END = . ;
+  } > LOS
+
+  . = LOS_FINI_END;
+  .tdata ALIGN(16) :
+  {
+    _TLS_Data_begin = .;
+    *(.tdata .tdata.* .gnu.linkonce.td.*)
+    _TLS_Data_end = .;
+  } > LOS
+
+  . = _TLS_Data_end;
+  .tbss . :
+  {
+    _TLS_BSS_begin = .;
+    *(.tbss .tbss.* .gnu.linkonce.tb.*)
+    *(.tcommon)
+    _TLS_BSS_end = .;
+  } > LOS
+
+  _TLS_Data_size = _TLS_Data_end - _TLS_Data_begin;
+  _TLS_BSS_size = _TLS_BSS_end - _TLS_BSS_begin;
+  _TLS_Size = _TLS_BSS_end - _TLS_Data_begin;
+  _TLS_Alignment = ALIGNOF (.tdata);
+
+  ASSERT( (_TLS_Size >= 0) && (_TLS_Size < 0x0FFFFFFF) , "RTEMS TLS table size is negative!")
+
+  .rtemsroset :
+  {
+    /* for pre rtems-libbsd FreeBSD code */
+    __start_set_sysctl_set = .;
+    KEEP(*(set_sysctl_*));
+    __stop_set_sysctl_set = .;
+    KEEP(*(set_domain_*));
+    KEEP(*(set_pseudo_*));
+    KEEP (*(SORT(.rtemsroset.*)))
+    _endtext = .;
+  } > LOS
+
+  /* Update location pointer */
+  . = _endtext;
+  .rela.dyn ALIGN(16) :
+  {
+    *(.rela.init)
+    *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
+    *(.rela.fini)
+    *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
+    *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
+    *(.rela.tdata .rela.tdata.* .rela.gnu.linkonce.td.*)
+    *(.rela.tbss .rela.tbss.* .rela.gnu.linkonce.tb.*)
+    *(.rela.ctors)
+    *(.rela.dtors)
+    *(.rela.got)
+    *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+  } > LOS
+
+  .rtemsrwset :
+  {
+    KEEP (*(SORT(.rtemsrwset.*)))
+  } > LOS
+
+  .data :
+  {
+    data_start = .;
+    _data_start = .;
+    _sdata = . ;
+    *(.data*)
+    *(.gnu.linkonce.d*)
+    LOS_DATA_END = .;
+  } > LOS
+
+  /* Update location pointer */
+  . = LOS_DATA_END;
+
+  /* Necessary to align exception table to address beginning with first 4 bits 0 */
+  .data.except_table ALIGN(0x10):
+  {
+    *(.gcc_except_table*)
+    edata = ALIGN(0x10);
+    _edata = edata;
+  } > LOS
+
+  /* Update location pointer */
+  . = _edata;
+
+  /*The LeonOS default heap section*/
+  .heapSection . : { *(.heapSection.data) } > LOS
+
+  .dynamic    : { *(.dynamic)   } > LOS
+  .jcr        : { *(.jcr)       } > LOS
+  .got        : { *(.got)       } > LOS
+  .plt        : { *(.plt)       } > LOS
+  .hash       : { *(.hash)      } > LOS
+  .dynrel     : { *(.dynrel)    } > LOS
+  .dynsym     : { *(.dynsym)    } > LOS
+  .dynstr     : { *(.dynstr)    } > LOS
+  .hash       : { *(.hash)      } > LOS
+
+  .shbss :
+  {
+    *(.shbss)
+    LOS_END_SHBSS = .;
+  } > LOS
+
+  /* Update location pointer */
+  . = LOS_END_SHBSS;
+  .bss ALIGN(8) (NOLOAD):
+  {
+    __bss_start = .;
+    _bss_start = .;
+    bss_start = .;
+    *(.bss*)
+    *(.gnu.linkonce.b*)
+    *(COMMON)
+    bss_end = ALIGN(8);
+    _bss_end = bss_end;
+    __bss_end = bss_end;
+  } > LOS
+
+  /* Update location pointer */
+  . = __bss_end;
+  .noinit ALIGN(8) (NOLOAD) :
+  {
+    __noinit_start = . ;
+    *(.noinit*) *(COMMON)
+    __noinit_end = ALIGN(8);
+    end = ALIGN(8);
+    /* Note: RTEMS will use for the 'workspace', the memory area:
+        starting at the "end" symbol above,
+        up to "__sys_bss_start" symbol below - 8K.
+        If this linkerscript is modified to add more statically allocated
+        sections after this one, then the above assignment should be moved
+        lower.
+    */
+  } > LOS
+
+  . = __noinit_end;
+
+ .stack . (NOLOAD):
+  {
+    _STACKEND_LOS = ORIGIN(LOS) + ( LENGTH(LOS) >= 0x200 ? (LENGTH(LOS) - 0x200) : LENGTH(LOS));
+    _STACKSIZE_LOS = _STACKEND_LOS - .;
+    FILL(0);
+    . = (_STACKSIZE_LOS > 0) ? _STACKEND_LOS : .;
+  } > LOS
+  _LEON_STACK_POINTER = .;
+
+  .sys.bss ALIGN(8) (NOLOAD) :
+  {
+    __sys_bss_start = . ;
+    *(.sys.bss*)
+    __sys_bss_end = ALIGN(8);
+  } > LOS
+
+  /* Update location pointer */
+  . = __sys_bss_end;
+  .stab . (NOLOAD) :
+  {
+    [ .stab ]
+  } > LOS
+  .stabstr . (NOLOAD) :
+  {
+    [ .stabstr ]
+  } > LOS
+
+  __MIN_STACK_SIZE = DEFINED( __MIN_STACK_SIZE ) ? __MIN_STACK_SIZE : 3584;
+  __STACK_SIZE = ABSOLUTE(__sys_bss_start - __bss_end);
+  __TEXT_SIZE = ABSOLUTE(_rodata_start - _text_start);
+
+  ASSERT( (__TEXT_SIZE == 0) || ( (__STACK_SIZE > __MIN_STACK_SIZE) && (__STACK_SIZE < 0x80000000) ) , "LeonOS Code + data too big. Stack space left is smaller than the required minimum (3.5 KB)!")
+
+  /DISCARD/ :
+  {
+    *(.comment .gnu.attributes .iplt .rela.iplt)
+  }
+}

@@ -1,0 +1,5 @@
+set SoC [mdbg::MV_SOC_REV]
+if {[catch {source [file join [file dirname [info script]] "SoC/$SoC.scr"]} errmsg]} {
+    puts stderr "Error loading mdk-local tcl defines for SoC $SoC.\n$errmsg"
+}
+# vim: ft=tcl

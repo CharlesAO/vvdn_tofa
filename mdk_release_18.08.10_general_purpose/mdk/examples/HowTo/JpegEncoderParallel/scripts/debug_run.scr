@@ -1,0 +1,16 @@
+; boilerplate load and run
+breset
+start $default_target
+target $default_target
+echo load $elf ..
+load $elf
+echo runw
+runw
+
+; dump the output file
+echo "Complete: dumping output image"
+save 0x81200000 1529822 output.jpg
+
+; exit debugger
+echo $exit_opt
+$exit_opt

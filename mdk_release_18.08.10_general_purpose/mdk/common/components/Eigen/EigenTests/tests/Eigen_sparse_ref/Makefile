@@ -1,0 +1,3 @@
+include ../../shared/appcommon.mk
+MVCCOPT += -DEIGEN_TEST_PART_1=1 -DEIGEN_TEST_PART_2=1 -DEIGEN_TEST_PART_3=1 
+#MVCCOPT += -DCYCLESCOUNT

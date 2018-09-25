@@ -1,0 +1,533 @@
+/*  This is a Leon Default Linker script
+ *  Should be used as an included linker script in top level scripts
+ *
+ *  Addresses defined in common/drivers/myriad2/system/asm/memmap.S
+ */
+/*  linkcmds
+ */
+
+
+
+OUTPUT_ARCH(sparc)
+__DYNAMIC  =  0;
+ENTRY(start)
+
+/*
+ * The memory map looks like this:
+ * +--------------------+ <- low memory
+ * | .text              |
+ * |        etext       |
+ * |        ctor list   | the ctor and dtor lists are for
+ * |        dtor list   | C++ support
+ * |        _endtext    |
+ * +--------------------+
+ * | .data              | initialized data goes here
+ * |        _sdata      |
+ * |        _edata      |
+ * +--------------------+
+ * | .bss               |
+ * |        __bss_start | start of bss, cleared by crt0
+ * |        _end        | start of heap, used by sbrk()
+ * +--------------------+
+ * |    heap space      |
+ * |        _ENDHEAP    |
+ * |    stack space     |
+ * |        __stack     | top of stack
+ * +--------------------+ <- high memory
+ */
+
+VERSION_INFO_DYNAMIC_SIZE = DEFINED (VERSION_INFO_DYNAMIC_SIZE) ? VERSION_INFO_DYNAMIC_SIZE : 1024;
+DTP_DATA_SIZE = DEFINED (DTP_DATA_SIZE) ? DTP_DATA_SIZE : (1024 * 300);
+
+/*
+ * SPARC monitor assumes this is present to provide proper RTEMS awareness.
+ */
+EXTERN(rtems_get_version_string);
+
+/*
+ * stick everything in ram (of course)
+ */
+SECTIONS
+{
+  .text :
+  {
+    CREATE_OBJECT_SYMBOLS
+    text_start = .;
+    _text_start = .;
+        /********************************************/
+        /* In order to include the trap table first */
+    . = ALIGN(0x1000);
+      *(.sys.text.traps)
+    . = ALIGN(4);
+      *(.sys.text.start)
+      *(.sys.text*)
+        /********************************************/
+        . = ALIGN (4);
+    *(.text*)
+    . = ALIGN (16);
+
+    KEEP(*(.eh_frame*))
+    . = ALIGN (16);
+
+    *(.gnu.linkonce.t*)
+  } > LOS
+   .ddr.xxdebug :
+   {
+    __start_mmsdbgvarlist = .;
+    KEEP(*(mmsdbgvarlist))
+    __stop_mmsdbgvarlist = .;
+  } > LOS
+
+  version_info :
+  {
+    . = ALIGN (16);
+    linker_version_info_begin = .;
+
+    KEEP(*(version_info_prolog))
+    KEEP(*(version_info))
+    KEEP(*(version_info_epilog))
+    . = ALIGN (4);
+    . += VERSION_INFO_DYNAMIC_SIZE;
+    linker_version_info_end = .;
+  } > LOS
+
+  dtp_data :
+  {
+    . = ALIGN (16);
+    linker_dtp_data_begin = .;
+    *(dtp_data*)
+    . = linker_dtp_data_begin + DTP_DATA_SIZE;
+    linker_dtp_data_end = .;
+  } > LOS
+  .ctors :
+  {
+    /*
+     * C++ constructors
+     */
+    /* gcc uses crtbegin.o to find the start of
+       the constructors, so we make sure it is
+       first.  Because this is a wildcard, it
+       doesn't matter if the user does not
+       actually link against crtbegin.o; the
+       linker won't look for a file to match a
+       wildcard.  The wildcard also means that it
+       doesn't matter which directory crtbegin.o
+       is in.  */
+    CTORS_BEGIN = .;
+    KEEP (*crtbegin.o(.ctors))
+    KEEP (*crtbegin?.o(.ctors))
+    /* We don't want to include the .ctor section from
+       the crtend.o file until after the sorted ctors.
+       The .ctor section from the crtend file contains the
+       end of ctors marker and it must be last */
+    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .ctors))
+    KEEP (*(SORT(.ctors*)))
+    CTORS_END = .;
+  } > LOS
+
+  .dtors :
+  {
+    KEEP (*crtbegin.o(.dtors))
+    KEEP (*crtbegin?.o(.dtors))
+    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .dtors))
+    KEEP (*(SORT(.dtors*)))
+  } > LOS
+
+  .rodata :
+  {
+        . = ALIGN(4);
+    _rodata_start = . ;
+        /* Adding startup readonly data */
+        *(.sys.rodata*)
+    *(.rodata*)
+    *(.gnu.linkonce.r*)
+    _erodata = ALIGN( 0x10 ) ;
+    etext = ALIGN(0x10);
+    _etext = .;
+  } > LOS
+
+  .init :
+  {
+    KEEP(*(.init*))
+  } > LOS
+
+  .fini :
+  {
+    KEEP(*(.fini*))
+    *(.lit)
+    *(.shdata)
+    . = ALIGN (16);
+  } > LOS
+
+  .tdata :
+  {
+    _TLS_Data_begin = .;
+    *(.tdata .tdata.* .gnu.linkonce.td.*)
+    _TLS_Data_end = .;
+  } > LOS
+
+  .tbss :
+  {
+    _TLS_BSS_begin = .;
+    *(.tbss .tbss.* .gnu.linkonce.tb.*) *(.tcommon)
+    _TLS_BSS_end = .;
+  } > LOS
+
+  _TLS_Data_size = _TLS_Data_end - _TLS_Data_begin;
+  _TLS_BSS_size = _TLS_BSS_end - _TLS_BSS_begin;
+  _TLS_Size = _TLS_BSS_end - _TLS_Data_begin;
+  _TLS_Alignment = ALIGNOF (.tdata);
+  .rtemsroset : {
+    /* for pre rtems-libbsd FreeBSD code */
+    __start_set_sysctl_set = .;
+    KEEP(*(set_sysctl_*));
+    __stop_set_sysctl_set = .;
+    KEEP(*(set_domain_*));
+    KEEP(*(set_pseudo_*));
+
+    KEEP (*(SORT(.rtemsroset.*)))
+
+    . = ALIGN (16);
+    _endtext = .;
+  } > LOS
+
+  .rela.dyn       :
+    {
+      *(.rela.init)
+      *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
+      *(.rela.fini)
+      *(.rela.rodata .rela.rodata.* .rela.gnu.linkonce.r.*)
+      *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
+      *(.rela.tdata .rela.tdata.* .rela.gnu.linkonce.td.*)
+      *(.rela.tbss .rela.tbss.* .rela.gnu.linkonce.tb.*)
+      *(.rela.ctors)
+      *(.rela.dtors)
+      *(.rela.got)
+      *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+  } > LOS
+
+  .rtemsrwset : {
+    KEEP (*(SORT(.rtemsrwset.*)))
+  } > LOS
+  .data :
+  {
+    data_start = .;
+    _data_start = .;
+    _sdata = . ;
+    *(.data*)
+    *(.gnu.linkonce.d*)
+    . = ALIGN(0x10);
+    *(.gcc_except_table*)
+    . = ALIGN(0x10);
+    edata = .;
+    _edata = .;
+  } > LOS
+  /*The LeonOS default heap section*/
+  .heapSection : { *(.heapSection.data) } > LOS
+
+  .dynamic        : { *(.dynamic)       } > LOS
+  .jcr            : { *(.jcr)           } > LOS
+  .got            : { *(.got)           } > LOS
+  .plt            : { *(.plt)           } > LOS
+  .hash           : { *(.hash)          } > LOS
+  .dynrel         : { *(.dynrel)        } > LOS
+  .dynsym         : { *(.dynsym)        } > LOS
+  .dynstr         : { *(.dynstr)        } > LOS
+  .hash           : { *(.hash)          } > LOS
+
+  .shbss :
+  {
+    *(.shbss)
+  } > LOS
+  .bss :
+  {
+    __bss_start = ALIGN(4);
+    _bss_start = .;
+    bss_start = .;
+    *(.bss .bss* .gnu.linkonce.b*)
+    *(COMMON)
+    . = ALIGN (16);
+    end = .;
+    bss_end = .;
+    _bss_end = ALIGN(0x8);
+    __bss_end = ALIGN(0x8);
+  } > LOS
+
+  .noinit (NOLOAD) : {
+    . = ALIGN(8);
+    __noinit_start = . ;
+    *(.noinit*) *(COMMON)
+    . = ALIGN(8);
+    __noinit_end = . ;
+  } > LOS
+
+ .stack :
+  {
+    FILL(0);
+    . = ORIGIN(LOS) + LENGTH(LOS) - 0x100;
+  } > LOS
+  _LEON_STACK_POINTER = .;
+  .sys.bss ALIGN(4) (NOLOAD) : {
+    . = ALIGN(8);
+    __sys_bss_start = . ;
+    *(.sys.bss*)
+    . = ALIGN(8);
+    __sys_bss_end = . ;
+  } > LOS
+  .stab . (NOLOAD) :
+  {
+    [ .stab ]
+  } > LOS
+  .stabstr . (NOLOAD) :
+  {
+    [ .stabstr ]
+  } > LOS
+ }
+/*----------------------------------------------------------------*/
+/*------------Same sections follow for LeonRT---------------------*/
+/*----------------------------------------------------------------*/
+OUTPUT_ARCH(sparc)
+lrt___DYNAMIC  =  0;
+
+/*
+ * The memory map looks like this:
+ * +------------------------+ <- low memory
+ * | .lrt.text              |
+ * |        lrt_etext       |
+ * |        ctor list       | the ctor and dtor lists are for
+ * |        dtor list       | C++ support
+ * |        lrt__endtext    |
+ * +------------------------+
+ * | .lrt.data              | initialized data goes here
+ * |        lrt__sdata      |
+ * |        lrt__edata      |
+ * +------------------------+
+ * | .lrt.bss               |
+ * |        lrt___bss_start | start of bss, cleared by crt0
+ * |        lrt__end        | start of heap, used by sbrk()
+ * +------------------------+
+ * |    heap space          |
+ * |        lrt__ENDHEAP    |
+ * |    stack space         |
+ * |        lrt___stack     | top of stack
+ * +------------------------+ <- high memory
+ */
+
+
+/*
+ * SPARC monitor assumes this is present to provide proper RTEMS awareness.
+ */
+EXTERN(lrt_rtems_get_version_string);
+
+/*
+ * stick everything in ram (of course)
+ */
+SECTIONS
+{
+  .lrt.text :
+  {
+    CREATE_OBJECT_SYMBOLS
+    lrt_text_start = .;
+    lrt__text_start = .;
+        /********************************************/
+        /* In order to include the trap table first */
+      *(.lrt.sys.text.traps)
+  /* LeonRT Entry point has a requirement that the bottom 12 bits
+     are 0. Thus 4KB alignment is required */
+    . = ALIGN(0x1000);
+      *(.lrt.sys.text.start)
+      *(.lrt.sys.text*)
+        /********************************************/
+        . = ALIGN (4);
+    *(.lrt.text*)
+    . = ALIGN (16);
+
+    KEEP(*(.lrt.eh_frame*))
+    . = ALIGN (16);
+
+    *(.lrt.gnu.linkonce.t*)
+  } > LRT
+  .lrt.ctors :
+  {
+    /*
+     * C++ constructors
+     */
+    /* gcc uses crtbegin.o to find the start of
+       the constructors, so we make sure it is
+       first.  Because this is a wildcard, it
+       doesn't matter if the user does not
+       actually link against crtbegin.o; the
+       linker won't look for a file to match a
+       wildcard.  The wildcard also means that it
+       doesn't matter which directory crtbegin.o
+       is in.  */
+    lrt_CTORS_BEGIN = .;
+    KEEP (*crtbegin.o(.lrt.ctors))
+    KEEP (*crtbegin?.o(.lrt.ctors))
+    /* We don't want to include the .ctor section from
+       the crtend.o file until after the sorted ctors.
+       The .ctor section from the crtend file contains the
+       end of ctors marker and it must be last */
+    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .lrt.ctors))
+    KEEP (*(SORT(.lrt.ctors*)))
+    lrt_CTORS_END = .;
+  } > LRT
+  .lrt.dtors :
+  {
+    KEEP (*crtbegin.o(.lrt.dtors))
+    KEEP (*crtbegin?.o(.lrt.dtors))
+    KEEP (*(EXCLUDE_FILE (*crtend.o *crtend?.o ) .lrt.dtors))
+    KEEP (*(SORT(.lrt.dtors*)))
+  } > LRT
+  .lrt.rodata :
+  {
+        . = ALIGN(4);
+    lrt__rodata_start = . ;
+        /* Adding startup readonly data */
+        *(.lrt.sys.rodata*)
+    *(.lrt.rodata*)
+    *(.lrt.gnu.linkonce.r*)
+    lrt__erodata = ALIGN( 0x10 ) ;
+
+    lrt_etext = ALIGN(0x10);
+    lrt__etext = .;
+  } > LRT
+  .lrt.init :
+  {
+    KEEP(*(.lrt.init*))
+  } > LRT
+  .lrt.fini :
+  {
+    KEEP(*(.lrt.fini*))
+    *(.lrt.lit)
+    *(.lrt.shdata)
+    . = ALIGN (16);
+  } > LRT
+  .lrt.tdata : {
+    lrt__TLS_Data_begin = .;
+    *(.lrt.tdata .lrt.tdata.* .lrt.gnu.linkonce.td.*)
+    lrt__TLS_Data_end = .;
+  } > LRT
+  .lrt.tbss : {
+    lrt__TLS_BSS_begin = .;
+    *(.lrt.tbss .lrt.tbss.* .lrt.gnu.linkonce.tb.*) *(.lrt.tcommon)
+    lrt__TLS_BSS_end = .;
+  } > LRT
+  lrt__TLS_Data_size = lrt__TLS_Data_end - lrt__TLS_Data_begin;
+  lrt__TLS_BSS_size = lrt__TLS_BSS_end - lrt__TLS_BSS_begin;
+  lrt__TLS_Size = lrt__TLS_BSS_end - lrt__TLS_Data_begin;
+  lrt__TLS_Alignment = ALIGNOF (.lrt.tdata);
+  .lrt.rtemsroset : {
+    /* for pre rtems-libbsd FreeBSD code */
+    lrt___start_set_sysctl_set = .;
+    KEEP(*(lrt_set_sysctl_*));
+    lrt___stop_set_sysctl_set = .;
+    KEEP(*(lrt_set_domain_*));
+    KEEP(*(lrt_set_pseudo_*));
+
+    KEEP (*(SORT(.lrt.rtemsroset.*)))
+
+    . = ALIGN (16);
+    lrt__endtext = .;
+  } > LRT
+  .lrt.rela.dyn       :
+    {
+      *(.lrt.rela.init)
+      *(.lrt.rela.text .lrt.rela.text.* .lrt.rela.gnu.linkonce.t.*)
+      *(.lrt.rela.fini)
+      *(.lrt.rela.rodata .lrt.rela.rodata.* .lrt.rela.gnu.linkonce.r.*)
+      *(.lrt.rela.data .lrt.rela.data.* .lrt.rela.gnu.linkonce.d.*)
+      *(.lrt.rela.tdata .lrt.rela.tdata.* .lrt.rela.gnu.linkonce.td.*)
+      *(.lrt.rela.tbss .lrt.rela.tbss.* .lrt.rela.gnu.linkonce.tb.*)
+      *(.lrt.rela.ctors)
+      *(.lrt.rela.dtors)
+      *(.lrt.rela.got)
+      *(.lrt.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
+    } > LRT
+  .lrt.rtemsrwset : {
+    KEEP (*(SORT(.lrt.rtemsrwset.*)))
+  } > LRT
+  .lrt.data :
+  {
+    lrt_data_start = .;
+    lrt__data_start = .;
+    lrt__sdata = . ;
+    *(.lrt.data*)
+    *(.lrt.gnu.linkonce.d*)
+    . = ALIGN(0x10);
+    *(.lrt.gcc_except_table*)
+    . = ALIGN(0x10);
+    lrt_edata = .;
+    lrt__edata = .;
+  } > LRT
+  /*The LeonRT default heap section*/
+  .lrt.heapSection : { *(.lrt.heapSection.data) } > LRT
+
+
+  .lrt.dynamic    : { *(.lrt.dynamic)   } > LRT
+  .lrt.jcr                : { *(.lrt.jcr)               } > LRT
+  .lrt.got                : { *(.lrt.got)               } > LRT
+  .lrt.plt        : { *(.lrt.plt)               } > LRT
+  .lrt.hash               : { *(.lrt.hash)              } > LRT
+  .lrt.dynrel     : { *(.lrt.dynrel)    } > LRT
+  .lrt.dynsym     : { *(.lrt.dynsym)    } > LRT
+  .lrt.dynstr     : { *(.lrt.dynstr)    } > LRT
+  .lrt.hash               : { *(.lrt.hash)              } > LRT
+  .lrt.shbss :
+  {
+    *(.lrt.shbss)
+  } > LRT
+  .lrt.bss :
+  {
+    lrt___bss_start = ALIGN(0x8);
+    lrt__bss_start = .;
+    lrt_bss_start = .;
+    *(.lrt.bss .lrt.bss* .lrt.gnu.linkonce.b*)
+    *(.lrtCOMMON)
+    . = ALIGN (16);
+    lrt_end = .;
+    lrt_bss_end = .;
+    lrt__bss_end = ALIGN(0x8);
+    lrt___bss_end = ALIGN(0x8);
+  } > LRT AT>LRT
+
+  .lrt.noinit (NOLOAD) : {
+    . = ALIGN(8);
+    lrt___noinit_start = . ;
+    *(.lrt.noinit*) *(.lrtCOMMON)
+    . = ALIGN(8);
+    lrt___noinit_end = . ;
+  } > LRT
+  .lrt.stack :
+  {
+    FILL(0);
+    . = ORIGIN(LRT) + LENGTH(LRT) - 0x100;
+  } > LRT
+
+  lrt__LEON_STACK_POINTER = .;
+  .lrt.sys.bss ALIGN(4) (NOLOAD) : {
+    . = ALIGN(8);
+    lrt___sys_bss_start = . ;
+    *(.lrt.sys.bss*)
+    . = ALIGN(8);
+    lrt___sys_bss_end = . ;
+  } > LRT
+  .lrt.stab . (NOLOAD) :
+  {
+    [ .lrt.stab ]
+  } > LRT
+  .lrt.stabstr . (NOLOAD) :
+  {
+    [ .lrt.stabstr ]
+  } > LRT
+  __MIN_STACK_SIZE = DEFINED( __MIN_STACK_SIZE ) ? __MIN_STACK_SIZE : 3584;
+  __STACK_SIZE = ABSOLUTE(__sys_bss_start - __bss_end);
+  ASSERT( (__STACK_SIZE > __MIN_STACK_SIZE) && (__STACK_SIZE < 0x80000000) , "LeonOS Code + data too big. Stack space left is smaller than the required minimum (3.5 KB)!")
+
+  lrt__MIN_STACK_SIZE = DEFINED( lrt__MIN_STACK_SIZE ) ? lrt__MIN_STACK_SIZE : 3584;
+  lrt__STACK_SIZE = ABSOLUTE(lrt___sys_bss_start - lrt___bss_end);
+  ASSERT( (lrt__STACK_SIZE > lrt__MIN_STACK_SIZE) && (lrt__STACK_SIZE < 0x80000000) , "LeonRT Code + data too big. Stack space left is smaller than the required minimum (3.5 KB)!")
+  /DISCARD/ : {
+    *(.comment .gnu.attributes .iplt .rela.iplt)
+  }
+}

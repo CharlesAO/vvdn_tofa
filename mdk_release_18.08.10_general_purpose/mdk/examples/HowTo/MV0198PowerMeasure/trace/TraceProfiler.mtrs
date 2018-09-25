@@ -1,0 +1,8 @@
+[General]
+Format=MTRS
+Version=0.1
+
+[10000]
+Name=MY_APP_RUN
+Type=Logic
+

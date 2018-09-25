@@ -1,0 +1,31 @@
+breset
+echo "custom debug script being used..."
+
+start $default_target
+echo load $elf ..
+load $elf
+echo $run_opt
+
+target $default_target
+
+runw
+
+ get newCamFrameCtr
+
+ get newCamFrameCtr
+
+ get newCamFrameCtr
+
+contw
+
+ get newCamFrameCtr
+
+ get newCamFrameCtr
+
+ get newCamFrameCtr
+
+    breset
+    exit
+    echo $exit_opt
+    $exit_opt
+

@@ -1,0 +1,22 @@
+%rename endfile old_endfile
+%rename startfile old_startfile
+%rename link old_link
+%rename lib old_lib
+
+# Include Linker file at the very end because now all the libraries are available
+*endfile:
+-T linkcmds%s crtend.o%s crtn.o%s
+
+# Start Files
+*startfile:
+%{!qrtems: %(old_startfile)} \
+%{!nostdlib: %{qrtems: start.o%s crti.o%s crtbegin.o%s}}
+
+*link:
+%{!qrtems: %(old_link)} %{qrtems: -dc -dp -N %(old_link)}
+
+# Modified Lib so that it does not include linker script file as it is used twice and breaks the BSP !!!
+*lib:
+%{!qrtems: %(old_lib)} \
+%{!nostdlib: %{qrtems: --start-group -lrtemsbsp -lrtemscpu -lc -lgcc --end-group }}
+

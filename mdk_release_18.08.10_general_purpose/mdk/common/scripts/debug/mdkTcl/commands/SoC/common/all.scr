@@ -1,0 +1,5 @@
+loadAllBegin
+loadAllPrio utils.scr
+loadAllEnd
+
+# vim: ft=tcl

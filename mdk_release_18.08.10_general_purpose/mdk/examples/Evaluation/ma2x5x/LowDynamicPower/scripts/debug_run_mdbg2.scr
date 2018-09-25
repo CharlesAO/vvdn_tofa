@@ -1,0 +1,21 @@
+proc ldri {} {
+
+    mdbg::breset
+    mdbg::target LOS
+    mdbg::loadfile $::elf
+
+    set los_exists [mdbg::sym addr -nocomplain mvConsoleTxQueue]
+    if { $los_exists ne "" } {
+        mdbg::pipe create LOS
+        mdbg::pipe configure LOS -stdout
+        mdbg::pipe configure LOS -readsym mvConsoleTxQueue
+    }
+
+    mdbg::runw
+
+    mdbg::pipe flush LOS
+
+    exit
+}
+
+ldri

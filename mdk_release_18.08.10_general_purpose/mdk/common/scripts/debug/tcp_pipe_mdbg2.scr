@@ -1,0 +1,32 @@
+
+mdbg::pipe interval -busy 10 -idle 10
+
+set los_exists [mdbg::sym addr -nocomplain mvConsoleTxQueue]
+if { $los_exists ne "" } {
+    mdbg::pipe create LOS
+    mdbg::pipe configure LOS -tcp 30010
+    mdbg::pipe configure LOS -readsym  mvConsoleTxQueue
+    mdbg::pipe configure LOS -writesym mvConsoleRxQueue
+    puts "Please open a telnet session on port 30010 for LOS console:"
+    puts "telnet localhost 30010"
+}
+
+set lrt_exists [mdbg::sym addr -nocomplain lrt_mvConsoleTxQueue]
+if { "$lrt_exists" ne "" } {
+    mdbg::pipe create LRT
+    mdbg::pipe configure LRT -tcp 30011
+    mdbg::pipe configure LRT -readsym  lrt_mvConsoleTxQueue
+    mdbg::pipe configure LRT -writesym lrt_mvConsoleRxQueue
+    puts "Please open a telnet session on port 30011 for LRT console:"
+    puts "telnet localhost 30011"
+}
+set shave_exists [mdbg::sym addr -nocomplain mvConsoleShaveTxQueue]
+if { "$shave_exists" ne "" } {
+    mdbg::pipe create SHV
+    mdbg::pipe configure SHV -tcp 30012
+    mdbg::pipe configure SHV -readsym  mvConsoleShaveTxQueue
+    mdbg::pipe configure SHV -writesym mvConsoleShaveRxQueue
+    puts "Please open a telnet session on port 30012 for SHV console:"
+    puts "telnet localhost 30012"
+}
+

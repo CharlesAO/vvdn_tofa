@@ -1,0 +1,12 @@
+
+puts breset
+mdbg::breset
+
+mdbg::loadfile -verify XX_FLASHER_ELF_XX
+
+mdbg::mset 0x80000000 0
+
+mdbg::runw
+
+
+exit

@@ -1,0 +1,38 @@
+proc loadSourceDir { dir } {
+    source [file join [file dirname [info script]] "$dir/all.scr"]
+}
+
+proc loadAllBegin {} {
+    upvar 1 scrList lscrList
+    set lscrList [glob [file dirname [info script]]/*]
+    set lscrList [lsearch -all -inline -not -glob $lscrList */[file tail [info script]]]
+}
+
+proc loadAllPrio { args } {
+    upvar 1 scrList lscrList
+    foreach arg $args {
+        set f [lsearch -inline -glob $lscrList */$arg]
+        if {$f != -1} {
+            set lscrList [lsearch -all -inline -not -glob $lscrList */$arg]
+            set lscrList [linsert $lscrList 0 $f ]
+        }
+    }
+}
+
+proc loadAllEnd {} {
+    upvar 1 scrList lscrList
+    foreach scr $lscrList {
+        puts " Loading $scr"
+        source $scr
+    }
+}
+
+
+source [file join [file dirname [info script]] "commands/SoC.scr"]
+
+set ::rootScrReload [file join [file dirname [info script]] "commands/SoC.scr"]
+proc scriptsReload {} {
+    uplevel 1 [list source $::rootScrReload]
+}
+
+# vim: ft=tcl

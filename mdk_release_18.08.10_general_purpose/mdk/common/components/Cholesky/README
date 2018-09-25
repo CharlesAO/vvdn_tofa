@@ -1,0 +1,73 @@
+ ----- Structure of the Cholesky directory ----- 
+
+├── include 
+│   └──cholesky_solver.h  #header containing the .c functions declaration 
+├── README   #this 
+└── shave                  
+    ├── arch 
+    │   ├── gemvltNx4.asm      #used by gemvl_t(), multiplies a Nx4 block of a matrix by a vector,
+    │   │                         updating that vector; 4x4 inner loop size
+    │   ├── potrfln4x4.asm     #used by potrf_ln(), performs the Cholesky factorization of a 4x4 block;
+    │   ├── potrfln4x4upd.asm  #also used by potrf_ln()
+    │   ├── rcpy4xN.asm        #also used by syrk_tnl(), copies a 4xN block right-to-left; 
+    │   │                        this allows moving data in overlapping buffers, 
+    │   │                        where the destination is to the right of the source 
+    │   │                        
+    │   ├── syrktnNx4.asm      #used by syrk_tnl(), multiplies two Nx4 blocks (columns),
+    │   │                        producing a 4x4 output block; 
+    │   ├── trsvln4x4.asm      #used by trsvl_ln(), is a 4x4 lower-diagonal triangular solver,
+    │   │                        reading the matrix left-to-right (normal access)
+    │   ├── trsvlt4x4.asm      #used by trsvl_lt(), is a 4x4 lower-diagonal triangular solver,
+    │   │                        reading the matrix top-to-bottom (transposed access)
+    │   ├── trsvn4x4_U.asm     #used by trsvl_ln(), is the 4-element column update operator used in the 
+    │   │                        vector after every completely determined set of 4 values of the solution                    
+    │   └── trsvt4x4_U.asm     #used by trsvl_lt(), works like trsvn4x4_U(), 
+    │                            except it uses transposed matrix accesses                 
+    ├── cholesky.h    #header containing the kernels declaration         
+    ├── gemvl_t.c   #This will left-multiply b, by the transposed of matrix A: c := A' * b      
+    ├── potrf_ln.c  # This will multiply A transposed, by itself (normal), updating only 
+    │                 the lower half of the matrix ( below the main diagonal): A|lower := A' * A            
+    ├── syrk_tn_l.c #This will perform Cholesky decomposition of the lower triangular matrix, storing the result as-is 
+    │                  (normal: also to the lower half): A := L such that L * L' == A|original       
+    ├── trsvl_ln.c  #This will solve the triangular equation with the coefficients on the left side, A being 
+    │                  lower-triangular, and not transposed (normal): y = b \ A (from: A * y = b, compute y = A^(-1) * b)                
+    └── trsvl_lt.c   #This will solve the triangular equation with the coefficients on the left side, A being lower-triangular, and transposed: y = b \ A’ (from: A' * y = 
+                      b, compute y = (A')^(-1) * b )                    
+
+
+ ----- Algorithm Description -----
+
+The code solves the Ax=b equation, with A[N][N], x[N] and b[N].
+
+To do this, a single pass is performed (no iterative refinement), as follows:
+
+M = A' * A          // create an SPD matrix (syrk_tn_l)
+c = A' * b          // preserve the identity (gemvl_t)
+L = chol( M )       // perform the Cholesky factorization (potrf_ln)
+  // now our equation is
+  //   LL'x = c
+  // let L’x = y; it becomes
+  //  Ly = c
+y = c \ L     // solve y from Ly = c (trsv_ln)
+x = y \ L'    // solve x from L’x = c (trsv_lt)
+
+ ----- How to use Cholesky -----
+
+-> You have to include in your aplication's makefile 
+
+ifeq ($(MV_SOC_REV),Processor_arhitecture)
+MVASMOPT +=-DProcessor_arhitecture  ( for example for ma2150 this line will be: MVASMOPT +=-Dma2150 )
+endif 
+
+ !! Where Processor_arhitecture can be ma2150, ma2450 or ma2480
+
+ComponentList := Cholesky // to include the component
+SHAVE_COMPONENTS = yes
+
+Also at SHAVE linking rules you have to specify the ENTRYPOINTS like this:
+
+ENTRYPOINTS += -e gemvl_t -u potrf_ln -u syrk_tn_l -u trsvl_ln -u trsvl_lt -u --gc-sections
+
+
+
+

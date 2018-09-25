@@ -1,0 +1,25 @@
+///
+/// @file      mvispScale2xBilinHV075_U16ToU16.h
+/// @copyright All code copyright Movidius Ltd 2013, all rights reserved.
+///            For License Warranty see: common/license.txt
+///
+/// @brief     Down scale by half in each direction wil bilinear (sw) kernel.
+///            Fp16 in and out
+///
+
+#ifndef __mvispScale2xBilinHV075_Fp16ToFp16_H__
+#define __mvispScale2xBilinHV075_Fp16ToFp16_H__
+#include <mv_types.h>
+#include <mvcv_macro.h>
+
+//!@{
+/// mvispScale2xBilinHV075_Fp16ToFp16 kernel
+/// @param[in] in         - Input lines
+/// @param[in] out        - Output line
+/// @param[in] inWidth    - Width of input line
+
+MVCV_FUNC(void, mvispScale2xBilinHV075_Fp16ToFp16, half** in, half** out, u32 inWidth)
+
+//!@}
+
+#endif //__mvispScale2xBilinHV075_Fp16ToFp16_H__

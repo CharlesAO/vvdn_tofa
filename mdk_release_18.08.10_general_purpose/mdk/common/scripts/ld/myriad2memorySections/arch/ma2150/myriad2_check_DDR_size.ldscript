@@ -1,0 +1,8 @@
+  /*Check if the end of DDR cache was achieved and don't link if so*/
+  ASSERT( DDR_END < 0x80000000 + 128M,
+          "DDR cache overflows available memory outside 128M boundry !")
+
+
+  /*Check if the end of DDR uncache was achieved and don't link if so*/
+  ASSERT( DDR_UNCACHED_END < 0xC0000000 + 128M,
+         "DDR_UNCACHED overflows available memory outside 128M boundry !")

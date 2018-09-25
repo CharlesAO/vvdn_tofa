@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" version="2.1">
+<key attr.name="includes" attr.type="string" for="graph" id="includes"/>
+<key attr.name="binary" attr.type="string" for="graph" id="binary"/>
+<key attr.name="shaveFirst" attr.type="int" for="graph" id="shaveFirst"/>
+<key attr.name="shaveLast" attr.type="int" for="graph" id="shaveLast"/>
+<key attr.name="mkPath" attr.type="string" for="graph" id="mkPath"/>
+<key attr.name="myriadTarget" attr.type="int" for="graph" id="myriadTarget"/>
+<key attr.name="id" attr.type="string" for="node" id="id"/>
+<key attr.name="name" attr.type="string" for="node" id="name"/>
+<key attr.name="description" attr.type="string" for="node" id="description"/>
+<key attr.name="flags" attr.type="string" for="node" id="flags"/>
+<key attr.name="dataType" attr.type="string" for="node" id="dataType"/>
+<key attr.name="outW" attr.type="string" for="node" id="outW"/>
+<key attr.name="outH" attr.type="string" for="node" id="outH"/>
+<key attr.name="userImgSize" attr.type="string" for="node" id="userImgSize"/>
+<key attr.name="numPl" attr.type="string" for="node" id="numPl"/>
+<key attr.name="symbol" attr.type="string" for="node" id="symbol"/>
+<key attr.name="x" attr.type="int" for="node" id="x"/>
+<key attr.name="y" attr.type="int" for="node" id="y"/>
+<key attr.name="w" attr.type="int" for="node" id="w"/>
+<key attr.name="h" attr.type="int" for="node" id="h"/>
+<key attr.name="internal0" attr.type="string" for="node" id="internal0"/>
+<key attr.name="internal1" attr.type="string" for="node" id="internal1"/>
+<key attr.name="thresh" attr.type="string" for="node" id="thresh"/>
+<key attr.name="cfg" attr.type="string" for="node" id="cfg"/>
+<key attr.name="bayerPattern" attr.type="string" for="node" id="bayerPattern"/>
+<key attr.name="blcGR" attr.type="string" for="node" id="blcGR"/>
+<key attr.name="blcR" attr.type="string" for="node" id="blcR"/>
+<key attr.name="blcB" attr.type="string" for="node" id="blcB"/>
+<key attr.name="blcGB" attr.type="string" for="node" id="blcGB"/>
+<key attr.name="gmBase" attr.type="string" for="node" id="gmBase"/>
+<key attr.name="gmWidth" attr.type="string" for="node" id="gmWidth"/>
+<key attr.name="gmHeight" attr.type="string" for="node" id="gmHeight"/>
+<key attr.name="dataFormat" attr.type="string" for="node" id="dataFormat"/>
+<key attr.name="dataWidth" attr.type="string" for="node" id="dataWidth"/>
+<key attr.name="grgbPlat" attr.type="string" for="node" id="grgbPlat"/>
+<key attr.name="grgbDecay" attr.type="string" for="node" id="grgbDecay"/>
+<key attr.name="badPixCfg" attr.type="string" for="node" id="badPixCfg"/>
+<key attr.name="gainSat" attr.type="string" for="node" id="gainSat"/>
+<key attr.name="statsBase" attr.type="string" for="node" id="statsBase"/>
+<key attr.name="statsPlanes" attr.type="string" for="node" id="statsPlanes"/>
+<key attr.name="statsPatchCfg" attr.type="string" for="node" id="statsPatchCfg"/>
+<key attr.name="statsPatchStart" attr.type="string" for="node" id="statsPatchStart"/>
+<key attr.name="statsPatchSkip" attr.type="string" for="node" id="statsPatchSkip"/>
+<key attr.name="statsThresh" attr.type="string" for="node" id="statsThresh"/>
+<key attr.name="afF1coefs" attr.type="string" for="node" id="afF1coefs"/>
+<key attr.name="afF2coefs" attr.type="string" for="node" id="afF2coefs"/>
+<key attr.name="afMinThresh" attr.type="string" for="node" id="afMinThresh"/>
+<key attr.name="afSubtract" attr.type="string" for="node" id="afSubtract"/>
+<key attr.name="afPatchCfg" attr.type="string" for="node" id="afPatchCfg"/>
+<key attr.name="afPatchStart" attr.type="string" for="node" id="afPatchStart"/>
+<key attr.name="afStatsBase" attr.type="string" for="node" id="afStatsBase"/>
+<key attr.name="histLumaBase" attr.type="string" for="node" id="histLumaBase"/>
+<key attr.name="histRgbBase" attr.type="string" for="node" id="histRgbBase"/>
+<key attr.name="dewormCfg" attr.type="string" for="node" id="dewormCfg"/>
+<key attr.name="lumaWeight" attr.type="string" for="node" id="lumaWeight"/>
+<key attr.name="dogCoeffs11" attr.type="string" for="node" id="dogCoeffs11"/>
+<key attr.name="dogCoeffs15" attr.type="string" for="node" id="dogCoeffs15"/>
+<key attr.name="dogStrength" attr.type="string" for="node" id="dogStrength"/>
+<key attr.name="ltmCurves" attr.type="string" for="node" id="ltmCurves"/>
+<key attr.name="gaussLut" attr.type="string" for="node" id="gaussLut"/>
+<key attr.name="f2" attr.type="string" for="node" id="f2"/>
+<key attr.name="gammaLut" attr.type="string" for="node" id="gammaLut"/>
+<key attr.name="distCfg" attr.type="string" for="node" id="distCfg"/>
+<key attr.name="distOffsets" attr.type="string" for="node" id="distOffsets"/>
+<key attr.name="fullFrmDim" attr.type="string" for="node" id="fullFrmDim"/>
+<key attr.name="strength" attr.type="string" for="node" id="strength"/>
+<key attr.name="clip" attr.type="string" for="node" id="clip"/>
+<key attr.name="limit" attr.type="string" for="node" id="limit"/>
+<key attr.name="rgnStop01" attr.type="string" for="node" id="rgnStop01"/>
+<key attr.name="rgnStop23" attr.type="string" for="node" id="rgnStop23"/>
+<key attr.name="coef01" attr.type="string" for="node" id="coef01"/>
+<key attr.name="coef23" attr.type="string" for="node" id="coef23"/>
+<key attr.name="yCoefs" attr.type="string" for="node" id="yCoefs"/>
+<key attr.name="chrCoefs" attr.type="string" for="node" id="chrCoefs"/>
+<key attr.name="lumaAlpha" attr.type="string" for="node" id="lumaAlpha"/>
+<key attr.name="thr" attr.type="string" for="node" id="thr"/>
+<key attr.name="greyPt" attr.type="string" for="node" id="greyPt"/>
+<key attr.name="krgb" attr.type="string" for="node" id="krgb"/>
+<key attr.name="ccm" attr.type="string" for="node" id="ccm"/>
+<key attr.name="ccOffs" attr.type="string" for="node" id="ccOffs"/>
+<key attr.name="threeDLut" attr.type="string" for="node" id="threeDLut"/>
+<key attr.name="lutFormat" attr.type="string" for="node" id="lutFormat"/>
+<key attr.name="sizeA" attr.type="string" for="node" id="sizeA"/>
+<key attr.name="sizeB" attr.type="string" for="node" id="sizeB"/>
+<key attr.name="lut" attr.type="string" for="node" id="lut"/>
+<key attr.name="mat" attr.type="string" for="node" id="mat"/>
+<key attr.name="offset" attr.type="string" for="node" id="offset"/>
+<key attr.name="clamp" attr.type="string" for="node" id="clamp"/>
+<key attr.name="horzD" attr.type="string" for="node" id="horzD"/>
+<key attr.name="horzN" attr.type="string" for="node" id="horzN"/>
+<key attr.name="vertD" attr.type="string" for="node" id="vertD"/>
+<key attr.name="vertN" attr.type="string" for="node" id="vertN"/>
+<key attr.name="horzCoefs" attr.type="string" for="node" id="horzCoefs"/>
+<key attr.name="vertCoefs" attr.type="string" for="node" id="vertCoefs"/>
+<key attr.name="planeMode" attr.type="string" for="node" id="planeMode"/>
+<key attr.name="index" attr.type="int" for="edge" id="index"/>
+<key attr.name="inputIndex" attr.type="int" for="edge" id="inputIndex"/>
+<key attr.name="outputIndex" attr.type="int" for="edge" id="outputIndex"/>
+<key attr.name="kernel" attr.type="string" for="edge" id="kernel"/>
+<graph edgedefault="directed" id="Pipeline">
+<data key="includes">ISPPipeSettings.h</data>
+<data key="binary">mbinImgSipp</data>
+<data key="shaveFirst">0</data>
+<data key="shaveLast">3</data>
+<data key="mkPath">../build/sipp/</data>
+<data key="myriadTarget">MA2x5x</data>
+<node id="0">
+<node id="outputbuffer0">
+<data key="dataType">UInt16</data>
+<data key="numPl">SIPP_ISP_PIPE_BUFFER_INPUT_NUM_PLANES</data>
+</node>
+<data key="name">dmaIn0</data>
+<data key="id">dmaIn</data>
+<data key="description">DMA in filter</data>
+<data key="flags">0x00</data>
+<data key="outW">SIPP_ISP_PIPE_BUFFER_WIDTH</data>
+<data key="outH">SIPP_ISP_PIPE_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_DMA_ID</data>
+<data key="x">38</data>
+<data key="y">30</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="internal0">NULL</data>
+<data key="internal1"/>
+</node>
+<node id="1">
+<node id="outputbuffer0">
+<data key="dataType">UInt16</data>
+<data key="numPl">SIPP_ISP_PIPE_BUFFER_INPUT_NUM_PLANES</data>
+</node>
+<data key="name">sigmaDnsMa2x5x0</data>
+<data key="id">sigmaDnsMa2x5x</data>
+<data key="description">Sigma Denoise &amp; Black level correction Filter</data>
+<data key="flags">0x0</data>
+<data key="outW">SIPP_ISP_PIPE_BUFFER_WIDTH</data>
+<data key="outH">SIPP_ISP_PIPE_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_SIGMA_ID</data>
+<data key="x">181</data>
+<data key="y">32</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="thresh">(ISPC_SIGMA_THRESH1_P0 &lt;&lt;  0 | ISPC_SIGMA_THRESH2_P0 &lt;&lt;  8 | ISPC_SIGMA_THRESH1_P1 &lt;&lt; 16 | ISPC_SIGMA_THRESH2_P1 &lt;&lt; 24),(ISPC_SIGMA_THRESH1_P2 &lt;&lt;  0 | ISPC_SIGMA_THRESH2_P2 &lt;&lt;  8 | ISPC_SIGMA_THRESH1_P3 &lt;&lt; 16 | ISPC_SIGMA_THRESH2_P3 &lt;&lt; 24)</data>
+<data key="cfg">SIGMA_DNS_CFG(ISPC_SIGMA_NOISE_FLOOR, (ISPC_BAYER_BITS - 1), SIGMA_DNS_PASSTHRU_BIT,FORMAT)</data>
+<data key="bayerPattern">BAYER_PATTERN</data>
+<data key="blcGR">64</data>
+<data key="blcR">64</data>
+<data key="blcB">64</data>
+<data key="blcGB">64</data>
+</node>
+<node id="2">
+<node id="outputbuffer0">
+<data key="dataType">UInt16</data>
+<data key="numPl">SIPP_ISP_PIPE_BUFFER_INPUT_NUM_PLANES</data>
+</node>
+<data key="name">lscMa2x5x0</data>
+<data key="id">lscMa2x5x</data>
+<data key="description">Lens shading correction (or anti-vignetting) compensates for the effect produced by camera optics whereby the  light  intensity  of  pixels  reduces  the  further  away  from  the  centre  of  the  image  they  are.</data>
+<data key="flags">0x0</data>
+<data key="outW">SIPP_ISP_PIPE_BUFFER_WIDTH</data>
+<data key="outH">SIPP_ISP_PIPE_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_LSC_ID</data>
+<data key="x">295</data>
+<data key="y">30</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="gmBase">ispcLscMesh</data>
+<data key="gmWidth">ISPC_LSC_GAIN_MAP_W</data>
+<data key="gmHeight">ISPC_LSC_GAIN_MAP_H</data>
+<data key="dataFormat">SIPP_LSC_CFG_FORMAT(BAYER)</data>
+<data key="dataWidth">ISPC_BAYER_BITS</data>
+</node>
+<node id="3">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">SIPP_ISP_PIPE_BUFFER_INPUT_NUM_PLANES</data>
+</node>
+<data key="name">rawMa2x5x0</data>
+<data key="id">rawMa2x5x</data>
+<data key="description">The Raw filter performs a number of functions on raw CFA data, prior to demosaicing,  including  hot  and  cold  pixel  suppression,  Gr/Gb  imbalance  correction,  digital  gain, and statistics collection.</data>
+<data key="flags">0x0</data>
+<data key="outW">SIPP_ISP_PIPE_BUFFER_WIDTH</data>
+<data key="outH">SIPP_ISP_PIPE_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_RAW_ID</data>
+<data key="x">425</data>
+<data key="y">31</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="grgbPlat">RAW_GRGB_PLATO(ISPC_GRGB_IMBAL_PLAT_DARK,ISPC_GRGB_IMBAL_PLAT_BRIGHT)</data>
+<data key="grgbDecay">RAW_GRGB_DECAY(ISPC_GRGB_IMBAL_DECAY_BRIGHT, ISPC_GRGB_IMBAL_DECAY_DARK)</data>
+<data key="badPixCfg">RAW_BAD_PIX_CFG(ISPC_BAD_PIX_NOISE_LEVEL, ISPC_BAD_PIX_ALPHA_G_HOT, ISPC_BAD_PIX_ALPHA_G_COLD, ISPC_BAD_PIX_ALPHA_RB_HOT, ISPC_BAD_PIX_ALPHA_RB_COLD)</data>
+<data key="cfg">RAW_CFG(BAYER,BAYER_PATTERN,GRGB_IMBAL_EN,0,AE_PATCH_STATS_EN,AE_RGB_HIST_STATS_EN,(ISPC_BAYER_BITS - 1),ISPC_GRGB_IMBAL_THRESHOLD,0,AF_PATCH_STATS_EN,BAYER_2x2_MODE,AE_Y_HIST_STATS_EN,HOT_COLD_PIX_SUPPRESS_EN)</data>
+<data key="gainSat">((ISPC_RAW_CLAMP_0&lt;&lt;16) | ISPC_RAW_GAIN_GR ), ((ISPC_RAW_CLAMP_1&lt;&lt;16) | ISPC_RAW_GAIN_R ), ((ISPC_RAW_CLAMP_2&lt;&lt;16) | ISPC_RAW_GAIN_B ), ((ISPC_RAW_CLAMP_3&lt;&lt;16) | ISPC_RAW_GAIN_GB )</data>
+<data key="statsBase">0</data>
+<data key="statsPlanes">0</data>
+<data key="statsPatchCfg">0</data>
+<data key="statsPatchStart">0</data>
+<data key="statsPatchSkip">0</data>
+<data key="statsThresh">0</data>
+<data key="afF1coefs">0,0,0,0,0,0,0,0,0,0,0</data>
+<data key="afF2coefs">0,0,0,0,0,0,0,0,0,0,0</data>
+<data key="afMinThresh">0</data>
+<data key="afSubtract">0</data>
+<data key="afPatchCfg">0</data>
+<data key="afPatchStart">0</data>
+<data key="afStatsBase">0</data>
+<data key="histLumaBase">0</data>
+<data key="histRgbBase">0</data>
+</node>
+<node id="4">
+<node id="outputbuffer0">
+<data key="dataType">UInt16</data>
+<data key="numPl">3</data>
+</node>
+<node id="outputbuffer1">
+<data key="dataType">fp16</data>
+<data key="numPl">SIPP_ISP_PIPE_BUFFER_INPUT_NUM_PLANES</data>
+</node>
+<data key="name">debayerMa2x5x0</data>
+<data key="id">debayerMa2x5x</data>
+<data key="description">This filter converts raw Bayer data into 3-channels-per-pixel RGB data.</data>
+<data key="flags">0x0</data>
+<data key="outW">SIPP_ISP_PIPE_BUFFER_WIDTH</data>
+<data key="outH">SIPP_ISP_PIPE_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_DBYR_ID</data>
+<data key="x">558</data>
+<data key="y">33</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="cfg">DEBAYER_CFG(BAYER_PATTERN,0,0,ISPC_BAYER_BITS,ISPC_DEBAYER_BITS,IMAGE_ORDER_OUT, OUTPUT_PLANE_NO,0)</data>
+<data key="thresh">DEBAYER_THRESH(0,0,1,1,1,0) </data>
+<data key="dewormCfg">DEBAYER_DEWORM(ISPC_DEMOSAIC_MIX_OFFSET,ISPC_DEMOSAIC_MIX_SLOPE)</data>
+<data key="lumaWeight">DEBAYER_LUMA_COEFS_CFG(ISPC_DEMOSAIC_LUMA_WEIGHT_RED , ISPC_DEMOSAIC_LUMA_WEIGHT_GREEN, ISPC_DEMOSAIC_LUMA_WEIGHT_BLUE)</data>
+</node>
+<node id="5">
+<node id="outputbuffer0">
+<data key="dataType">fp16</data>
+<data key="numPl">SIPP_ISP_PIPE_BUFFER_INPUT_NUM_PLANES</data>
+</node>
+<data key="name">dogLtmMa2x5x0</data>
+<data key="id">dogLtmMa2x5x</data>
+<data key="description">Spatial Local Tone Mapping plus Noise reduction based on a Difference of Gaussians</data>
+<data key="flags">0x0</data>
+<data key="outW">SIPP_ISP_PIPE_BUFFER_WIDTH</data>
+<data key="outH">SIPP_ISP_PIPE_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_DOGL_ID</data>
+<data key="x">340</data>
+<data key="y">131</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="cfg">DOGL_CFG_SET(DOG_LTM_MODE,ISPC_DOG_THR,DOG_OUTPUT_CLAMP,DS_MODE,ISPC_LTM_FILTER_TH1,0,DOG_HEIGHT);</data>
+<data key="dogCoeffs11">dogCoeffs11</data>
+<data key="dogCoeffs15">dogCoeffs15</data>
+<data key="dogStrength">ISPC_DOG_STRENGTH</data>
+<data key="ltmCurves">(u16 *)ltm_curves</data>
+</node>
+<node id="6">
+<node id="outputbuffer0">
+<data key="dataType">fp16</data>
+<data key="numPl">SIPP_ISP_PIPE_BUFFER_INPUT_NUM_PLANES</data>
+</node>
+<data key="name">ydnsMa2x5x0</data>
+<data key="id">ydnsMa2x5x</data>
+<data key="description">This filter is designed to remove noise from a single image plane.</data>
+<data key="flags">0x0</data>
+<data key="outW">SIPP_ISP_PIPE_BUFFER_WIDTH</data>
+<data key="outH">SIPP_ISP_PIPE_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_LUMA_ID</data>
+<data key="x">341</data>
+<data key="y">239</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="cfg">LUMA_DNS_CFG(0x1, ISPC_LUMA_DNS_REF_SHIFT, ISPC_LUMA_DNS_ALPHA, ISPC_LUMA_DNS_BITPOS)</data>
+<data key="gaussLut">gaussLut[0],gaussLut[1],gaussLut[2],gaussLut[3]</data>
+<data key="f2">ISPC_LUMA_DNS_F2</data>
+<data key="gammaLut">gammaLut[0],gammaLut[1],gammaLut[2],gammaLut[3],gammaLut[4]</data>
+<data key="distCfg">(u32)ispcYDnsDistLut</data>
+<data key="distOffsets">X_OFFSET | (Y_OFFSET &lt;&lt; 16)</data>
+<data key="fullFrmDim">(FULL_IMAGE_WIDTH &lt;&lt; 16 ) | FULL_IMAGE_HEIGHT</data>
+</node>
+<node id="7">
+<node id="outputbuffer0">
+<data key="dataType">fp16</data>
+<data key="numPl">SIPP_ISP_PIPE_BUFFER_INPUT_NUM_PLANES</data>
+</node>
+<data key="name">sharpenMa2x5x0</data>
+<data key="id">sharpenMa2x5x</data>
+<data key="description">The Sharpen filter enhances image sharpness. Programmable (separable, symmetric) blur filter kernel. Sharpening functionality can be disabled to use filter kernel on its own.</data>
+<data key="flags">0x0</data>
+<data key="outW">SIPP_ISP_PIPE_BUFFER_WIDTH</data>
+<data key="outH">SIPP_ISP_PIPE_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_SHARPEN_ID</data>
+<data key="x">342</data>
+<data key="y">346</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="cfg">SHARPEN_CFG( THR, SHARPEN_KERNEL_SIZE,OUTPUT_CLAMP ,SHARPEN_MODE,OUTPUT_DELTAS)</data>
+<data key="strength">SHARPEN_STRENGTH_CFG(SHARPEN_STRENGTH_LIGHTEN, SHARPEN_STRENGTH_DARKEN )</data>
+<data key="clip">SHARPEN_CLIPPING_ALPHA</data>
+<data key="limit"> SHARPEN_LIMITS_CFG(0x0,0x4000)</data>
+<data key="rgnStop01">SHARPEN_RANGESTOP01_CFG(SHARPEN_RANGE_STOP0, SHARPEN_RANGE_STOP1)</data>
+<data key="rgnStop23"> SHARPEN_RANGESTOP01_CFG(SHARPEN_RANGE_STOP2, SHARPEN_RANGE_STOP3)</data>
+<data key="coef01">SHARPEN_COEFS01_CFG(0x0,0x0)</data>
+<data key="coef23">SHARPEN_COEFS23_CFG(0x0,0x0)</data>
+</node>
+<node id="8">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">3</data>
+</node>
+<data key="name">chromaGenMa2x5x0</data>
+<data key="id">chromaGenMa2x5x</data>
+<data key="description">Spatial sub-sampling, Purple Flare reduction, Desaturation &amp; Chroma Generation Filter</data>
+<data key="flags">SIPP_RESIZE</data>
+<data key="outW">ISPC_CHROMA_PIPE_WIDTH</data>
+<data key="outH">ISPC_CHROMA_PIPE_HEIGHT</data>
+<data key="symbol">SIPP_CGEN_ID</data>
+<data key="x">736</data>
+<data key="y">103</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="cfg">CGEN_CFG_SET(ISPC_CGEN_PFR_STRENGTH,ISPC_CGEN_DESAT_OFFSET,ISPC_CGEN_DESAT_SLOPE,ISPC_DEBAYER_BITS,BYPASS_PF_DAD,DS_MODE)</data>
+<data key="yCoefs">CGEN_LUMA_COEFF_SET(ISPC_CGEN_LUMA_COEFF_R,ISPC_CGEN_LUMA_COEFF_G,ISPC_CGEN_LUMA_COEFF_B) </data>
+<data key="chrCoefs">CGEN_CHROMA_COEFF_SET(ISPC_CGEN_EPSILON,ISPC_CGEN_KR,ISPC_CGEN_KG,ISPC_CGEN_KB)</data>
+</node>
+<node id="9">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">3</data>
+</node>
+<data key="name">medianMa2x5x0</data>
+<data key="id">medianMa2x5x</data>
+<data key="description">Median Filter.</data>
+<data key="flags">0x0</data>
+<data key="outW">ISPC_CHROMA_PIPE_WIDTH</data>
+<data key="outH">ISPC_CHROMA_PIPE_HEIGHT</data>
+<data key="symbol">SIPP_MED_ID</data>
+<data key="x">742</data>
+<data key="y">236</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="cfg">MED_CFG(MEDIAN_KERNEL_SIZE,MEDIAN_OUT_SEL,MEDIAN_THRESHOLD,MEDIAN_LUMA_ABLEND_EN,MEDIAN_LUMA_SAMPLE_EN,0)</data>
+<data key="lumaAlpha">MED_LUMA_ALPHA(ISPC_CHROMA_MEDIAN_MIX_SLOPE,ISPC_CHROMA_MEDIAN_MIX_OFFSET)</data>
+</node>
+<node id="10">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">3</data>
+</node>
+<data key="name">chromadnsMa2x5x0</data>
+<data key="id">chromadnsMa2x5x</data>
+<data key="description">This filter performs chroma denoise using wide cascaded, thresholded box filters.</data>
+<data key="flags">0x0</data>
+<data key="outW">ISPC_CHROMA_PIPE_WIDTH</data>
+<data key="outH">ISPC_CHROMA_PIPE_HEIGHT</data>
+<data key="symbol">SIPP_CHROMA_ID</data>
+<data key="x">748</data>
+<data key="y">352</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="cfg">CHROMA_DNS_CFG(ISPC_CHROMA_DNS_H_ENAB,ISPC_CHROMA_DNS_LIMIT,FORCE_WT_H,FORCE_WT_V,(PLANES_PER_CYCLE-1),ISPC_GREY_DESAT_OFFSET,ISPC_GREY_DESAT_SLOPE)</data>
+<data key="thr">CHROMA_DNS_THRESH0,CHROMA_DNS_THRESH1</data>
+<data key="greyPt">CHORMA_GREY_PT_SET(ISPC_GREY_POINT_B,ISPC_GREY_POINT_G,ISPC_GREY_POINT_R,GREY_PT_EN)</data>
+<data key="chrCoefs">CHROMA_DNS_COEFFS_SET(ispcLowpassKernel[4],ispcLowpassKernel[1],ispcLowpassKernel[0])</data>
+</node>
+<node id="11">
+<node id="outputbuffer0">
+<data key="dataType">UInt16</data>
+<data key="numPl">3</data>
+</node>
+<data key="name">colorcombMa2x5x0</data>
+<data key="id">colorcombMa2x5x</data>
+<data key="description">The Color Combination filter takes Chrominance and Luminance data that was separated from RGB previously, for the purposes of independent filtering.</data>
+<data key="flags">0x0</data>
+<data key="outW">SIPP_ISP_PIPE_BUFFER_WIDTH</data>
+<data key="outH">SIPP_ISP_PIPE_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_CC_ID</data>
+<data key="x">541</data>
+<data key="y">372</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="cfg">CC_CFG(FORCE_LUMA_ONE,0,LUT_3D_BYPASS,LUT_3D_LOAD,U12F_OUTPUT,CC_OUTPUT_PLANE)</data>
+<data key="krgb">ISPC_CC_KR | (ISPC_CC_KG &lt;&lt; 16),(ISPC_CC_KB | (ISPC_CGEN_EPSILON &lt;&lt; 16))</data>
+<data key="ccm">(ccm_lut_coeffs[0] | (ccm_lut_coeffs[3] &lt;&lt; 16)),(ccm_lut_coeffs[6] | (ccm_lut_coeffs[1] &lt;&lt; 16)),(ccm_lut_coeffs[4] | (ccm_lut_coeffs[7] &lt;&lt; 16)),(ccm_lut_coeffs[2] | (ccm_lut_coeffs[5] &lt;&lt; 16)),(ccm_lut_coeffs[8] | (ccm_lut_offsets[0] &lt;&lt; 16))</data>
+<data key="ccOffs">(ccm_lut_offsets[1] | (ccm_lut_offsets[2] &lt;&lt; 16))</data>
+<data key="threeDLut">0x0</data>
+<data key="lutFormat">0x0</data>
+</node>
+<node id="12">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">3</data>
+</node>
+<data key="name">lutMa2x5x0</data>
+<data key="id">lutMa2x5x</data>
+<data key="description">The LUT is a highly flexible lookup table which can be used for tonal curve or gamma application, or other complex functions.</data>
+<data key="flags">0x0</data>
+<data key="outW">SIPP_ISP_PIPE_BUFFER_WIDTH</data>
+<data key="outH">SIPP_ISP_PIPE_BUFFER_HEIGHT</data>
+<data key="symbol">SIPP_LUT_ID</data>
+<data key="x">524</data>
+<data key="y">480</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="cfg">INTERP_MODE | CHANNEL_MODE&lt;&lt; 1 | (CHANNELS_NO - 1) &lt;&lt; 12 | LUT_LOAD &lt;&lt; 14 | CSC_ENABLE&lt;&lt; 16</data>
+<data key="sizeA">LUT_REGION0_SIZE_I | (LUT_REGION1_SIZE_I &lt;&lt;  4) | (LUT_REGION2_SIZE_I &lt;&lt;  8) | (LUT_REGION3_SIZE_I &lt;&lt; 12) | (LUT_REGION4_SIZE_I &lt;&lt; 16) | (LUT_REGION5_SIZE_I &lt;&lt; 20) | (LUT_REGION6_SIZE_I &lt;&lt; 24) | (LUT_REGION7_SIZE_I &lt;&lt; 28)</data>
+<data key="sizeB">LUT_REGION8_SIZE_I | (LUT_REGION9_SIZE_I  &lt;&lt;  4) | (LUT_REGION10_SIZE_I &lt;&lt;  8) | (LUT_REGION11_SIZE_I &lt;&lt; 12) | (LUT_REGION12_SIZE_I &lt;&lt; 16) | (LUT_REGION13_SIZE_I &lt;&lt; 20) | (LUT_REGION14_SIZE_I &lt;&lt; 24) | (LUT_REGION15_SIZE_I &lt;&lt; 28)</data>
+<data key="lut">(void *)gammaLutFp16</data>
+<data key="lutFormat">LUT_LD_FORMAT</data>
+<data key="mat">LUT_MAT_11,LUT_MAT_12,LUT_MAT_13,LUT_MAT_21,LUT_MAT_22,LUT_MAT_23,LUT_MAT_31,LUT_MAT_32,LUT_MAT_33</data>
+<data key="offset">LUT_OFF_1,LUT_OFF_2,LUT_OFF_3</data>
+</node>
+<node id="13">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">polyphasefirMa2x5xY</data>
+<data key="id">polyphasefirMa2x5x</data>
+<data key="description">The poly-phase FIR filter scaler is suitable for high-quality implementations of scaling using e.g. Lanczos resampling.</data>
+<data key="flags">SIPP_RESIZE</data>
+<data key="outW">POLY_Y_IMAGE_WIDTH</data>
+<data key="outH">POLY_Y_IMAGE_HEIGHT</data>
+<data key="userImgSize">true</data>
+<data key="symbol">SIPP_UPFIRDN_ID</data>
+<data key="x">404</data>
+<data key="y">596</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="clamp">0</data>
+<data key="horzD">POLYFIR_Y_H_DEN</data>
+<data key="horzN">POLYFIR_Y_H_NUM</data>
+<data key="vertD">POLYFIR_Y_V_DEN</data>
+<data key="vertN">POLYFIR_Y_V_NUM</data>
+<data key="horzCoefs">(UInt8*)hCoefs</data>
+<data key="vertCoefs">(UInt8*)vCoefs</data>
+<data key="planeMode">POLY_PLANE_Y</data>
+</node>
+<node id="14">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">polyphasefirMa2x5xU</data>
+<data key="id">polyphasefirMa2x5x</data>
+<data key="description">The poly-phase FIR filter scaler is suitable for high-quality implementations of scaling using e.g. Lanczos resampling.</data>
+<data key="flags">SIPP_RESIZE</data>
+<data key="outW">POLY_UV_IMAGE_WIDTH</data>
+<data key="outH">POLY_UV_IMAGE_HEIGHT</data>
+<data key="userImgSize">true</data>
+<data key="symbol">SIPP_UPFIRDN_ID</data>
+<data key="x">555</data>
+<data key="y">598</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="clamp">0</data>
+<data key="horzD">POLYFIR_U_H_DEN</data>
+<data key="horzN">POLYFIR_U_H_NUM</data>
+<data key="vertD">POLYFIR_U_V_DEN</data>
+<data key="vertN">POLYFIR_U_V_NUM</data>
+<data key="horzCoefs">(UInt8*)hCoefs</data>
+<data key="vertCoefs">(UInt8*)vCoefs</data>
+<data key="planeMode">POLY_PLANE_U</data>
+</node>
+<node id="15">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">polyphasefirMa2x5xV</data>
+<data key="id">polyphasefirMa2x5x</data>
+<data key="description">The poly-phase FIR filter scaler is suitable for high-quality implementations of scaling using e.g. Lanczos resampling.</data>
+<data key="flags">SIPP_RESIZE</data>
+<data key="outW">POLY_UV_IMAGE_WIDTH</data>
+<data key="outH">POLY_UV_IMAGE_HEIGHT</data>
+<data key="userImgSize">true</data>
+<data key="symbol">SIPP_UPFIRDN_ID</data>
+<data key="x">692</data>
+<data key="y">596</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="clamp">0</data>
+<data key="horzD">POLYFIR_V_H_DEN</data>
+<data key="horzN">POLYFIR_V_H_NUM</data>
+<data key="vertD">POLYFIR_V_V_DEN</data>
+<data key="vertN">POLYFIR_V_V_NUM</data>
+<data key="horzCoefs">(UInt8*)hCoefs</data>
+<data key="vertCoefs">(UInt8*)vCoefs</data>
+<data key="planeMode">POLY_PLANE_V</data>
+</node>
+<node id="16">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">dmaOutY</data>
+<data key="id">dmaOut</data>
+<data key="description">DMA out filter</data>
+<data key="flags">0x00</data>
+<data key="outW">POLY_Y_IMAGE_WIDTH</data>
+<data key="outH">POLY_Y_IMAGE_HEIGHT</data>
+<data key="symbol">SIPP_DMA_ID</data>
+<data key="x">405</data>
+<data key="y">710</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="internal0">NULL</data>
+<data key="internal1"/>
+</node>
+<node id="17">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">dmaOutU</data>
+<data key="id">dmaOut</data>
+<data key="description">DMA out filter</data>
+<data key="flags">0x00</data>
+<data key="outW">POLY_UV_IMAGE_WIDTH</data>
+<data key="outH">POLY_UV_IMAGE_HEIGHT</data>
+<data key="symbol">SIPP_DMA_ID</data>
+<data key="x">552</data>
+<data key="y">709</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="internal0">NULL</data>
+<data key="internal1"/>
+</node>
+<node id="18">
+<node id="outputbuffer0">
+<data key="dataType">UInt8</data>
+<data key="numPl">1</data>
+</node>
+<data key="name">dmaOutV</data>
+<data key="id">dmaOut</data>
+<data key="description">DMA out filter</data>
+<data key="flags">0x00</data>
+<data key="outW">POLY_UV_IMAGE_WIDTH</data>
+<data key="outH">POLY_UV_IMAGE_HEIGHT</data>
+<data key="symbol">SIPP_DMA_ID</data>
+<data key="x">696</data>
+<data key="y">712</data>
+<data key="w">75</data>
+<data key="h">75</data>
+<data key="internal0">NULL</data>
+<data key="internal1"/>
+</node>
+<edge id="0" source="0" target="1">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">5x5</data>
+</edge>
+<edge id="1" source="1" target="2">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">1x1</data>
+</edge>
+<edge id="2" source="2" target="3">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">5x5</data>
+</edge>
+<edge id="3" source="3" target="4">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">11x11</data>
+</edge>
+<edge id="4" source="4" target="8">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">6x6</data>
+</edge>
+<edge id="5" source="4" target="5">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">1</data>
+<data key="kernel">15x15</data>
+</edge>
+<edge id="6" source="4" target="9">
+<data key="index">1</data>
+<data key="inputIndex">1</data>
+<data key="outputIndex">1</data>
+<data key="kernel">1x0</data>
+</edge>
+<edge id="7" source="5" target="6">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">11x11</data>
+</edge>
+<edge id="8" source="6" target="7">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">7x7</data>
+</edge>
+<edge id="9" source="7" target="11">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">1x1</data>
+</edge>
+<edge id="10" source="8" target="9">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">7x7</data>
+</edge>
+<edge id="11" source="9" target="10">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">3x3</data>
+</edge>
+<edge id="12" source="10" target="11">
+<data key="index">1</data>
+<data key="inputIndex">1</data>
+<data key="outputIndex">0</data>
+<data key="kernel">5x5</data>
+</edge>
+<edge id="13" source="11" target="12">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">1x1</data>
+</edge>
+<edge id="14" source="12" target="13">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">7x7</data>
+</edge>
+<edge id="15" source="12" target="14">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">7x7</data>
+</edge>
+<edge id="16" source="12" target="15">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">7x7</data>
+</edge>
+<edge id="17" source="13" target="16">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">1x1</data>
+</edge>
+<edge id="18" source="14" target="17">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">1x1</data>
+</edge>
+<edge id="19" source="15" target="18">
+<data key="index">0</data>
+<data key="inputIndex">0</data>
+<data key="outputIndex">0</data>
+<data key="kernel">1x1</data>
+</edge>
+</graph>
+</graphml>

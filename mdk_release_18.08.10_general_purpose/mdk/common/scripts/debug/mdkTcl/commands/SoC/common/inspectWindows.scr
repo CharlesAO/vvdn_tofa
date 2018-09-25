@@ -1,0 +1,20 @@
+haltproc windows { args } {
+    if { [llength $args] eq 0 } {set args [shavesList]}
+    set addrSvuBase [mdbg::getRegAddr SHAVE_0_BASE_ADR]
+    set addrSvuOff  [mdbg::getRegAddr SVU_SLICE_OFFSET]
+    set addrSvuWin [lmap W {A B C D}  {mdbg::getRegAddr SLC_TOP_OFFSET_WIN_$W}]
+    puts "          WIN A      WIN B      WIN C      WIN D"
+    foreach svu $args {
+        puts -nonewline "SVU [format %02d $svu]  "
+        set base [expr $addrSvuBase + $addrSvuOff * $svu]
+        foreach win $addrSvuWin {
+            set address [expr $base + $win]
+            set window [mdbg::jtag get32 $address]
+            puts -nonewline "0x[format %08X $window] "
+        }
+        puts ""
+    }
+}
+
+
+# vim: ft=tcl

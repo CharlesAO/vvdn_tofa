@@ -1,0 +1,113 @@
+/* =============================================================================
+* Copyright (c) 2013-2014 MM Solutions AD
+* All rights reserved. Property of MM Solutions AD.
+*
+* This source code may not be used against the terms and conditions stipulated
+* in the licensing agreement under which it has been supplied, or without the
+* written permission of MM Solutions. Rights to use, copy, modify, and
+* distribute or disclose this source code and its documentation are granted only
+* through signed licensing agreement, provided that this copyright notice
+* appears in all copies, modifications, and distributions and subject to the
+* following conditions:
+* THIS SOURCE CODE AND ACCOMPANYING DOCUMENTATION, IS PROVIDED AS IS, WITHOUT
+* WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. MM SOLUTIONS SPECIFICALLY DISCLAIMS
+* ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+* MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN
+* NO EVENT SHALL MM SOLUTIONS BE LIABLE TO ANY PARTY FOR ANY CLAIM, DIRECT,
+* INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST
+* PROFITS, OR OTHER LIABILITY, ARISING OUT OF THE USE OF OR IN CONNECTION WITH
+* THIS SOURCE CODE AND ITS DOCUMENTATION.
+* =========================================================================== */
+/**
+* @file profile_ids.h
+*
+* @author ( MM Solutions AD )
+*
+*/
+/* -----------------------------------------------------------------------------
+*!
+*! Revision History
+*! ===================================
+*! 05-Nov-2013 : Author ( MM Solutions AD )
+*! Created
+* =========================================================================== */
+
+#ifndef _PROFILE_IDS_H
+#define _PROFILE_IDS_H
+
+enum {
+    PROFILE_ID_GUZZI_CAMERA3_CAP_REQ = PROFILE_ID_APPLICATION_START,
+
+    PROFILE_ID_SENSOR_EXP_GAIN = PROFILE_ID_SENSOR,
+    PROFILE_ID_SENSOR_WRITE_SETTINGS,
+    PROFILE_ID_SENSOR_READ_FRAME,
+    PROFILE_ID_SENSOR_LIGHT,
+    PROFILE_ID_SENSOR_LENS,
+    PROFILE_ID_I2C_TRANSACTION_WR,
+    PROFILE_ID_I2C_TRANSACTION_RD,
+    PROFILE_ID_CAMERA_TIME,
+    PROFILE_ID_SENSOR_TIME,
+    PROFILE_ID_SENSOR_STOP,
+    PROFILE_ID_SENSOR_STREAM_OFF,
+
+    PROFILE_ID_AF_STATS_FRAME,
+    PROFILE_ID_AF_STATS_PATCH_ROW,
+    PROFILE_ID_AF_STATS_PATCH_ROW_ABS,
+    PROFILE_ID_AF_STATS_FRAME_S_BOUND,
+    PROFILE_ID_AF_STATS_FRAME_E_BOUND,
+    PROFILE_ID_AF_STATS_PATCH_FV,
+
+    PROFILE_ID_ALGOS_CL_EXP_GAIN = PROFILE_ID_ALGOS,
+    PROFILE_ID_ALGOS_ACA_EXP_GAIN,
+    PROFILE_ID_ALGOS_AE_RUN,
+    PROFILE_ID_ALGOS_AF_RUN,
+    PROFILE_ID_ALGOS_AFD_RUN,
+    PROFILE_ID_ALGOS_AWB_RUN,
+    PROFILE_ID_ALGOS_FMV_RUN,
+    PROFILE_ID_ALGOS_AF_INPUT,
+    PROFILE_ID_ALGOS_AE_RUN_INPUT,
+    PROFILE_ID_ALGOS_AE_MERGER_RUN,
+
+    PROFILE_ID_LRT_STATS_READY = PROFILE_ID_LRT,
+    PROFILE_ID_LRT_END_FRAME,
+    PROFILE_ID_LRT_START_FRAME,
+    PROFILE_ID_LRT_LINE_REACHED,
+    PROFILE_ID_LRT_ISP_START,
+    PROFILE_ID_LRT_ISP_END,
+    PROFILE_ID_LRT_ISP_CFG_ACEPT,
+    PROFILE_ID_LRT_ZSL_LOCKED,
+    PROFILE_ID_LRT_SEND_DATA,
+    PROFILE_ID_LRT_DATA_SENT,
+    PROFILE_ID_LRT_ERROR,
+
+    PROFILE_ID_EXT_START_CMD= PROFILE_ID_EXT_COMMAND,
+    PROFILE_ID_EXT_CAPTURE_CMD,
+    PROFILE_ID_EXT_STOP_CMD,
+    PROFILE_ID_EXT_LENS_MOVE,
+
+    PROFILE_ID_LOS_TRIGGER_CAPTURE = PROFILE_ID_LOS,
+    PROFILE_ID_LOS_LOCK_ZSL,
+    PROFILE_ID_LOS_START_SRC,
+    PROFILE_ID_LOS_CONFIG_ISP,
+    PROFILE_ID_LOS_START,
+    PROFILE_ID_LOS_STOP,
+    PROFILE_ID_LOS_GOB_CONFIG,
+    PROFILE_ID_LOS_SRC_CONFIG,
+    PROFILE_ID_LOS_SRC_STOP,
+    PROFILE_ID_LOS_SRC_SART,
+
+    PROFILE_ID_DTP_VPIPE = PROFILE_ID_DTP,
+    PROFILE_ID_DTP_VPIPE_LSC,
+    PROFILE_ID_DTP_VPIPE_RGB2RGB,
+    PROFILE_ID_DTP_VPIPE_GAMMA,
+    PROFILE_ID_DTP_IPIPE_CONVERT,
+
+    PROFILE_ID_SYS_CL_PROCESS = PROFILE_ID_SYS,
+    PROFILE_ID_SYS_CAM_PROCESS,
+    PROFILE_ID_SYS_ACA_PROCESS,
+    PROFILE_ID_SYS_FR_INFO_PROCESS,
+
+};
+
+#endif /* _PROFILE_IDS_H */
+

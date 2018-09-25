@@ -1,0 +1,686 @@
+{
+  "scripts" : [
+    "var acceptEvent = function(trace, id) {",
+    "   return trace.name == 'profile:movi_event' && trace.event_id ==  id;",
+    "};",
+        "var getData = function(trace, result) {",
+    "   result.put('Data', trace.data.toString());",
+    "};",
+    "var putStandardTooltips = function(trace, result) {",
+    "   result.put('EventID', trace.event_id.toString());",
+    "   if(trace.caller) {",
+    "       getAddressTooltip(trace, result)",
+    "    }",
+    "};",
+    "var acceptMessageEvent = function(trace) {",
+    "   return trace.name == 'lttng_ust_tracef:event';",
+    "};",
+    "var getAddress = function(trace, result) {",
+    "   result.put('Address', trace.caller.toString());",
+    "};",
+    "var getAddressTooltip = function(trace, result) {",
+    "   var symbol = '';",
+    "   var cdtSymbol = symbolProvider.getCDTSymbol(trace.caller); ",
+    "   if(cdtSymbol) {",
+    "   symbol = cdtSymbol.getName();",
+    "   }",
+    "   symbol += '@0x';",
+    "   symbol += Number(trace.caller).toString(16);",
+    "   result.put('Function', symbol );",
+    "};",
+    "var putWaveTooltips = function(trace, result) {",
+    "   result.put('EventID', trace.event_id.toString());",
+    "   result.put('Data', trace.data.toString());",
+    "   if(trace.caller) {",
+    "       getAddressTooltip(trace, result)",
+    "    }",
+    "};",
+    "var putMessageTooltip = function(trace, result) {",
+    "   result.put('Message', trace.msg.toString());",
+    "   if(trace.caller) {",
+    "       getAddressTooltip(trace, result)",
+    "    }",
+    "};",
+  ],
+  "eventClasses" : [
+    {
+      "name" : "MoviLogicEvent",
+      "base" : "LogicEvent",
+      "config" : {
+        "activate" : "trace.data != 0",
+        "tooltip" : "putStandardTooltips(trace, result)",
+        "address" : "getAddress(trace, result)",
+        "bgcolor" : "0x0071993D",
+        "fgcolor" : "0x00997f3D"
+      }
+    },
+    {
+      "name" : "MoviWaveEvent",
+      "base" : "WaveEvent",
+      "config" : {
+                "dataValue" : "getData(trace, result)",
+                "heightMultiplicator" : "3",
+        "minValue" : "0",
+        "tooltip" : "putWaveTooltips(trace, result)",
+        "address" : "getAddress(trace, result)",
+        "bgcolor" : "0x00e6e6e6",
+        "fgcolor" : "0x000099ff"
+      }
+    },
+    {
+      "name" : "MoviSingleEvent",
+      "base" : "SingleEvent",
+      "config" : {
+        "tooltip" : "putStandardTooltips(trace, result)",
+        "address" : "getAddress(trace, result)",
+        "bgcolor" : "0x0099423D",
+        "fgcolor" : "0x0093993D"
+      }
+    },
+    {
+      "name" : "MoviMessageEvent",
+      "base" : "SingleEvent",
+      "config" : {
+        "tooltip" : "putMessageTooltip(trace, result)",
+        "address" : "getAddress(trace, result)",
+        "bgcolor" : "0x0099423D",
+        "fgcolor" : "0x0093993D"
+      }
+    }
+  ],
+  "eventTypes" : [
+    {
+      "id" : "1",
+      "filter" : "acceptEvent(trace, 1);",
+      "name" : "LOS_RUN",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "2",
+      "filter" : "acceptEvent(trace, 2)",
+      "name" : "LRT_RUN",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "3",
+      "filter" : "acceptEvent(trace, 3)",
+      "name" : "WAIT_FOR_LRT",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "10",
+      "filter" : "acceptEvent(trace, 10)",
+      "name" : "SHAVE_0_RESET",
+      "class" : "MoviSingleEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "11",
+      "filter" : "acceptEvent(trace, 11)",
+      "name" : "SHAVE_1_RESET",
+      "class" : "MoviSingleEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "12",
+      "filter" : "acceptEvent(trace, 12)",
+      "name" : "SHAVE_2_RESET",
+      "class" : "MoviSingleEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "13",
+      "filter" : "acceptEvent(trace, 13)",
+      "name" : "SHAVE_3_RESET",
+      "class" : "MoviSingleEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "14",
+      "filter" : "acceptEvent(trace, 14)",
+      "name" : "SHAVE_4_RESET",
+      "class" : "MoviSingleEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "15",
+      "filter" : "acceptEvent(trace, 15)",
+      "name" : "SHAVE_5_RESET",
+      "class" : "MoviSingleEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "16",
+      "filter" : "acceptEvent(trace, 16)",
+      "name" : "SHAVE_6_RESET",
+      "class" : "MoviSingleEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "17",
+      "filter" : "acceptEvent(trace, 17)",
+      "name" : "SHAVE_7_RESET",
+      "class" : "MoviSingleEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "18",
+      "filter" : "acceptEvent(trace, 18)",
+      "name" : "SHAVE_8_RESET",
+      "class" : "MoviSingleEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "19",
+      "filter" : "acceptEvent(trace, 19)",
+      "name" : "SHAVE_9_RESET",
+      "class" : "MoviSingleEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "20",
+      "filter" : "acceptEvent(trace, 20)",
+      "name" : "SHAVE_10_RESET",
+      "class" : "MoviSingleEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "21",
+      "filter" : "acceptEvent(trace, 21)",
+      "name" : "SHAVE_11_RESET",
+      "class" : "MoviSingleEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "22",
+      "filter" : "acceptEvent(trace, 22)",
+      "name" : "SHAVE_0_RUN",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "23",
+      "filter" : "acceptEvent(trace, 23)",
+      "name" : "SHAVE_1_RUN",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "24",
+      "filter" : "acceptEvent(trace, 24)",
+      "name" : "SHAVE_2_RUN",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "25",
+      "filter" : "acceptEvent(trace, 25)",
+      "name" : "SHAVE_3_RUN",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "26",
+      "filter" : "acceptEvent(trace, 26)",
+      "name" : "SHAVE_4_RUN",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "27",
+      "filter" : "acceptEvent(trace, 27)",
+      "name" : "SHAVE_5_RUN",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "28",
+      "filter" : "acceptEvent(trace, 28)",
+      "name" : "SHAVE_6_RUN",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "29",
+      "filter" : "acceptEvent(trace, 29)",
+      "name" : "SHAVE_7_RUN",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "30",
+      "filter" : "acceptEvent(trace, 30)",
+      "name" : "SHAVE_8_RUN",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "31",
+      "filter" : "acceptEvent(trace, 31)",
+      "name" : "SHAVE_9_RUN",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "32",
+      "filter" : "acceptEvent(trace, 32)",
+      "name" : "SHAVE_10_RUN",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "33",
+      "filter" : "acceptEvent(trace, 33)",
+      "name" : "SHAVE_11_RUN",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "34",
+      "filter" : "acceptEvent(trace, 34)",
+      "name" : "WAIT_FOR_SHAVE_0",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "35",
+      "filter" : "acceptEvent(trace, 35)",
+      "name" : "WAIT_FOR_SHAVE_1",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "36",
+      "filter" : "acceptEvent(trace, 36)",
+      "name" : "WAIT_FOR_SHAVE_2",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "37",
+      "filter" : "acceptEvent(trace, 37)",
+      "name" : "WAIT_FOR_SHAVE_3",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "38",
+      "filter" : "acceptEvent(trace, 38)",
+      "name" : "WAIT_FOR_SHAVE_4",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "39",
+      "filter" : "acceptEvent(trace, 39)",
+      "name" : "WAIT_FOR_SHAVE_5",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "40",
+      "filter" : "acceptEvent(trace, 40)",
+      "name" : "WAIT_FOR_SHAVE_6",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "41",
+      "filter" : "acceptEvent(trace, 41)",
+      "name" : "WAIT_FOR_SHAVE_7",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "42",
+      "filter" : "acceptEvent(trace, 42)",
+      "name" : "WAIT_FOR_SHAVE_8",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "43",
+      "filter" : "acceptEvent(trace, 43)",
+      "name" : "WAIT_FOR_SHAVE_9",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "44",
+      "filter" : "acceptEvent(trace, 44)",
+      "name" : "WAIT_FOR_SHAVE_10",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "45",
+      "filter" : "acceptEvent(trace, 45)",
+      "name" : "WAIT_FOR_SHAVE_11",
+      "class" : "MoviLogicEvent",
+      "category" : "CPU control"
+    },
+    {
+      "id" : "46",
+      "filter" : "acceptEvent(trace, 46)",
+      "name" : "CSS_DIGITAL_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "47",
+      "filter" : "acceptEvent(trace, 47)",
+      "name" : "CSS_ANALOG_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "48",
+      "filter" : "acceptEvent(trace, 48)",
+      "name" : "RETENTION",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "49",
+      "filter" : "acceptEvent(trace, 49)",
+      "name" : "SHAVE_0_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "50",
+      "filter" : "acceptEvent(trace, 50)",
+      "name" : "SHAVE_1_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "51",
+      "filter" : "acceptEvent(trace, 51)",
+      "name" : "SHAVE_2_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "52",
+      "filter" : "acceptEvent(trace, 52)",
+      "name" : "SHAVE_3_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "53",
+      "filter" : "acceptEvent(trace, 53)",
+      "name" : "SHAVE_4_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "54",
+      "filter" : "acceptEvent(trace, 54)",
+      "name" : "SHAVE_5_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "55",
+      "filter" : "acceptEvent(trace, 55)",
+      "name" : "SHAVE_6_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "56",
+      "filter" : "acceptEvent(trace, 56)",
+      "name" : "SHAVE_7_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "57",
+      "filter" : "acceptEvent(trace, 57)",
+      "name" : "SHAVE_8_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "58",
+      "filter" : "acceptEvent(trace, 58)",
+      "name" : "SHAVE_9_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "59",
+      "filter" : "acceptEvent(trace, 59)",
+      "name" : "SHAVE_10_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "60",
+      "filter" : "acceptEvent(trace, 60)",
+      "name" : "SHAVE_11_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "61",
+      "filter" : "acceptEvent(trace, 61)",
+      "name" : "PMB_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "62",
+      "filter" : "acceptEvent(trace, 62)",
+      "name" : "MSS_DIGITAL_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "63",
+      "filter" : "acceptEvent(trace, 63)",
+      "name" : "MSS_ANALOG_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "64",
+      "filter" : "acceptEvent(trace, 64)",
+      "name" : "DSS_DIGITAL_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "65",
+      "filter" : "acceptEvent(trace, 65)",
+      "name" : "DSS_ANALOG_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "70",
+      "filter" : "acceptEvent(trace, 70)",
+      "name" : "POWER_M2x5x_BASE",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "86",
+      "filter" : "acceptEvent(trace, 86)",
+      "name" : "MSS_CPU_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "87",
+      "filter" : "acceptEvent(trace, 87)",
+      "name" : "MSS_AMC_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "88",
+      "filter" : "acceptEvent(trace, 88)",
+      "name" : "MSS_SIPP_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "89",
+      "filter" : "acceptEvent(trace, 89)",
+      "name" : "DSS_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "90",
+      "filter" : "acceptEvent(trace, 90)",
+      "name" : "USB_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "Power Island state"
+    },
+    {
+      "id" : "100",
+      "filter" : "acceptEvent(trace, 100)",
+      "name" : "198_RAIL_VDDCV_I_MA",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "101",
+      "filter" : "acceptEvent(trace, 101)",
+      "name" : "198_RAIL_VDDCR_I_MA",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "102",
+      "filter" : "acceptEvent(trace, 102)",
+      "name" : "198_RAIL_VDDIO_I_MA",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "103",
+      "filter" : "acceptEvent(trace, 103)",
+      "name" : "198_RAIL_MIPI_VDD_I_MA",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "104",
+      "filter" : "acceptEvent(trace, 104)",
+      "name" : "198_RAIL_PLL_AVDD_I_MA",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "105",
+      "filter" : "acceptEvent(trace, 105)",
+      "name" : "198_RAIL_DRAM_MVDDQ_I_MA",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "106",
+      "filter" : "acceptEvent(trace, 106)",
+      "name" : "198_RAIL_DRAM_MVDDA_I_MA",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "107",
+      "filter" : "acceptEvent(trace, 107)",
+      "name" : "198_RAIL_DRAM_VDD1_I_MA",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "108",
+      "filter" : "acceptEvent(trace, 108)",
+      "name" : "198_RAIL_DRAM_VDD2_I_MA",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "109",
+      "filter" : "acceptEvent(trace, 109)",
+      "name" : "198_RAIL_DRAM_VDDQ_I_MA",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "110",
+      "filter" : "acceptEvent(trace, 110)",
+      "name" : "198_RAIL_USB_VDD330_I_MA",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "111",
+      "filter" : "acceptEvent(trace, 111)",
+      "name" : "198_RAIL_USB_VP_VDD_I_MA",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "112",
+      "filter" : "acceptEvent(trace, 112)",
+      "name" : "198_RAIL_VDDCV_V_MV",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "113",
+      "filter" : "acceptEvent(trace, 113)",
+      "name" : "198_RAIL_MIPI_VDD_V_MV",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "114",
+      "filter" : "acceptEvent(trace, 114)",
+      "name" : "198_RAIL_VDDIO_B_I_MUL_I_MA_MA2150",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "115",
+      "filter" : "acceptEvent(trace, 115)",
+      "name" : "198_TOTAL_CURRENT",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "116",
+      "filter" : "acceptEvent(trace, 116)",
+      "name" : "198_TOTAL_POWER",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "117",
+      "filter" : "acceptEvent(trace, 117)",
+      "name" : "198_DDR_CURRENT",
+      "class" : "MoviWaveEvent",
+      "category" : "MV198 Power Monitor"
+    },
+    {
+      "id" : "9999",
+      "filter" : "trace.name == 'profile:movi_event' && trace.event_id > 9999",
+      "name" : "CUSTOM_EVENT",
+      "class" : "MoviSingleEvent"
+    },
+    {
+      "id" : "DBG_MSG",
+      "filter" : "acceptMessageEvent(trace)",
+      "name" : "LogEvent",
+      "class" : "MoviMessageEvent"
+    }
+  ]
+}

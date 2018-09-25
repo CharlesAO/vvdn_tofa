@@ -1,0 +1,166 @@
+ ///
+ /// @file
+ /// @copyright All code copyright Movidius Ltd 2016, all rights reserved.
+ ///            For License Warranty see: common/license.txt
+ ///
+ /// @brief Mutex asm defines and macros
+ ///
+
+.version 00.51.04
+
+.ifndef COMMON_DRIVERS_MYRIAD2_SOCDRIVERS_SHAVE_ARCH_MA2X5X_INCLUDE_SHDRVMUTEXDEFINES_INCL_
+.set COMMON_DRIVERS_MYRIAD2_SOCDRIVERS_SHAVE_ARCH_MA2X5X_INCLUDE_SHDRVMUTEXDEFINES_INCL_
+
+///* MUTEX  */
+//......................
+.set MUTEX_GRANT_MASK    0X0020
+
+.set MUTEX_CTRL_ADDR     0x3000
+//...............
+.set MUTEX_REQUEST_0     0x0100
+.set MUTEX_REQUEST_1     0x0101
+.set MUTEX_REQUEST_2     0x0102
+.set MUTEX_REQUEST_3     0x0103
+.set MUTEX_REQUEST_4     0x0104
+.set MUTEX_REQUEST_5     0x0105
+.set MUTEX_REQUEST_6     0x0106
+.set MUTEX_REQUEST_7     0x0107
+.set MUTEX_REQUEST_8     0x0108
+.set MUTEX_REQUEST_9     0x0109
+.set MUTEX_REQUEST_10    0x010A
+.set MUTEX_REQUEST_11    0x010B
+.set MUTEX_REQUEST_12    0x010C
+.set MUTEX_REQUEST_13    0x010D
+.set MUTEX_REQUEST_14    0x010E
+.set MUTEX_REQUEST_15    0x010F
+.set MUTEX_REQUEST_16    0x0110
+.set MUTEX_REQUEST_17    0x0111
+.set MUTEX_REQUEST_18    0x0112
+.set MUTEX_REQUEST_19    0x0113
+.set MUTEX_REQUEST_20    0x0114
+.set MUTEX_REQUEST_21    0x0115
+.set MUTEX_REQUEST_22    0x0116
+.set MUTEX_REQUEST_23    0x0117
+.set MUTEX_REQUEST_24    0x0118
+.set MUTEX_REQUEST_25    0x0119
+.set MUTEX_REQUEST_26    0x011A
+.set MUTEX_REQUEST_27    0x011B
+.set MUTEX_REQUEST_28    0x011C
+.set MUTEX_REQUEST_29    0x011D
+.set MUTEX_REQUEST_30    0x011E
+.set MUTEX_REQUEST_31    0x011F
+
+//...............
+.set MUTEX_RELEASE_0     0x0200
+.set MUTEX_RELEASE_1     0x0201
+.set MUTEX_RELEASE_2     0x0202
+.set MUTEX_RELEASE_3     0x0203
+.set MUTEX_RELEASE_4     0x0204
+.set MUTEX_RELEASE_5     0x0205
+.set MUTEX_RELEASE_6     0x0206
+.set MUTEX_RELEASE_7     0x0207
+.set MUTEX_RELEASE_8     0x0208
+.set MUTEX_RELEASE_9     0x0209
+.set MUTEX_RELEASE_10    0x020A
+.set MUTEX_RELEASE_11    0x020B
+.set MUTEX_RELEASE_12    0x020C
+.set MUTEX_RELEASE_13    0x020D
+.set MUTEX_RELEASE_14    0x020E
+.set MUTEX_RELEASE_15    0x020F
+.set MUTEX_RELEASE_16    0x0210
+.set MUTEX_RELEASE_17    0x0211
+.set MUTEX_RELEASE_18    0x0212
+.set MUTEX_RELEASE_19    0x0213
+.set MUTEX_RELEASE_20    0x0214
+.set MUTEX_RELEASE_21    0x0215
+.set MUTEX_RELEASE_22    0x0216
+.set MUTEX_RELEASE_23    0x0217
+.set MUTEX_RELEASE_24    0x0218
+.set MUTEX_RELEASE_25    0x0219
+.set MUTEX_RELEASE_26    0x021A
+.set MUTEX_RELEASE_27    0x021B
+.set MUTEX_RELEASE_28    0x021C
+.set MUTEX_RELEASE_29    0x021D
+.set MUTEX_RELEASE_30    0x021E
+.set MUTEX_RELEASE_31    0x021F
+
+//...............
+.set MUTEX_CLEAR_0       0x0400
+.set MUTEX_CLEAR_1       0x0401
+.set MUTEX_CLEAR_2       0x0402
+.set MUTEX_CLEAR_3       0x0403
+.set MUTEX_CLEAR_4       0x0404
+.set MUTEX_CLEAR_5       0x0405
+.set MUTEX_CLEAR_6       0x0406
+.set MUTEX_CLEAR_7       0x0407
+.set MUTEX_CLEAR_8       0x0408
+.set MUTEX_CLEAR_9       0x0409
+.set MUTEX_CLEAR_10      0x040A
+.set MUTEX_CLEAR_11      0x040B
+.set MUTEX_CLEAR_12      0x040C
+.set MUTEX_CLEAR_13      0x040D
+.set MUTEX_CLEAR_14      0x040E
+.set MUTEX_CLEAR_15      0x040F
+.set MUTEX_CLEAR_16      0x0410
+.set MUTEX_CLEAR_17      0x0411
+.set MUTEX_CLEAR_18      0x0412
+.set MUTEX_CLEAR_19      0x0413
+.set MUTEX_CLEAR_20      0x0414
+.set MUTEX_CLEAR_21      0x0415
+.set MUTEX_CLEAR_22      0x0416
+.set MUTEX_CLEAR_23      0x0417
+.set MUTEX_CLEAR_24      0x0418
+.set MUTEX_CLEAR_25      0x0419
+.set MUTEX_CLEAR_26      0x041A
+.set MUTEX_CLEAR_27      0x041B
+.set MUTEX_CLEAR_28      0x041C
+.set MUTEX_CLEAR_29      0x041D
+.set MUTEX_CLEAR_30      0x041E
+.set MUTEX_CLEAR_31      0x041F
+
+// Request mutex asm macro
+// param 0 - defined register for request MUTEX_REQUEST_0, MUTEX_REQUEST_1 ....
+// param 1 - an irf that can be changed
+.macro MTX_REQUEST_M mtxReqRegister, i_tempReg
+    lsu1.ldil \i_tempReg, \mtxReqRegister
+    lsu0.sta.32  \i_tempReg, SHAVE_LOCAL, MUTEX_CTRL_ADDR 
+.endm
+
+.set __mutex_wait 1
+
+// Poll for Mutex 
+// param 0 - an irf that can be changed
+.macro MTX_WAIT_M i_tempReg, l_labelName
+    NOP 3
+    // JUMP HERE for the BRU.BRA below
+.L_mutex_wait_(\l_labelName)_jmp:
+    LSU0.LDIL \i_tempReg, MUTEX_GRANT_MASK
+    CMU.CMTI.BITP \i_tempReg, P_GPI
+    PEU.PC1C NEQ || CMU.CMTI.BITP \i_tempReg, P_GPI // do we have it? check again to make sure (hw bug workaround)
+    LSU0.LDA.32 \i_tempReg, SHAVE_LOCAL, MUTEX_CTRL_ADDR
+    NOP 6
+    PEU.PC1C EQ || IAU.FEXTU \i_tempReg, \i_tempReg, 0, 10
+    // ^^ remove the status bit because if there was a race condition,
+    // and it became 1 since the last CMU.CMTI.BIPT, then it will be
+    // interpreted as a clear command, and we only want to clear a
+    // request on the last iteration.
+    LSU0.STA.32 \i_tempReg, SHAVE_LOCAL, MUTEX_CTRL_ADDR
+    PEU.PC1C EQ || BRU.BRA .L_mutex_wait_(\l_labelName)_jmp
+    NOP 6
+    
+.endm
+
+
+// Release mutex
+// param 0 - defined register for request MUTEX_RELEASE_0, MUTEX_RELEASE_1 ....
+// param 1 - an irf that can be changed
+.macro MTX_RELEASE_M mtxReqRegister, i_tempReg
+    lsu1.ldil \i_tempReg, \mtxReqRegister
+    lsu0.sta.32  \i_tempReg, SHAVE_LOCAL, MUTEX_CTRL_ADDR 
+    NOP 3
+    LSU0.LDIL \i_tempReg, MUTEX_GRANT_MASK
+    CMU.CMTI.BITP \i_tempReg, P_GPI
+    PEU.PC1C NEQ || BRU.RPIM 0 || CMU.CMTI.BITP \i_tempReg, P_GPI    
+.endm
+
+.endif
